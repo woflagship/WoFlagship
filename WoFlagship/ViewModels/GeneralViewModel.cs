@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WoFlagship.ViewModels
+{
+    public class GeneralViewModel : ViewModelBase
+    {
+        public GeneralViewModel()
+        {
+            for(int i=0; i<QuestList.Length; i++)
+            {
+                QuestList[i] = new QuestViewModel();
+                QuestList[i].Reset();
+            }
+
+            for(int i=0; i<Decks.Length; i++)
+            {
+                Decks[i] = new DeckViewModel();
+                Decks[i].Name = (i+1) + "";
+            }
+            
+        }
+
+        private string _level;
+        public string Level { get { return _level; } set { _level = value;OnPropertyChanged(); } }
+
+        private string _rank;
+        public string Rank { get { return _rank; } set { _rank = value; OnPropertyChanged(); } }
+
+        private string _nickName;
+        public string NickName { get { return _nickName; } set { _nickName = value;OnPropertyChanged(); } }
+
+        private int _shipCount;
+        public int ShipCount { get { return _shipCount; } set { _shipCount = value; OnPropertyChanged(); } }
+
+        private int _itemCount;
+        public int ItemCount { get { return _itemCount; } set { _itemCount = value; OnPropertyChanged(); } }
+
+        private int _maxshipCount;
+        public int MaxShipCount { get { return _maxshipCount; } set { _maxshipCount = value; OnPropertyChanged(); } }
+
+        private int _maxitemCount;
+        public int MaxItemCount { get { return _maxitemCount; } set { _maxitemCount = value; OnPropertyChanged(); } }
+
+
+        private int _ran;
+        public int Ran { get { return _ran; } set { _ran = value; OnPropertyChanged(); } }
+
+        private int _dan;
+        public int Dan { get { return _dan; } set { _dan = value; OnPropertyChanged(); } }
+
+        private int _gang;
+        public int Gang { get { return _gang; } set { _gang = value; OnPropertyChanged(); } }
+
+        private int _lv;
+        public int Lv { get { return _lv; } set { _lv = value; OnPropertyChanged(); } }
+
+        private int _gaixiu;
+        public int Gaixiu { get { return _gaixiu; } set { _gaixiu = value; OnPropertyChanged(); } }
+
+        private int _kaifa;
+        public int Kaifa { get { return _kaifa; } set { _kaifa = value;OnPropertyChanged(); } }
+
+        private int _xiufu;
+        public int Xiufu { get { return _xiufu; } set { _xiufu = value; OnPropertyChanged(); } }
+
+        private int _jianzao;
+        public int Jianzao { get { return _jianzao; } set { _jianzao = value; OnPropertyChanged(); } }
+
+        private QuestViewModel[] _questList = new QuestViewModel[6];
+        public QuestViewModel[] QuestList { get { return _questList; } set { _questList = value; OnPropertyChanged(); } }
+
+        private DeckViewModel[] _decks = new DeckViewModel[4];
+        public DeckViewModel[] Decks { get { return _decks; } set { _decks = value; OnPropertyChanged(); } }
+    }
+
+    public class QuestViewModel : ViewModelBase
+    {
+        private string _name = "未设置";
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged(); } }
+
+        private string _detail = "未设置";
+        public string Detail { get { return _detail; } set { _detail = value; OnPropertyChanged(); } }
+
+        private int _id = int.MaxValue;
+        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+
+        private string _progress;
+        public string Progress { get { return _progress; } set { _progress = value; OnPropertyChanged(); } }
+
+        public void Reset()
+        {
+            Name = "未设置";
+            Detail = "未设置";
+            Progress = "";        
+            Id = int.MaxValue;
+        }
+
+    }
+
+    public class DeckViewModel : ViewModelBase
+    {
+        public DeckViewModel()
+        {
+            for(int i=0; i<Ships.Length; i++)
+            {
+                Ships[i] = new DeckShipViewModel();
+                Ships[i].Reset();
+            }
+        }
+
+        private string _id;
+        public string Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+
+        private string _name = "";
+        public string Name { get { return _name; } set { _name = value;OnPropertyChanged(); } }
+
+        private DeckShipViewModel[] _ships = new DeckShipViewModel[6];
+        public DeckShipViewModel[] Ships { get { return _ships; } set { _ships = value; OnPropertyChanged(); } }
+    }
+
+    public class DeckShipViewModel : ViewModelBase
+    {
+        private string _name;
+        public string Name { get { return _name; } set { _name = value; OnPropertyChanged(); } }
+
+        private int _id;
+        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+
+        public void Reset()
+        {
+            Name = "空";
+        }
+
+        public DeckShipViewModel Clone()
+        {
+            DeckShipViewModel ship = new DeckShipViewModel();
+            ship.Name = this.Name;
+            return ship;
+        }
+    }
+
+}

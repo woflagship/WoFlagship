@@ -1,0 +1,12 @@
+﻿1、Plugin类必须在命名空间WoFlagShip.Plugins中
+2、Plugin类必须实现IPlugin接口
+3、Plugin类允许对传入的ViewModel进行改动，但是不允许对其他参数改动
+
+创建新plugin方式
+1、创建WPF工程
+2、删除Window1.xaml 和 App.xaml
+3、将输出类型改为类库
+4、引用WoFlagship项目，且其输出到目录为false
+
+Note:
+1、问题就在于[assembly: log4net.Config.XmlConfigurator(Watch = true)]，wpf编译会加载解析log4net，这样就会报错，在LogFactory中配置初始化
