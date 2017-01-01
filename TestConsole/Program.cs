@@ -22,7 +22,7 @@ using WoFlagship.KancolleAI;
 using Microsoft.SolverFoundation.Common;
 using Microsoft.SolverFoundation.Services;
 using SmartFormat;
-using WoFlagship.KancolleQuest;
+using WoFlagship.KancolleQuestData;
 using SmartFormat.Core.Extensions;
 
 namespace TestConsole
@@ -44,6 +44,8 @@ namespace TestConsole
             this.Indexs = index;
         }
     }
+
+   
 
     class TestProvider : IFormatProvider, ICustomFormatter
     {
@@ -198,39 +200,7 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            List<KancolleShip> ships = new List<KancolleShip>();
-            for (int i = 0; i < 120; i++)
-            {
-                ships.Add(new KancolleShip()
-                {
-                    ShipId = i,
-                    Type = i / 3 + 1
-                });
-            };
-
-            int n = 4;
-            var now = DateTime.Now;
-            var selected1 = from s in ships
-                           where s.Type == 1
-                           select s;
-            var selected2 = from s in ships
-                            where s.Type == 2
-                            select s;
-            var selected3 = from s in ships
-                            where s.Type == 3
-                            select s;
-            var selected4 = from s in ships
-                            where s.Type == 1
-                            select s;
-            var selected5 = from s in ships
-                            where s.Type == 2
-                            select s;
-            var selected6 = from s in ships
-                            where s.Type == 3
-                            select s;
-            Console.WriteLine("finish get " + selected1.Count());
-
-            Console.WriteLine((DateTime.Now - now).TotalSeconds);
+    
             
             /*
             foreach(var i in selected)

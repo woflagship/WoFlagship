@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class SimpleQuestRequirement : IQuestRequirement
+    public class AndQuestRequirement : IQuestRequirement
     {
-        public string Subcategory { get; set; }
-
-        public int Times { get; set; }
-
-        public bool? Batch { get; set; }
+        /// <summary>
+        /// 需要完成的出击
+        /// </summary>
+        public IQuestRequirement[] List { get; set; }
 
         public List<KancolleTask> GetTasks(KancolleGameData gameData)
         {

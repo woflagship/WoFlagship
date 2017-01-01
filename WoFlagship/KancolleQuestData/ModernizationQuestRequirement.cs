@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
     public class ModernizationQuestRequirement : IQuestRequirement

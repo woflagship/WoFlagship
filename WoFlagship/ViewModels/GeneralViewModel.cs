@@ -89,14 +89,45 @@ namespace WoFlagship.ViewModels
         private int _id = int.MaxValue;
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
 
+        private int _state;
+        public int State { get { return _state; } set { _state = value; OnPropertyChanged(); } }
+
+        private int _progressFlag;
+        public int ProgressFlag
+        {
+            get { return _progressFlag; }
+            set
+            {
+                _progressFlag = value;
+                if (State > 1)
+                {
+                    if (_progressFlag == 3)
+                        _progress = "完成";
+                    else
+                    {
+                        if (_progressFlag == 0)
+                            _progress = "进行中";
+                        else
+                            _progress = (30 * _progressFlag + 20) + "%";
+                    }
+                }
+                else
+                {
+                    _progress = "";
+                }
+                OnPropertyChanged();
+                OnPropertyChanged("Progress");
+            }
+        }
+
         private string _progress;
-        public string Progress { get { return _progress; } set { _progress = value; OnPropertyChanged(); } }
+        public string Progress { get { return _progress; }}
 
         public void Reset()
         {
             Name = "未设置";
             Detail = "未设置";
-            Progress = "";        
+            State = 1;      
             Id = int.MaxValue;
         }
 

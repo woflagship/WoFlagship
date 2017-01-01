@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
     public enum RequirementTypes

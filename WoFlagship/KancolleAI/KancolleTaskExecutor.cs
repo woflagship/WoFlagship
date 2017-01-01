@@ -213,8 +213,8 @@ namespace WoFlagship.KancolleAI
             }*/
 
 
-            var sortedShip = (from s in GameData.OwnedShipDic.Values
-                             orderby s.api_id descending
+            var sortedShip = (from s in GameData.OwnedShipDictionary.Values
+                             orderby s.Id descending
                              select s).ToArray();//按照降序排列，和new的顺序相同
             
             //依次变更
@@ -279,11 +279,11 @@ namespace WoFlagship.KancolleAI
             return true;
         }
 
-        private int indexOf(api_ship_item[] shipArray, int idToFind)
+        private int indexOf(KancolleShip[] shipArray, int idToFind)
         {
             for(int i=0; i<shipArray.Length; i++)
             {
-                if (shipArray[i].api_id == idToFind)
+                if (shipArray[i].Id == idToFind)
                     return i;
             }
             return -1;

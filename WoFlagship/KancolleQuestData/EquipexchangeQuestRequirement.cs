@@ -6,32 +6,33 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class ExerciseQuestRequirement : IQuestRequirement
+    public class EquipexchangeQuestRequirement : IQuestRequirement
     {
+        /// <summary>
+        /// 装备要求
+        /// </summary>
+        public QuestRequiredItem[] Equipments { get; set; }
 
         /// <summary>
-        /// 需要完成的次数
-        /// null也表示1次
+        /// 废弃要求
         /// </summary>
-        public int? Times { get; set; }
+        public QuestRequiredItem[] Scraps { get; set; }
 
         /// <summary>
-        /// 是否需要胜利
-        /// null表示无要求
+        /// 消耗
         /// </summary>
-        public bool? Victory { get; set; }
+        public QuestRequiredItem[] Consumptions { get; set; }
 
-        /// <summary>
-        /// 是否为日常任务
-        /// </summary>
-        public bool? Daily { get; set; }
+        public int[] Resources { get; set; }
 
         public List<KancolleTask> GetTasks(KancolleGameData gameData)
         {
             throw new NotImplementedException();
         }
     }
+
+   
 }

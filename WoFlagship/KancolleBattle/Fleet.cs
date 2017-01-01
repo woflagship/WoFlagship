@@ -43,7 +43,7 @@ namespace WoFlagship.KancolleBattle
         }
 
         public Fleet() { }
-        public Fleet(api_ship_item[] rawFleet, int intl, ShipOwners owner = ShipOwners.Friend)
+        public Fleet(KancolleShip[] rawFleet, int intl, ShipOwners owner = ShipOwners.Friend)
         {
             if (rawFleet == null) return;
             for (int i = 0; i < rawFleet.Length; i++)
@@ -54,11 +54,11 @@ namespace WoFlagship.KancolleBattle
                     //slots!!!!!!!
                     Add(new Ship()
                     {
-                        ShipId = rawShip.api_ship_id,
+                        ShipId = rawShip.Id,
                         ShipOwner = owner,
                         Position = intl + i + 1,
-                        MaxHP = rawShip.api_maxhp,
-                        NowHP = rawShip.api_nowhp,
+                        MaxHP = rawShip.MaxHP,
+                        NowHP = rawShip.NowHP,
                         Items = null,//!!!!!!!!
                         Raw = rawShip
                     });

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
-using WoFlagship.KancolleQuest;
+using WoFlagship.KancolleQuestData;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
     public class SortieQuestRequirement : IQuestRequirement

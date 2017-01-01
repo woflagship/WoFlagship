@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class KancolleQuestInfo : IMetadata
+    public class KancolleQuestInfoMetadata : IMetadata
     {
         public int Version { get; set; } = 1;
         public string UpdateTime { get; set; } = "20161229";
 
-        public QuestInfoItem[] QuestInfos { get; set; }
+        public KancolleQuestInfoItem[] QuestInfos { get; set; }
     }
 
 }

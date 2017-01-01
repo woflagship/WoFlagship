@@ -160,15 +160,15 @@ namespace WoFlagship.KancolleBattle
         /// </summary>
         /// <param name="deckId"></param>
         /// <returns></returns>
-        private api_ship_item[] getRawFleet(int deckId)
+        private KancolleShip[] getRawFleet(int deckId)
         {
-            List<api_ship_item> fleet = new List<api_ship_item>();
+            List<KancolleShip> fleet = new List<KancolleShip>();
             for(int i=0; i<gameData.OwnedShipPlaceArray.GetLength(1); i++)
             {
                 int ownedShipId = gameData.OwnedShipPlaceArray[deckId - 1, i];
                 if (ownedShipId > 0)
                 {
-                    fleet.Add(gameData.OwnedShipDic[ownedShipId]);
+                    fleet.Add(gameData.OwnedShipDictionary[ownedShipId]);
                 }
                 else
                     fleet.Add(null);

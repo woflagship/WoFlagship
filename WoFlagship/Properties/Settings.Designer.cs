@@ -22,5 +22,43 @@ namespace WoFlagship.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>NoProxy</string>\r\n  <string>HTTP</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection ProxyType {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["ProxyType"]));
+            }
+            set {
+                this["ProxyType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        public string ProxyHost {
+            get {
+                return ((string)(this["ProxyHost"]));
+            }
+            set {
+                this["ProxyHost"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8099")]
+        public string ProxyPort {
+            get {
+                return ((string)(this["ProxyPort"]));
+            }
+            set {
+                this["ProxyPort"] = value;
+            }
+        }
     }
 }

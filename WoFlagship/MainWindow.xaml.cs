@@ -28,7 +28,7 @@ using WoFlagship.ToolWindows;
 using WoFlagship.ViewModels;
 using WoFlagship.KancolleBattle;
 using System.Threading;
-using WoFlagship.KancolleQuest;
+using WoFlagship.KancolleQuestData;
 
 namespace WoFlagship
 {
@@ -63,6 +63,7 @@ namespace WoFlagship
         private StreamWriter sw = new StreamWriter("outputAPI.txt");
 
         private KancolleGameData gameData = new KancolleGameData();
+        private KancolleGameContext gameContext = new KancolleGameContext();
         
 
         private INavigator navigator = new SimpleNavigator();
@@ -74,6 +75,8 @@ namespace WoFlagship
 
         public MainWindow()
         {
+            //初始化事件
+            InitContextEvent();
             ///初始化资源
             InitResources();
 
@@ -131,6 +134,86 @@ namespace WoFlagship
             }
         }
 
+        private void InitContextEvent()
+        {
+            gameContext.OnShipUpdated += e =>
+            {
+                foreach (var plugin in pluginManager.Plugins)
+                {
+                    plugin.OnShipUpdated(generalViewModel, e.GameData);
+                }
+            };
+
+            gameContext.OnDeckUpdated += e =>
+            {
+                for (int i = 0; i < generalViewModel.Decks.Length; i++)
+                {
+                    generalViewModel.Decks[i].Name = (i + 1) + "";
+                    for (int j = 0; j < generalViewModel.Decks[i].Ships.Length; j++)
+                    {
+                        int ownedShipId = e.GameData.OwnedShipPlaceArray[i, j];
+                        if (ownedShipId > 0)
+                        {
+                            generalViewModel.Decks[i].Ships[j].Name = e.GameData.OwnedShipDictionary[ownedShipId].Name;
+                        }
+                        else
+                            generalViewModel.Decks[i].Ships[j].Reset();
+                    }
+
+                    foreach (var plugin in pluginManager.Plugins)
+                    {
+                        plugin.OnDeckUpdated(generalViewModel, e.GameData);
+                    }
+                };
+            };
+
+            gameContext.OnMaterialUpdated += e =>
+            {
+                generalViewModel.Ran = e.GameData.Material.Ran;
+                generalViewModel.Dan = e.GameData.Material.Dan;
+                generalViewModel.Gang = e.GameData.Material.Gang;
+                generalViewModel.Lv = e.GameData.Material.Lv;
+                generalViewModel.Jianzao = e.GameData.Material.Jianzao;
+                generalViewModel.Gaixiu = e.GameData.Material.Gaixiu;
+                generalViewModel.Xiufu = e.GameData.Material.Xiufu;
+                generalViewModel.Kaifa = e.GameData.Material.Kaifa;
+
+                foreach (var plugin in pluginManager.Plugins)
+                {
+                    plugin.OnMaterialUpdated(generalViewModel, e.GameData);
+                }
+            };
+
+            gameContext.OnQuestUpdated += e =>
+            {
+                var runningQuest = (from q in e.GameData.QuestDictionary
+                                   where q.Value.State>1
+                                   orderby q.Value.Id
+                                   select q.Value).ToArray();
+
+                for(int i=0; i<generalViewModel.QuestList.Length; i++)
+                {
+                    if (i < runningQuest.Length)
+                    {
+                        var quest = runningQuest[i];
+                        generalViewModel.QuestList[i].Id = quest.Id;
+                        generalViewModel.QuestList[i].Name = quest.Title;
+                        generalViewModel.QuestList[i].Detail = quest.Detail;
+                        generalViewModel.QuestList[i].State = quest.State;
+                        generalViewModel.QuestList[i].ProgressFlag = quest.ProgressFlag;
+                    }
+                    else
+                        generalViewModel.QuestList[i].Reset();
+                }
+
+                foreach (var plugin in pluginManager.Plugins)
+                {
+                    plugin.OnQuestUpdated(generalViewModel, e.GameData);
+                }
+            };
+        }
+
+
         private void InitResources()
         {
             InitQuestInfo();
@@ -154,10 +237,11 @@ namespace WoFlagship
                         var questInfoObject = JsonConvert.DeserializeObject(content) as JToken;
                         int version = questInfoObject["Version"].ToObject<int>();
                         string updateTime = questInfoObject["UpdateTime"].ToString();
-                        gameData.QuestInfoDic.Clear();
+                       
+                        Dictionary<int, KancolleQuestInfoItem> dic = new Dictionary<int, KancolleQuestInfoItem>();
                         foreach (var quest in questInfoObject["QuestInfos"])
                         {
-                            QuestInfoItem qi = new QuestInfoItem()
+                            KancolleQuestInfoItem qi = new KancolleQuestInfoItem()
                             {
                                 Id = quest["Id"].ToString(),
                                 Name = quest["Name"].ToString(),
@@ -236,9 +320,10 @@ namespace WoFlagship
                             if (!unknownCat)
                             {
                                 qi.Requirements = re;
-                                gameData.QuestInfoDic.Add(qi.GameId, qi);
+                                dic.Add(qi.GameId, qi);
                             }
                         }
+                        gameContext.GameData.QuestInfoDictionary = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(dic);
                     }
                 }
                 catch (Exception ex)
@@ -302,7 +387,7 @@ namespace WoFlagship
             actionExecutor = new KancolleActionExecutor(webView);
             try
             {
-                taskExecutor = new KancolleTaskExecutor(webView, () => GetCurrentScene(), () => gameData);
+                taskExecutor = new KancolleTaskExecutor(webView, () => GetCurrentScene(), () => gameContext.GameData);
                 taskExecutor.Start();
             }
             catch(Exception ex)
@@ -353,28 +438,29 @@ namespace WoFlagship
                 {
                     case "api_start2":
                         var start_data = api_object.ToObject<api_start_data>();
-                        UpdateShipDictionary(start_data.api_mst_ship);
+                        gameContext.UpdateShipDatas(start_data.api_mst_ship);
                         UpdateMissionDictionary(start_data.api_mst_mission);
+                        gameContext.UpdateMissions(start_data.api_mst_mission);
                         UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
                         UpdateSlotDictionary(start_data.api_mst_slotitem);
                         foreach(var plugin in pluginManager.Plugins)
                         {
-                            plugin.OnGameStart(generalViewModel, gameData.Clone());
+                            plugin.OnGameStart(generalViewModel, gameContext.GameData);
                         }
                         break;
                     case "api_port/port":
                         var port_data = api_object.ToObject<api_port_data>();
-                        UpdateOwnedShipDictionary(port_data.api_ship);
-                        UpdateMaterial(port_data.api_material);
+                        gameContext.UpdateOwnedShips(port_data.api_ship);
+                        gameContext.UpdateMaterial(port_data.api_material);
                         UpdatePort(port_data);
-                        UpdateDeck(port_data.api_deck_port);
+                        gameContext.UpdateDeck(port_data.api_deck_port);
                         break;
                     case "api_get_member/material":
                         var material_data = api_object.ToObject<api_material_item[]>();
-                        UpdateMaterial(material_data);
+                        gameContext.UpdateMaterial(material_data);
                         break;
                     case "api_req_hokyu/charge":
-                        UpdateMaterial(api_object["api_material"].ToObject<int[]>());
+                        gameContext.UpdateMaterial(api_object["api_material"].ToObject<int[]>());
                         break;
                     case "api_get_member/require_info":
                         var getmember_data = api_object.ToObject<api_requireinfo_data>();
@@ -393,23 +479,19 @@ namespace WoFlagship
                         break;
                     case "api_get_member/questlist":
                         var questlist_data = api_object.ToObject<api_questlist_data>();
-                        if (arg1.Data["api_tab_id"] == "0")
-                        {
-                            UpdateQuest(questlist_data);
-                        }
-                        UpdateQuestDictionary(questlist_data);
+                        gameContext.UpdateQuest(questlist_data);
                         break;
                     case "api_req_quest/start":
-                        StartQuest(gameData.QuestDic[int.Parse(arg1.Data["api_quest_id"])]);
+                       // StartQuest(gameData.QuestDic[int.Parse(arg1.Data["api_quest_id"])]);
                         break;
                     case "api_req_quest/stop":
                     case "api_req_quest/clearitemget":
-                        StopQuest(gameData.QuestDic[int.Parse(arg1.Data["api_quest_id"])]);
+                        //StopQuest(int.Parse(arg1.Data["api_quest_id"]));
                         break;
                     case "api_req_hensei/change"://舰队编成修改
-                        ChangeShip(arg1.Data);
+                        gameContext.UpdateDeck(arg1.Data);
                         break;
-                    case "api_get_member/mission"://可进行的任务
+                    case "api_get_member/mission"://可进行的远征任务
                         var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
                         UpdateOwnedMissionDictionary(ownedMissionItems);
                         break;
@@ -427,18 +509,18 @@ namespace WoFlagship
                     case "api_req_battle_midnight/battle"://夜战
                         var nightbattledata = api_object.ToObject<api_battle_data>();
                         break;
-                    case "api_get_member/ship_deck":
+                    case "api_get_member/ship_deck"://有什么用来着？
                         UpdateShipDeck(api_object.ToObject<api_shipdeck_data>());
                         break;
                 }
                 
-                battleManager.OnGameDataUpdatedHandler(gameData.Clone());
+                battleManager.OnGameDataUpdatedHandler(gameContext.GameData);
                 battleManager.OnAPIResponseReceivedHandler(arg1, arg2, api);
                 taskExecutor.OnAPIResponseReceivedHandler(arg1, arg2, api);
             }
             catch(Exception ex)
             {
-                MessageBox.Show("API处理错误\n" + ex.Message);
+                MessageBox.Show("API处理错误\n" + ex.Message + "\n" + ex.StackTrace);
                 LogFactory.SystemLogger.Error($"API'{arg1.RequestUrl}'处理错误![{arg2}]", ex);
             }
             
@@ -447,7 +529,7 @@ namespace WoFlagship
         private void WebView_StatusMessage(object sender, CefSharp.StatusMessageEventArgs e)
         {
            
-           // MessageBox.Show("status\n"+e.Value);
+           // MessageBox.Show("status\n"+e.Item2);
         }
 
         private void WebView_LoadError(object sender, CefSharp.LoadErrorEventArgs e)
@@ -463,24 +545,14 @@ namespace WoFlagship
            
         }
 
-        private void UpdateShipDictionary(api_mst_ship_item[] shipItems)
-        {
-            gameData.ShipDic = shipItems.ToDictionary(k=>k.api_id, k=>k);
-        }
+        
 
         private void UpdateSlotDictionary(api_mst_slotitem_item[] slotItems)
         {
             gameData.SlotDic = slotItems.ToDictionary(k => k.api_id, k => k);
         }
 
-        private void UpdateOwnedShipDictionary(api_ship_item[] shipItems)
-        {
-            gameData.OwnedShipDic = shipItems.ToDictionary(k => k.api_id, k => k);
-            foreach (var plugin in pluginManager.Plugins)
-            {
-                plugin.OnShipUpdated(generalViewModel, gameData.Clone());
-            }
-        }
+       
 
         private void UpdateMissionDictionary(api_mst_mission_item[] missionItems)
         {
@@ -497,39 +569,7 @@ namespace WoFlagship
             gameData.OwnedMissionDic = ownedMissionItems.ToDictionary(k => k.api_mission_id, k => k);
         }
 
-        /// <summary>
-        /// 调用port的API时会更新deck
-        /// </summary>
-        /// <param name="deckPorts"></param>
-        private void UpdateDeck(KancolleCommon.api_deck_port_item[] deckPorts)
-        {
-            gameData.OwnedShipPlaceDic.Clear();
-            for(int i=0; i<deckPorts.Length; i++)
-            {
-                for(int j=0; j<deckPorts[i].api_ship.Length; j++)
-                {
-                    int ownedShipId = deckPorts[i].api_ship[j];//在第i个舰队第j个位置的舰娘id
-                    generalViewModel.Decks[i].Name = (i+1) + "";
-                    if(ownedShipId > 0)
-                    {
-                        var ship = gameData.ShipDic[gameData.OwnedShipDic[ownedShipId].api_ship_id];//通过自己的舰娘id查找库中的舰娘
-                        generalViewModel.Decks[i].Ships[j].Name = ship.api_name;
-                        gameData.OwnedShipPlaceDic.Add(ownedShipId, new KeyValuePair<int, int>(i, j));
-                    }
-                    else
-                        generalViewModel.Decks[i].Ships[j].Reset();
-                    gameData.OwnedShipPlaceArray[i, j] = ownedShipId;
-                    
-                }
-            }
-
-            foreach(var plugin in pluginManager.Plugins)
-            {
-                plugin.OnDeckUpdated(generalViewModel, gameData.Clone());
-            }
-        }
-
-
+       
         private void UpdateOwnedSlotDictionary(api_slot_item_item[] slotItems)
         {
             gameData.OwnedSlotDic = slotItems.ToDictionary(k=>k.api_id, k=>k);
@@ -539,180 +579,20 @@ namespace WoFlagship
         {
             foreach(var ship in shipdeckData.api_ship_data)
             {
-                if (gameData.OwnedShipDic.ContainsKey(ship.api_id))
+                if (gameData.OwnedShipDictionary.ContainsKey(ship.api_id))
                 {
-                    gameData.OwnedShipDic[ship.api_id] = ship;
+                    //gameData.OwnedShipDic[ship.api_id] = ship;
                 }
                 else
                 {
                     //事实上应该不可能
-                    gameData.OwnedShipDic.Add(ship.api_id, ship);
+                   // gameData.OwnedShipDic.Add(ship.api_id, ship);
                 }
             }
         }
 
-        /// <summary>
-        /// 编成更改时调用
-        /// </summary>
-        /// <param name="postData"></param>
-        private void ChangeShip(Dictionary<string, string> postData)
-        {
-            int api_id = int.Parse(postData["api_id"]);
-            int deck_index = api_id - 1;
-            int api_ship_id = int.Parse(postData["api_ship_id"]);
-            int api_ship_idx = int.Parse(postData["api_ship_idx"]);
-            if (api_ship_id > 0)//添加
-            {
-                var ship = gameData.ShipDic[gameData.OwnedShipDic[api_ship_id].api_ship_id];
-                
-                //交换自己的位置和目标位置
-                if (gameData.OwnedShipPlaceDic.ContainsKey(api_ship_id))//本来就在编队中
-                {
-                    var place = gameData.OwnedShipPlaceDic[api_ship_id];//本来的位置
-                    int dstShip = gameData.OwnedShipPlaceArray[deck_index, api_ship_idx];
-                    if (dstShip == -1) //目标位置为空
-                    {
-                        //直接添加
-                        gameData.OwnedShipPlaceArray[deck_index, api_ship_idx] = api_ship_id;
-                        gameData.OwnedShipPlaceDic[api_ship_id] = new KeyValuePair<int, int>(deck_index, api_ship_idx);
-                        generalViewModel.Decks[deck_index].Ships[api_ship_idx].Name = ship.api_name;
-                        //原位置清空      
-                        int i = 0;
-                        for (i = place.Value; i < generalViewModel.Decks[place.Key].Ships.Length - 1; i++)
-                        {
-                            generalViewModel.Decks[place.Key].Ships[i].Name = generalViewModel.Decks[place.Key].Ships[i + 1].Name;
-                            int nextShipId = gameData.OwnedShipPlaceArray[place.Key, i + 1];
-                            if (nextShipId > 0)
-                                gameData.OwnedShipPlaceDic[nextShipId] = new KeyValuePair<int, int>(place.Key, i);
-                            gameData.OwnedShipPlaceArray[place.Key, i] = nextShipId;
-                        }
-                        generalViewModel.Decks[place.Key].Ships[i].Reset();
-                        gameData.OwnedShipPlaceArray[place.Key, i] = -1;
-                    }
-                    else//目标位置有舰娘
-                    {
-                        //交换
-                        gameData.OwnedShipPlaceArray[deck_index, api_ship_idx] = api_ship_id;
-                        gameData.OwnedShipPlaceArray[place.Key, place.Value] = dstShip;
-                        gameData.OwnedShipPlaceDic[api_ship_id] = new KeyValuePair<int, int>(deck_index, api_ship_idx);
-                        gameData.OwnedShipPlaceDic[dstShip] = new KeyValuePair<int, int>(place.Key, place.Value);
-                        string temp = generalViewModel.Decks[place.Key].Ships[place.Value].Name;
-                        generalViewModel.Decks[place.Key].Ships[place.Value].Name = generalViewModel.Decks[deck_index].Ships[api_ship_idx].Name;
-                        generalViewModel.Decks[deck_index].Ships[api_ship_idx].Name = temp;
-                    }
-                }
-                else//本来不在编队中
-                {
-                    int dstShip = gameData.OwnedShipPlaceArray[deck_index, api_ship_idx];
-                    if (dstShip == -1) //目标位置为空
-                    {
-                        //直接添加
-                        gameData.OwnedShipPlaceArray[deck_index, api_ship_idx] = api_ship_id;
-                        gameData.OwnedShipPlaceDic.Add(api_ship_id, new KeyValuePair<int, int>(deck_index, api_ship_idx));
-                        generalViewModel.Decks[0].Ships[api_ship_idx].Name = ship.api_name;
-                    }
-                    else//目标位置有舰娘
-                    {
-                        //交换
-                        gameData.OwnedShipPlaceArray[deck_index, api_ship_idx] = api_ship_id;
-                        gameData.OwnedShipPlaceDic.Add(api_ship_id, new KeyValuePair<int, int>(deck_index, api_ship_idx));
-                        gameData.OwnedShipPlaceDic.Remove(dstShip);
-                        generalViewModel.Decks[deck_index].Ships[api_ship_idx].Name = ship.api_name;
-
-                    }
-                }
-            }
-            else if (api_ship_id == -1)//移除
-            {
-                int i;
-                gameData.OwnedShipPlaceDic.Remove(gameData.OwnedShipPlaceArray[deck_index, api_ship_idx]);
-                for (i = api_ship_idx; i < generalViewModel.Decks[deck_index].Ships.Length - 1; i++)
-                {//后面的向前补充
-                    generalViewModel.Decks[deck_index].Ships[i].Name = generalViewModel.Decks[deck_index].Ships[i + 1].Name;
-                    int nextShipId = gameData.OwnedShipPlaceArray[deck_index, i + 1];
-                    if (nextShipId > 0)
-                        gameData.OwnedShipPlaceDic[nextShipId] = new KeyValuePair<int, int>(deck_index, i);
-                    gameData.OwnedShipPlaceArray[deck_index, i] = nextShipId;
-                }
-                generalViewModel.Decks[deck_index].Ships[i].Reset();
-                gameData.OwnedShipPlaceArray[deck_index, i] = -1;
-
-            }
-            else if(api_ship_id == -2)//移除旗舰外所有舰船
-            {
-                for(int i=1; i<gameData.OwnedShipPlaceArray.GetLength(1); i++)
-                {
-                    gameData.OwnedShipPlaceDic.Remove(gameData.OwnedShipPlaceArray[deck_index, i]);
-                    gameData.OwnedShipPlaceArray[deck_index, i] = -1;
-                    generalViewModel.Decks[deck_index].Ships[i].Reset();
-                }
-            }
-
-            foreach (var plugin in pluginManager.Plugins)
-            {
-                plugin.OnDeckUpdated(generalViewModel, gameData.Clone());
-            }
-        }
-
-        private void UpdateMaterial(int[] materials)
-        {
-            if(materials != null)
-            {
-                generalViewModel.Ran = materials[0];
-                generalViewModel.Dan = materials[1];
-                generalViewModel.Gang = materials[2];
-                generalViewModel.Lv= materials[3];
-            }
-        }
-
-
-        /// <summary>
-        /// 更新资源信息
-        /// </summary>
-        /// <param name="materials"></param>
-        private void UpdateMaterial(api_material_item[] materials = null)
-        {
-            if(materials != null)
-            {
-                foreach(var material in materials)
-                {
-                    switch(material.api_id)
-                    {
-                        case 1:
-                            generalViewModel.Ran = material.api_value;
-                            break;
-                        case 2:
-                            generalViewModel.Dan = material.api_value;
-                            break;
-                        case 3:
-                            generalViewModel.Gang = material.api_value;
-                            break;
-                        case 4:
-                            generalViewModel.Lv = material.api_value;
-                            break;
-                        case 5:
-                            generalViewModel.Jianzao = material.api_value;
-                            break;
-                        case 6:
-                            generalViewModel.Xiufu = material.api_value;
-                            break;
-                        case 7:
-                            generalViewModel.Kaifa = material.api_value;
-                            break;
-                        case 8:
-                            generalViewModel.Gaixiu = material.api_value;
-                            break;
-                    }
-                   
-                }
-                
-            }
-            foreach (var plugin in pluginManager.Plugins)
-            {
-                plugin.OnMaterialUpdated(generalViewModel, gameData.Clone());
-            }
-        }
-
+       
+       
         /// <summary>
         /// 更新提督基本信息
         /// </summary>
@@ -730,174 +610,6 @@ namespace WoFlagship
             }
         }
 
-        /// <summary>
-        /// 更新任务字典，用于任务信息的查询
-        /// </summary>
-        /// <param name="questData"></param>
-        private void UpdateQuestDictionary(api_questlist_data questData)
-        {
-            if(questData != null && questData.api_list !=null)
-            {
-                List<api_questlist_item> validQuestList = new List<api_questlist_item>();
-
-                for (int i = 0; i < questData.api_list.Length; i++)
-                {
-                    JObject jo = questData.api_list[i] as JObject;
-                    if (jo != null)
-                    {
-                        validQuestList.Add(jo.ToObject<api_questlist_item>());
-                    }
-
-                }
-                foreach(var quest in validQuestList)
-                {
-                    if (gameData.QuestDic.ContainsKey(quest.api_no))
-                        gameData.QuestDic[quest.api_no] = quest;
-                    else
-                        gameData.QuestDic.Add(quest.api_no, quest);
-                }
-            }
-            foreach (var plugin in pluginManager.Plugins)
-            {
-                plugin.OnQuestUpdated(generalViewModel, gameData.Clone());
-            }
-        }
-
-        /// <summary>
-        /// 获取到任务列表后更新任务列表
-        /// </summary>
-        /// <param name="questData"></param>
-        private void UpdateQuest(KancolleCommon.api_questlist_data questData)
-        {
-            if (questData != null && questData.api_list.Length > 0)
-            {
-                List<KancolleCommon.api_questlist_item> validQuestList = new List<KancolleCommon.api_questlist_item>();
-                
-                for(int i=0; i< questData.api_list.Length; i++)
-                {
-                    JObject jo = questData.api_list[i] as JObject;
-                    if(jo != null)
-                    {
-                        validQuestList.Add(jo.ToObject<KancolleCommon.api_questlist_item>());
-                    }
-                   
-                }
-                if (validQuestList.Count == 0)
-                    return;
-
-                int minId = validQuestList[0].api_no;
-                int maxId = validQuestList[validQuestList.Count - 1].api_no;
-                if (questData.api_disp_page == 1)
-                {
-                    foreach (var quest in generalViewModel.QuestList)
-                    {
-                        if (quest.Id <= maxId)
-                            quest.Reset();
-                    }
-                }
-                else if (questData.api_disp_page == questData.api_page_count)
-                {
-                    foreach (var quest in generalViewModel.QuestList)
-                    {
-                        if (quest.Id >= minId)
-                            quest.Reset();
-                    }
-                }
-                else
-                {
-                    foreach (var quest in generalViewModel.QuestList)
-                    {
-                        if (quest.Id >= minId && quest.Id <= maxId)
-                            quest.Reset();
-                    }
-                }
-
-                generalViewModel.QuestList = (from q in generalViewModel.QuestList
-                                              orderby q.Id ascending
-                                              select q).ToArray();
-                int j = generalViewModel.QuestList.Length - 1;
-                foreach (var quest in validQuestList)
-                {
-                    if (quest.api_state > 1)
-                    {
-                        generalViewModel.QuestList[j].Id = quest.api_no;
-                        generalViewModel.QuestList[j].Name = quest.api_title;
-                        generalViewModel.QuestList[j].Detail = quest.api_detail;
-                        if (quest.api_state == 3)
-                            generalViewModel.QuestList[j].Progress = "完成";
-                        else
-                        {
-                            if (quest.api_progress_flag == 0)
-                                generalViewModel.QuestList[j].Progress = "进行中";
-                            else
-                                generalViewModel.QuestList[j].Progress = (30 * quest.api_progress_flag + 20) + "%";
-                        }
-                        j--;
-                    }
-                    if (j < 0)
-                        break;
-                }
-                generalViewModel.QuestList = (from q in generalViewModel.QuestList
-                                              orderby q.Id ascending
-                                              select q).ToArray();
-
-            }
-
-            foreach(var plugin in pluginManager.Plugins)
-            {
-                plugin.OnQuestUpdated(generalViewModel, gameData.Clone());
-            }
-        }
-
-        /// <summary>
-        /// 开始某个任务后更新任务列表
-        /// </summary>
-        /// <param name="quest"></param>
-        private void StartQuest(api_questlist_item quest)
-        {
-            generalViewModel.QuestList = (from q in generalViewModel.QuestList
-                                          orderby q.Id ascending
-                                          select q).ToArray();
-            int j = generalViewModel.QuestList.Length - 1;
-            generalViewModel.QuestList[j].Id = quest.api_no;
-            generalViewModel.QuestList[j].Name = quest.api_title;
-            generalViewModel.QuestList[j].Detail = quest.api_detail;
-            if (quest.api_state == 3)
-                generalViewModel.QuestList[j].Progress = "完成";
-            else
-            {
-                if (quest.api_progress_flag == 0)
-                    generalViewModel.QuestList[j].Progress = "进行中";
-                else
-                    generalViewModel.QuestList[j].Progress = (30 * quest.api_progress_flag + 20) + "%";
-            }
-            generalViewModel.QuestList = (from q in generalViewModel.QuestList
-                                          orderby q.Id ascending
-                                          select q).ToArray();
-        }
-
-        /// <summary>
-        /// 停止某个任务后更新任务列表
-        /// </summary>
-        /// <param name="quest"></param>
-        private void StopQuest(api_questlist_item quest)
-        {
-            foreach (var q in generalViewModel.QuestList)
-            {
-                if (q.Id == quest.api_no)
-                {
-                    q.Reset();
-                    break;
-                }
-            }
-            generalViewModel.QuestList = (from q in generalViewModel.QuestList
-                                          orderby q.Id ascending
-                                          select q).ToArray();
-            foreach (var plugin in pluginManager.Plugins)
-            {
-                plugin.OnQuestUpdated(generalViewModel, gameData.Clone());
-            }
-        }
 
         private void Btn_ShowDevTool_Click(object sender, RoutedEventArgs e)
         {

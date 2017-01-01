@@ -46,15 +46,15 @@ namespace WoFlagship.Plugins.ShipInfo
         {
             this.gameData = gameData;
             AllShipCollection.Clear();
-            foreach (var ship in gameData.ShipDic.Values)
+            foreach (var ship in gameData.ShipDataDictionary.Values)
             {
                 var model = new ShipViewModel()
                 {
-                    Name = ship.api_name,
-                    Id = ship.api_id,
+                    Name = ship.Name,
+                    Id = ship.ShipId,
                    
-                    TypeId = ship.api_stype,
-                    Type = ship.api_stype > KancolleAPIs.ShipTypeText.Length ? ship.api_stype + "" : KancolleAPIs.ShipTypeText[ship.api_stype - 1],
+                    TypeId = ship.Type,
+                    Type = ship.Type > KancolleAPIs.ShipTypeText.Length ? ship.Type + "" : KancolleAPIs.ShipTypeText[ship.Type - 1],
                 };
 
                 AllShipCollection.Add(model);
@@ -65,27 +65,26 @@ namespace WoFlagship.Plugins.ShipInfo
         {
             this.gameData = gameData;
             ShipCollection.Clear();
-            foreach(var ship in gameData.OwnedShipDic.Values)
+            foreach(var ship in gameData.OwnedShipDictionary.Values)
             {
-                var mst_ship = gameData.ShipDic[ship.api_ship_id];
                 var model = new ShipViewModel()
                 {
-                    Name = mst_ship.api_name,
-                    Level = ship.api_lv.ToString(),
-                    Id = ship.api_id,
-                    ShipId = ship.api_ship_id,
-                    TypeId = mst_ship.api_stype,
-                    Type = mst_ship.api_stype >= KancolleAPIs.ShipTypeText.Length ? mst_ship.api_stype + "" : KancolleAPIs.ShipTypeText[mst_ship.api_stype - 1],
-                    Condition = ship.api_cond,
-                    Karyoku = ship.api_karyoku[0],
-                    Raisou = ship.api_raisou[0],
-                    Taiku = ship.api_taiku[0],
-                    Soukou = ship.api_soukou[0],
-                    Kaihi = ship.api_kaihi[0],
-                    Taisen = ship.api_taisen[0],
-                    Sakuteki = ship.api_sakuteki[0],
-                    Lucky = ship.api_lucky[0],
-                    SlotIds = ship.api_slot
+                    Name = ship.Name,
+                    Level = ship.Level.ToString(),
+                    Id = ship.Id,
+                    ShipId = ship.ShipId,
+                    TypeId = ship.Type,
+                    Type = ship.Type >= KancolleAPIs.ShipTypeText.Length ? ship.Type + "" : KancolleAPIs.ShipTypeText[ship.Type - 1],
+                    Condition = ship.Condition,
+                    Karyoku = ship.Karyoku.Item1,
+                    Raisou = ship.Raisou.Item1,
+                    Taiku = ship.Taiku.Item1,
+                    Soukou = ship.Soukou.Item1,
+                    Kaihi = ship.Kaihi.Item1,
+                    Taisen = ship.Taisen.Item1,
+                    Sakuteki = ship.Sakuteki.Item1,
+                    Lucky = ship.Lucky.Item1,
+                    SlotIds = new int[0]
                 };
 
                 model.Slots = "";

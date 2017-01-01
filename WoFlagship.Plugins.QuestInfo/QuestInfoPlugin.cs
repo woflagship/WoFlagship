@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WoFlagship.KancolleCommon;
-using WoFlagship.KancolleQuest;
+using WoFlagship.KancolleQuestData;
 using WoFlagship.Plugins.QuestInfo.Properties;
 using WoFlagship.ViewModels;
 
@@ -59,8 +59,8 @@ namespace WoFlagship.Plugins.QuestInfo
             formatter.GameData = gameData;
             foreach (var quest in generalViewModel.QuestList)
             {
-                KancolleQuest.QuestInfoItem questInfo;
-                if(gameData.QuestInfoDic.TryGetValue(quest.Id, out questInfo))
+                KancolleQuestData.KancolleQuestInfoItem questInfo;
+                if(gameData.QuestInfoDictionary.TryGetValue(quest.Id, out questInfo))
                 {
                     if(questInfo.Requirements is AGouQuestRequirement)
                     {
@@ -239,10 +239,10 @@ namespace WoFlagship.Plugins.QuestInfo
                 return Resources.ship_any;
             if (id > 0)
             {
-                api_mst_ship_item item = null;
-                if(GameData?.ShipDic.TryGetValue((int)id, out item) == true)
+                KancolleShipData item = null;
+                if(GameData?.ShipDataDictionary.TryGetValue((int)id, out item) == true)
                 {
-                    return item.api_name;
+                    return item.Name;
                 }
                 else
                 {

@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WoFlagship.KancolleCommon;
-using WoFlagship.KancolleQuest;
+using WoFlagship.KancolleQuestData;
 using WoFlagship.Wiki;
 
 namespace WoFlagship.ToolWindows
@@ -27,10 +27,10 @@ namespace WoFlagship.ToolWindows
     /// </summary>
     public partial class QuestEditor : Window
     {
-        private ObservableCollection<QuestInfoItem> questList = new ObservableCollection<QuestInfoItem>();
+        private ObservableCollection<KancolleQuestInfoItem> questList = new ObservableCollection<KancolleQuestInfoItem>();
 
         private KancolleGameData gameData;
-        Dictionary<string, api_mst_ship_item> nameDic;
+        Dictionary<string, KancolleShipData> nameDic;
 
         public QuestEditor(KancolleGameData gameData)
         {
@@ -80,7 +80,7 @@ namespace WoFlagship.ToolWindows
                 {
                     if (row.Count >= 8)
                     {
-                        QuestInfoItem questInfo = new QuestInfoItem();
+                        KancolleQuestInfoItem questInfo = new KancolleQuestInfoItem();
                         questInfo.Id = row[0].Substring(row[0].IndexOf('|') + 1).Trim();
                         questInfo.Name = row[1].Substring(row[1].LastIndexOf('|') + 1).Replace("}}", "").Trim();
                         questInfo.Detail = row[2].Trim().Replace("<br/>","\n");
@@ -103,7 +103,7 @@ namespace WoFlagship.ToolWindows
             using (StreamWriter sw = File.CreateText(jsonFile))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                KancolleQuestInfo qi = new KancolleQuestInfo()
+                KancolleQuestInfoMetadata qi = new KancolleQuestInfoMetadata()
                 {
                     QuestInfos = questList.ToArray(),
                 };
@@ -133,12 +133,12 @@ namespace WoFlagship.ToolWindows
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Json文件(*.json)|*.json";
-           nameDic  = new Dictionary<string, api_mst_ship_item>();
+           nameDic  = new Dictionary<string, KancolleShipData>();
             
-            foreach(var item in gameData.ShipDic)
+            foreach(var item in gameData.ShipDataDictionary)
             {
-                if (!nameDic.ContainsKey(item.Value.api_name))
-                    nameDic.Add(item.Value.api_name, item.Value);
+                if (!nameDic.ContainsKey(item.Value.Name))
+                    nameDic.Add(item.Value.Name, item.Value);
             }
             if(ofd.ShowDialog() == true)
             {
@@ -269,7 +269,7 @@ namespace WoFlagship.ToolWindows
                             };
                             var shipStr = item["ship"].ToString();
                             if (nameDic.ContainsKey(shipStr))
-                                mi.ShipId = nameDic[shipStr].api_id;
+                                mi.ShipId = nameDic[shipStr].ShipId;
                             else if (KancolleAPIs.ShipTypeDic.ContainsKey(shipStr))
                                 mi.ShipId = -KancolleAPIs.ShipTypeDic[shipStr];
                             else
@@ -354,13 +354,13 @@ namespace WoFlagship.ToolWindows
                             List<int> ids = new List<int>();
                             foreach (var s in secretary)
                             {
-                                ids.Add(nameDic[s.ToString()].api_id);
+                                ids.Add(nameDic[s.ToString()].ShipId);
                             }
                             require.Secretary = ids.ToArray();
                         }
                         else
                         {
-                            require.Secretary = new int[] { nameDic[secretary.ToString()].api_id };
+                            require.Secretary = new int[] { nameDic[secretary.ToString()].ShipId };
                         }
                     }
                     return require;
@@ -469,7 +469,7 @@ namespace WoFlagship.ToolWindows
                 if (shipToken["ship"] is JValue)
                 {
                     if (nameDic.ContainsKey(shipToken["ship"].ToString()))
-                        req.Ship = new int[] { nameDic[shipToken["ship"].ToString()].api_id };
+                        req.Ship = new int[] { nameDic[shipToken["ship"].ToString()].ShipId };
                     else if (KancolleAPIs.ShipTypeDic.ContainsKey(shipToken["ship"].ToString()))
                         req.Ship = new int[] { -KancolleAPIs.ShipTypeDic[shipToken["ship"].ToString()] };
                     else
@@ -483,7 +483,7 @@ namespace WoFlagship.ToolWindows
                     for (int i = 0; i < ids.Length; i++)
                     {
                         if (nameDic.ContainsKey(strs[i]))
-                            ids[i] = nameDic[strs[i]].api_id;
+                            ids[i] = nameDic[strs[i]].ShipId;
                         else if (KancolleAPIs.ShipTypeDic.ContainsKey(strs[i]))
                             ids[i] = -KancolleAPIs.ShipTypeDic[strs[i]];
                         else

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class QuestInfoItem : ViewModelBase
+    public class KancolleQuestInfoItem : ViewModelBase
     {
         private string _id;
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }

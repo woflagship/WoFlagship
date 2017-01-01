@@ -6,35 +6,28 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public enum EnemySinkType
+    public class ExerciseQuestRequirement : IQuestRequirement
     {
-        Unknown,
 
         /// <summary>
-        /// 敵潜水艦
+        /// 需要完成的次数
+        /// null也表示1次
         /// </summary>
-        SS,
+        public int? Times { get; set; }
 
         /// <summary>
-        /// 敵空母
+        /// 是否需要胜利
+        /// null表示无要求
         /// </summary>
-        CV,
+        public bool? Victory { get; set; }
 
         /// <summary>
-        /// 敵補給艦
+        /// 是否为日常任务
         /// </summary>
-        Supply,
-    }
-
-    [Serializable]
-    public class SinkQuestRequirement : IQuestRequirement
-    {
-        public EnemySinkType ShipType { get; set; }
-
-        public int Amount { get; set; }
+        public bool? Daily { get; set; }
 
         public List<KancolleTask> GetTasks(KancolleGameData gameData)
         {

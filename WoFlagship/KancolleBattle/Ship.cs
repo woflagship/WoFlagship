@@ -24,7 +24,7 @@ namespace WoFlagship.KancolleBattle
         public int ToHP { get; set; }
         public int[] Items { get; set; }
         public int ItemUsed { get; set; } = -1;
-        public api_ship_item Raw { get; set; }
+        public KancolleShip Raw { get; set; }
 
         public int UseItem()
         {

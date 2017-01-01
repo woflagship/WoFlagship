@@ -5,7 +5,7 @@ using System.Text;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     public interface IQuestRequirement
     {

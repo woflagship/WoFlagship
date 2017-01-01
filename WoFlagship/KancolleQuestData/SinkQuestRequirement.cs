@@ -6,33 +6,39 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class EquipexchangeQuestRequirement : IQuestRequirement
+    public enum EnemySinkType
     {
-        /// <summary>
-        /// 装备要求
-        /// </summary>
-        public QuestRequiredItem[] Equipments { get; set; }
+        Unknown,
 
         /// <summary>
-        /// 废弃要求
+        /// 敵潜水艦
         /// </summary>
-        public QuestRequiredItem[] Scraps { get; set; }
+        SS,
 
         /// <summary>
-        /// 消耗
+        /// 敵空母
         /// </summary>
-        public QuestRequiredItem[] Consumptions { get; set; }
+        CV,
 
-        public int[] Resources { get; set; }
+        /// <summary>
+        /// 敵補給艦
+        /// </summary>
+        Supply,
+    }
+
+    [Serializable]
+    public class SinkQuestRequirement : IQuestRequirement
+    {
+        public EnemySinkType ShipType { get; set; }
+
+        public int Amount { get; set; }
 
         public List<KancolleTask> GetTasks(KancolleGameData gameData)
         {
             throw new NotImplementedException();
         }
     }
-
-   
 }

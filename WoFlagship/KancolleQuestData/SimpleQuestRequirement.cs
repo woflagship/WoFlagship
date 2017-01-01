@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using WoFlagship.KancolleAI;
 using WoFlagship.KancolleCommon;
 
-namespace WoFlagship.KancolleQuest
+namespace WoFlagship.KancolleQuestData
 {
     [Serializable]
-    public class AGouQuestRequirement : IQuestRequirement
+    public class SimpleQuestRequirement : IQuestRequirement
     {
+        public string Subcategory { get; set; }
+
+        public int Times { get; set; }
+
+        public bool? Batch { get; set; }
+
         public List<KancolleTask> GetTasks(KancolleGameData gameData)
         {
             throw new NotImplementedException();
