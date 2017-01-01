@@ -59,7 +59,7 @@ namespace WoFlagship.Plugins.QuestInfo
             formatter.GameData = gameData;
             foreach (var quest in generalViewModel.QuestList)
             {
-                QuestInfoViewModel questInfo;
+                KancolleQuest.QuestInfoItem questInfo;
                 if(gameData.QuestInfoDic.TryGetValue(quest.Id, out questInfo))
                 {
                     if(questInfo.Requirements is AGouQuestRequirement)

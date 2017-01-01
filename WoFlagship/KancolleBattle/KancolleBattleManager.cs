@@ -133,7 +133,7 @@ namespace WoFlagship.KancolleBattle
                 */
                 if(Battle.mainFleet == null)
                 {
-                    int fleetId = (int)(new int?[] { body["api_deck_id"].ToObject<int?>(), body["api_dock_id"].ToObject<int?>() }.First((x) => x != null));
+                    int fleetId = (int)(new int?[] { body["api_deck_id"]?.ToObject<int?>(), body["api_dock_id"]?.ToObject<int?>() }.First((x) => x != null));
                     int escortId = FleetType > 0 ? 2 : -1;// HACK: -1 for empty fleet.
                     Battle.FleetType = FleetType;
                     Battle.mainFleet = new Fleet(getRawFleet(fleetId), 0);//KancolleBattle.initFleet( getRawFleet(fleetId), 0);

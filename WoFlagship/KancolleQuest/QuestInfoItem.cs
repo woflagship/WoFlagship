@@ -8,7 +8,7 @@ using WoFlagship.ViewModels;
 namespace WoFlagship.KancolleQuest
 {
     [Serializable]
-    public class QuestInfoViewModel : ViewModelBase
+    public class QuestInfoItem : ViewModelBase
     {
         private string _id;
         public string Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }

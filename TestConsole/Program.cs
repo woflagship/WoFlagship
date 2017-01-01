@@ -198,25 +198,52 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            
-            SortieQuestRequirement r = new SortieQuestRequirement()
+            List<KancolleShip> ships = new List<KancolleShip>();
+            for (int i = 0; i < 120; i++)
             {
-                MapStr = "2-3",
-                Boss = false,
-                Result = "S",
-                Times = 1,
-                FleetId = 0,
-                Disallowed = -1,
-                Groups = new ShipRequirement[]
+                ships.Add(new KancolleShip()
                 {
-                    new ShipRequirement() {Flagship=false, RequirementType = RequirementTypes.ShipType,Amount=null, Select = new int[] { 3}, Ship = new int[] { 3,15} }
-                }
-
+                    ShipId = i,
+                    Type = i / 3 + 1
+                });
             };
-            EditAction e = new EditAction(12, 13);
-            EditAction e2 = new EditAction(13312, 1312);
-            Smart.Default.AddExtensions(new KancolleFormatter());
-            Console.WriteLine(Smart.Format("{MapStr}{Boss:Boss战|出击}{Result:Result()}{Times}次\n编成要求：{Groups:Group()}}", r));
+
+            int n = 4;
+            var now = DateTime.Now;
+            var selected1 = from s in ships
+                           where s.Type == 1
+                           select s;
+            var selected2 = from s in ships
+                            where s.Type == 2
+                            select s;
+            var selected3 = from s in ships
+                            where s.Type == 3
+                            select s;
+            var selected4 = from s in ships
+                            where s.Type == 1
+                            select s;
+            var selected5 = from s in ships
+                            where s.Type == 2
+                            select s;
+            var selected6 = from s in ships
+                            where s.Type == 3
+                            select s;
+            Console.WriteLine("finish get " + selected1.Count());
+
+            Console.WriteLine((DateTime.Now - now).TotalSeconds);
+            
+            /*
+            foreach(var i in selected)
+            {
+                Console.WriteLine(i.Length);
+              foreach(var k in i)
+                {
+                    Console.Write(k.ShipId + " ");
+                }
+                Console.WriteLine();
+            }
+                           
+    */
             Console.Read();
         }
 

@@ -14,6 +14,16 @@ namespace WoFlagship.KancolleCommon
         public const int Version = 1;
         public const string UpdateTime = "20161212";
 
+        public static string GetAPI(string url)
+        {
+            int index = url.IndexOf(DMMUrls.KanColleAPIKeyword);
+            if(index > 0)
+            {
+                return url.Substring(index + DMMUrls.KanColleAPIKeyword.Length);
+            }
+            return "";
+        }
+
         public static string[] RankText { get; } = { "", "元帥", "大将", "中将", "少将", "大佐", "中佐", "新米中佐", "少佐", "中堅少佐", "新米少佐" };
         public static string[] ShipTypeText { get; } = { Resources.unkown, Resources.dd, Resources.cl, Resources.clt, Resources.ca, Resources.cav, Resources.cvl, Resources.fbb, Resources.bb, Resources.bbv,
             Resources.cv, Resources.unkown, Resources.ss, Resources.ssv, Resources.av_e, Resources.av, Resources.ls, Resources.acv, Resources.ws, Resources.ssm, Resources.pcl, Resources.sp};

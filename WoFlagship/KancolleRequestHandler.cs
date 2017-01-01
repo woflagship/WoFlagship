@@ -120,15 +120,15 @@ namespace WoFlagship
                     responseFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
             }
             else if(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleFrameSrcPrefix))
-            {
+            {//过滤掉多余的页面信息
                 gameFrame = frame;
                 var script = "document.body.style.margin='0px';";
                 browserControl.ExecuteScriptAsync(script);
                 gameFrameFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
                 
             }
-            else if(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleAPIUrl))
-            {
+            else if(request.Url.Contains(KancolleCommon.DMMUrls.KanColleAPIKeyword))//(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleAPIUrl))
+            {//获取api post
                 RequestInfo requestInfo = new RequestInfo();
                 requestInfo.RequestUrl = request.Url;
                 foreach(var postData in request.PostData.Elements)

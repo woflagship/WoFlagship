@@ -18,7 +18,7 @@ namespace WoFlagship.KancolleCommon
         public Dictionary<int, api_mst_mapinfo_item> MapDic { get; set; } = new Dictionary<int, api_mst_mapinfo_item>();
 
         public Dictionary<int, api_questlist_item> QuestDic { get; set; } = new Dictionary<int, api_questlist_item>();
-        public Dictionary<int, QuestInfoViewModel> QuestInfoDic { get; set; } = new Dictionary<int, QuestInfoViewModel>();
+        public Dictionary<int, QuestInfoItem> QuestInfoDic { get; set; } = new Dictionary<int, QuestInfoItem>();
 
 
         /// <summary>
@@ -74,5 +74,28 @@ namespace WoFlagship.KancolleCommon
                 return clonedData;
             }
         }
+    }
+
+    public class KancolleShip
+    {
+        /// <summary>
+        /// OwnedId，按照船的获得顺序生成
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// 数据库中的船的id
+        /// </summary>
+        public int ShipId { get; set; }
+
+        /// <summary>
+        /// 船的类型
+        /// </summary>
+        public int Type { get; set; }
+
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public int Level { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace WoFlagship.KancolleCommon
         public const string KanColleUrl = @"http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/";
         public const string KanColleFrameSrcPrefix = @"http://osapi.dmm.com/gadgets/ifr?synd=dmm&container=dmm";
         public const string KanColleAPIUrl = @"http://203.104.248.135/kcsapi/";
+        public const string KanColleAPIKeyword = @"/kcsapi/";
         public const string KanColleSwfUrl = @"http://203.104.248.135/kcs/";
     }
 }

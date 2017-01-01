@@ -157,7 +157,7 @@ namespace WoFlagship
                         gameData.QuestInfoDic.Clear();
                         foreach (var quest in questInfoObject["QuestInfos"])
                         {
-                            QuestInfoViewModel qi = new QuestInfoViewModel()
+                            QuestInfoItem qi = new QuestInfoItem()
                             {
                                 Id = quest["Id"].ToString(),
                                 Name = quest["Name"].ToString(),
@@ -347,7 +347,7 @@ namespace WoFlagship
 
                 var data = JsonConvert.DeserializeObject(arg2) as JObject;
                 var api_object = data["api_data"];
-                string api = arg1.RequestUrl.Substring(KancolleCommon.DMMUrls.KanColleAPIUrl.Length);
+                string api = KancolleAPIs.GetAPI(arg1.RequestUrl);//= arg1.RequestUrl.Substring(KancolleCommon.DMMUrls.KanColleAPIUrl.Length);
                 
                 switch (api)
                 {
@@ -1189,6 +1189,12 @@ namespace WoFlagship
         private void Grid_AIPanel_Loaded(object sender, RoutedEventArgs e)
         {
             aiGrid = sender as Grid;
+        }
+
+        private void Btn_MapEditor_Click(object sender, RoutedEventArgs e)
+        {
+            MapEditor me = new MapEditor();
+            me.ShowDialog();
         }
     }
 }

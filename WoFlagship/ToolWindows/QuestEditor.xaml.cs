@@ -27,7 +27,7 @@ namespace WoFlagship.ToolWindows
     /// </summary>
     public partial class QuestEditor : Window
     {
-        private ObservableCollection<QuestInfoViewModel> questList = new ObservableCollection<QuestInfoViewModel>();
+        private ObservableCollection<QuestInfoItem> questList = new ObservableCollection<QuestInfoItem>();
 
         private KancolleGameData gameData;
         Dictionary<string, api_mst_ship_item> nameDic;
@@ -80,7 +80,7 @@ namespace WoFlagship.ToolWindows
                 {
                     if (row.Count >= 8)
                     {
-                        QuestInfoViewModel questInfo = new QuestInfoViewModel();
+                        QuestInfoItem questInfo = new QuestInfoItem();
                         questInfo.Id = row[0].Substring(row[0].IndexOf('|') + 1).Trim();
                         questInfo.Name = row[1].Substring(row[1].LastIndexOf('|') + 1).Replace("}}", "").Trim();
                         questInfo.Detail = row[2].Trim().Replace("<br/>","\n");

@@ -101,6 +101,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CefSharp.Common.53.0.1\CefSharp\x86\CefSharp.Core.dll</HintPath>
     </Reference>
+    <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\packages\FCTB.2.16.21.0\lib\FastColoredTextBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\..\C# Project\MyCrawler\MyCrawler\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -149,6 +153,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.2\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -182,7 +190,10 @@
     <Compile Include="AIManualTab.cs" />
     <Compile Include="KancolleAI\AIExceptions.cs" />
     <Compile Include="KancolleAI\AIManager.cs" />
+    <Compile Include="KancolleCommon\IMetadata.cs" />
     <Compile Include="KancolleCommon\KancolleGameData.cs" />
+    <Compile Include="KancolleMap\KancolleMapInfo.cs" />
+    <Compile Include="KancolleMap\MapInfoItem.cs" />
     <Compile Include="KancolleQuest\AGouQuestRequirement.cs" />
     <Compile Include="KancolleQuest\AndQuestRequirement.cs" />
     <Compile Include="KancolleQuest\EquipexchangeQuestRequirement.cs" />
@@ -193,7 +204,7 @@
     <Compile Include="KancolleQuest\KancolleQuestInfo.cs" />
     <Compile Include="KancolleQuest\ModelconversionQuestRequirement.cs" />
     <Compile Include="KancolleQuest\ModernizationQuestRequirement.cs" />
-    <Compile Include="KancolleQuest\QuestInfoViewModel.cs" />
+    <Compile Include="KancolleQuest\QuestInfoItem.cs" />
     <Compile Include="KancolleQuest\ScrapequipmentQuestRequirement.cs" />
     <Compile Include="KancolleQuest\ShipRequirement.cs" />
     <Compile Include="KancolleQuest\SimpleQuestRequirement.cs" />
@@ -220,6 +231,8 @@
     <Compile Include="KancolleNavigation\SceneRecognizer.cs" />
     <Compile Include="KancolleNavigation\Scenes.cs" />
     <Compile Include="KancolleNavigation\SimpleNavigator.cs" />
+    <Compile Include="KancolleRequirement\ShipCondition.cs" />
+    <Compile Include="KancolleRequirement\ShipConstraint.cs" />
     <Compile Include="KancolleResponseFilter.cs" />
     <Compile Include="Logger\LogFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
@@ -228,6 +241,9 @@
       <DependentUpon>PluginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RequestInfo.cs" />
+    <Compile Include="ToolWindows\MapEditor.xaml.cs">
+      <DependentUpon>MapEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToolWindows\QuestEditor.xaml.cs">
       <DependentUpon>QuestEditor.xaml</DependentUpon>
     </Compile>
@@ -245,6 +261,7 @@
     <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\ObservaleRangeCollection.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
+    <Compile Include="ViewModels\MapEditorViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Wiki\WikiTable.cs" />
@@ -263,6 +280,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PluginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToolWindows\MapEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -372,6 +393,10 @@
     <Content Include="Resources\PepperFlash\pepflashplayer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="KancolleMetadata\" />
+    <Folder Include="UserControls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2785.1486\build\cef.redist.x64.targets')" />
