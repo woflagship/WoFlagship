@@ -1,2 +1,2 @@
-WoFlagship
+WoFlagship ヲ酱浏览器
 ============
