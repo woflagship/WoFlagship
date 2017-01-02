@@ -222,7 +222,7 @@
     <Compile Include="KancolleBattle\Attack.cs" />
     <Compile Include="KancolleBattle\Fleet.cs" />
     <Compile Include="KancolleBattle\KancolleBattle.cs" />
-    <Compile Include="KancolleBattle\KancolleBattleManager.cs" />
+    <Compile Include="KancolleBattle\KancolleBattleContext.cs" />
     <Compile Include="KancolleBattle\Ship.cs" />
     <Compile Include="KancolleBattle\Stage.cs" />
     <Compile Include="KancolleNavigation\KancolleAction.cs" />
@@ -261,6 +261,7 @@
     <Compile Include="Utils\BehaviorTree\Invertor.cs" />
     <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\ObservaleRangeCollection.cs" />
+    <Compile Include="Utils\ReadOnlyArray.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
     <Compile Include="ViewModels\MapEditorViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />

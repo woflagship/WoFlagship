@@ -35,7 +35,8 @@ namespace WoFlagship.KancolleCommon
         public readonly static Point Organize_Changes_Remove = new Point(500, 145);
         public readonly static Point[] Organize_Changes_ShipList = new Point[] { new Point(500, 170), new Point(500, 195), new Point(500, 225), new Point(500, 250), new Point(500, 280), new Point(500, 310), new Point(500, 335), new Point(500, 365), new Point(500, 390), new Point(500, 420) };
         public readonly static Point Organize_Changes_FirstPage = new Point(430, 450);
-        public readonly static Point Organize_Changes_NextPage = new Point(675, 450);
+        public readonly static Point Organize_Changes_Next5Page = new Point(675, 450);
+        public readonly static Point[] Organize_Changes_Pages = new Point[] { new Point(520, 450), new Point(550, 450), new Point(580, 450), new Point(610, 450), new Point(640, 450), };
         public readonly static Point Organize_Change_Decide = new Point(685, 440);
         public readonly static Point Organize_SortType = new Point(775, 110);
         public readonly static Point Organize_ShipList_Back = new Point(280, 280);

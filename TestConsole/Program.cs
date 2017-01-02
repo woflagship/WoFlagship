@@ -24,6 +24,7 @@ using Microsoft.SolverFoundation.Services;
 using SmartFormat;
 using WoFlagship.KancolleQuestData;
 using SmartFormat.Core.Extensions;
+using WoFlagship.Utils;
 
 namespace TestConsole
 {
@@ -198,22 +199,21 @@ namespace TestConsole
 
     class Program
     {
+        static readonly int[,] dd = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
+
         static void Main(string[] args)
         {
-    
-            
-            /*
-            foreach(var i in selected)
+            ReadOnlyArray2<int> r = new ReadOnlyArray2<int>(dd);
+            var rr = r.ToArray();
+            foreach(var ar in r)
             {
-                Console.WriteLine(i.Length);
-              foreach(var k in i)
-                {
-                    Console.Write(k.ShipId + " ");
-                }
-                Console.WriteLine();
+                Console.WriteLine(ar);
+ 
             }
-                           
-    */
+            foreach (var ar in rr)
+            {
+                Console.WriteLine(ar);
+            }
             Console.Read();
         }
 

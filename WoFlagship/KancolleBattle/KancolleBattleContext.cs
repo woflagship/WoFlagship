@@ -9,7 +9,7 @@ using WoFlagship.KancolleCommon;
 
 namespace WoFlagship.KancolleBattle
 {
-    public class KancolleBattleManager : IKancolleAPIReceiver, IKancolleGameDataReceiver
+    public class KancolleBattleContext : IKancolleAPIReceiver, IKancolleGameDataReceiver
     {
         public event Action<KancolleBattle> OnBattleHappened;
 
@@ -163,7 +163,7 @@ namespace WoFlagship.KancolleBattle
         private KancolleShip[] getRawFleet(int deckId)
         {
             List<KancolleShip> fleet = new List<KancolleShip>();
-            for(int i=0; i<gameData.OwnedShipPlaceArray.GetLength(1); i++)
+            for(int i=0; i<gameData.OwnedShipPlaceArray.ColumnCount; i++)
             {
                 int ownedShipId = gameData.OwnedShipPlaceArray[deckId - 1, i];
                 if (ownedShipId > 0)

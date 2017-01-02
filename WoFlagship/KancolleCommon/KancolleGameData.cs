@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using WoFlagship.KancolleQuestData;
+using WoFlagship.Utils;
 
 namespace WoFlagship.KancolleCommon
 {
@@ -16,7 +17,7 @@ namespace WoFlagship.KancolleCommon
         public const string QuestInfoFile = "Resources\\Infos\\questinfo.json";
 
         public Dictionary<int, api_mst_mapinfo_item> MapDic { get; set; } = new Dictionary<int, api_mst_mapinfo_item>();
-
+        public KancolleBasicInfo BasicInfo { get; set; }
         public ReadOnlyDictionary<int, KancolleQuest> QuestDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleQuest>(new Dictionary<int, KancolleQuest>());
         public ReadOnlyDictionary<int, KancolleQuestInfoItem> QuestInfoDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(new Dictionary<int, KancolleQuestInfoItem>());
         public KancolleMaterial Material { get; set; }
@@ -25,10 +26,10 @@ namespace WoFlagship.KancolleCommon
         /// key:shipId
         /// value:api_mst_ship_item
         /// </summary>
-      
+
         public ReadOnlyDictionary<int, KancolleShipData> ShipDataDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleShipData>(new Dictionary<int, KancolleShipData>());
         public ReadOnlyDictionary<int, KancolleShip> OwnedShipDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleShip>(new Dictionary<int, KancolleShip>());
-     
+
         public Dictionary<int, api_mst_mission_item> MissionDic { get; set; } = new Dictionary<int, api_mst_mission_item>();
         public ReadOnlyDictionary<int, KancolleMissionData> MissionDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleMissionData>(new Dictionary<int, KancolleMissionData>());
         public Dictionary<int, api_mission_item> OwnedMissionDic { get; set; } = new Dictionary<int, api_mission_item>();
@@ -37,32 +38,73 @@ namespace WoFlagship.KancolleCommon
         /// key:ownedShipId 
         /// value:Tuple(i,j),表示第i个舰队，第j个位置，从0开始算
         /// </summary>
-        public Dictionary<int, Tuple<int, int>> OwnedShipPlaceDictionary { get; set; } = new Dictionary<int, Tuple<int, int>>();
+        public ReadOnlyDictionary<int, Tuple<int, int>> OwnedShipPlaceDictionary { get; set; } = new ReadOnlyDictionary<int, Tuple<int, int>>(new Dictionary<int, Tuple<int, int>>());
         /// <summary>
         /// (i,j),表示第i个舰队，第j个位置，从0开始算
         /// 返回的是ownedShipId
         /// </summary>
-        public int[,] OwnedShipPlaceArray { get; set; } = new int[4, 6];
+        public ReadOnlyArray2<int> OwnedShipPlaceArray { get; set; } = new ReadOnlyArray2<int>(new int[4, 6]);
 
         public Dictionary<int, api_mst_slotitem_item> SlotDic { get; set; } = new Dictionary<int, api_mst_slotitem_item>();
         public Dictionary<int, api_slot_item_item> OwnedSlotDic { get; set; } = new Dictionary<int, api_slot_item_item>();
 
-
-        /*
-        public KancolleGameData Clone()
-        {
-            using (MemoryStream stream = new MemoryStream())
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, this);
-                stream.Position = 0;
-                var clonedData = formatter.Deserialize(stream) as KancolleGameData;
-                stream.Close();
-                return clonedData;
-            }
-        }*/
     }
 
+    /// <summary>
+    /// 提督基本信息
+    /// </summary>
+    public class KancolleBasicInfo
+    {
+        /// <summary>
+        /// 提督等级
+        /// </summary>
+        public int Level { get; private set; }
+
+        /// <summary>
+        /// 头衔id
+        /// </summary>
+        public int RankId { get; private set; }
+
+        /// <summary>
+        /// 头衔
+        /// </summary>
+        public string Rank { get; private set; }
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string NickName { get; private set; }
+
+        /// <summary>
+        /// 拥有的舰娘个数
+        /// </summary>
+        public int OwnedShipCount { get; private set; }
+
+        /// <summary>
+        /// 最大可保有舰娘个数
+        /// </summary>
+        public int MaxShipCount { get; private set; }
+
+        /// <summary>
+        /// 最大可保有装备个数
+        /// </summary>
+        public int MaxSlotItemCount { get; private set; }
+
+        public KancolleBasicInfo(api_port_data portdata)
+        {
+            Level = portdata.api_basic.api_level;
+            RankId = portdata.api_basic.api_rank;
+            Rank = KancolleAPIs.RankText[portdata.api_basic.api_rank];
+            NickName = portdata.api_basic.api_nickname;
+            OwnedShipCount = portdata.api_ship.Length;
+            MaxShipCount = portdata.api_basic.api_max_chara;
+            MaxSlotItemCount = portdata.api_basic.api_max_slotitem;
+        }
+    }
+
+    /// <summary>
+    /// 舰娘信息
+    /// </summary>
     public class KancolleShip
     {
         /// <summary>
@@ -164,6 +206,9 @@ namespace WoFlagship.KancolleCommon
         }
     }
 
+    /// <summary>
+    /// 舰娘信息（数据库）
+    /// </summary>
     public class KancolleShipData
     {
         /// <summary>
@@ -189,6 +234,9 @@ namespace WoFlagship.KancolleCommon
         }
     }
 
+    /// <summary>
+    /// 远征信息（数据库）
+    /// </summary>
     public class KancolleMissionData
     {
         /// <summary>
@@ -208,6 +256,9 @@ namespace WoFlagship.KancolleCommon
         }
     }
 
+    /// <summary>
+    /// 资源信息
+    /// </summary>
     public class KancolleMaterial
     {
         public int Ran { get; private set; }
@@ -294,6 +345,9 @@ namespace WoFlagship.KancolleCommon
 
     }
 
+    /// <summary>
+    /// 任务信息
+    /// </summary>
     public class KancolleQuest
     {
         public int Id { get; private set; }
@@ -330,4 +384,6 @@ namespace WoFlagship.KancolleCommon
             ProgressFlag = api_questlist.api_progress_flag;
         }
     }
+
+   
 }

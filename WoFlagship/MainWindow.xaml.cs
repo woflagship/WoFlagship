@@ -68,7 +68,7 @@ namespace WoFlagship
 
         private INavigator navigator = new SimpleNavigator();
         private KancolleActionExecutor actionExecutor;
-        private KancolleBattleManager battleManager = new KancolleBattleManager();
+        private KancolleBattleContext battleContext = new KancolleBattleContext();
 
 
         private KancolleTaskExecutor taskExecutor;
@@ -93,7 +93,7 @@ namespace WoFlagship
             settingViewModel.WebSetting.ProxyType = ProxyTypes.Http;
             InitializeComponent();
 
-            battleManager.OnBattleHappened += BattleManager_OnBattleHappened;
+            battleContext.OnBattleHappened += BattleContext_OnBattleHappened;
 
             Cbx_ProxyType.SetBinding(ComboBox.SelectedItemProperty, new Binding() { Source = settingViewModel.WebSetting, Path = new PropertyPath("ProxyType") });
             Txt_ProxyHost.SetBinding(TextBox.TextProperty, new Binding() { Source = settingViewModel.WebSetting, Path = new PropertyPath("ProxyHost") });
@@ -211,128 +211,25 @@ namespace WoFlagship
                     plugin.OnQuestUpdated(generalViewModel, e.GameData);
                 }
             };
+
+            gameContext.OnBasicInfoUpdated += e =>
+            {
+                generalViewModel.Level = "Lv." + e.GameData.BasicInfo.Level;
+                generalViewModel.Rank = e.GameData.BasicInfo.Rank;
+                generalViewModel.NickName = e.GameData.BasicInfo.NickName;
+                generalViewModel.ShipCount = e.GameData.BasicInfo.OwnedShipCount;
+                generalViewModel.MaxShipCount = e.GameData.BasicInfo.MaxShipCount;
+                generalViewModel.MaxItemCount = e.GameData.BasicInfo.MaxSlotItemCount;
+            };
         }
 
 
         private void InitResources()
         {
-            InitQuestInfo();
+            gameContext.UpdateQuestInfo();
         }
 
-        private void InitQuestInfo()
-        {
-            if (!File.Exists(KancolleGameData.QuestInfoFile))
-            {
-                MessageBox.Show($"未能找到资源文件[{KancolleGameData.QuestInfoFile}]");
-                LogFactory.SystemLogger.Error($"未能找到资源文件[{KancolleGameData.QuestInfoFile}]");
-            }
-            else
-            {
-                try
-                {
-                    using (StreamReader sr = new StreamReader(KancolleGameData.QuestInfoFile))
-                    {
-                     
-                        string content = sr.ReadToEnd();
-                        var questInfoObject = JsonConvert.DeserializeObject(content) as JToken;
-                        int version = questInfoObject["Version"].ToObject<int>();
-                        string updateTime = questInfoObject["UpdateTime"].ToString();
-                       
-                        Dictionary<int, KancolleQuestInfoItem> dic = new Dictionary<int, KancolleQuestInfoItem>();
-                        foreach (var quest in questInfoObject["QuestInfos"])
-                        {
-                            KancolleQuestInfoItem qi = new KancolleQuestInfoItem()
-                            {
-                                Id = quest["Id"].ToString(),
-                                Name = quest["Name"].ToString(),
-                                Detail = quest["Detail"].ToString(),
-                                Ran = quest["Ran"].ToObject<int>(),
-                                Dan = quest["Dan"].ToObject<int>(),
-                                Gang = quest["Gang"].ToObject<int>(),
-                                Lu = quest["Lu"].ToObject<int>(),
-                                Other = quest["Other"].ToString(),
-                                Note = quest["Note"].ToString(),
-                                GameId = quest["GameId"].ToObject<int>(),
-                                Prerequisite = quest["Prerequisite"].ToObject<int[]>(),
-                                Category = quest["Category"].ToString(),
-                            };
-
-                            IQuestRequirement re = null;
-                            bool unknownCat = false;
-                            switch (qi.Category)
-                            {
-                                case "sortie":
-                                     re = quest["Requirements"].ToObject<SortieQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "excercise":
-                                     re = quest["Requirements"].ToObject<ExerciseQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "expedition":
-                                     re = quest["Requirements"].ToObject<ExpeditionQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "equipexchange":
-                                     re = quest["Requirements"].ToObject<EquipexchangeQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "modernization":
-                                     re = quest["Requirements"].ToObject<ModernizationQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "fleet":
-                                    re = quest["Requirements"].ToObject<FleetQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "sink":
-                                     re = quest["Requirements"].ToObject<SinkQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "and":
-                                     re = quest["Requirements"].ToObject<AndQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "simple":
-                                     re = quest["Requirements"].ToObject<SimpleQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "a-gou":
-                                    qi.Requirements = new AGouQuestRequirement();
-                                    break;
-                                case "modelconversion":
-                                     re = quest["Requirements"].ToObject<ModelconversionQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                case "scrapequipment":
-                                     re = quest["Requirements"].ToObject<ScrapequipmentQuestRequirement>();
-                                    qi.Requirements = re;
-                                    break;
-                                default:
-                                    if (!string.IsNullOrEmpty(qi.Category))
-                                    {
-                                        MessageBox.Show($"未知任务类型[{qi.Category}]!");
-                                        LogFactory.SystemLogger.Warn($"未知任务类型[{qi.Category}]!");
-                                    }
-                                    unknownCat = true;
-                                    break;
-                            }
-                            if (!unknownCat)
-                            {
-                                qi.Requirements = re;
-                                dic.Add(qi.GameId, qi);
-                            }
-                        }
-                        gameContext.GameData.QuestInfoDictionary = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(dic);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"任务信息资源初始化失败！\n{ex.Message}");
-                    LogFactory.SystemLogger.Error("任务信息资源初始化失败！", ex);
-                }
-            }
-        }
+        
 
         private void AiManager_OnAILoaded(List<IKancolleAI> obj)
         {
@@ -344,7 +241,7 @@ namespace WoFlagship
             }
         }
 
-        private void BattleManager_OnBattleHappened(KancolleBattle.KancolleBattle obj)
+        private void BattleContext_OnBattleHappened(KancolleBattle.KancolleBattle obj)
         {
             Dispatcher.Invoke(new Action(() => Txt_Battle.Text = obj.ToString()));
         }
@@ -439,7 +336,7 @@ namespace WoFlagship
                     case "api_start2":
                         var start_data = api_object.ToObject<api_start_data>();
                         gameContext.UpdateShipDatas(start_data.api_mst_ship);
-                        UpdateMissionDictionary(start_data.api_mst_mission);
+                        gameContext.UpdateMissions(start_data.api_mst_mission);
                         gameContext.UpdateMissions(start_data.api_mst_mission);
                         UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
                         UpdateSlotDictionary(start_data.api_mst_slotitem);
@@ -452,7 +349,7 @@ namespace WoFlagship
                         var port_data = api_object.ToObject<api_port_data>();
                         gameContext.UpdateOwnedShips(port_data.api_ship);
                         gameContext.UpdateMaterial(port_data.api_material);
-                        UpdatePort(port_data);
+                        gameContext.UpdatePort(port_data);
                         gameContext.UpdateDeck(port_data.api_deck_port);
                         break;
                     case "api_get_member/material":
@@ -514,8 +411,8 @@ namespace WoFlagship
                         break;
                 }
                 
-                battleManager.OnGameDataUpdatedHandler(gameContext.GameData);
-                battleManager.OnAPIResponseReceivedHandler(arg1, arg2, api);
+                battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
+                battleContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
                 taskExecutor.OnAPIResponseReceivedHandler(arg1, arg2, api);
             }
             catch(Exception ex)
@@ -552,12 +449,6 @@ namespace WoFlagship
             gameData.SlotDic = slotItems.ToDictionary(k => k.api_id, k => k);
         }
 
-       
-
-        private void UpdateMissionDictionary(api_mst_mission_item[] missionItems)
-        {
-            gameData.MissionDic = missionItems.ToDictionary(k => k.api_id, k => k);
-        }
 
         private void UpdateMapInfoDictionary(api_mst_mapinfo_item[] mapinfoItems)
         {
@@ -593,20 +484,12 @@ namespace WoFlagship
 
        
        
-        /// <summary>
-        /// 更新提督基本信息
-        /// </summary>
-        /// <param name="portdata"></param>
-        private void UpdatePort(api_port_data portdata)
+        
+        private void UpdatfePort(api_port_data portdata)
         {
             if(portdata != null)
             {
-                generalViewModel.Level = "Lv." + portdata.api_basic.api_level;
-                generalViewModel.Rank = KancolleAPIs.RankText[portdata.api_basic.api_rank];
-                generalViewModel.NickName = portdata.api_basic.api_nickname;
-                generalViewModel.ShipCount = portdata.api_ship.Length;
-                generalViewModel.MaxShipCount = portdata.api_basic.api_max_chara;
-                generalViewModel.MaxItemCount = portdata.api_basic.api_max_slotitem;
+               
             }
         }
 

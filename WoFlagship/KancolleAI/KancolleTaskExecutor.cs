@@ -259,14 +259,19 @@ namespace WoFlagship.KancolleAI
                     return false;
 
                 int page = index / 10;//页数，每页最多可以放10个
+                int page5 = page / 5;//每5页翻一次
+                int pageIn5 = page % 5;
                 int item = index % 10;//每页第几个
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_FirstPage));//转到第1页
                 Thread.Sleep(1000);
-                for (int p = 0; p < page; p++)
+                for (int p = 0; p < page5; p++)//先5页5页的翻
                 {
-                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_NextPage));
+                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Next5Page));
                     Thread.Sleep(1000);
                 }
+
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Pages[pageIn5]));
+                Thread.Sleep(1000);
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_ShipList[item]));
                 Thread.Sleep(500);
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
