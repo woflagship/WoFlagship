@@ -13,7 +13,7 @@ using WoFlagship.Logger;
 
 namespace WoFlagship.KancolleCommon
 {
-    public class KancolleGameContext
+    public class KancolleGameContext : IKancolleAPIReceiver
     {
         public event Action<KancolleGameContext> OnShipUpdated;
         public event Action<KancolleGameContext> OnDeckUpdated;
@@ -30,7 +30,90 @@ namespace WoFlagship.KancolleCommon
         private KancolleGameData gameData = new KancolleGameData();
         public KancolleGameData GameData { get { return gameData; } }
 
-  
+        public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
+        {
+            var data = JsonConvert.DeserializeObject(response) as JObject;
+            var api_object = data["api_data"];
+
+            switch (api)
+            {
+                case "api_start2":
+                    var start_data = api_object.ToObject<api_start_data>();
+                    UpdateShipDatas(start_data.api_mst_ship);
+                    UpdateMissions(start_data.api_mst_mission);
+                    UpdateMissions(start_data.api_mst_mission);
+                    //UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
+                    //UpdateSlotDictionary(start_data.api_mst_slotitem);
+                   
+                    break;
+                case "api_port/port":
+                    var port_data = api_object.ToObject<api_port_data>();
+                    UpdateOwnedShips(port_data.api_ship);
+                    UpdateMaterial(port_data.api_material);
+                    UpdatePort(port_data);
+                    UpdateDeck(port_data.api_deck_port);
+                    break;
+                case "api_get_member/material":
+                    var material_data = api_object.ToObject<api_material_item[]>();
+                    UpdateMaterial(material_data);
+                    break;
+                case "api_req_hokyu/charge":
+                    UpdateMaterial(api_object["api_material"].ToObject<int[]>());
+                    break;
+                case "api_get_member/require_info":
+                    var getmember_data = api_object.ToObject<api_requireinfo_data>();
+                    //UpdateOwnedSlotDictionary(getmember_data.api_slot_item);
+                    //generalViewModel.ItemCount = getmember_data.api_slot_item.Length;
+                    break;
+                case "api_req_kousyou/createitem"://开发装备
+                    var createitem_data = api_object.ToObject<api_createitem_data>();
+                    //if (createitem_data.api_create_flag == 1)
+                        //generalViewModel.ItemCount++;
+                    break;
+                case "api_req_kousyou/destroyitem2":
+                   destroyitem2_api.svdata sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCommon.destroyitem2_api.svdata>(response);
+                   // if (sv_data_destroyitem2 != null)
+                        //generalViewModel.ItemCount--;
+                    break;
+                case "api_get_member/questlist":
+                   // var questlist_data = api_object.ToObject<api_questlist_data>();
+                    //gameContext.UpdateQuest(questlist_data);
+                    break;
+                case "api_req_quest/start":
+                    
+                    break;
+                case "api_req_quest/stop":
+                case "api_req_quest/clearitemget":
+                   
+                    break;
+                case "api_req_hensei/change"://舰队编成修改
+                    UpdateDeck(requestInfo.Data);
+                    break;
+                case "api_get_member/mission"://可进行的远征任务
+                    var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
+                    //UpdateOwnedMissionDictionary(ownedMissionItems);
+                    break;
+                case "api_req_map/start"://出击
+                case "api_req_map/next":
+                    var nextdata = api_object.ToObject<api_mapnext_data>();
+                    break;
+                case "api_req_sortie/battle"://战斗
+                    var battledata = api_object.ToObject<api_battle_data>();
+
+                    break;
+                case "api_req_sortie/battleresult"://战斗结果
+                    var result = api_object.ToObject<api_battleresult_data>();
+                    break;
+                case "api_req_battle_midnight/battle"://夜战
+                    var nightbattledata = api_object.ToObject<api_battle_data>();
+                    break;
+                case "api_get_member/ship_deck"://有什么用来着？
+                   // UpdateShipDeck(api_object.ToObject<api_shipdeck_data>());
+                    break;
+            }
+        }
+
+
         /// <summary>
         /// 更新从api_mst_ship中获得的舰娘数据信息
         /// </summary>
@@ -395,5 +478,6 @@ namespace WoFlagship.KancolleCommon
             }
         }
 
+       
     }
 }
