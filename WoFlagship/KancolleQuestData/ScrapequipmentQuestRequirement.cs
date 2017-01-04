@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoFlagship.KancolleAI;
-using WoFlagship.KancolleCommon;
+using WoFlagship.KancolleCore;
+using WoFlagship.KancolleCore.Navigation;
+
 
 namespace WoFlagship.KancolleQuestData
 {

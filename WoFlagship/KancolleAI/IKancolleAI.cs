@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CefSharp;
-using CefSharp.Wpf;
-using WoFlagship.KancolleCommon;
+﻿using WoFlagship.KancolleCore;
 using System.Windows.Controls;
 
 namespace WoFlagship.KancolleAI

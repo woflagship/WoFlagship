@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using WoFlagship.KancolleCommon;
+using WoFlagship.KancolleCore;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Plugins.QuestInfo.Properties;
 using WoFlagship.ViewModels;

@@ -1,18 +1,11 @@
 ﻿using Priority_Queue;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using WoFlagship.KancolleNavigation;
 using CefSharp.Wpf;
-using System.Windows.Threading;
 using System.Windows;
-using WoFlagship.KancolleCommon;
-using WoFlagship.Utils.BehaviorTree;
 
-namespace WoFlagship.KancolleAI
+namespace WoFlagship.KancolleCore.Navigation
 {
     class KancolleTaskExecutor : IKancolleAPIReceiver
     {
@@ -37,11 +30,11 @@ namespace WoFlagship.KancolleAI
 
         private INavigator navigator = new SimpleNavigator();
 
-        private Func<Scene> GetCurrentScene;
+        private Func<KancolleScene> GetCurrentScene;
         private Func<KancolleGameData> GetGameData;
 
 
-        protected Scene CurrentScene
+        protected KancolleScene CurrentScene
         {
             get
             {
@@ -74,7 +67,7 @@ namespace WoFlagship.KancolleAI
             get { return "手动控制AI"; }
         }
 
-        public KancolleTaskExecutor(ChromiumWebBrowser webBrowser,Func<Scene> GetCurrentScene, Func<KancolleGameData> GetGameData)
+        public KancolleTaskExecutor(ChromiumWebBrowser webBrowser,Func<KancolleScene> GetCurrentScene, Func<KancolleGameData> GetGameData)
         {
             this.GetCurrentScene = GetCurrentScene;
             this.GetGameData = GetGameData;
@@ -194,7 +187,7 @@ namespace WoFlagship.KancolleAI
 
             bool result;
             //先到编成界面
-            result = ReachScene(SceneTypes.Organize);
+            result = ReachScene(KancolleSceneTypes.Organize);
             if (!result)
                 return false;
             //切换到正确的舰队
@@ -245,13 +238,13 @@ namespace WoFlagship.KancolleAI
                 Thread.Sleep(1000);
                 //将排序方式改为new
                 DateTime start = DateTime.Now;
-                while (CurrentScene.SceneState != SceneStates.Organize_SortByNew && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
+                while (CurrentScene.SceneState != KancolleSceneStates.Organize_SortByNew && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
                 {
                     //点击变更排序
                     actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_SortType));
                     Thread.Sleep(1000);
                 }
-                if (CurrentScene.SceneState != SceneStates.Organize_SortByNew)
+                if (CurrentScene.SceneState != KancolleSceneStates.Organize_SortByNew)
                     return false;
 
                 int index = indexOf(sortedShip, ships[i]);
@@ -300,7 +293,7 @@ namespace WoFlagship.KancolleAI
         {
             bool result;
             //先转到补给界面
-            result = ReachScene(SceneTypes.Supply);
+            result = ReachScene(KancolleSceneTypes.Supply);
             if (!result)
                 return false;
 
@@ -324,7 +317,7 @@ namespace WoFlagship.KancolleAI
         {
             bool result;
             //先转到任务界面
-            result = ReachScene(SceneTypes.Quest);
+            result = ReachScene(KancolleSceneTypes.Quest);
             if(!result)
                 return false;
             return true;
@@ -334,7 +327,7 @@ namespace WoFlagship.KancolleAI
         {
             bool result;
             //先转到远征界面
-            result = ReachScene(SceneTypes.Mission);
+            result = ReachScene(KancolleSceneTypes.Mission);
             if (!result)
                 return false;
 
@@ -346,14 +339,14 @@ namespace WoFlagship.KancolleAI
             Thread.Sleep(1000);
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_MissionItems[item]));
             Thread.Sleep(500);
-            if (CurrentScene != SceneTypes.Mission_Decide)
+            if (CurrentScene != KancolleSceneTypes.Mission_Decide)
                 return false;
             //决定按钮
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Decide));
             //鼠标移开
             actionExector.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Port));
             Thread.Sleep(500);
-            if (CurrentScene != SceneTypes.Mission_Start)
+            if (CurrentScene != KancolleSceneTypes.Mission_Start)
                 return false;
             //选择舰队
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Start_Decks[task.MissionFleet]));
@@ -370,7 +363,7 @@ namespace WoFlagship.KancolleAI
         {
             bool result;
             //先到出击地图界面
-            result = ReachScene(SceneTypes.Map);
+            result = ReachScene(KancolleSceneTypes.Map);
             if(!result)
                 return false;
 
@@ -413,7 +406,7 @@ namespace WoFlagship.KancolleAI
                 if(t.BattleChoice == BattleChoiceTask.BattleChoices.Back || t.BattleChoice == BattleChoiceTask.BattleChoices.Night)
                 {
                     //夜战选择
-                    result = WaitForScene(SceneTypes.Battle_NightChoice, ActionTimeout);
+                    result = WaitForScene(KancolleSceneTypes.Battle_NightChoice, ActionTimeout);
                     if (!result)
                         return false;
                     //左为返回，右为夜战
@@ -424,7 +417,7 @@ namespace WoFlagship.KancolleAI
                 }
                 else if(t.BattleChoice == BattleChoiceTask.BattleChoices.Next || t.BattleChoice == BattleChoiceTask.BattleChoices.Return)
                 {
-                    result = WaitForScene(SceneTypes.Battle_NextChoice, ActionTimeout);
+                    result = WaitForScene(KancolleSceneTypes.Battle_NextChoice, ActionTimeout);
                     if (!result)
                         return false;
                     //左为进击，右为回港
@@ -437,7 +430,7 @@ namespace WoFlagship.KancolleAI
             else if(task is BattleFormationTask)
             {
                 var t = task as BattleFormationTask;
-                result = WaitForScene(SceneTypes.Battle_Formation, ActionTimeout);
+                result = WaitForScene(KancolleSceneTypes.Battle_Formation, ActionTimeout);
                 if (!result)
                     return result;
                 actionExector.Execute(KancolleWidgetPositions.Battle_Formation[t.Formation-1]);
@@ -446,7 +439,7 @@ namespace WoFlagship.KancolleAI
             return true;
         }
 
-        private bool WaitForScene(SceneTypes scene, double timeout)
+        private bool WaitForScene(KancolleSceneTypes scene, double timeout)
         {
             DateTime start = DateTime.Now;
             while ((DateTime.Now - start).TotalMilliseconds <= timeout)
@@ -463,7 +456,7 @@ namespace WoFlagship.KancolleAI
         /// </summary>
         /// <param name="toScene"></param>
         /// <returns></returns>
-        private bool ReachScene(SceneTypes toScene)
+        private bool ReachScene(KancolleSceneTypes toScene)
         {
             //先转到补给界面
             var edges = navigator.Navigate(CurrentScene.SceneType, toScene);
@@ -503,7 +496,7 @@ namespace WoFlagship.KancolleAI
         {
             if (!actionExector.Execute(edge))//未能执行成功
                 return false;
-            if (edge.Target == SceneTypes.Quest)
+            if (edge.Target == KancolleSceneTypes.Quest)
             {
                 Thread.Sleep(2000);//等待明石动画
                 if (!actionExector.Execute(edge))//点掉明石

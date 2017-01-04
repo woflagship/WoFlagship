@@ -8,27 +8,20 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WoFlagship.KancolleCommon;
+using WoFlagship.KancolleCore;
 using WoFlagship.KancolleAI;
-using WoFlagship.KancolleNavigation;
 using WoFlagship.Logger;
 using WoFlagship.Plugins;
 using WoFlagship.ToolWindows;
 using WoFlagship.ViewModels;
 using WoFlagship.KancolleBattle;
-using System.Threading;
-using WoFlagship.KancolleQuestData;
+using WoFlagship.KancolleCore.Navigation;
 
 namespace WoFlagship
 {
@@ -309,7 +302,7 @@ namespace WoFlagship
         {
            if((bool)e.NewValue)
             {
-                webView.Address = KancolleCommon.DMMUrls.KanColleUrl;
+                webView.Address = KancolleCore.DMMUrls.KanColleUrl;
             }
         }
 
@@ -319,7 +312,7 @@ namespace WoFlagship
             {
                 sw.WriteLine(arg1.RequestUrl + " " + arg1.DataString + " \n" + arg2);
                 sw.Flush();
-                Dispatcher.Invoke(new System.Action(() => Txt_Console.Content = arg1.RequestUrl.Substring(KancolleCommon.DMMUrls.KanColleAPIUrl.Length)));
+                Dispatcher.Invoke(new System.Action(() => Txt_Console.Content = arg1.RequestUrl.Substring(KancolleCore.DMMUrls.KanColleAPIUrl.Length)));
                 if (arg2.StartsWith("svdata="))
                     arg2 = arg2.Substring(7);
 
@@ -345,7 +338,7 @@ namespace WoFlagship
                             generalViewModel.ItemCount++;
                         break;
                     case "api_req_kousyou/destroyitem2":
-                        var sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCommon.destroyitem2_api.svdata>(arg2);
+                        var sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCore.destroyitem2_api.svdata>(arg2);
                         if (sv_data_destroyitem2 != null)
                             generalViewModel.ItemCount--;
                         break;
@@ -416,7 +409,7 @@ namespace WoFlagship
             Txt_CurrentScene.Content = sceneType.ToString();
         }
 
-        private Scene GetCurrentScene()
+        private KancolleScene GetCurrentScene()
         {
             var screen = GetWebViewBitmap();
             var scene = sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
@@ -505,7 +498,7 @@ namespace WoFlagship
         private void Btn_NavigateTo_Click(object sender, RoutedEventArgs e)
         {
             var currentScene = GetCurrentScene();
-            SceneTypes toSceneType = (SceneTypes)Cbx_NavigateTarget.SelectedItem;
+            KancolleSceneTypes toSceneType = (KancolleSceneTypes)Cbx_NavigateTarget.SelectedItem;
             var edges = navigator.Navigate(currentScene.SceneType, toSceneType);
             Txt_Navigation.Text = ToNavigationString(edges);
             /*
@@ -525,7 +518,7 @@ namespace WoFlagship
 
         private void Cbx_NavigateTarget_Loaded(object sender, RoutedEventArgs e)
         {
-            Cbx_NavigateTarget.ItemsSource = Enum.GetValues(typeof(SceneTypes));
+            Cbx_NavigateTarget.ItemsSource = Enum.GetValues(typeof(KancolleSceneTypes));
             Cbx_NavigateTarget.SelectedIndex = 0;
         }
 
@@ -633,7 +626,7 @@ namespace WoFlagship
                 //切换至新ai
                 if (lb.SelectedIndex > 0)
                 {
-                    if (GetCurrentScene() != SceneTypes.Port)
+                    if (GetCurrentScene() != KancolleSceneTypes.Port)
                     {
                         MessageBox.Show("请将当前场景切换至[母港]再更改AI！");
                     }

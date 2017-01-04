@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace WoFlagship.KancolleNavigation
+namespace WoFlagship.KancolleCore.Navigation
 {
     interface INavigator
     {
@@ -14,6 +10,6 @@ namespace WoFlagship.KancolleNavigation
         /// <param name="from"></param>
         /// <param name="to"></param>
         /// <returns>可到达的行为列表，null表示不可到，空表示已经到了</returns>
-        List<KancolleActionEdge> Navigate(SceneTypes from, SceneTypes to);
+        List<KancolleActionEdge> Navigate(KancolleSceneTypes from, KancolleSceneTypes to);
     }
 }

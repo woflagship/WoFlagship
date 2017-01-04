@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using WoFlagship.KancolleCommon;
+﻿using System.Windows.Controls;
+using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
 namespace WoFlagship.Plugins
@@ -27,12 +20,12 @@ namespace WoFlagship.Plugins
 
         void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData);
 
-        void OnMaterialUpdated(GeneralViewModel generalViewModel, KancolleCommon.KancolleGameData gameData);
+        void OnMaterialUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
 
-        void OnQuestUpdated(GeneralViewModel generalViewModel, KancolleCommon.KancolleGameData gameData);
+        void OnQuestUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
 
-        void OnShipUpdated(GeneralViewModel generalViewModel, KancolleCommon.KancolleGameData gameData);
+        void OnShipUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
 
-        void OnDeckUpdated(GeneralViewModel generalViewModel, KancolleCommon.KancolleGameData gameData);
+        void OnDeckUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
     }
 }

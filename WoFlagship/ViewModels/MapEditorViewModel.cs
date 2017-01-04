@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using WoFlagship.KancolleMap;
 using WoFlagship.KancolleRequirement;
 
@@ -22,7 +19,7 @@ namespace WoFlagship.ViewModels
 
         static MapEditorViewModel()
         {
-            PropertyInfo[] properties = typeof(KancolleCommon.KancolleShip).GetProperties(BindingFlags.Instance|BindingFlags.Public);
+            PropertyInfo[] properties = typeof(KancolleCore.KancolleShip).GetProperties(BindingFlags.Instance|BindingFlags.Public);
             foreach(var pi in properties)
             {
                 LinqItems.Add("s." + pi.Name);

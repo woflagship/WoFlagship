@@ -190,9 +190,9 @@
     <Compile Include="AIManualTab.cs" />
     <Compile Include="KancolleAI\AIExceptions.cs" />
     <Compile Include="KancolleAI\AIManager.cs" />
-    <Compile Include="KancolleCommon\IMetadata.cs" />
-    <Compile Include="KancolleCommon\KancolleGameContext.cs" />
-    <Compile Include="KancolleCommon\KancolleGameData.cs" />
+    <Compile Include="KancolleCore\IMetadata.cs" />
+    <Compile Include="KancolleCore\KancolleGameContext.cs" />
+    <Compile Include="KancolleCore\KancolleGameData.cs" />
     <Compile Include="KancolleMap\KancolleMapInfo.cs" />
     <Compile Include="KancolleMap\MapInfoItem.cs" />
     <Compile Include="KancolleQuestData\AGouQuestRequirement.cs" />
@@ -211,30 +211,30 @@
     <Compile Include="KancolleQuestData\SimpleQuestRequirement.cs" />
     <Compile Include="KancolleQuestData\SinkQuestRequirement.cs" />
     <Compile Include="KancolleQuestData\SortieQuestRequirement.cs" />
-    <Compile Include="KancolleCommon\IKancolleAPIReceiver.cs" />
-    <Compile Include="KancolleCommon\IKancolleGameDataReceiver.cs" />
-    <Compile Include="KancolleCommon\KancolleAPIs.cs" />
-    <Compile Include="KancolleCommon\KancolleWidgetPositions.cs" />
+    <Compile Include="KancolleCore\IKancolleAPIReceiver.cs" />
+    <Compile Include="KancolleCore\IKancolleGameDataReceiver.cs" />
+    <Compile Include="KancolleCore\KancolleAPIs.cs" />
+    <Compile Include="KancolleCore\KancolleWidgetPositions.cs" />
     <Compile Include="KancolleAI\IKancolleAI.cs" />
-    <Compile Include="KancolleAI\KancolleTaskExecutor.cs" />
-    <Compile Include="KancolleAI\KancolleTask.cs" />
-    <Compile Include="KancolleAI\ResponseHelper.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleTaskExecutor.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleTask.cs" />
+    <Compile Include="KancolleCore\Navigation\ResponseHelper.cs" />
     <Compile Include="KancolleBattle\Attack.cs" />
     <Compile Include="KancolleBattle\Fleet.cs" />
     <Compile Include="KancolleBattle\KancolleBattle.cs" />
     <Compile Include="KancolleBattle\KancolleBattleContext.cs" />
     <Compile Include="KancolleBattle\Ship.cs" />
     <Compile Include="KancolleBattle\Stage.cs" />
-    <Compile Include="KancolleNavigation\KancolleAction.cs" />
-    <Compile Include="KancolleNavigation\KancolleActionEdge.cs" />
-    <Compile Include="KancolleNavigation\KancolleActionExecutor.cs" />
-    <Compile Include="KancolleNavigation\INavigator.cs" />
-    <Compile Include="KancolleNavigation\SceneRecognizer.cs" />
-    <Compile Include="KancolleNavigation\Scenes.cs" />
-    <Compile Include="KancolleNavigation\SimpleNavigator.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleAction.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleActionEdge.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleActionExecutor.cs" />
+    <Compile Include="KancolleCore\Navigation\INavigator.cs" />
+    <Compile Include="KancolleCore\Navigation\SceneRecognizer.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleScenes.cs" />
+    <Compile Include="KancolleCore\Navigation\SimpleNavigator.cs" />
     <Compile Include="KancolleRequirement\ShipCondition.cs" />
     <Compile Include="KancolleRequirement\ShipConstraint.cs" />
-    <Compile Include="KancolleResponseFilter.cs" />
+    <Compile Include="KancolleCore\KancolleResponseFilter.cs" />
     <Compile Include="Logger\LogFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
@@ -275,8 +275,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="KancolleRequestHandler.cs" />
-    <Compile Include="KancolleCommon\DMMUrls.cs" />
+    <Compile Include="KancolleCore\KancolleRequestHandler.cs" />
+    <Compile Include="KancolleCore\DMMUrls.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

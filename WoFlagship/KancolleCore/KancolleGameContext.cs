@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Logger;
 
-namespace WoFlagship.KancolleCommon
+namespace WoFlagship.KancolleCore
 {
     public class KancolleGameContext : IKancolleAPIReceiver
     {

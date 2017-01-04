@@ -1,15 +1,9 @@
-﻿
-using AForge.Imaging;
+﻿using AForge.Imaging;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static WoFlagship.Properties.Resources;
 
-namespace WoFlagship.KancolleNavigation
+namespace WoFlagship.KancolleCore.Navigation
 {
     public class SceneRecognizer
     {
@@ -97,9 +91,9 @@ namespace WoFlagship.KancolleNavigation
             //bm_battle_formation = new Bitmap(Path.Combine(ComparisonFolder, "Battle_Formation.bmp"));
         }
 
-        public Scene GetSceneTypeFromBitmap(Bitmap screenBitmap)
+        public KancolleScene GetSceneTypeFromBitmap(Bitmap screenBitmap)
         {
-            Scene scene = new Scene();
+            KancolleScene scene = new KancolleScene();
             double maxSim = 0, sim;
 
             //判断是否存在港口的title
@@ -110,24 +104,24 @@ namespace WoFlagship.KancolleNavigation
 
                 if (SceneSimilarity(screenBitmap, Rect_MainPort_Left, MainPort_Left) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Port;
+                    scene.SceneType = KancolleSceneTypes.Port;
                     return scene;
                 }
 
                 //编成
                 if (SceneSimilarity(screenBitmap, Rect_Organize_ShipSelect, Organize_ShipSelect) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Organize_ShipSelect;
+                    scene.SceneType = KancolleSceneTypes.Organize_ShipSelect;
                     maxSim = 0;
                     sim = SceneSimilarity(screenBitmap, Rect_Organize_Sort, Organize_SortByNew);
-                    if (sim > maxSim && sim > Threshold) { maxSim = sim; scene.SceneState = SceneStates.Organize_SortByNew; }
+                    if (sim > maxSim && sim > Threshold) { maxSim = sim; scene.SceneState = KancolleSceneStates.Organize_SortByNew; }
 
                     return scene;
                 }
 
                 if (SceneSimilarity(screenBitmap, Rect_Organize_Change_Decide, Organize_Change_Decide_True) > Threshold || SceneSimilarity(screenBitmap, Rect_Organize_Change_Decide, Organize_Change_Decide_False) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Organzie_Change_Decide;
+                    scene.SceneType = KancolleSceneTypes.Organzie_Change_Decide;
                     return scene;
                 }
 
@@ -135,45 +129,45 @@ namespace WoFlagship.KancolleNavigation
                 //远征的决定按钮
                 if (SceneSimilarity(screenBitmap, Rect_Mission_Decide, Mission_Decide) > Threshold && SceneSimilarity(screenBitmap, Rect_Sally, Mission) > Threshold)
                 {
-                        scene.SceneType = SceneTypes.Mission_Decide;
+                        scene.SceneType = KancolleSceneTypes.Mission_Decide;
                     return scene;
                 }
 
                 //海域的决定按钮
                 if (SceneSimilarity(screenBitmap, Rect_Map_Decide, Map_Decide) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Map_Decide;
+                    scene.SceneType = KancolleSceneTypes.Map_Decide;
                     return scene;
                 }
 
                 //远征开始
                 if (SceneSimilarity(screenBitmap, Rect_Mission_Start, Mission_Start_True) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Mission_Start;
-                    scene.SceneState = SceneStates.Mission_Start_True;
+                    scene.SceneType = KancolleSceneTypes.Mission_Start;
+                    scene.SceneState = KancolleSceneStates.Mission_Start_True;
                     return scene;
                 }
 
                 //海域出击开始
                 if (SceneSimilarity(screenBitmap, Rect_Map_Start, Map_Start_True) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Map_Start;
-                    scene.SceneState = SceneStates.Map_Start_True;
+                    scene.SceneType = KancolleSceneTypes.Map_Start;
+                    scene.SceneState = KancolleSceneStates.Map_Start_True;
                     return scene;
                 }
 
                 //海域出击开始,由于在不可出击状态下和远征开始很像，所以需要bm_map_start_false2作辅助判断
                 if (SceneSimilarity(screenBitmap, Rect_Map_Start, Map_Start_False) > Threshold && SceneSimilarity(screenBitmap, Rect_Map_Start2, Map_Start_False2) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Map_Start;
-                    scene.SceneState = SceneStates.Map_Start_False;
+                    scene.SceneType = KancolleSceneTypes.Map_Start;
+                    scene.SceneState = KancolleSceneStates.Map_Start_False;
                     return scene;
                 }
 
                 if (SceneSimilarity(screenBitmap, Rect_Mission_Start, Mission_Start_False) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Mission_Start;
-                    scene.SceneState = SceneStates.Mission_Start_False;
+                    scene.SceneType = KancolleSceneTypes.Mission_Start;
+                    scene.SceneState = KancolleSceneStates.Mission_Start_False;
                     return scene;
                 }
 
@@ -182,16 +176,16 @@ namespace WoFlagship.KancolleNavigation
                 //判断是否为出击、演习、远征选择
                 if (SceneSimilarity(screenBitmap, Rect_WholeScreen, Sally) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.SallyMain;
+                    scene.SceneType = KancolleSceneTypes.SallyMain;
                     return scene;
                 }
                 maxSim = 0;
                 sim = SceneSimilarity(screenBitmap, Rect_Sally, Map);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Map; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Map; }
                 sim = SceneSimilarity(screenBitmap, Rect_Sally, Mission);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Mission; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Mission; }
                 sim = SceneSimilarity(screenBitmap, Rect_Sally, Practice);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Practice; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Practice; }
                 if (maxSim > Threshold)
                     return scene;
 
@@ -199,21 +193,21 @@ namespace WoFlagship.KancolleNavigation
                 //判断是否为编成、补给、改装、入渠、工厂中的一个
                 maxSim = 0;
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Organize);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Organize; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Organize; }
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Supply);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Supply; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Supply; }
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Remodel);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.Remodel; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.Remodel; }
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Repair);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.RepairMain; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.RepairMain; }
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Arsenal);
-                if (sim > maxSim) { maxSim = sim; scene.SceneType = SceneTypes.ArsenalMain; }
+                if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.ArsenalMain; }
                 if (maxSim > Threshold)
                     return scene;
 
                 if (SceneSimilarity(screenBitmap, Rect_Quest, Quest) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Quest;
+                    scene.SceneType = KancolleSceneTypes.Quest;
                     return scene;
                 }
             }
@@ -222,7 +216,7 @@ namespace WoFlagship.KancolleNavigation
                 //罗盘娘
                 if (SceneSimilarity(screenBitmap, Rect_Battle_Compass, Battle_Compass) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Battle_Compass;
+                    scene.SceneType = KancolleSceneTypes.Battle_Compass;
                     return scene;
                 }
 
@@ -230,7 +224,7 @@ namespace WoFlagship.KancolleNavigation
                 if (SceneSimilarity(screenBitmap, Rect_Battle_LeftChoice, Battle_Next)>Threshold &&
                     SceneSimilarity(screenBitmap, Rect_Battle_RightChoice, Battle_Return) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Battle_NextChoice;
+                    scene.SceneType = KancolleSceneTypes.Battle_NextChoice;
                     return scene;
                 }
 
@@ -238,13 +232,13 @@ namespace WoFlagship.KancolleNavigation
                 if (SceneSimilarity(screenBitmap, Rect_Battle_LeftChoice, Battle_Back) > Threshold &&
                    SceneSimilarity(screenBitmap, Rect_Battle_RightChoice, Battle_Night) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Battle_NightChoice;
+                    scene.SceneType = KancolleSceneTypes.Battle_NightChoice;
                     return scene;
                 }
 
                 if (SceneSimilarity(screenBitmap, Rect_Battle_Formation, Battle_Formation) > Threshold)
                 {
-                    scene.SceneType = SceneTypes.Battle_Formation;
+                    scene.SceneType = KancolleSceneTypes.Battle_Formation;
                     return scene;
                 }
 

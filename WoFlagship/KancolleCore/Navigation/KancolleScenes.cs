@@ -1,35 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AForge.Imaging;
-using System.IO;
-using System.Windows.Media.Imaging;
-
-namespace WoFlagship.KancolleNavigation
+﻿namespace WoFlagship.KancolleCore.Navigation
 {
 
-    public class Scene
+    public class KancolleScene
     {
-        public SceneTypes SceneType{get; set;} = SceneTypes.Unknown;
-        public SceneStates SceneState { get; set; } = SceneStates.Unknown;
-        public Scene() { }
-        public Scene(SceneTypes sceneType) { this.SceneType = sceneType; SceneState = SceneStates.Unknown; }
-        public Scene(SceneTypes sceneType, SceneStates sceneState) { SceneType = sceneType; SceneState = sceneState; }
+        public KancolleSceneTypes SceneType{get; set;} = KancolleSceneTypes.Unknown;
+        public KancolleSceneStates SceneState { get; set; } = KancolleSceneStates.Unknown;
+        public KancolleScene() { }
+        public KancolleScene(KancolleSceneTypes sceneType) { this.SceneType = sceneType; SceneState = KancolleSceneStates.Unknown; }
+        public KancolleScene(KancolleSceneTypes sceneType, KancolleSceneStates sceneState) { SceneType = sceneType; SceneState = sceneState; }
 
         public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
-            if(obj is SceneTypes)
+            if(obj is KancolleSceneTypes)
             {
-                return SceneType == ((SceneTypes)obj);
+                return SceneType == ((KancolleSceneTypes)obj);
             }
-            if(obj is Scene)
+            if(obj is KancolleScene)
             {
-                var s = obj as Scene;
+                var s = obj as KancolleScene;
                 return s.SceneType == SceneType && s.SceneState == SceneState;
             }
             return false;
@@ -40,7 +30,7 @@ namespace WoFlagship.KancolleNavigation
             return SceneType.GetHashCode() + SceneState.GetHashCode();
         }
 
-        public static bool operator ==(Scene s1, Scene s2)
+        public static bool operator ==(KancolleScene s1, KancolleScene s2)
         {
             if (((object)s1) == null)
                 return ((object)s2) == null;
@@ -48,7 +38,7 @@ namespace WoFlagship.KancolleNavigation
                 return s1.Equals(s2);
         }
 
-        public static bool operator !=(Scene s1, Scene s2)
+        public static bool operator !=(KancolleScene s1, KancolleScene s2)
         {
             return !(s1 == s2);
         }
@@ -59,7 +49,7 @@ namespace WoFlagship.KancolleNavigation
         /// <param name="s1"></param>
         /// <param name="s2"></param>
         /// <returns></returns>
-        public static bool operator ==(Scene s1, SceneTypes s2)
+        public static bool operator ==(KancolleScene s1, KancolleSceneTypes s2)
         {
             if (((object)s1) == null)
                 return false;
@@ -67,7 +57,7 @@ namespace WoFlagship.KancolleNavigation
                 return s1.Equals(s2);
         }
 
-        public static bool operator !=(Scene s1, SceneTypes s2)
+        public static bool operator !=(KancolleScene s1, KancolleSceneTypes s2)
         {
             return !(s1 == s2);
         }
@@ -81,7 +71,7 @@ namespace WoFlagship.KancolleNavigation
     /// <summary>
     /// 16进制下，总共2位，低位表示某个场景下的小场景，高位表示场景
     /// </summary>
-    public enum SceneTypes
+    public enum KancolleSceneTypes
     {
         Unknown = 0,
         Port = 0x10,
@@ -113,7 +103,7 @@ namespace WoFlagship.KancolleNavigation
         Battle_Formation = 0xC3,//阵型选择
     }
 
-    public enum SceneStates
+    public enum KancolleSceneStates
     {
         Unknown,
         Organize_SortByNew,

@@ -16,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WoFlagship.KancolleCommon;
+using WoFlagship.KancolleCore;
 using WoFlagship.KancolleMap;
 using WoFlagship.ViewModels;
 

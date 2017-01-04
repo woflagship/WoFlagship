@@ -1,15 +1,8 @@
 ﻿using CefSharp;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Security.Cryptography.X509Certificates;
 
-namespace WoFlagship
+namespace WoFlagship.KancolleCore
 {
     class KancolleRequestHandler : IRequestHandler
     {
@@ -40,15 +33,15 @@ namespace WoFlagship
         public IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
 
-            if (request.Url == KancolleCommon.DMMUrls.KanColleUrl)
+            if (request.Url == KancolleCore.DMMUrls.KanColleUrl)
             {
                 return responseFilter;
             }
-            else if (request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleFrameSrcPrefix))
+            else if (request.Url.StartsWith(KancolleCore.DMMUrls.KanColleFrameSrcPrefix))
             {
                 return gameFrameFilter;
             }
-            else if (request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleAPIUrl))
+            else if (request.Url.StartsWith(KancolleCore.DMMUrls.KanColleAPIUrl))
             {
                 return apiResponseFilter;
             }
@@ -114,12 +107,12 @@ namespace WoFlagship
 
         public bool OnResourceResponse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
-            if(request.Url == KancolleCommon.DMMUrls.KanColleUrl)
+            if(request.Url == KancolleCore.DMMUrls.KanColleUrl)
             {
                 if (response.ResponseHeaders["Content-Length"] != null)
                     responseFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
             }
-            else if(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleFrameSrcPrefix))
+            else if(request.Url.StartsWith(KancolleCore.DMMUrls.KanColleFrameSrcPrefix))
             {//过滤掉多余的页面信息
                 gameFrame = frame;
                 var script = "document.body.style.margin='0px';";
@@ -127,7 +120,7 @@ namespace WoFlagship
                 gameFrameFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
                 
             }
-            else if(request.Url.Contains(KancolleCommon.DMMUrls.KanColleAPIKeyword))//(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleAPIUrl))
+            else if(request.Url.Contains(KancolleCore.DMMUrls.KanColleAPIKeyword))//(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleAPIUrl))
             {//获取api post
                 RequestInfo requestInfo = new RequestInfo();
                 requestInfo.RequestUrl = request.Url;
@@ -143,7 +136,7 @@ namespace WoFlagship
                 apiResponseFilter.CurrentRequest = requestInfo;
                 apiResponseFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
             }
-            else if(request.Url.StartsWith(KancolleCommon.DMMUrls.KanColleSwfUrl))
+            else if(request.Url.StartsWith(KancolleCore.DMMUrls.KanColleSwfUrl))
             {
                 RequestInfo requestInfo = new RequestInfo();
                 string requestUrl = request.Url;
