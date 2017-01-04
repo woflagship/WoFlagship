@@ -16,23 +16,16 @@ namespace WoFlagship.KancolleCommon
     {
         public const string QuestInfoFile = "Resources\\Infos\\questinfo.json";
 
-        public Dictionary<int, api_mst_mapinfo_item> MapDic { get; set; } = new Dictionary<int, api_mst_mapinfo_item>();
+        public ReadOnlyDictionary<int, KancolleMapInfoData> MapInfoDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleMapInfoData>(new Dictionary<int, KancolleMapInfoData>());
         public KancolleBasicInfo BasicInfo { get; set; }
         public ReadOnlyDictionary<int, KancolleQuest> QuestDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleQuest>(new Dictionary<int, KancolleQuest>());
         public ReadOnlyDictionary<int, KancolleQuestInfoItem> QuestInfoDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(new Dictionary<int, KancolleQuestInfoItem>());
         public KancolleMaterial Material { get; set; }
-
-        /// <summary>
-        /// key:shipId
-        /// value:api_mst_ship_item
-        /// </summary>
-
         public ReadOnlyDictionary<int, KancolleShipData> ShipDataDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleShipData>(new Dictionary<int, KancolleShipData>());
         public ReadOnlyDictionary<int, KancolleShip> OwnedShipDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleShip>(new Dictionary<int, KancolleShip>());
 
-        public Dictionary<int, api_mst_mission_item> MissionDic { get; set; } = new Dictionary<int, api_mst_mission_item>();
         public ReadOnlyDictionary<int, KancolleMissionData> MissionDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleMissionData>(new Dictionary<int, KancolleMissionData>());
-        public Dictionary<int, api_mission_item> OwnedMissionDic { get; set; } = new Dictionary<int, api_mission_item>();
+        public ReadOnlyDictionary<int, KancolleMissson> OwnedMissionDic { get; set; } = new ReadOnlyDictionary<int, KancolleMissson>(new Dictionary<int, KancolleMissson>());
         //用于双向查询舰娘的位置
         /// <summary>
         /// key:ownedShipId 
@@ -45,8 +38,8 @@ namespace WoFlagship.KancolleCommon
         /// </summary>
         public ReadOnlyArray2<int> OwnedShipPlaceArray { get; set; } = new ReadOnlyArray2<int>(new int[4, 6]);
 
-        public Dictionary<int, api_mst_slotitem_item> SlotDic { get; set; } = new Dictionary<int, api_mst_slotitem_item>();
-        public Dictionary<int, api_slot_item_item> OwnedSlotDic { get; set; } = new Dictionary<int, api_slot_item_item>();
+        public ReadOnlyDictionary<int, KancolleSlotItemData> SlotDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleSlotItemData>(new Dictionary<int, KancolleSlotItemData>());
+        public ReadOnlyDictionary<int, KancolleSlotItem> OwnedSlotDictionary { get; set; } = new ReadOnlyDictionary<int, KancolleSlotItem>(new Dictionary<int, KancolleSlotItem>());
 
     }
 
@@ -113,19 +106,9 @@ namespace WoFlagship.KancolleCommon
         public int Id { get; private set; }
 
         /// <summary>
-        /// 舰娘名
-        /// </summary>
-        public string Name { get; private set; }
-
-        /// <summary>
         /// 数据库中的船的id
         /// </summary>
         public int ShipId { get; private set; }
-
-        /// <summary>
-        /// 船的类型
-        /// </summary>
-        public int Type { get; private set; }
 
         /// <summary>
         /// 等级
@@ -182,16 +165,24 @@ namespace WoFlagship.KancolleCommon
         /// </summary>
         public bool Locked { get; private set; }
 
-        public int MaxHP { get; set; }
+        /// <summary>
+        /// 最大生命值
+        /// </summary>
+        public int MaxHP { get; private set; }
 
-        public int NowHP { get; set; }
+        /// <summary>
+        /// 当前生命值
+        /// </summary>
+        public int NowHP { get; private set; }
 
-        public KancolleShip(api_ship_item ship, KancolleShipData shipData)
+        public int[] Slot { get; private set; }
+
+        public int[] OnSlot { get; private set; }
+
+        public KancolleShip(api_ship_item ship)
         {
             Id = ship.api_id;
             ShipId = ship.api_ship_id;
-            Name = shipData.Name;
-            Type = shipData.Type;
             Level = ship.api_lv;
             Condition = ship.api_cond;
             Karyoku = new Tuple<int, int>(ship.api_karyoku[0], ship.api_karyoku[1]);
@@ -203,6 +194,10 @@ namespace WoFlagship.KancolleCommon
             Sakuteki = new Tuple<int, int>(ship.api_sakuteki[0], ship.api_sakuteki[1]);
             Lucky = new Tuple<int, int>(ship.api_lucky[0], ship.api_lucky[1]);
             Locked = ship.api_locked == 0;
+            MaxHP = ship.api_maxhp;
+            NowHP = ship.api_nowhp;
+            Slot = ship.api_slot.ToArray();
+            OnSlot = ship.api_onslot.ToArray();
         }
     }
 
@@ -233,6 +228,23 @@ namespace WoFlagship.KancolleCommon
             Type = mst_ship_item.api_stype;
         }
     }
+
+    public class KancolleMissson
+    {
+        /// <summary>
+        /// 远征数据库对应的id
+        /// </summary>
+        public int MissionId { get; private set; }
+
+        public int State { get; private set; }
+
+        public KancolleMissson(api_mission_item mission_item)
+        {
+            MissionId = mission_item.api_mission_id;
+            State = mission_item.api_state;
+        }
+    }
+
 
     /// <summary>
     /// 远征信息（数据库）
@@ -385,5 +397,224 @@ namespace WoFlagship.KancolleCommon
         }
     }
 
-   
+    /// <summary>
+    /// 地图信息（数据库）
+    /// </summary>
+    public class KancolleMapInfoData
+    {
+        public int Id { get; private set; }
+
+        /// <summary>
+        /// 海域id
+        /// </summary>
+        public int MapAreaId { get; private set; }
+
+        /// <summary>
+        /// 海域的第几个地图
+        /// </summary>
+        public int MapNo { get; private set; }
+
+        public string Name { get; private set; }
+
+        public int Level { get; private set; }
+
+        public string InfoText { get; private set; }
+
+        public KancolleMapInfoData(api_mst_mapinfo_item mapinfo_item)
+        {
+            Id = mapinfo_item.api_id;
+            MapAreaId = mapinfo_item.api_maparea_id;
+            MapNo = mapinfo_item.api_no;
+            Name = mapinfo_item.api_name;
+            Level = mapinfo_item.api_level;
+            InfoText = mapinfo_item.api_infotext;
+        }
+    }
+
+    /// <summary>
+    /// 装备信息
+    /// </summary>
+    public class KancolleSlotItem
+    {
+        public int Id { get; private set; }
+
+        /// <summary>
+        /// 对应到装备数据库的id
+        /// </summary>
+        public int SlotItemId { get; private set; }
+
+        public bool Locked { get; private set; }
+
+        public int Level { get; private set; }
+
+        public KancolleSlotItem(api_slot_item_item slot_item_item)
+        {
+            Id = slot_item_item.api_id;
+            SlotItemId = slot_item_item.api_slotitem_id;
+            Locked = slot_item_item.api_locked != 0;
+            Level = slot_item_item.api_level;
+        }
+    }
+
+    /// <summary>
+    /// 装备信息（数据库）
+    /// </summary>
+    public class KancolleSlotItemData
+    {
+        public int Id { get; private set; }
+
+        /// <summary>
+        /// 当前分类下顺序
+        /// </summary>
+        public int SortNo { get; private set; }
+
+        /// <summary>
+        /// 装备名
+        /// </summary>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// 装备类型
+        /// </summary>
+        public int[] Type { get; private set; }
+
+        /// <summary>
+        /// 最大HP
+        /// </summary>
+        public int Taik { get; private set; }
+
+        /// <summary>
+        /// 装甲
+        /// </summary>
+        public int Souk { get; private set; }
+
+        /// <summary>
+        /// 火力
+        /// </summary>
+        public int Houg { get; set; }
+
+        /// <summary>
+        /// 雷装
+        /// </summary>
+        public int Raig { get; private set; }
+
+        /// <summary>
+        /// 速度
+        /// </summary>
+        public int Soku { get; private set; }
+
+        /// <summary>
+        /// Dive bomber??
+        /// </summary>
+        public int Baku { get; private set; }
+
+        /// <summary>
+        /// 对空
+        /// </summary>
+        public int Tyku { get; private set; }
+
+        /// <summary>
+        /// 对潜
+        /// </summary>
+        public int Tais { get; private set; }
+
+        /// <summary>
+        /// Unused
+        /// </summary>
+        public int Atap { get; private set; }
+
+        /// <summary>
+        /// 命中
+        /// </summary>
+        public int Houm { get; private set; }
+
+        /// <summary>
+        /// Unkown
+        /// </summary>
+        public int Raim { get; private set; }
+
+        /// <summary>
+        /// 回避
+        /// </summary>
+        public int Houk { get; private set; }
+
+        /// <summary>
+        /// Unused
+        /// </summary>
+        public int Raik { get; private set; }
+
+        /// <summary>
+        /// Unused
+        /// </summary>
+        public int Bakk { get; private set; }
+
+        /// <summary>
+        /// Line of Sight??
+        /// </summary>
+        public int Saku { get; private set; }
+
+        /// <summary>
+        /// Unused
+        /// </summary>
+        public int Sakb { get; private set; }
+
+        /// <summary>
+        /// 运
+        /// </summary>
+        public int Luck { get; private set; }
+
+        /// <summary>
+        /// 射程
+        /// </summary>
+        public int Leng { get; private set; }
+
+        /// <summary>
+        /// 稀有度
+        /// </summary>
+        public int Rare { get; private  set; }
+
+        /// <summary>
+        /// 废弃后所能获得的材料(燃弹钢铝)
+        /// </summary>
+        public Tuple<int,int,int,int> Broken { get; private set; }
+
+        /// <summary>
+        /// 装备信息
+        /// </summary>
+        public string Info { get; private set; }
+
+        /// <summary>
+        /// unused
+        /// </summary>
+        public string UseBull { get; private set; }
+
+        public KancolleSlotItemData(api_mst_slotitem_item mst_slotitem_item)
+        {
+            Id = mst_slotitem_item.api_id;
+            SortNo = mst_slotitem_item.api_sortno;
+            Name = mst_slotitem_item.api_name;
+            Type = mst_slotitem_item.api_type;
+            Taik = mst_slotitem_item.api_taik;
+            Souk = mst_slotitem_item.api_souk;
+            Houg = mst_slotitem_item.api_houg;
+            Raig = mst_slotitem_item.api_raig;
+            Soku = mst_slotitem_item.api_soku;
+            Baku = mst_slotitem_item.api_baku;
+            Tyku = mst_slotitem_item.api_tyku;
+            Tais = mst_slotitem_item.api_tais;
+            Atap = mst_slotitem_item.api_atap;
+            Houm = mst_slotitem_item.api_houm;
+            Raim = mst_slotitem_item.api_raim;
+            Houk = mst_slotitem_item.api_houk;
+            Raik = mst_slotitem_item.api_raik;
+            Bakk = mst_slotitem_item.api_bakk;
+            Saku = mst_slotitem_item.api_saku;
+            Sakb = mst_slotitem_item.api_sakb;
+            Luck = mst_slotitem_item.api_luck;
+            Rare = mst_slotitem_item.api_rare;
+            Broken = new Tuple<int, int, int, int>(mst_slotitem_item.api_broken[0], mst_slotitem_item.api_broken[1], mst_slotitem_item.api_broken[2], mst_slotitem_item.api_broken[3]);
+            Info = mst_slotitem_item.api_info;
+            UseBull = mst_slotitem_item.api_usebull;
+        }
+    }
 }

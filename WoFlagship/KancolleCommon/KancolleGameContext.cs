@@ -42,9 +42,8 @@ namespace WoFlagship.KancolleCommon
                     UpdateShipDatas(start_data.api_mst_ship);
                     UpdateMissions(start_data.api_mst_mission);
                     UpdateMissions(start_data.api_mst_mission);
-                    //UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
-                    //UpdateSlotDictionary(start_data.api_mst_slotitem);
-                   
+                    UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
+                    UpdateSlotDictionary(start_data.api_mst_slotitem);              
                     break;
                 case "api_port/port":
                     var port_data = api_object.ToObject<api_port_data>();
@@ -62,63 +61,67 @@ namespace WoFlagship.KancolleCommon
                     break;
                 case "api_get_member/require_info":
                     var getmember_data = api_object.ToObject<api_requireinfo_data>();
-                    //UpdateOwnedSlotDictionary(getmember_data.api_slot_item);
-                    //generalViewModel.ItemCount = getmember_data.api_slot_item.Length;
-                    break;
-                case "api_req_kousyou/createitem"://开发装备
-                    var createitem_data = api_object.ToObject<api_createitem_data>();
-                    //if (createitem_data.api_create_flag == 1)
-                        //generalViewModel.ItemCount++;
-                    break;
-                case "api_req_kousyou/destroyitem2":
-                   destroyitem2_api.svdata sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCommon.destroyitem2_api.svdata>(response);
-                   // if (sv_data_destroyitem2 != null)
-                        //generalViewModel.ItemCount--;
+                    UpdateOwnedSlotDictionary(getmember_data.api_slot_item);
                     break;
                 case "api_get_member/questlist":
-                   // var questlist_data = api_object.ToObject<api_questlist_data>();
-                    //gameContext.UpdateQuest(questlist_data);
-                    break;
-                case "api_req_quest/start":
-                    
-                    break;
-                case "api_req_quest/stop":
-                case "api_req_quest/clearitemget":
-                   
-                    break;
-                case "api_req_hensei/change"://舰队编成修改
-                    UpdateDeck(requestInfo.Data);
+                    var questlist_data = api_object.ToObject<api_questlist_data>();
+                   UpdateQuest(questlist_data);
                     break;
                 case "api_get_member/mission"://可进行的远征任务
                     var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
-                    //UpdateOwnedMissionDictionary(ownedMissionItems);
-                    break;
-                case "api_req_map/start"://出击
-                case "api_req_map/next":
-                    var nextdata = api_object.ToObject<api_mapnext_data>();
-                    break;
-                case "api_req_sortie/battle"://战斗
-                    var battledata = api_object.ToObject<api_battle_data>();
-
-                    break;
-                case "api_req_sortie/battleresult"://战斗结果
-                    var result = api_object.ToObject<api_battleresult_data>();
-                    break;
-                case "api_req_battle_midnight/battle"://夜战
-                    var nightbattledata = api_object.ToObject<api_battle_data>();
-                    break;
-                case "api_get_member/ship_deck"://有什么用来着？
-                   // UpdateShipDeck(api_object.ToObject<api_shipdeck_data>());
+                    UpdateOwnedMissionDictionary(ownedMissionItems);
                     break;
             }
         }
 
+        #region pulic methods
+        /// <summary>
+        /// 获取舰娘类型id
+        /// </summary>
+        /// <param name="ownedShip"></param>
+        /// <returns></returns>
+        public int GetShipType(KancolleShip ownedShip)
+        {
+            return gameData.ShipDataDictionary[ownedShip.ShipId].Type;
+        }
 
+        /// <summary>
+        /// 获取舰娘类型id
+        /// </summary>
+        /// <param name="ownedShipId"></param>
+        /// <returns></returns>
+        public int GetShipType(int ownedShipId)
+        {
+            return GetShipType(gameData.OwnedShipDictionary[ownedShipId]);
+        }
+
+        /// <summary>
+        /// 获取舰娘名
+        /// </summary>
+        /// <param name="ownedShip"></param>
+        /// <returns></returns>
+        public string GetShipName(KancolleShip ownedShip)
+        {
+            return gameData.ShipDataDictionary[ownedShip.ShipId].Name;
+        }
+
+        /// <summary>
+        /// 获取舰娘名
+        /// </summary>
+        /// <param name="ownedShipId"></param>
+        /// <returns></returns>
+        public string GetShipName(int ownedShipId)
+        {
+            return GetShipName(gameData.OwnedShipDictionary[ownedShipId]);
+        }
+        #endregion
+
+        #region private methods
         /// <summary>
         /// 更新从api_mst_ship中获得的舰娘数据信息
         /// </summary>
         /// <param name="items"></param>
-        public void UpdateShipDatas(api_mst_ship_item[] items)
+        private void UpdateShipDatas(api_mst_ship_item[] items)
         {
             api_mst_ship = items;
             gameData.ShipDataDictionary = new ReadOnlyDictionary<int, KancolleShipData>(items.ToDictionary(
@@ -130,28 +133,69 @@ namespace WoFlagship.KancolleCommon
         }
 
         /// <summary>
+        /// 更新从api_mst_mapinfo_item获取的地图信息
+        /// </summary>
+        /// <param name="api_mst_mapinfo"></param>
+        private void UpdateMapInfoDictionary(api_mst_mapinfo_item[] api_mst_mapinfo)
+        {
+            gameData.MapInfoDictionary = new ReadOnlyDictionary<int, KancolleMapInfoData>(api_mst_mapinfo.ToDictionary(
+                k=>k.api_id,
+                k=>new KancolleMapInfoData(k)));
+        }
+
+        /// <summary>
+        /// 更新从api_mst_slotitem_item中获得的装备数据信息
+        /// </summary>
+        /// <param name="api_mst_slotitem"></param>
+        private void UpdateSlotDictionary(api_mst_slotitem_item[] api_mst_slotitem)
+        {
+            gameData.SlotDictionary = new ReadOnlyDictionary<int, KancolleSlotItemData>(api_mst_slotitem.ToDictionary(
+                k => k.api_id,
+                k=>new KancolleSlotItemData(k)));
+        }
+
+
+        /// <summary>
+        /// 更新从api_slot_item_item中获得到的装备信息
+        /// </summary>
+        /// <param name="api_slot_item"></param>
+        private void UpdateOwnedSlotDictionary(api_slot_item_item[] api_slot_item)
+        {
+            gameData.OwnedSlotDictionary = new ReadOnlyDictionary<int, KancolleSlotItem>(api_slot_item.ToDictionary(
+                k=>k.api_id,
+                k=>new KancolleSlotItem(k)));
+        }
+
+        /// <summary>
         /// 更新从api_ship中获得的当前已有的舰娘信息
         /// </summary>
         /// <param name="items"></param>
-        public void UpdateOwnedShips(api_ship_item[] items)
+        private void UpdateOwnedShips(api_ship_item[] items)
         {
             api_ship = items;
             if (api_mst_ship == null)
                 throw new Exception("需要先更新舰娘数据信息api_mst_item");
             gameData.OwnedShipDictionary = new ReadOnlyDictionary<int, KancolleShip>(items.ToDictionary(
                     k => k.api_id, 
-                    k => new KancolleShip(k, gameData.ShipDataDictionary[k.api_ship_id])
+                    k => new KancolleShip(k)
                     ));
 
             OnShipUpdated?.Invoke(this);
             OnGameDataUpdated?.Invoke(this);
         }
 
+        private void UpdateOwnedMissionDictionary(api_mission_item[] ownedMissionItems)
+        {
+            gameData.OwnedMissionDic = new ReadOnlyDictionary<int, KancolleMissson>(ownedMissionItems.ToDictionary(
+                k => k.api_mission_id,
+                k=>new KancolleMissson(k)));
+        }
+
         /// <summary>
         /// 更新从api_mst_mission中获得的远征数据信息
         /// </summary>
         /// <param name="missions"></param>
-        public void UpdateMissions(api_mst_mission_item[] missions)
+        private void UpdateMissions(api_mst_mission_item[] missions)
         {
             api_mst_mission = missions;
             gameData.MissionDictionary = new ReadOnlyDictionary<int, KancolleMissionData>(missions.ToDictionary(
@@ -165,7 +209,7 @@ namespace WoFlagship.KancolleCommon
         /// 更新提督基本信息
         /// </summary>
         /// <param name="portdata"></param>
-        public void UpdatePort(api_port_data portData)
+        private void UpdatePort(api_port_data portData)
         {
             if (portData != null)
             {
@@ -178,7 +222,7 @@ namespace WoFlagship.KancolleCommon
         /// 调用port的API时会更新deck
         /// </summary>
         /// <param name="deckPorts"></param>
-        public void UpdateDeck(api_deck_port_item[] deckPorts)
+        private void UpdateDeck(api_deck_port_item[] deckPorts)
         {
             //var dic = gameData.OwnedShipPlaceDictionary.ToDictionary(k => k.Key, k => k.Value);
             var dic = new Dictionary<int, Tuple<int, int>>();
@@ -207,7 +251,7 @@ namespace WoFlagship.KancolleCommon
         /// 当改变船的编成位置时更新deck
         /// </summary>
         /// <param name="shipChangePostData"></param>
-        public void UpdateDeck(Dictionary<string, string> shipChangePostData)
+        private void UpdateDeck(Dictionary<string, string> shipChangePostData)
         {
             int api_id = int.Parse(shipChangePostData["api_id"]);
             int deck_index = api_id - 1;
@@ -300,7 +344,7 @@ namespace WoFlagship.KancolleCommon
         /// 更新资源信息
         /// </summary>
         /// <param name="materials"></param>
-        public void UpdateMaterial(api_material_item[] materials)
+        private void UpdateMaterial(api_material_item[] materials)
         {
             if (materials != null)
             {
@@ -315,7 +359,7 @@ namespace WoFlagship.KancolleCommon
         /// 更新资源信息，只更新燃弹钢铝
         /// </summary>
         /// <param name="materials"></param>
-        public void UpdateMaterial(int[] materials)
+        private void UpdateMaterial(int[] materials)
         {
             if (materials != null)
             {
@@ -329,7 +373,7 @@ namespace WoFlagship.KancolleCommon
         /// 更新任务信息
         /// </summary>
         /// <param name="questData"></param>
-        public void UpdateQuest(api_questlist_data questData)
+        private void UpdateQuest(api_questlist_data questData)
         {
             if (questData != null && questData.api_list != null)
             {
@@ -364,7 +408,7 @@ namespace WoFlagship.KancolleCommon
         /// <summary>
         /// 从questinfo文件中更新任务信息
         /// </summary>
-        public void UpdateQuestInfo()
+        private void UpdateQuestInfo()
         {
             if (!File.Exists(KancolleGameData.QuestInfoFile))
             {
@@ -478,6 +522,6 @@ namespace WoFlagship.KancolleCommon
             }
         }
 
-       
+        #endregion
     }
 }

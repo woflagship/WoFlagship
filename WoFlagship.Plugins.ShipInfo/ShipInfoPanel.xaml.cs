@@ -67,14 +67,15 @@ namespace WoFlagship.Plugins.ShipInfo
             ShipCollection.Clear();
             foreach(var ship in gameData.OwnedShipDictionary.Values)
             {
+                var shipData = gameData.ShipDataDictionary[ship.ShipId];
                 var model = new ShipViewModel()
                 {
-                    Name = ship.Name,
+                    Name = shipData.Name,
                     Level = ship.Level.ToString(),
                     Id = ship.Id,
                     ShipId = ship.ShipId,
-                    TypeId = ship.Type,
-                    Type = ship.Type >= KancolleAPIs.ShipTypeText.Length ? ship.Type + "" : KancolleAPIs.ShipTypeText[ship.Type - 1],
+                    TypeId = shipData.Type,
+                    Type = shipData.Type >= KancolleAPIs.ShipTypeText.Length ? shipData.Type + "" : KancolleAPIs.ShipTypeText[shipData.Type - 1],
                     Condition = ship.Condition,
                     Karyoku = ship.Karyoku.Item1,
                     Raisou = ship.Raisou.Item1,
@@ -84,7 +85,7 @@ namespace WoFlagship.Plugins.ShipInfo
                     Taisen = ship.Taisen.Item1,
                     Sakuteki = ship.Sakuteki.Item1,
                     Lucky = ship.Lucky.Item1,
-                    SlotIds = new int[0]
+                    SlotIds = ship.Slot
                 };
 
                 model.Slots = "";
@@ -92,10 +93,10 @@ namespace WoFlagship.Plugins.ShipInfo
                 {
                     if(model.SlotIds[i] != -1)
                     {
-                        api_slot_item_item slotItem;
-                        if(gameData.OwnedSlotDic.TryGetValue(model.SlotIds[i], out slotItem))
+                        KancolleSlotItem slotItem;
+                        if(gameData.OwnedSlotDictionary.TryGetValue(model.SlotIds[i], out slotItem))
                         {
-                            model.Slots += gameData.SlotDic[slotItem.api_slotitem_id].api_name + " ";
+                            model.Slots += gameData.SlotDictionary[slotItem.SlotItemId].Name + " ";
                         }
                     }
                 }

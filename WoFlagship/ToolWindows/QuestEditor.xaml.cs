@@ -393,13 +393,13 @@ namespace WoFlagship.ToolWindows
                     Amount = (i is JValue) ? 1 : i["amount"].ToObject<int>()
                 };
                 try
-                { var slot = (from s in gameData.SlotDic.Values
-                              where s.api_name == o.SlotName
+                { var slot = (from s in gameData.SlotDictionary.Values
+                              where s.Name == o.SlotName
                               select s).First();
                     if (slot == null)
                         MessageBox.Show("unknown slot name\n" + o.SlotName);
                     else
-                        o.SlotId = slot.api_id;
+                        o.SlotId = slot.Id;
                 }
                 catch(Exception )
                 {

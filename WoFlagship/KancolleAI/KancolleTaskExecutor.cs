@@ -374,11 +374,11 @@ namespace WoFlagship.KancolleAI
             if(!result)
                 return false;
 
-            api_mst_mapinfo_item mapinfo;
-            if (!GameData.MapDic.TryGetValue(task.MapId, out mapinfo))
+            KancolleMapInfoData mapinfo;
+            if (!GameData.MapInfoDictionary.TryGetValue(task.MapId, out mapinfo))
                 return false;
-            int areaIndex = mapinfo.api_maparea_id - 1;
-            int mapIndex = mapinfo.api_no - 1;
+            int areaIndex = mapinfo.MapAreaId - 1;
+            int mapIndex = mapinfo.MapAreaId - 1;
 
             //先转到海域
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_Areas[areaIndex]));

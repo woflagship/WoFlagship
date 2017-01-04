@@ -62,7 +62,6 @@ namespace WoFlagship
 
         private StreamWriter sw = new StreamWriter("outputAPI.txt");
 
-        private KancolleGameData gameData = new KancolleGameData();
         private KancolleGameContext gameContext = new KancolleGameContext();
         
 
@@ -77,8 +76,6 @@ namespace WoFlagship
         {
             //初始化事件
             InitContextEvent();
-            ///初始化资源
-            InitResources();
 
             LogFactory.SystemLogger.Info("程序启动");
             pluginManager.OnPluginsLoaded += PluginManager_OnPluginsLoaded;
@@ -154,7 +151,8 @@ namespace WoFlagship
                         int ownedShipId = e.GameData.OwnedShipPlaceArray[i, j];
                         if (ownedShipId > 0)
                         {
-                            generalViewModel.Decks[i].Ships[j].Name = e.GameData.OwnedShipDictionary[ownedShipId].Name;
+                            int shipId = e.GameData.OwnedShipDictionary[ownedShipId].ShipId;
+                            generalViewModel.Decks[i].Ships[j].Name = e.GameData.ShipDataDictionary[shipId].Name;
                         }
                         else
                             generalViewModel.Decks[i].Ships[j].Reset();
@@ -221,15 +219,13 @@ namespace WoFlagship
                 generalViewModel.MaxShipCount = e.GameData.BasicInfo.MaxShipCount;
                 generalViewModel.MaxItemCount = e.GameData.BasicInfo.MaxSlotItemCount;
             };
+
+            gameContext.OnGameDataUpdated += e =>
+            {
+                battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
+            };
         }
 
-
-        private void InitResources()
-        {
-            gameContext.UpdateQuestInfo();
-        }
-
-        
 
         private void AiManager_OnAILoaded(List<IKancolleAI> obj)
         {
@@ -330,38 +326,17 @@ namespace WoFlagship
                 var data = JsonConvert.DeserializeObject(arg2) as JObject;
                 var api_object = data["api_data"];
                 string api = KancolleAPIs.GetAPI(arg1.RequestUrl);//= arg1.RequestUrl.Substring(KancolleCommon.DMMUrls.KanColleAPIUrl.Length);
-                
+                gameContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
                 switch (api)
                 {
                     case "api_start2":
-                        var start_data = api_object.ToObject<api_start_data>();
-                        gameContext.UpdateShipDatas(start_data.api_mst_ship);
-                        gameContext.UpdateMissions(start_data.api_mst_mission);
-                        gameContext.UpdateMissions(start_data.api_mst_mission);
-                        UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
-                        UpdateSlotDictionary(start_data.api_mst_slotitem);
                         foreach(var plugin in pluginManager.Plugins)
                         {
                             plugin.OnGameStart(generalViewModel, gameContext.GameData);
                         }
-                        break;
-                    case "api_port/port":
-                        var port_data = api_object.ToObject<api_port_data>();
-                        gameContext.UpdateOwnedShips(port_data.api_ship);
-                        gameContext.UpdateMaterial(port_data.api_material);
-                        gameContext.UpdatePort(port_data);
-                        gameContext.UpdateDeck(port_data.api_deck_port);
-                        break;
-                    case "api_get_member/material":
-                        var material_data = api_object.ToObject<api_material_item[]>();
-                        gameContext.UpdateMaterial(material_data);
-                        break;
-                    case "api_req_hokyu/charge":
-                        gameContext.UpdateMaterial(api_object["api_material"].ToObject<int[]>());
-                        break;
+                        break;;
                     case "api_get_member/require_info":
                         var getmember_data = api_object.ToObject<api_requireinfo_data>();
-                        UpdateOwnedSlotDictionary(getmember_data.api_slot_item);
                         generalViewModel.ItemCount = getmember_data.api_slot_item.Length;
                         break;
                     case "api_req_kousyou/createitem"://开发装备
@@ -370,48 +345,12 @@ namespace WoFlagship
                             generalViewModel.ItemCount++;
                         break;
                     case "api_req_kousyou/destroyitem2":
-                        KancolleCommon.destroyitem2_api.svdata sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCommon.destroyitem2_api.svdata>(arg2);
+                        var sv_data_destroyitem2 = JsonConvert.DeserializeObject<KancolleCommon.destroyitem2_api.svdata>(arg2);
                         if (sv_data_destroyitem2 != null)
                             generalViewModel.ItemCount--;
                         break;
-                    case "api_get_member/questlist":
-                        var questlist_data = api_object.ToObject<api_questlist_data>();
-                        gameContext.UpdateQuest(questlist_data);
-                        break;
-                    case "api_req_quest/start":
-                       // StartQuest(gameData.QuestDic[int.Parse(arg1.Data["api_quest_id"])]);
-                        break;
-                    case "api_req_quest/stop":
-                    case "api_req_quest/clearitemget":
-                        //StopQuest(int.Parse(arg1.Data["api_quest_id"]));
-                        break;
-                    case "api_req_hensei/change"://舰队编成修改
-                        gameContext.UpdateDeck(arg1.Data);
-                        break;
-                    case "api_get_member/mission"://可进行的远征任务
-                        var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
-                        UpdateOwnedMissionDictionary(ownedMissionItems);
-                        break;
-                    case "api_req_map/start"://出击
-                    case "api_req_map/next":
-                        var nextdata = api_object.ToObject<api_mapnext_data>();
-                        break;
-                    case "api_req_sortie/battle"://战斗
-                        var battledata = api_object.ToObject<api_battle_data>();
-
-                        break;
-                    case "api_req_sortie/battleresult"://战斗结果
-                        var result = api_object.ToObject<api_battleresult_data>();
-                        break;
-                    case "api_req_battle_midnight/battle"://夜战
-                        var nightbattledata = api_object.ToObject<api_battle_data>();
-                        break;
-                    case "api_get_member/ship_deck"://有什么用来着？
-                        UpdateShipDeck(api_object.ToObject<api_shipdeck_data>());
-                        break;
                 }
-                
-                battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
+
                 battleContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
                 taskExecutor.OnAPIResponseReceivedHandler(arg1, arg2, api);
             }
@@ -442,48 +381,6 @@ namespace WoFlagship
            
         }
 
-        
-
-        private void UpdateSlotDictionary(api_mst_slotitem_item[] slotItems)
-        {
-            gameData.SlotDic = slotItems.ToDictionary(k => k.api_id, k => k);
-        }
-
-
-        private void UpdateMapInfoDictionary(api_mst_mapinfo_item[] mapinfoItems)
-        {
-            gameData.MapDic = mapinfoItems.ToDictionary(k => k.api_id, k => k);
-        }
-
-        private void UpdateOwnedMissionDictionary(api_mission_item[] ownedMissionItems)
-        {
-            gameData.OwnedMissionDic = ownedMissionItems.ToDictionary(k => k.api_mission_id, k => k);
-        }
-
-       
-        private void UpdateOwnedSlotDictionary(api_slot_item_item[] slotItems)
-        {
-            gameData.OwnedSlotDic = slotItems.ToDictionary(k=>k.api_id, k=>k);
-        }
-
-        private void UpdateShipDeck(api_shipdeck_data shipdeckData)
-        {
-            foreach(var ship in shipdeckData.api_ship_data)
-            {
-                if (gameData.OwnedShipDictionary.ContainsKey(ship.api_id))
-                {
-                    //gameData.OwnedShipDic[ship.api_id] = ship;
-                }
-                else
-                {
-                    //事实上应该不可能
-                   // gameData.OwnedShipDic.Add(ship.api_id, ship);
-                }
-            }
-        }
-
-       
-       
         
         private void UpdatfePort(api_port_data portdata)
         {
@@ -583,7 +480,7 @@ namespace WoFlagship
 
         private void Btn_QuestEditor_Click(object sender, RoutedEventArgs e)
         {
-            QuestEditor questEditor = new QuestEditor(gameData);
+            QuestEditor questEditor = new QuestEditor(gameContext.GameData);
             questEditor.ShowDialog();
         }
 
