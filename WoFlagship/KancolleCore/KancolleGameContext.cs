@@ -25,7 +25,7 @@ namespace WoFlagship.KancolleCore
         private api_ship_item[] api_ship;
         private api_mst_mission_item[] api_mst_mission;
 
-        private KancolleGameData gameData = new KancolleGameData();
+        private readonly KancolleGameData gameData = new KancolleGameData();
         public KancolleGameData GameData { get { return gameData; } }
 
         public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
@@ -72,47 +72,7 @@ namespace WoFlagship.KancolleCore
             }
         }
 
-        #region pulic methods
-        /// <summary>
-        /// 获取舰娘类型id
-        /// </summary>
-        /// <param name="ownedShip"></param>
-        /// <returns></returns>
-        public int GetShipType(KancolleShip ownedShip)
-        {
-            return gameData.ShipDataDictionary[ownedShip.ShipId].Type;
-        }
-
-        /// <summary>
-        /// 获取舰娘类型id
-        /// </summary>
-        /// <param name="ownedShipId"></param>
-        /// <returns></returns>
-        public int GetShipType(int ownedShipId)
-        {
-            return GetShipType(gameData.OwnedShipDictionary[ownedShipId]);
-        }
-
-        /// <summary>
-        /// 获取舰娘名
-        /// </summary>
-        /// <param name="ownedShip"></param>
-        /// <returns></returns>
-        public string GetShipName(KancolleShip ownedShip)
-        {
-            return gameData.ShipDataDictionary[ownedShip.ShipId].Name;
-        }
-
-        /// <summary>
-        /// 获取舰娘名
-        /// </summary>
-        /// <param name="ownedShipId"></param>
-        /// <returns></returns>
-        public string GetShipName(int ownedShipId)
-        {
-            return GetShipName(gameData.OwnedShipDictionary[ownedShipId]);
-        }
-        #endregion
+       
 
         #region private methods
         /// <summary>

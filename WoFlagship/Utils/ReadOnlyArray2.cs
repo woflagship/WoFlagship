@@ -30,6 +30,19 @@ namespace WoFlagship.Utils
             return data.Clone() as T[,];
         }
 
+        /// <summary>
+        /// 返回第i行的值
+        /// </summary>
+        /// <param name="i">第i行（从0开始）</param>
+        /// <returns></returns>
+        public T[] ToArray(int i)
+        {
+            T[] arr = new T[ColumnCount];
+            for (int col = 0; col < ColumnCount; col++)
+                arr[col] = data[i, col];
+            return arr;
+        }
+
         public int Count
         {
             get

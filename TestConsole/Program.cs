@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using AForge.Imaging;
 using System.Drawing;
-using WoFlagship.KancolleBattle;
 using WoFlagship.KancolleAI;
 using Microsoft.SolverFoundation.Common;
 using Microsoft.SolverFoundation.Services;
@@ -202,6 +201,7 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
+
             ReadOnlyArray2<int> r = new ReadOnlyArray2<int>(dd);
             var rr = r.ToArray();
             foreach(var ar in r)

@@ -49,7 +49,7 @@ namespace WoFlagship.KancolleCore
     {
         public int api_result { get; set; }
         public string api_result_msg { get; set; }
-        public dynamic api_data { get; set; }
+        public object api_data { get; set; }
         //下面属性只有在api_req_hokyu/charge中有用
         public api_ship_item[] api_ship { get; set; }
         public int[] api_material { get; set; }
@@ -578,8 +578,8 @@ namespace WoFlagship.KancolleCore
         public int api_dock_id { get; set; }
 
         //敌舰队的舰船id，第0位不使用,数字和字符串都有可能是里面的元素
-        public dynamic[] api_ship_ke { get; set; }
-        public dynamic[] api_ship_ke_combined { get; set; }
+        public object[] api_ship_ke { get; set; }
+        public object[] api_ship_ke_combined { get; set; }
         //敌舰队等级，第0位不使用
         public int[] api_ship_lv { get; set; }
 

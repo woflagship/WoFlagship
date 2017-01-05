@@ -4,22 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WoFlagship.KancolleCore;
+using WoFlagship.Utils;
 
-namespace WoFlagship.KancolleBattle
+namespace WoFlagship.KancolleCore.KancolleBattle
 {
-    public enum BattleTypes
+    public class Battle
     {
-        Normal,
-        Boss,
-        Practice
-    }
-
-    public class KancolleBattle
-    {
-
         private static readonly AttackTypes[] DayAttackTypeMap = new AttackTypes[]
-        {
+       {
             AttackTypes.Normal,
             AttackTypes.Laser,
             AttackTypes.Double,
@@ -27,7 +19,7 @@ namespace WoFlagship.KancolleBattle
             AttackTypes.Primary_Radar_CI,
             AttackTypes.Primary_AP_CI,
             AttackTypes.Primary_Primary_CI,
-        };
+       };
 
         private static readonly AttackTypes[] NightAttackTypeMap = new AttackTypes[]
         {
@@ -46,41 +38,53 @@ namespace WoFlagship.KancolleBattle
             StageTypes.Torpedo
         };
 
-
         public BattleTypes BattleType { get; set; }
         /// <summary>
         /// [body.api_maparea_id, body.api_mapinfo_no, body.api_no]
         /// </summary>
-        public int[] Map { get; set; }
-        public int FleetType { get; set; }
-        public int EnemyType { get; set; }
-        public Fleet mainFleet { get; set; }
-        public Fleet escortFleet { get; set; }
-        public Fleet enemyFleet { get; set; }
-        public Fleet enemyEscort { get; set; }
-        public Fleet SupportFleet { get; set; }
-        public List<api_battle_data> Packets { get; set; } = new List<api_battle_data>();
-        public List<Stage> Stages { get; set; } = new List<Stage>();
+       // public int[] Map { get; private set; }
+        public int FleetType { get; private set; }
+        public int EnemyType { get; private set; }
+        public Fleet mainFleet { get; private set; }
+        public Fleet escortFleet { get; private set; }
+        public Fleet enemyFleet { get; private set; }
+        public Fleet enemyEscort { get; private set; }
+        public Fleet SupportFleet { get; private set; }
+        public List<Stage> Stages { get; private set; } = new List<Stage>();
+
+
+        /// <summary>
+        /// 创建一次战斗的实例
+        /// </summary>
+        /// <param name="mainFleet">第一舰队</param>
+        /// <param name="escortFleet">第二舰队，联合舰队时有效；单舰队时为null</param>
+        /// <param name="fleetType">联合舰队类型,0-通常部队，1-空母机动部队，2-水上打击部队，3-输送护卫部队</param>
+        /// <param name="supportFleet">支援舰队，无支援舰队为null</param>
+        public Battle(Fleet mainFleet, Fleet escortFleet, int fleetType, Fleet supportFleet)
+        {
+            this.mainFleet = mainFleet;
+            this.escortFleet = escortFleet;
+            this.FleetType = fleetType;
+            this.SupportFleet = supportFleet;
+        }
 
         public override string ToString()
         {
             string str = "";
-            foreach(var stage in Stages)
+            foreach (var stage in Stages)
             {
                 str += stage.ToString() + "\n";
             }
             return str;
         }
 
-        public KancolleBattle(){}
-
         public void Simulate(api_battle_data packet)
         {
             if (enemyFleet == null)
             {
-                enemyFleet = new Fleet(0, packet.api_ship_ke, packet.api_eSlot, packet.api_maxhps, packet.api_nowhps, packet.api_ship_lv);
+                enemyFleet = new Fleet(new JArray(packet.api_ship_ke), packet.api_eSlot, packet.api_maxhps, packet.api_nowhps, packet.api_ship_lv, ShipOwner.Enemy, 0);
                 if (packet.api_ship_ke_combined != null)
-                    enemyEscort = new Fleet(6, packet.api_ship_ke_combined, packet.api_eSlot_combined, packet.api_maxhps_combined, packet.api_nowhps_combined, packet.api_ship_lv_combined);
+                    enemyEscort = new Fleet(new JArray(packet.api_ship_ke_combined), packet.api_eSlot_combined, packet.api_maxhps_combined, packet.api_nowhps_combined, packet.api_ship_lv_combined, ShipOwner.Enemy, 6);
             }
             //以下两行在KancolleBattleManager中实现
             // HACK: Only enemy carrier task force now.
@@ -139,9 +143,9 @@ namespace WoFlagship.KancolleBattle
             }
 
             // Surface Task Force, 水上打撃部隊
-            if(FleetType == 2)
+            if (FleetType == 2)
             {
-                if(EnemyType == 0)
+                if (EnemyType == 0)
                 {
                     // Opening Anti-Sub
                     Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
@@ -156,7 +160,7 @@ namespace WoFlagship.KancolleBattle
                     // Closing Torpedo Salvo
                     Stages.AddIfNotNull((Stage)SimulateTorpedo(escortFleet, null, enemyFleet, null, packet.api_raigeki));
                 }
-                if(EnemyType == 1)
+                if (EnemyType == 1)
                 {
                     // Opening Anti-Sub
                     Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
@@ -175,10 +179,10 @@ namespace WoFlagship.KancolleBattle
 
             // Carrier Task Force, 空母機動部隊
             // Transport Escort, 輸送護衛部隊
-            if (FleetType ==1 | FleetType == 3)
+            if (FleetType == 1 | FleetType == 3)
             {
-                if(EnemyType == 0)
-                { 
+                if (EnemyType == 0)
+                {
                     // Opening Anti-Sub
                     Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
@@ -193,7 +197,7 @@ namespace WoFlagship.KancolleBattle
                     Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki3, StageTypes.SMain));
 
                 }
-                if(EnemyType == 1)
+                if (EnemyType == 1)
                 {
                     // Opening Anti-Sub
                     Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
@@ -232,7 +236,7 @@ namespace WoFlagship.KancolleBattle
             Stage stage = new Stage();
             stage.StageType = StageTypes.Aerial;
             List<Attack> attacks = new List<Attack>();
-            if(kouku.api_stage3 != null)
+            if (kouku.api_stage3 != null)
             {
                 var st3 = kouku.api_stage3;
                 attacks.AddRange(SimulateAerialAttack(enemyFleet, st3.api_edam, st3.api_ebak_flag, st3.api_erai_flag, st3.api_ecl_flag));
@@ -255,7 +259,7 @@ namespace WoFlagship.KancolleBattle
 
             if (fleet == null || edam == null)
                 return attacks;
-            for(int i=1; i<edam.Length; i++)
+            for (int i = 1; i < edam.Length; i++)
             {
                 int damage = (int)Math.Floor(edam[i]);
                 if (damage < 0 || (ebak_flag[i] <= 0 && erai_flag[i] <= 0))
@@ -263,16 +267,7 @@ namespace WoFlagship.KancolleBattle
                 var toShip = fleet[i - 1];
                 var hit = (ecl_flag[i] == 1 ? HitTypes.Critical : (damage > 0 ? HitTypes.Hit : HitTypes.Miss));
                 toShip.Damage(damage);
-                attacks.Add(new Attack()
-                {
-                    AttackType = AttackTypes.Normal,
-                    ToShip = toShip,
-                    Damages = new int[] { damage },
-                    Hits = new HitTypes[] { hit },
-                    FromHP = toShip.FromHP,
-                    ToHp = toShip.ToHP,
-                    ItemUse = toShip.ItemUsed
-                });
+                attacks.Add(new Attack(AttackTypes.Normal, null, toShip,new int[] { damage }, new HitTypes[] { hit }));
             }
 
             return attacks;
@@ -283,10 +278,10 @@ namespace WoFlagship.KancolleBattle
             if (raigeki == null)
                 return null;
             List<Attack> attacks = new List<Attack>();
-            if(raigeki.api_frai != null)
+            if (raigeki.api_frai != null)
                 attacks.AddRange(SimulateTorpedoAttack(mainFleet, escortFleet, enemyFleet, enemyEscort, raigeki.api_fydam, raigeki.api_frai, raigeki.api_fcl));
             if (raigeki.api_erai != null)
-                attacks.AddRange(SimulateTorpedoAttack(enemyFleet, enemyEscort, mainFleet, escortFleet,raigeki.api_eydam, raigeki.api_erai, raigeki.api_ecl));
+                attacks.AddRange(SimulateTorpedoAttack(enemyFleet, enemyEscort, mainFleet, escortFleet, raigeki.api_eydam, raigeki.api_erai, raigeki.api_ecl));
 
             Stage stage = new Stage
             {
@@ -297,12 +292,12 @@ namespace WoFlagship.KancolleBattle
             return stage;
         }
 
-        public static List<Attack> SimulateTorpedoAttack(Fleet mainFleet, Fleet escortFleet,Fleet enemyFleet, Fleet enemyEscort, double[] api_eydam, int[] api_erai, int[] api_ecl)
+        public static List<Attack> SimulateTorpedoAttack(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, double[] api_eydam, int[] api_erai, int[] api_ecl)
         {
             List<Attack> attacks = new List<Attack>();
             if (enemyFleet == null || api_eydam == null)
                 return attacks;
-            for(int i=1; i<api_erai.Length; i++)
+            for (int i = 1; i < api_erai.Length; i++)
             {
                 int t = api_erai[i];
                 if (t <= 0) continue;
@@ -315,17 +310,7 @@ namespace WoFlagship.KancolleBattle
                 int damage = (int)Math.Floor(api_eydam[i]);
                 var hit = (api_ecl[i] == 2 ? HitTypes.Critical : (api_ecl[i] == 1 ? HitTypes.Hit : HitTypes.Miss));
                 toShip.Damage(damage);
-                attacks.Add(new Attack()
-                {
-                    AttackType = AttackTypes.Normal,
-                    FromShip = fromShip,
-                    ToShip = toShip,
-                    Damages = new int[] { damage},
-                    Hits = new HitTypes[] { hit},
-                    FromHP = toShip.FromHP,
-                    ToHp = toShip.ToHP,
-                    ItemUse = toShip.ItemUsed
-                });
+                attacks.Add(new Attack( AttackTypes.Normal, fromShip, toShip, new int[] { damage}, new HitTypes[] { hit}));
             }
             return attacks;
         }
@@ -336,7 +321,7 @@ namespace WoFlagship.KancolleBattle
                 return null;
             bool isNight = (subType == StageTypes.SNight);
             List<Attack> attacks = new List<Attack>();
-            for(int i=1; i<hougeki.api_at_list.Length; i++)
+            for (int i = 1; i < hougeki.api_at_list.Length; i++)
             {
                 int at = hougeki.api_at_list[i];
                 if (at == -1) continue;
@@ -344,7 +329,7 @@ namespace WoFlagship.KancolleBattle
                 at = at - 1;//attacker
                 int df = (hougeki.api_df_list[i] as JArray)[0].ToObject<int>() - 1;//defender
                 bool fromEnemy;
-                if(hougeki.api_at_eflag != null)
+                if (hougeki.api_at_eflag != null)
                 {
                     fromEnemy = hougeki.api_at_eflag[i] == 1;
                 }
@@ -370,7 +355,7 @@ namespace WoFlagship.KancolleBattle
                 var attackType = isNight ? NightAttackTypeMap[hougeki.api_sp_list[i]] : DayAttackTypeMap[hougeki.api_at_type[i]];
                 List<int> damage = new List<int>();
                 int damageTotal = 0;
-                foreach(double dmg_i in (hougeki.api_damage[i] as JArray).ToObject<double[]>())
+                foreach (double dmg_i in (hougeki.api_damage[i] as JArray).ToObject<double[]>())
                 {
                     double dmg = dmg_i;
                     if (dmg < 0)
@@ -381,22 +366,12 @@ namespace WoFlagship.KancolleBattle
                 }
 
                 List<HitTypes> hits = new List<HitTypes>();
-                foreach(int cl in (hougeki.api_cl_list[i] as JArray).ToObject<int[]>())
+                foreach (int cl in (hougeki.api_cl_list[i] as JArray).ToObject<int[]>())
                 {
                     hits.Add(cl == 2 ? HitTypes.Critical : (cl == 1 ? HitTypes.Hit : HitTypes.Miss));
                 }
                 toShip.Damage(damageTotal);
-                attacks.Add(new Attack()
-                {
-                    AttackType = attackType,
-                    FromShip = fromShip,
-                    ToShip = toShip,
-                    Damages = damage.ToArray(),
-                    Hits = hits.ToArray(),
-                    FromHP = toShip.FromHP,
-                    ToHp = toShip.ToHP,
-                    ItemUse = toShip.ItemUsed
-                });
+                attacks.Add(new Attack(attackType, fromShip, toShip, damage.ToArray(), hits.ToArray()));
             }
             return new Stage()
             {
@@ -412,7 +387,7 @@ namespace WoFlagship.KancolleBattle
                 return null;
             Fleet _oursFleet = fleetType == 0 ? mainFleet : escortFleet;
             Fleet _enemyFleet = enemyType == 0 ? enemyFleet : enemyEscort;
-            if(packet.api_active_deck != null)
+            if (packet.api_active_deck != null)
             {
                 if (packet.api_active_deck[0] == 1)
                 {
@@ -438,7 +413,7 @@ namespace WoFlagship.KancolleBattle
 
         public static Stage SimulateSupport(Fleet enemyFleet, Fleet enemyEscort, dynamic support, Nullable<int> flag)
         {
-            if(support == null || flag == null)
+            if (support == null || flag == null)
             {
                 return null;
             }
@@ -451,7 +426,7 @@ namespace WoFlagship.KancolleBattle
                     Attacks = stage.Attacks,
                     SubType = SupportTypeMap[(int)flag]
                 };
-               
+
             }
             if (flag == 2 || flag == 3)
             {
@@ -473,16 +448,7 @@ namespace WoFlagship.KancolleBattle
                     if (hit == HitTypes.Miss)
                         continue;
                     toShip.Damage(damage);
-                    attacks.Add(new Attack()
-                    {
-                        AttackType = AttackTypes.Normal,
-                        ToShip = toShip,
-                        Damages = new int[] { damage },
-                        Hits = new HitTypes[] { hit },
-                        FromHP = toShip.FromHP,
-                        ToHp = toShip.ToHP,
-                        ItemUse = toShip.ItemUsed
-                    });
+                    attacks.Add(new Attack( AttackTypes.Normal, null, toShip,new int[] { damage }, new HitTypes[] { hit} ));
                 }
                 return new Stage()
                 {
@@ -500,7 +466,7 @@ namespace WoFlagship.KancolleBattle
             stage.StageType = StageTypes.LandBase;
             return stage;
         }
- 
+
         //未完成！！！！！！
         public static Stage GetEngagementStage(api_battle_data packet)
         {
@@ -508,15 +474,6 @@ namespace WoFlagship.KancolleBattle
             {
                 StageType = StageTypes.Engagement
             };
-        }
-    }
-
-    static class ListExtensions
-    {
-        public static void AddIfNotNull<T>(this List<T> list, T item) where T : class
-        {
-            if (item != null)
-                list.Add(item);
         }
     }
 }

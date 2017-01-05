@@ -20,8 +20,8 @@ using WoFlagship.Logger;
 using WoFlagship.Plugins;
 using WoFlagship.ToolWindows;
 using WoFlagship.ViewModels;
-using WoFlagship.KancolleBattle;
 using WoFlagship.KancolleCore.Navigation;
+using WoFlagship.KancolleCore.KancolleBattle;
 
 namespace WoFlagship
 {
@@ -55,12 +55,12 @@ namespace WoFlagship
 
         private StreamWriter sw = new StreamWriter("outputAPI.txt");
 
-        private KancolleGameContext gameContext = new KancolleGameContext();
-        
+        private readonly KancolleGameContext gameContext = new KancolleGameContext();
+        private readonly KancolleBattleContext battleContext;
 
         private INavigator navigator = new SimpleNavigator();
         private KancolleActionExecutor actionExecutor;
-        private KancolleBattleContext battleContext = new KancolleBattleContext();
+       
 
 
         private KancolleTaskExecutor taskExecutor;
@@ -69,6 +69,8 @@ namespace WoFlagship
         {
             //初始化事件
             InitContextEvent();
+
+            battleContext = new KancolleBattleContext(gameContext.GameData);
 
             LogFactory.SystemLogger.Info("程序启动");
             pluginManager.OnPluginsLoaded += PluginManager_OnPluginsLoaded;
@@ -215,7 +217,7 @@ namespace WoFlagship
 
             gameContext.OnGameDataUpdated += e =>
             {
-                battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
+                //battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
             };
         }
 
@@ -230,7 +232,7 @@ namespace WoFlagship
             }
         }
 
-        private void BattleContext_OnBattleHappened(KancolleBattle.KancolleBattle obj)
+        private void BattleContext_OnBattleHappened(Battle obj)
         {
             Dispatcher.Invoke(new Action(() => Txt_Battle.Text = obj.ToString()));
         }
