@@ -29,6 +29,11 @@ namespace WoFlagship.KancolleCore
         private readonly KancolleGameData gameData = new KancolleGameData();
         public KancolleGameData GameData { get { return gameData; } }
 
+        public KancolleGameContext()
+        {
+            UpdateQuestInfo();
+        }
+
         public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
         {
             var data = JsonConvert.DeserializeObject(response) as JObject;

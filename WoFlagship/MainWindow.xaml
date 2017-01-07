@@ -159,7 +159,7 @@
                                 <TextBlock Name="Txt_Navigation" Text="asdfasfd" Margin="5"/>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Button Width="60" Content="编成" Height="30" Click="Btn_AIManual_Organize_Click"/>
-                                    <Label Content="舰队" VerticalAlignment="Center"/>
+                                    <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Organize_Deck"/>
                                     <Label Content="舰娘(ownedId)" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     <TextBox Width="30" Text="1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship1"/>
@@ -171,14 +171,14 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Button Content="补给" Width="60" Height="30"  Click="Btn_AIManual_Supply_Click"/>
-                                    <Label Content="舰队" VerticalAlignment="Center"/>
+                                    <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Supply_Deck"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Button Content="出击" Width="60" Height="30"  Click="Btn_AIManual_Map_Click"/>
-                                    <Label Content="舰队" VerticalAlignment="Center"/>
+                                    <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Map_Deck"/>
-                                    <Label Content="地图海域" VerticalAlignment="Center"/>
+                                    <Label Content="地图海域"  Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Map_Area"/>
                                     <Label Content="-" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Map_Map"/>

@@ -34,20 +34,20 @@ namespace WoFlagship.KancolleCore.Navigation
         /// <summary>
         /// 舰队号，从0开始
         /// </summary>
-        public int OrganizedFleet { get; private set; }
+        public int OrganizedDeck { get; private set; }
         /// <summary>
         /// 长度必须为6
         /// </summary>
         public int[] Ships { get; private set; }
 
         /// <summary>
-        /// 编成，ships的id是ownship的id
+        /// 编成，organizeFleet从0开始，ships的id是ownship的id
         /// </summary>
-        /// <param name="organizeFleet">编成的舰队号，从0开始算</param>
+        /// <param name="organizeDeck">编成的舰队号，从0开始算</param>
         /// <param name="ships">舰队船的id，ownShip的id，-1表示没有船</param>
-        public OrganizeTask(int organizeFleet, int[] ships)
+        public OrganizeTask(int organizeDeck, int[] ships)
         {
-            OrganizedFleet = organizeFleet;
+            OrganizedDeck = organizeDeck;
             Ships = ships;
         }
     }
@@ -56,6 +56,10 @@ namespace WoFlagship.KancolleCore.Navigation
     {
         public int SupplyDeck { get; private set; }
 
+        /// <summary>
+        /// 补给，supplyDeck从0开始
+        /// </summary>
+        /// <param name="supplyDeck">补给舰队，从0开始</param>
         public SupplyTask(int supplyDeck)
         {
             SupplyDeck = supplyDeck;

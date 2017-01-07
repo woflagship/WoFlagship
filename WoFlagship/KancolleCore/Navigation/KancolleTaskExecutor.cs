@@ -165,7 +165,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
         private bool Organize(OrganizeTask task)
         {
-            int deck = task.OrganizedFleet;
+            int deck = task.OrganizedDeck;
             if (deck < 0 || deck > 3)
                 throw new ArgumentOutOfRangeException("编成OrganizedDeck只能是0-3");
             

@@ -21,7 +21,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Organize_Ship5.Text),
                 int.Parse(Txt_AIManual_Organize_Ship6.Text),
             };
-            OrganizeTask task = new OrganizeTask(deck, ships);
+            OrganizeTask task = new OrganizeTask(deck-1, ships);
             taskExecutor.EnqueueTask(task);
 
         }
@@ -29,7 +29,7 @@ namespace WoFlagship
         private void Btn_AIManual_Supply_Click(object sender, RoutedEventArgs e)
         {
             int supplyDeck = int.Parse(Txt_AIManual_Supply_Deck.Text);
-            SupplyTask task = new SupplyTask(0);
+            SupplyTask task = new SupplyTask(supplyDeck-1);
             taskExecutor.EnqueueTask(task);
         }
 
@@ -38,7 +38,7 @@ namespace WoFlagship
             int area = int.Parse(Txt_AIManual_Map_Area.Text);
             int map = int.Parse(Txt_AIManual_Map_Map.Text);
             int deck = int.Parse(Txt_AIManual_Map_Deck.Text);
-            MapTask task = new MapTask(deck, area * 10 + map);
+            MapTask task = new MapTask(deck-1, area * 10 + map);
             taskExecutor.EnqueueTask(task);
         }
 
