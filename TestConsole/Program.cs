@@ -44,6 +44,16 @@ namespace TestConsole
         }
     }
 
+    class Test
+    {
+        public event Action<int> TestAction;
+
+        public void invoke()
+        {
+            TestAction?.InvokeAll(0);
+        }
+    }
+
    
 
     class TestProvider : IFormatProvider, ICustomFormatter
@@ -201,19 +211,15 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-
-            ReadOnlyArray2<int> r = new ReadOnlyArray2<int>(dd);
-            var rr = r.ToArray();
-            foreach(var ar in r)
-            {
-                Console.WriteLine(ar);
- 
-            }
-            foreach (var ar in rr)
-            {
-                Console.WriteLine(ar);
-            }
+            Test t = new Test();
+            t.TestAction += ttt;
+            t.invoke();
             Console.Read();
+        }
+
+        static void ttt(int i)
+        {
+            Console.WriteLine(i);
         }
 
        

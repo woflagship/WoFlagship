@@ -207,7 +207,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
 
             var sortedShip = (from s in GameData.OwnedShipDictionary.Values
-                             orderby s.Id descending
+                             orderby s.No descending
                              select s).ToArray();//按照降序排列，和new的顺序相同
             
             //依次变更
@@ -277,11 +277,11 @@ namespace WoFlagship.KancolleCore.Navigation
             return true;
         }
 
-        private int indexOf(KancolleShip[] shipArray, int idToFind)
+        private int indexOf(KancolleShip[] shipArray, int noToFind)
         {
             for(int i=0; i<shipArray.Length; i++)
             {
-                if (shipArray[i].Id == idToFind)
+                if (shipArray[i].No == noToFind)
                     return i;
             }
             return -1;

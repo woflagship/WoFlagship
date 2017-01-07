@@ -51,7 +51,7 @@ namespace WoFlagship.Plugins.ShipInfo
                 var model = new ShipViewModel()
                 {
                     Name = ship.Name,
-                    Id = ship.ShipId,
+                    No = ship.ShipId,
                    
                     TypeId = ship.Type,
                     Type = ship.Type > KancolleAPIs.ShipTypeText.Length ? ship.Type + "" : KancolleAPIs.ShipTypeText[ship.Type - 1],
@@ -72,7 +72,7 @@ namespace WoFlagship.Plugins.ShipInfo
                 {
                     Name = shipData.Name,
                     Level = ship.Level.ToString(),
-                    Id = ship.Id,
+                    No = ship.No,
                     ShipId = ship.ShipId,
                     TypeId = shipData.Type,
                     Type = shipData.Type >= KancolleAPIs.ShipTypeText.Length ? shipData.Type + "" : KancolleAPIs.ShipTypeText[shipData.Type - 1],
@@ -140,8 +140,8 @@ namespace WoFlagship.Plugins.ShipInfo
         private string _level;
         public string Level { get { return _level; } set { _level = value; OnPropertyChanged(); } }
 
-        private int _id;
-        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+        private int _no;
+        public int No { get { return _no; } set { _no = value; OnPropertyChanged(); } }
 
         private int _shipId;
         public int ShipId { get { return _shipId; } set { _shipId = value; OnPropertyChanged(); } }

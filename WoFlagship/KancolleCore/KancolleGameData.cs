@@ -47,7 +47,7 @@ namespace WoFlagship.KancolleCore
         public KancolleShipData GetShip(KancolleShip ownedShip)
         {
             KancolleShipData shipData;
-            if (ShipDataDictionary.TryGetValue(ownedShip.Id, out shipData))
+            if (ShipDataDictionary.TryGetValue(ownedShip.No, out shipData))
                 return shipData;
             return null;
         }
@@ -73,7 +73,7 @@ namespace WoFlagship.KancolleCore
         public int GetShipType(KancolleShip ownedShip)
         {
             KancolleShipData shipData;
-            if (ShipDataDictionary.TryGetValue(ownedShip.Id, out shipData))
+            if (ShipDataDictionary.TryGetValue(ownedShip.No, out shipData))
                 return shipData.Type;
             return -1;
         }
@@ -99,7 +99,7 @@ namespace WoFlagship.KancolleCore
         public string GetShipName(KancolleShip ownedShip)
         {
             KancolleShipData shipData;
-            if (ShipDataDictionary.TryGetValue(ownedShip.Id, out shipData))
+            if (ShipDataDictionary.TryGetValue(ownedShip.No, out shipData))
                 return shipData.Name;
             return null;
         }
@@ -178,9 +178,9 @@ namespace WoFlagship.KancolleCore
     public class KancolleShip
     {
         /// <summary>
-        /// OwnedId，按照船的获得顺序生成
+        /// OwnedNo，按照船的获得顺序生成
         /// </summary>
-        public int Id { get; private set; }
+        public int No { get; private set; }
 
         /// <summary>
         /// 数据库中的船的id
@@ -258,7 +258,7 @@ namespace WoFlagship.KancolleCore
 
         public KancolleShip(api_ship_item ship)
         {
-            Id = ship.api_id;
+            No = ship.api_id;
             ShipId = ship.api_ship_id;
             Level = ship.api_lv;
             Condition = ship.api_cond;
@@ -513,7 +513,10 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleSlotItem
     {
-        public int Id { get; private set; }
+        /// <summary>
+        /// 装备顺序编号
+        /// </summary>
+        public int No { get; private set; }
 
         /// <summary>
         /// 对应到装备数据库的id
@@ -526,7 +529,7 @@ namespace WoFlagship.KancolleCore
 
         public KancolleSlotItem(api_slot_item_item slot_item_item)
         {
-            Id = slot_item_item.api_id;
+            No = slot_item_item.api_id;
             SlotItemId = slot_item_item.api_slotitem_id;
             Locked = slot_item_item.api_locked != 0;
             Level = slot_item_item.api_level;

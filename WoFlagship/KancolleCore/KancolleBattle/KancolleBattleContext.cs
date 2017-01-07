@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using WoFlagship.Utils;
 
 namespace WoFlagship.KancolleCore.KancolleBattle
 {
     public class KancolleBattleContext : IKancolleAPIReceiver
     {
         public event Action<Battle> OnBattleHappened;
+        public event Action<Battle, BattleResult> OnBattleResultReceived;
 
         public KancolleGameData GameData { get; private set; }
 
@@ -67,9 +70,29 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                     //未完成！！！
                     break;
 
+                //战斗
                 case "api_req_sortie/battle":
                     CurrentBattle.Simulate(api_object.ToObject<api_battle_data>());
-                    OnBattleHappened?.Invoke(CurrentBattle);
+                    try
+                    {
+                        OnBattleHappened?.InvokeAll(CurrentBattle);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("OnBattleHappened 错误！\n"+ex.Message +"\n"+ex.StackTrace);
+                    }
+                    break;
+
+                //战斗结果
+                case "api_req_sortie/battleresult":
+                    try
+                    {
+                        OnBattleResultReceived?.InvokeAll(CurrentBattle, new BattleResult(api_object.ToObject<api_battleresult_data>()));
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show("OnBattleResultReceived 错误！\n" + ex.Message + "\n" + ex.StackTrace);
+                    }
                     break;
 
             }

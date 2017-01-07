@@ -638,7 +638,7 @@ namespace WoFlagship.KancolleCore
     public class api_kouku
     {
         //自军，敌军的舰载机発艦舰艇座次排列,[[n],[n]]的二维数组方式
-        public int[,] api_plane_from { get; set; }
+        public int[][] api_plane_from { get; set; }
         //制空权关联的参加舰载机和击落状况
         public api_plane_stage api_stage1 { get; set; }
         //航空雷击和航空轰炸的参加舰载机击落状况

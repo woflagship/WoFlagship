@@ -8,37 +8,26 @@ using System.Threading.Tasks;
 
 namespace WoFlagship.KancolleCore.KancolleBattle
 {
-    public class Fleet : IList<Ship>
+    public class Fleet : IReadOnlyCollection<Ship>
     {
 
         //public int CombinedFlag { get; set; }
-        private List<Ship> mainShips = new List<Ship>();
+        private List<Ship> ships = new List<Ship>();
 
         public int Count
         {
             get
             {
-                throw new NotImplementedException();
+                return ships.Count;
             }
         }
 
-        public bool IsReadOnly
-        {
-            get
-            {
-                return false;
-            }
-        }
 
         public Ship this[int index]
         {
             get
             {
-                return mainShips[index];
-            }
-            set
-            {
-                mainShips[index] = value;
+                return ships[index];
             }
         }
 
@@ -60,11 +49,11 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 var rawShip = rawFleet[i];
                 if(rawShip != null)
                 {
-                    this.Add(new Ship(rawShip, ShipOwner.Friend, fleetOffset + i + 1));
+                    ships.Add(new Ship(rawShip, ShipOwner.Friend, fleetOffset + i + 1));
                 }
                 else
                 {
-                    this.Add(null);
+                    ships.Add(null);
                 }
             }
         
@@ -94,58 +83,18 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 {
                     ship = new Ship(id.ToObject<int>(), api_maxhps[i + 6], api_nowhps[i + 6], slots, shipOwner, fleetOffset + i);
                 }
-                this.Add(ship);
+                ships.Add(ship);
             }
-        }
-
-        public void Add(Ship ship)
-        {
-            mainShips.Add(ship);
-        }
-
-        public int IndexOf(Ship ship)
-        {
-            return mainShips.IndexOf(ship);
-        }
-
-        public void Insert(int index, Ship ship)
-        {
-            mainShips.Insert(index, ship);
-        }
-
-        public void RemoveAt(int index)
-        {
-            mainShips.RemoveAt(index);
-        }
-
-        public void Clear()
-        {
-            mainShips.Clear();
-        }
-
-        public bool Contains(Ship item)
-        {
-            return mainShips.Contains(item);
-        }
-
-        public void CopyTo(Ship[] array, int arrayIndex)
-        {
-            mainShips.CopyTo(array, arrayIndex);
-        }
-
-        public bool Remove(Ship item)
-        {
-            return mainShips.Remove(item);
         }
 
         public IEnumerator<Ship> GetEnumerator()
         {
-            return mainShips.GetEnumerator();
+            return ships.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return mainShips.GetEnumerator();
+            return ships.GetEnumerator();
         }
     }
 }

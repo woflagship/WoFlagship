@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
         public int NowHP { get; private set; }
         public int FromHP { get; private set; }
         public int ToHP { get; private set; }
-        public int[] Items { get; private set; }
+        public ReadOnlyCollection<int> Items { get; private set; }
         public int ItemUsed { get; private set; } = -1;
         public KancolleShip Raw { get; private set; }
 
@@ -38,7 +39,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             NowHP = rawShip.NowHP;
             FromHP = NowHP;
             ToHP = NowHP;
-            Items = rawShip.Slot;
+            Items = new ReadOnlyCollection<int>(rawShip.Slot);
             ItemUsed = -1;
             
         }
@@ -53,7 +54,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             Position = position;
             MaxHP = maxHp;
             NowHP = nowHp;
-            Items = slots;
+            Items = new ReadOnlyCollection<int>(slots);
         }
 
         private int UseItem()

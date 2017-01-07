@@ -41,8 +41,16 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 foreach (var d in Damages)
                     ds += d;
             }
-            string str = string.Format("Attack:{0}\t从[{1}] 到 [{2}] 伤害[{3}]", AttackType.ToString(), FromShip.Position, ToShip.Position, ds);
-            return str;
+            if (FromShip != null)
+            {
+                string str = string.Format("Attack:{0}\t从[{1}] 到 [{2}] 伤害[{3}]", AttackType.ToString(), FromShip.Position, ToShip.Position, ds);
+                return str;
+            }
+            else
+            {
+                string str = string.Format("Attack:{0}\t对[{1}] 造成伤害[{2}]", AttackType.ToString(), ToShip.Position, ds);
+                return str;
+            }
         }
     }
 }

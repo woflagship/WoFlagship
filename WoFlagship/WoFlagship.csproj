@@ -194,6 +194,7 @@
     <Compile Include="KancolleCore\KancolleBattle\Attack.cs" />
     <Compile Include="KancolleCore\KancolleBattle\AttackTypes.cs" />
     <Compile Include="KancolleCore\KancolleBattle\Battle.cs" />
+    <Compile Include="KancolleCore\KancolleBattle\BattleResult.cs" />
     <Compile Include="KancolleCore\KancolleBattle\BattleTypes.cs" />
     <Compile Include="KancolleCore\KancolleBattle\Fleet.cs" />
     <Compile Include="KancolleCore\KancolleBattle\HitTypes.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="Utils\BehaviorTree\SequenceNode.cs" />
     <Compile Include="Utils\BehaviorTree\ConditionNode.cs" />
     <Compile Include="Utils\BehaviorTree\Invertor.cs" />
+    <Compile Include="Utils\EventExtensions.cs" />
     <Compile Include="Utils\ListExtensions.cs" />
     <Compile Include="Utils\ObservableDictionary.cs" />
     <Compile Include="Utils\ObservaleRangeCollection.cs" />

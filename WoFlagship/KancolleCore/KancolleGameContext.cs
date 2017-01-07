@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Logger;
+using WoFlagship.Utils;
 
 namespace WoFlagship.KancolleCore
 {
@@ -138,8 +139,8 @@ namespace WoFlagship.KancolleCore
                     k => new KancolleShip(k)
                     ));
 
-            OnShipUpdated?.Invoke(this);
-            OnGameDataUpdated?.Invoke(this);
+            OnShipUpdated?.InvokeAll(this);
+            OnGameDataUpdated?.InvokeAll(this);
         }
 
         private void UpdateOwnedMissionDictionary(api_mission_item[] ownedMissionItems)
@@ -160,7 +161,7 @@ namespace WoFlagship.KancolleCore
                 k=>k.api_id,
                 k=>new KancolleMissionData(k)
                 ));
-            OnGameDataUpdated?.Invoke(this);
+            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -172,7 +173,7 @@ namespace WoFlagship.KancolleCore
             if (portData != null)
             {
                 gameData.BasicInfo = new KancolleBasicInfo(portData);
-                OnBasicInfoUpdated?.Invoke(this);
+                OnBasicInfoUpdated?.InvokeAll(this);
             }
         }
 
@@ -201,8 +202,8 @@ namespace WoFlagship.KancolleCore
             }
             gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
             gameData.OwnedShipPlaceArray = new Utils.ReadOnlyArray2<int>(array);
-            OnDeckUpdated?.Invoke(this);
-            OnGameDataUpdated?.Invoke(this);
+            OnDeckUpdated?.InvokeAll(this);
+            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -294,8 +295,8 @@ namespace WoFlagship.KancolleCore
             }
             gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
             gameData.OwnedShipPlaceArray = new Utils.ReadOnlyArray2<int>(array);
-            OnDeckUpdated?.Invoke(this);
-            OnGameDataUpdated?.Invoke(this);
+            OnDeckUpdated?.InvokeAll(this);
+            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -307,8 +308,8 @@ namespace WoFlagship.KancolleCore
             if (materials != null)
             {
                 gameData.Material = new KancolleMaterial(materials);
-                OnMaterialUpdated?.Invoke(this);
-                OnGameDataUpdated?.Invoke(this);
+                OnMaterialUpdated?.InvokeAll(this);
+                OnGameDataUpdated?.InvokeAll(this);
             }
 
         }
@@ -322,8 +323,8 @@ namespace WoFlagship.KancolleCore
             if (materials != null)
             {
                 gameData.Material = new KancolleMaterial(gameData.Material, materials);
-                OnMaterialUpdated?.Invoke(this);
-                OnGameDataUpdated?.Invoke(this);
+                OnMaterialUpdated?.InvokeAll(this);
+                OnGameDataUpdated?.InvokeAll(this);
             }
         }
 
@@ -357,8 +358,8 @@ namespace WoFlagship.KancolleCore
                             dic.Add(quest.api_no, new KancolleQuest(quest));
                     }
                     gameData.QuestDictionary = new ReadOnlyDictionary<int, KancolleQuest>(dic);
-                    OnQuestUpdated?.Invoke(this);
-                    OnGameDataUpdated?.Invoke(this);
+                    OnQuestUpdated?.InvokeAll(this);
+                    OnGameDataUpdated?.InvokeAll(this);
                 }
             }
         }

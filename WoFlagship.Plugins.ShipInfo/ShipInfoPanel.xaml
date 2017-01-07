@@ -16,7 +16,7 @@
                 <DataGrid Name="Dg_Ships" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding}"
                   Loaded="Dg_Ships_Loaded">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Width="40" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="No" Width="40" Binding="{Binding No}"/>
                         <DataGridTextColumn Header="类型" Width="80" Binding="{Binding Type}"/>
                         <DataGridTextColumn Header="等级" Width="40" Binding="{Binding Level}"/>
                         <DataGridTextColumn Header="舰娘" Width="80" Binding="{Binding Name}"/>

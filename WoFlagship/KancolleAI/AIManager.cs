@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using WoFlagship.Logger;
+using WoFlagship.Utils;
 
 namespace WoFlagship.KancolleAI
 {
@@ -81,8 +82,7 @@ namespace WoFlagship.KancolleAI
                 }
             }
             LogFactory.SystemLogger.Info($"AI载入完毕，共载入{AIs.Count}个AI");
-            OnAILoaded?.Invoke(AIs);
-
+            OnAILoaded?.InvokeAll(AIs);
         }
     }
 }

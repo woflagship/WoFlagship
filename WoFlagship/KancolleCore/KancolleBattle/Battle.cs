@@ -45,10 +45,10 @@ namespace WoFlagship.KancolleCore.KancolleBattle
        // public int[] Map { get; private set; }
         public int FleetType { get; private set; }
         public int EnemyType { get; private set; }
-        public Fleet mainFleet { get; private set; }
-        public Fleet escortFleet { get; private set; }
-        public Fleet enemyFleet { get; private set; }
-        public Fleet enemyEscort { get; private set; }
+        public Fleet MainFleet { get; private set; }
+        public Fleet EscortFleet { get; private set; }
+        public Fleet EnemyFleet { get; private set; }
+        public Fleet EnemyEscort { get; private set; }
         public Fleet SupportFleet { get; private set; }
         public List<Stage> Stages { get; private set; } = new List<Stage>();
 
@@ -62,8 +62,8 @@ namespace WoFlagship.KancolleCore.KancolleBattle
         /// <param name="supportFleet">支援舰队，无支援舰队为null</param>
         public Battle(Fleet mainFleet, Fleet escortFleet, int fleetType, Fleet supportFleet)
         {
-            this.mainFleet = mainFleet;
-            this.escortFleet = escortFleet;
+            this.MainFleet = mainFleet;
+            this.EscortFleet = escortFleet;
             this.FleetType = fleetType;
             this.SupportFleet = supportFleet;
         }
@@ -80,11 +80,11 @@ namespace WoFlagship.KancolleCore.KancolleBattle
 
         public void Simulate(api_battle_data packet)
         {
-            if (enemyFleet == null)
+            if (EnemyFleet == null)
             {
-                enemyFleet = new Fleet(new JArray(packet.api_ship_ke), packet.api_eSlot, packet.api_maxhps, packet.api_nowhps, packet.api_ship_lv, ShipOwner.Enemy, 0);
+                EnemyFleet = new Fleet(new JArray(packet.api_ship_ke), packet.api_eSlot, packet.api_maxhps, packet.api_nowhps, packet.api_ship_lv, ShipOwner.Enemy, 0);
                 if (packet.api_ship_ke_combined != null)
-                    enemyEscort = new Fleet(new JArray(packet.api_ship_ke_combined), packet.api_eSlot_combined, packet.api_maxhps_combined, packet.api_nowhps_combined, packet.api_ship_lv_combined, ShipOwner.Enemy, 6);
+                    EnemyEscort = new Fleet(new JArray(packet.api_ship_ke_combined), packet.api_eSlot_combined, packet.api_maxhps_combined, packet.api_nowhps_combined, packet.api_ship_lv_combined, ShipOwner.Enemy, 6);
             }
             //以下两行在KancolleBattleManager中实现
             // HACK: Only enemy carrier task force now.
@@ -98,15 +98,15 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             {
                 foreach (api_kouku kouku in packet.api_air_base_attack)
                 {
-                    Stages.Add(SimulateLandBase(enemyFleet, enemyEscort, kouku));
+                    Stages.Add(SimulateLandBase(EnemyFleet, EnemyEscort, kouku));
                 }
             }
             //Aerial Combat
-            Stages.AddIfNotNull(SimulateAerial(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_kouku));
+            Stages.AddIfNotNull(SimulateAerial(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_kouku));
             // Aerial Combat 2nd
-            Stages.AddIfNotNull(SimulateAerial(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_kouku2));
+            Stages.AddIfNotNull(SimulateAerial(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_kouku2));
             // Expedition Support Fire
-            Stage stage_support = SimulateSupport(enemyFleet, enemyEscort, packet.api_support_info, packet.api_support_flag);
+            Stage stage_support = SimulateSupport(EnemyFleet, EnemyEscort, packet.api_support_info, packet.api_support_flag);
             Stages.AddIfNotNull(stage_support);
 
             //Normal Fleet
@@ -115,30 +115,30 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 if (EnemyType == 0)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, null, enemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, null, EnemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
                     //Shelling(Main), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki1));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki1));
                     // Shelling (Main), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki2));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki2));
                     //Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, null, enemyFleet, null, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, null, EnemyFleet, null, packet.api_raigeki));
                 }
                 if (EnemyType == 1)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, enemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, null, enemyFleet, enemyEscort, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_opening_atack, StageTypes.SOpening));
                     // Shelling (Escort)
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, enemyEscort, packet.api_hougeki1));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_hougeki1));
                     // Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, null, enemyFleet, enemyEscort, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_raigeki));
                     // Shelling (Any), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, enemyEscort, packet.api_hougeki2));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_hougeki2));
                     // Shelling (Any), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, enemyEscort, packet.api_hougeki3));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, EnemyEscort, packet.api_hougeki3));
                 }
             }
 
@@ -148,32 +148,32 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 if (EnemyType == 0)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(EscortFleet, null, EnemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(escortFleet, null, enemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(EscortFleet, null, EnemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
                     // Shelling (Main), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki1, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki1, StageTypes.SMain));
                     // Shelling (Main), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki2, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki2, StageTypes.SMain));
                     // Shelling (Escort)
-                    Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_hougeki3, StageTypes.SEscort));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(EscortFleet, null, EnemyFleet, null, packet.api_hougeki3, StageTypes.SEscort));
                     // Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(escortFleet, null, enemyFleet, null, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(EscortFleet, null, EnemyFleet, null, packet.api_raigeki));
                 }
                 if (EnemyType == 1)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_opening_atack, StageTypes.SOpening));
                     // Shelling (Main), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki1, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki1, StageTypes.SMain));
                     // Shelling (Main), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki2, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki2, StageTypes.SMain));
                     // Shelling (Escort)
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki3, StageTypes.SEscort));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki3, StageTypes.SEscort));
                     // Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_raigeki));
                 }
             }
 
@@ -184,33 +184,33 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                 if (EnemyType == 0)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(EscortFleet, null, EnemyFleet, null, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(escortFleet, null, enemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(EscortFleet, null, EnemyFleet, null, packet.api_opening_atack, StageTypes.SOpening));
                     // Shelling (Escort)
-                    Stages.AddIfNotNull((Stage)SimulateShelling(escortFleet, null, enemyFleet, null, packet.api_hougeki1, StageTypes.SEscort));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(EscortFleet, null, EnemyFleet, null, packet.api_hougeki1, StageTypes.SEscort));
                     // Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(escortFleet, null, enemyFleet, null, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(EscortFleet, null, EnemyFleet, null, packet.api_raigeki));
                     // Shelling (Main), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki2, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki2, StageTypes.SMain));
                     // Shelling (Main), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, null, enemyFleet, null, packet.api_hougeki3, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, null, EnemyFleet, null, packet.api_hougeki3, StageTypes.SMain));
 
                 }
                 if (EnemyType == 1)
                 {
                     // Opening Anti-Sub
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_opening_taisen, StageTypes.SOpening));
                     //Opening Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_opening_atack, StageTypes.SOpening));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_opening_atack, StageTypes.SOpening));
                     // Shelling (Main), 1st
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki1, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki1, StageTypes.SMain));
                     // Shelling (Escort)
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki2, StageTypes.SEscort));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki2, StageTypes.SEscort));
                     // Closing Torpedo Salvo
-                    Stages.AddIfNotNull((Stage)SimulateTorpedo(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_raigeki));
+                    Stages.AddIfNotNull((Stage)SimulateTorpedo(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_raigeki));
                     // Shelling (Main), 2nd
-                    Stages.AddIfNotNull((Stage)SimulateShelling(mainFleet, escortFleet, enemyFleet, enemyEscort, packet.api_hougeki3, StageTypes.SMain));
+                    Stages.AddIfNotNull((Stage)SimulateShelling(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, packet.api_hougeki3, StageTypes.SMain));
 
                 }
             }
@@ -221,12 +221,12 @@ namespace WoFlagship.KancolleCore.KancolleBattle
 
 
             // Night Combat
-            Stages.AddIfNotNull((Stage)SimulateNight(FleetType, mainFleet, escortFleet, EnemyType, enemyFleet, enemyEscort, packet.api_hougeki, packet));
+            Stages.AddIfNotNull((Stage)SimulateNight(FleetType, MainFleet, EscortFleet, EnemyType, EnemyFleet, EnemyEscort, packet.api_hougeki, packet));
         }
 
         private Stage simulateAerial(api_kouku kouku)
         {
-            return SimulateAerial(mainFleet, escortFleet, enemyFleet, enemyEscort, kouku);
+            return SimulateAerial(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, kouku);
         }
 
         public static Stage SimulateAerial(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_kouku kouku)

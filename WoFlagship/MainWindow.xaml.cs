@@ -234,7 +234,43 @@ namespace WoFlagship
 
         private void BattleContext_OnBattleHappened(Battle obj)
         {
-            Dispatcher.Invoke(new Action(() => Txt_Battle.Text = obj.ToString()));
+            string battleText = obj.ToString();
+
+            battleText += "我方第一舰队最终状态\n";
+            foreach(var ship in obj.MainFleet)
+            {
+                if (ship != null && ship.ShipId > 0)
+                    battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+            }
+
+            if(obj.EscortFleet != null)
+            {
+                battleText += "我方第二舰队最终状态\n";
+                foreach (var ship in obj.EscortFleet)
+                {
+                    if (ship != null && ship.ShipId > 0)
+                        battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                }
+            }
+
+            battleText += "敌方第一舰队最终状态\n";
+            foreach (var ship in obj.EnemyFleet)
+            {
+                if (ship != null && ship.ShipId>0)
+                    battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+            }
+
+            if (obj.EnemyEscort != null)
+            {
+                battleText += "敌方第二舰队最终状态\n";
+                foreach (var ship in obj.EnemyEscort)
+                {
+                    if (ship != null && ship.ShipId > 0)
+                        battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                }
+            }
+
+            Dispatcher.Invoke(new Action(() => Txt_Battle.Text = battleText));
         }
 
         private void PluginManager_OnPluginsLoaded(List<IPlugin> obj)
