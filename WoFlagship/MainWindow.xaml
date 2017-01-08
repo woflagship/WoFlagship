@@ -162,12 +162,19 @@
                                     <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Organize_Deck"/>
                                     <Label Content="舰娘(ownedId)" Margin="10,0,0,0" VerticalAlignment="Center"/>
-                                    <TextBox Width="30" Text="1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship1"/>
-                                    <TextBox Width="30" Text="2" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship2"/>
-                                    <TextBox Width="30" Text="3" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship3"/>
-                                    <TextBox Width="30" Text="4" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship4"/>
-                                    <TextBox Width="30" Text="5" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship5"/>
-                                    <TextBox Width="30" Text="6" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship6"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship1" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship2" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship3" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship4" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship5" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship6" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
+                                    <Label Content="舰娘名" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship1_name" IsReadOnly="True"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship2_name" IsReadOnly="True"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship3_name" IsReadOnly="True"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship4_name" IsReadOnly="True"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship5_name" IsReadOnly="True"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship6_name" IsReadOnly="True"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Button Content="补给" Width="60" Height="30"  Click="Btn_AIManual_Supply_Click"/>

@@ -56,6 +56,9 @@ namespace WoFlagship.KancolleCore
                     UpdatePort(port_data);
                     UpdateDeck(port_data.api_deck_port);
                     break;
+                case "api_req_hensei/change"://舰队编成修改
+                    UpdateDeck(requestInfo.Data);
+                    break;
                 case "api_get_member/material":
                     var material_data = api_object.ToObject<api_material_item[]>();
                     UpdateMaterial(material_data);
@@ -212,7 +215,7 @@ namespace WoFlagship.KancolleCore
         }
 
         /// <summary>
-        /// 当改变船的编成位置时更新deck
+        /// 当改变船的编成位置时更新deck;api_req_hensei/change时调用
         /// </summary>
         /// <param name="shipChangePostData"></param>
         private void UpdateDeck(Dictionary<string, string> shipChangePostData)
@@ -221,40 +224,28 @@ namespace WoFlagship.KancolleCore
             int deck_index = api_id - 1;
             int api_ship_id = int.Parse(shipChangePostData["api_ship_id"]);
             int api_ship_idx = int.Parse(shipChangePostData["api_ship_idx"]);
-            var dic = gameData.OwnedShipPlaceDictionary.ToDictionary(k => k.Key, k => k.Value);
             var array = gameData.OwnedShipPlaceArray.ToArray();
             if (api_ship_id > 0)//添加
             {
                 var ship = gameData.OwnedShipDictionary[api_ship_id];
 
                 //交换自己的位置和目标位置
-                if (dic.ContainsKey(api_ship_id))//本来就在编队中
+                if (gameData.OwnedShipPlaceDictionary.ContainsKey(api_ship_id))//本来就在编队中
                 {
-                    var place = dic[api_ship_id];//本来的位置
-                    int dstShip = gameData.OwnedShipPlaceArray[deck_index, api_ship_idx];
+                    var place = gameData.OwnedShipPlaceDictionary[api_ship_id];//本来的位置
+                    int dstShip = gameData.OwnedShipPlaceArray[deck_index, api_ship_idx];//目标位置的船
                     if (dstShip == -1) //目标位置为空
                     {
                         //直接添加
                         array[deck_index, api_ship_idx] = api_ship_id;
-                        dic[api_ship_id] = new Tuple<int, int>(deck_index, api_ship_idx);
                         //原位置清空      
-                        int i = 0;
-                        for (i = place.Item2; i < array.GetLength(1) - 1; i++)
-                        {
-                            int nextShipId = gameData.OwnedShipPlaceArray[place.Item1, i + 1];
-                            if (nextShipId > 0)
-                                dic[nextShipId] = new Tuple<int, int>(place.Item1, i);
-                            array[place.Item1, i] = nextShipId;
-                        }
-                        array[place.Item1, i] = -1;
+                        array[place.Item1, place.Item2] = -1;
                     }
                     else//目标位置有舰娘
                     {
                         //交换
                         array[deck_index, api_ship_idx] = api_ship_id;
                         array[place.Item1, place.Item2] = dstShip;
-                        dic[api_ship_id] = new Tuple<int, int>(deck_index, api_ship_idx);
-                        dic[dstShip] = new Tuple<int, int>(place.Item1, place.Item2);
                     }
                 }
                 else//本来不在编队中
@@ -264,41 +255,53 @@ namespace WoFlagship.KancolleCore
                     {
                         //直接添加
                         array[deck_index, api_ship_idx] = api_ship_id;
-                        dic.Add(api_ship_id, new Tuple<int, int>(deck_index, api_ship_idx));
                     }
                     else//目标位置有舰娘
                     {
                         //交换
                         array[deck_index, api_ship_idx] = api_ship_id;
-                        dic.Add(api_ship_id, new Tuple<int, int>(deck_index, api_ship_idx));
-                        dic.Remove(dstShip);
-
                     }
                 }
             }
             else if (api_ship_id == -1)//移除
             {
-                int i;
-                dic.Remove(gameData.OwnedShipPlaceArray[deck_index, api_ship_idx]);
-                for (i = api_ship_idx; i < array.GetLength(1) - 1; i++)
-                {//后面的向前补充
-                    int nextShipId = gameData.OwnedShipPlaceArray[deck_index, i + 1];
-                    if (nextShipId > 0)
-                        dic[nextShipId] = new Tuple<int, int>(deck_index, i);
-                    array[deck_index, i] = nextShipId;
-                }
-                array[deck_index, i] = -1;
+                array[deck_index, api_ship_idx] = -1;
 
             }
             else if (api_ship_id == -2)//移除旗舰外所有舰船
             {
                 for (int i = 1; i < array.GetLength(1); i++)
                 {
-                    dic.Remove(gameData.OwnedShipPlaceArray[deck_index, i]);
                     array[deck_index, i] = -1;
                 }
             }
-            gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
+
+            //所有中间为空的船位都需要向前合并
+            for(int i=0; i< array.GetLength(0); i++)
+            {
+                int realPlace = 0;
+                for(int j=0; j< array.GetLength(1); j++)
+                {
+                    if (array[i, j] > 0)
+                        array[i, realPlace++] = array[i, j];
+                }
+                for(; realPlace<array.GetLength(1); realPlace++)
+                {
+                    array[i, realPlace] = -1;
+                }
+            }
+
+            //生成位置检索字典
+            Dictionary<int, Tuple<int, int>> dic = new Dictionary<int, Tuple<int, int>>();
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    if (array[i, j] > 0)
+                        dic.Add(array[i,j], new Tuple<int, int>(i,j));
+                }
+            }
+             gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
             gameData.OwnedShipPlaceArray = new Utils.ReadOnlyArray2<int>(array);
             OnDeckUpdated?.InvokeAll(this);
             OnGameDataUpdated?.InvokeAll(this);

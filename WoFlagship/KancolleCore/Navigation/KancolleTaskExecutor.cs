@@ -209,16 +209,17 @@ namespace WoFlagship.KancolleCore.Navigation
             var sortedShip = (from s in GameData.OwnedShipDictionary.Values
                              orderby s.No descending
                              select s).ToArray();//按照降序排列，和new的顺序相同
-            
+
             //依次变更
-            for(int i=0; i<ships.Length; i++)
+            for (int i = 0; i < ships.Length; i++)
             {
-                if (ships[i] == GameData.OwnedShipPlaceArray[deck, i])
+                int currentShipId = GameData.OwnedShipPlaceArray[deck, i];
+                if (ships[i] == currentShipId)
                     continue;
 
                 if (ships[i] == -1)
                 {
-                    for(int j=i; j<ships.Length; j++)//删除后面的
+                    for (int j = i; j < ships.Length; j++)//删除后面的
                     {
                         if (GameData.OwnedShipPlaceArray[deck, i] == -1)//始终判断第i个
                             break;
@@ -231,7 +232,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     }
                     break;
                 }
-                
+
 
                 //点击变更按钮
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));
@@ -251,9 +252,12 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (index == -1)//没找到
                     return false;
 
-                int page = index / 10;//页数，每页最多可以放10个
-                int page5 = page / 5;//每5页翻一次
-                int pageIn5 = page % 5;
+           
+                int maxPage = sortedShip.Length / 10;//最大的页数
+                int page = index / 10;//所在的页数，每页最多可以放10个
+                Tuple<int, int> pageTurn = getPageTurn(maxPage, page);
+                int page5 = pageTurn.Item1;//每5页翻一次
+                int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
                 int item = index % 10;//每页第几个
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_FirstPage));//转到第1页
                 Thread.Sleep(1000);
@@ -263,8 +267,10 @@ namespace WoFlagship.KancolleCore.Navigation
                     Thread.Sleep(1000);
                 }
 
+                
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Pages[pageIn5]));
                 Thread.Sleep(1000);
+
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_ShipList[item]));
                 Thread.Sleep(500);
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
@@ -287,7 +293,40 @@ namespace WoFlagship.KancolleCore.Navigation
             return -1;
         }
 
-        
+        /// <summary>
+        /// 当最大页数为maxPage时，翻到第page页所需的操作数；所有页数都以0开始计算！
+        /// </summary>
+        /// <param name="maxPage"></param>
+        /// <param name="page"></param>
+        /// <param name="pageStep"></param>
+        /// <returns>item1:每pageStep页翻的次数；item2：翻完pageStep页后剩余的位置</returns>
+        Tuple<int, int> getPageTurn(int maxPage, int page, int pageStep = 5)
+        {
+            //以pageStep为5为例
+            //列表始终包含5页，例如0-4,3-7,8-12
+            //5页切换规则为[0,4]->[3,7]->[8,12]->...->[max-4,max](max为最大页数)
+            int page5 = 0;//翻5页的次数
+            int pageIn5 =0;//翻玩5页剩余的位置
+            if (page < pageStep)
+            {
+                page5 = 0;
+                pageIn5 = page;
+            }
+            else if(page > maxPage- pageStep)
+            {
+                page5 = maxPage / pageStep + 1;
+                pageIn5 = pageStep - 1 - (maxPage - page);
+            }
+            else
+            {
+                page5 = (page + 2) / pageStep;
+                pageIn5 = (page + 2) % pageStep;
+            }
+
+
+            Tuple<int, int> turn = new Tuple<int, int>(page5, pageIn5);
+            return turn;
+        }
 
         private bool Supply(SupplyTask task)
         {

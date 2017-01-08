@@ -40,7 +40,7 @@ namespace WoFlagship.KancolleCore
 
         #region public methods
         /// <summary>
-        /// 从ownedShip获得数据库的shipData
+        /// 从ownedShip获得数据库的shipData，若不存在返回null
         /// </summary>
         /// <param name="ownedShip"></param>
         /// <returns></returns>
@@ -53,20 +53,20 @@ namespace WoFlagship.KancolleCore
         }
 
         /// <summary>
-        /// 从ownedShipId获得数据库的shipData
+        /// 从ownedShipId获得数据库的shipData，若不存在返回null
         /// </summary>
         /// <param name="ownedShip"></param>
         /// <returns></returns>
-        public KancolleShipData GetShip(int ownedShipId)
+        public KancolleShipData GetShip(int ownedShipNo)
         {
             KancolleShip ownedShip;
-            if (OwnedShipDictionary.TryGetValue(ownedShipId, out ownedShip))
+            if (OwnedShipDictionary.TryGetValue(ownedShipNo, out ownedShip))
                 return GetShip(ownedShip);
             return null;
         }
 
         /// <summary>
-        /// 获取舰娘类型id
+        /// 获取舰娘类型id，若不存在返回-1
         /// </summary>
         /// <param name="ownedShip"></param>
         /// <returns></returns>
@@ -79,40 +79,40 @@ namespace WoFlagship.KancolleCore
         }
 
         /// <summary>
-        /// 获取舰娘类型id
+        /// 获取舰娘类型id，若不存在返回-1
         /// </summary>
-        /// <param name="ownedShipId"></param>
+        /// <param name="ownedShipNo"></param>
         /// <returns></returns>
-        public int GetShipType(int ownedShipId)
+        public int GetShipType(int ownedShipNo)
         {
             KancolleShip ownedShip;
-            if (OwnedShipDictionary.TryGetValue(ownedShipId, out ownedShip))
+            if (OwnedShipDictionary.TryGetValue(ownedShipNo, out ownedShip))
                 return GetShipType(ownedShip);
             return -1;
         }
 
         /// <summary>
-        /// 获取舰娘名
+        /// 获取舰娘名，若不存在返回null
         /// </summary>
         /// <param name="ownedShip"></param>
         /// <returns></returns>
         public string GetShipName(KancolleShip ownedShip)
         {
             KancolleShipData shipData;
-            if (ShipDataDictionary.TryGetValue(ownedShip.No, out shipData))
+            if (ShipDataDictionary.TryGetValue(ownedShip.ShipId, out shipData))
                 return shipData.Name;
             return null;
         }
 
         /// <summary>
-        /// 获取舰娘名
+        /// 获取舰娘名，若不存在返回null
         /// </summary>
-        /// <param name="ownedShipId"></param>
+        /// <param name="ownedShipNo"></param>
         /// <returns></returns>
-        public string GetShipName(int ownedShipId)
+        public string GetShipName(int ownedShipNo)
         {
             KancolleShip ownedShip;
-            if(OwnedShipDictionary.TryGetValue(ownedShipId, out ownedShip))
+            if(OwnedShipDictionary.TryGetValue(ownedShipNo, out ownedShip))
                 return GetShipName(ownedShip);
             return null;
         }
