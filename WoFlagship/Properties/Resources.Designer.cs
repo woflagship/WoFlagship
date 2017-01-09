@@ -532,6 +532,204 @@ namespace WoFlagship.Properties {
         }
         
         /// <summary>
+        ///   查找类似 海防艦 的本地化字符串。
+        /// </summary>
+        internal static string stype1 {
+            get {
+                return ResourceManager.GetString("stype1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 航空戦艦 的本地化字符串。
+        /// </summary>
+        internal static string stype10 {
+            get {
+                return ResourceManager.GetString("stype10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正規空母 的本地化字符串。
+        /// </summary>
+        internal static string stype11 {
+            get {
+                return ResourceManager.GetString("stype11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 超弩級戦艦 的本地化字符串。
+        /// </summary>
+        internal static string stype12 {
+            get {
+                return ResourceManager.GetString("stype12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 潜水艦 的本地化字符串。
+        /// </summary>
+        internal static string stype13 {
+            get {
+                return ResourceManager.GetString("stype13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 潜水空母 的本地化字符串。
+        /// </summary>
+        internal static string stype14 {
+            get {
+                return ResourceManager.GetString("stype14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 補給艦 的本地化字符串。
+        /// </summary>
+        internal static string stype15 {
+            get {
+                return ResourceManager.GetString("stype15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 水上機母艦 的本地化字符串。
+        /// </summary>
+        internal static string stype16 {
+            get {
+                return ResourceManager.GetString("stype16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 揚陸艦 的本地化字符串。
+        /// </summary>
+        internal static string stype17 {
+            get {
+                return ResourceManager.GetString("stype17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 装甲空母 的本地化字符串。
+        /// </summary>
+        internal static string stype18 {
+            get {
+                return ResourceManager.GetString("stype18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 工作艦 的本地化字符串。
+        /// </summary>
+        internal static string stype19 {
+            get {
+                return ResourceManager.GetString("stype19", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 駆逐艦 的本地化字符串。
+        /// </summary>
+        internal static string stype2 {
+            get {
+                return ResourceManager.GetString("stype2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 潜水母艦 的本地化字符串。
+        /// </summary>
+        internal static string stype20 {
+            get {
+                return ResourceManager.GetString("stype20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 練習巡洋艦 的本地化字符串。
+        /// </summary>
+        internal static string stype21 {
+            get {
+                return ResourceManager.GetString("stype21", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 補給艦 的本地化字符串。
+        /// </summary>
+        internal static string stype22 {
+            get {
+                return ResourceManager.GetString("stype22", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 軽巡洋艦 的本地化字符串。
+        /// </summary>
+        internal static string stype3 {
+            get {
+                return ResourceManager.GetString("stype3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重雷装巡洋艦 的本地化字符串。
+        /// </summary>
+        internal static string stype4 {
+            get {
+                return ResourceManager.GetString("stype4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 重巡洋艦 的本地化字符串。
+        /// </summary>
+        internal static string stype5 {
+            get {
+                return ResourceManager.GetString("stype5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 航空巡洋艦 的本地化字符串。
+        /// </summary>
+        internal static string stype6 {
+            get {
+                return ResourceManager.GetString("stype6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 軽空母 的本地化字符串。
+        /// </summary>
+        internal static string stype7 {
+            get {
+                return ResourceManager.GetString("stype7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 戦艦 的本地化字符串。
+        /// </summary>
+        internal static string stype8 {
+            get {
+                return ResourceManager.GetString("stype8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 戦艦 的本地化字符串。
+        /// </summary>
+        internal static string stype9 {
+            get {
+                return ResourceManager.GetString("stype9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap Supply {

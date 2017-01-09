@@ -277,4 +277,70 @@
   <data name="Supply" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Comparison\Supply.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="stype1" xml:space="preserve">
+    <value>海防艦</value>
+  </data>
+  <data name="stype10" xml:space="preserve">
+    <value>航空戦艦</value>
+  </data>
+  <data name="stype11" xml:space="preserve">
+    <value>正規空母</value>
+  </data>
+  <data name="stype12" xml:space="preserve">
+    <value>超弩級戦艦</value>
+  </data>
+  <data name="stype13" xml:space="preserve">
+    <value>潜水艦</value>
+  </data>
+  <data name="stype14" xml:space="preserve">
+    <value>潜水空母</value>
+  </data>
+  <data name="stype15" xml:space="preserve">
+    <value>補給艦</value>
+  </data>
+  <data name="stype16" xml:space="preserve">
+    <value>水上機母艦</value>
+  </data>
+  <data name="stype17" xml:space="preserve">
+    <value>揚陸艦</value>
+  </data>
+  <data name="stype18" xml:space="preserve">
+    <value>装甲空母</value>
+  </data>
+  <data name="stype19" xml:space="preserve">
+    <value>工作艦</value>
+  </data>
+  <data name="stype2" xml:space="preserve">
+    <value>駆逐艦</value>
+  </data>
+  <data name="stype20" xml:space="preserve">
+    <value>潜水母艦</value>
+  </data>
+  <data name="stype21" xml:space="preserve">
+    <value>練習巡洋艦</value>
+  </data>
+  <data name="stype22" xml:space="preserve">
+    <value>補給艦</value>
+  </data>
+  <data name="stype3" xml:space="preserve">
+    <value>軽巡洋艦</value>
+  </data>
+  <data name="stype4" xml:space="preserve">
+    <value>重雷装巡洋艦</value>
+  </data>
+  <data name="stype5" xml:space="preserve">
+    <value>重巡洋艦</value>
+  </data>
+  <data name="stype6" xml:space="preserve">
+    <value>航空巡洋艦</value>
+  </data>
+  <data name="stype7" xml:space="preserve">
+    <value>軽空母</value>
+  </data>
+  <data name="stype8" xml:space="preserve">
+    <value>戦艦</value>
+  </data>
+  <data name="stype9" xml:space="preserve">
+    <value>戦艦</value>
+  </data>
 </root>

@@ -85,16 +85,16 @@ namespace WoFlagship.Plugins.ShipInfo
                     Taisen = ship.Taisen.Item1,
                     Sakuteki = ship.Sakuteki.Item1,
                     Lucky = ship.Lucky.Item1,
-                    SlotIds = ship.Slot
+                    SlotNos = ship.Slot
                 };
 
                 model.Slots = "";
-                for(int i=0; i<model.SlotIds.Length; i++)
+                for(int i=0; i<model.SlotNos.Length; i++)
                 {
-                    if(model.SlotIds[i] != -1)
+                    if(model.SlotNos[i] != -1)
                     {
                         KancolleSlotItem slotItem;
-                        if(gameData.OwnedSlotDictionary.TryGetValue(model.SlotIds[i], out slotItem))
+                        if(gameData.OwnedSlotDictionary.TryGetValue(model.SlotNos[i], out slotItem))
                         {
                             model.Slots += gameData.SlotDictionary[slotItem.SlotItemId].Name + " ";
                         }
@@ -189,7 +189,7 @@ namespace WoFlagship.Plugins.ShipInfo
         public int Lucky { get { return _lucky; } set { _lucky = value; OnPropertyChanged(); } }
 
         private int[] _slotIds;
-        public int[] SlotIds { get { return _slotIds; } set { _slotIds = value; OnPropertyChanged(); } }
+        public int[] SlotNos { get { return _slotIds; } set { _slotIds = value; OnPropertyChanged(); } }
 
         public string _slots;
         public string Slots { get { return _slots; } set { _slots = value; OnPropertyChanged(); } }

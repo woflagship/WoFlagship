@@ -14,12 +14,6 @@ namespace WoFlagship.KancolleCore
 {
     public class KancolleGameContext : IKancolleAPIReceiver
     {
-        public event Action<KancolleGameContext> OnShipUpdated;
-        public event Action<KancolleGameContext> OnDeckUpdated;
-        public event Action<KancolleGameContext> OnMaterialUpdated;
-        public event Action<KancolleGameContext> OnQuestUpdated;
-        public event Action<KancolleGameContext> OnBasicInfoUpdated;
-
         public event Action<KancolleGameContext> OnGameDataUpdated;
 
         private api_mst_ship_item[] api_mst_ship;
@@ -38,7 +32,7 @@ namespace WoFlagship.KancolleCore
         {
             var data = JsonConvert.DeserializeObject(response) as JObject;
             var api_object = data["api_data"];
-
+            bool gameDataUpdated = true;
             switch (api)
             {
                 case "api_start2":
@@ -47,7 +41,9 @@ namespace WoFlagship.KancolleCore
                     UpdateMissions(start_data.api_mst_mission);
                     UpdateMissions(start_data.api_mst_mission);
                     UpdateMapInfoDictionary(start_data.api_mst_mapinfo);
-                    UpdateSlotDictionary(start_data.api_mst_slotitem);              
+                    UpdateSlotDictionary(start_data.api_mst_slotitem);
+                    UpdateShipTypeDictionary(start_data.api_mst_stype);
+                    UpdateItemEquipTypeDictionary(start_data.api_mst_slotitem_equiptype);
                     break;
                 case "api_port/port":
                     var port_data = api_object.ToObject<api_port_data>();
@@ -55,6 +51,7 @@ namespace WoFlagship.KancolleCore
                     UpdateMaterial(port_data.api_material);
                     UpdatePort(port_data);
                     UpdateDeck(port_data.api_deck_port);
+                   
                     break;
                 case "api_req_hensei/change"://舰队编成修改
                     UpdateDeck(requestInfo.Data);
@@ -72,12 +69,29 @@ namespace WoFlagship.KancolleCore
                     break;
                 case "api_get_member/questlist":
                     var questlist_data = api_object.ToObject<api_questlist_data>();
-                   UpdateQuest(questlist_data);
+                    UpdateQuest(questlist_data);
                     break;
                 case "api_get_member/mission"://可进行的远征任务
                     var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
                     UpdateOwnedMissionDictionary(ownedMissionItems);
                     break;
+                default:
+                    gameDataUpdated = false;
+                    break;
+            }
+            if (gameDataUpdated)
+            {
+                try
+                {
+                    OnGameDataUpdated?.InvokeAll(this);
+                }
+                catch (AggregateException exList)
+                {
+                    foreach(var ex in exList.InnerExceptions)
+                    {
+                        MessageBox.Show("OnGameDataUpdated出错！\n" + ex.Message + "\n" + ex.StackTrace);
+                    }
+                }
             }
         }
 
@@ -96,7 +110,21 @@ namespace WoFlagship.KancolleCore
                 k=>new KancolleShipData(k)
                 ));
 
-            OnGameDataUpdated?.Invoke(this);
+       
+        }
+
+        private void UpdateItemEquipTypeDictionary(api_mst_slotitem_equiptype_item[] items)
+        {
+            gameData.ItemEquipTypeDictionary = new ReadOnlyDictionary<int, KancolleItemEquipType>(items.ToDictionary(
+                k=>k.api_id,
+                k=>new KancolleItemEquipType(k)));
+        }
+
+        private void UpdateShipTypeDictionary(api_mst_stype_item[] items)
+        {
+            gameData.ShipTypeDictionary = new ReadOnlyDictionary<int, KancolleShipType>(items.ToDictionary(
+                k=>k.api_id,
+                k=>new KancolleShipType(k)));
         }
 
         /// <summary>
@@ -146,9 +174,6 @@ namespace WoFlagship.KancolleCore
                     k => k.api_id, 
                     k => new KancolleShip(k)
                     ));
-
-            OnShipUpdated?.InvokeAll(this);
-            OnGameDataUpdated?.InvokeAll(this);
         }
 
         private void UpdateOwnedMissionDictionary(api_mission_item[] ownedMissionItems)
@@ -169,7 +194,6 @@ namespace WoFlagship.KancolleCore
                 k=>k.api_id,
                 k=>new KancolleMissionData(k)
                 ));
-            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -181,7 +205,6 @@ namespace WoFlagship.KancolleCore
             if (portData != null)
             {
                 gameData.BasicInfo = new KancolleBasicInfo(portData);
-                OnBasicInfoUpdated?.InvokeAll(this);
             }
         }
 
@@ -210,8 +233,6 @@ namespace WoFlagship.KancolleCore
             }
             gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
             gameData.OwnedShipPlaceArray = new Utils.ReadOnlyArray2<int>(array);
-            OnDeckUpdated?.InvokeAll(this);
-            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -303,8 +324,6 @@ namespace WoFlagship.KancolleCore
             }
              gameData.OwnedShipPlaceDictionary = new ReadOnlyDictionary<int, Tuple<int, int>>(dic);
             gameData.OwnedShipPlaceArray = new Utils.ReadOnlyArray2<int>(array);
-            OnDeckUpdated?.InvokeAll(this);
-            OnGameDataUpdated?.InvokeAll(this);
         }
 
         /// <summary>
@@ -316,8 +335,6 @@ namespace WoFlagship.KancolleCore
             if (materials != null)
             {
                 gameData.Material = new KancolleMaterial(materials);
-                OnMaterialUpdated?.InvokeAll(this);
-                OnGameDataUpdated?.InvokeAll(this);
             }
 
         }
@@ -331,8 +348,6 @@ namespace WoFlagship.KancolleCore
             if (materials != null)
             {
                 gameData.Material = new KancolleMaterial(gameData.Material, materials);
-                OnMaterialUpdated?.InvokeAll(this);
-                OnGameDataUpdated?.InvokeAll(this);
             }
         }
 
@@ -366,8 +381,6 @@ namespace WoFlagship.KancolleCore
                             dic.Add(quest.api_no, new KancolleQuest(quest));
                     }
                     gameData.QuestDictionary = new ReadOnlyDictionary<int, KancolleQuest>(dic);
-                    OnQuestUpdated?.InvokeAll(this);
-                    OnGameDataUpdated?.InvokeAll(this);
                 }
             }
         }

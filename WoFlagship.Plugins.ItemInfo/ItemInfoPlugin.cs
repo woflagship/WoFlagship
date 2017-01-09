@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins.ShipInfo
+namespace WoFlagship.Plugins.ItemInfo
 {
-    class ShipInfoPlugin : IPlugin
+    public class ItemInfoPlugin : IPlugin
     {
-        private ShipInfoPanel panel = new ShipInfoPanel();
+        private ItemInfoPanel panel = new ItemInfoPanel();
 
         public string Description
         {
             get
             {
-                return "舰娘信息";
+                return "装备信息插件";
             }
         }
 
@@ -22,7 +26,7 @@ namespace WoFlagship.Plugins.ShipInfo
         {
             get
             {
-                return "舰娘信息";
+                return "装备信息插件";
             }
         }
 
@@ -52,12 +56,12 @@ namespace WoFlagship.Plugins.ShipInfo
 
         public void OnGameDataUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() => panel.UpdateShipList(gameData)));
+            Application.Current.Dispatcher.Invoke(new Action(() => panel.UpdateItemList(gameData)));
         }
 
         public void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() => panel.UpdateAllShipList(gameData)));
+            Application.Current.Dispatcher.Invoke(new Action(() => panel.UpdateItemList(gameData)));
         }
 
         public void OnInit(GeneralViewModel generalViewModel)

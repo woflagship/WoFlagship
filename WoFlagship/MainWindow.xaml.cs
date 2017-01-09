@@ -128,97 +128,76 @@ namespace WoFlagship
 
         private void InitContextEvent()
         {
-            gameContext.OnShipUpdated += e =>
-            {
-                foreach (var plugin in pluginManager.Plugins)
-                {
-                    plugin.OnShipUpdated(generalViewModel, e.GameData);
-                }
-            };
-
-            gameContext.OnDeckUpdated += e =>
-            {
-                for (int i = 0; i < generalViewModel.Decks.Length; i++)
-                {
-                    generalViewModel.Decks[i].Name = (i + 1) + "";
-                    for (int j = 0; j < generalViewModel.Decks[i].Ships.Length; j++)
-                    {
-                        int ownedShipId = e.GameData.OwnedShipPlaceArray[i, j];
-                        if (ownedShipId > 0)
-                        {
-                            int shipId = e.GameData.OwnedShipDictionary[ownedShipId].ShipId;
-                            generalViewModel.Decks[i].Ships[j].Name = e.GameData.ShipDataDictionary[shipId].Name;
-                        }
-                        else
-                            generalViewModel.Decks[i].Ships[j].Reset();
-                    }
-
-                    foreach (var plugin in pluginManager.Plugins)
-                    {
-                        plugin.OnDeckUpdated(generalViewModel, e.GameData);
-                    }
-                };
-            };
-
-            gameContext.OnMaterialUpdated += e =>
-            {
-                generalViewModel.Ran = e.GameData.Material.Ran;
-                generalViewModel.Dan = e.GameData.Material.Dan;
-                generalViewModel.Gang = e.GameData.Material.Gang;
-                generalViewModel.Lv = e.GameData.Material.Lv;
-                generalViewModel.Jianzao = e.GameData.Material.Jianzao;
-                generalViewModel.Gaixiu = e.GameData.Material.Gaixiu;
-                generalViewModel.Xiufu = e.GameData.Material.Xiufu;
-                generalViewModel.Kaifa = e.GameData.Material.Kaifa;
-
-                foreach (var plugin in pluginManager.Plugins)
-                {
-                    plugin.OnMaterialUpdated(generalViewModel, e.GameData);
-                }
-            };
-
-            gameContext.OnQuestUpdated += e =>
-            {
-                var runningQuest = (from q in e.GameData.QuestDictionary
-                                   where q.Value.State>1
-                                   orderby q.Value.Id
-                                   select q.Value).ToArray();
-
-                for(int i=0; i<generalViewModel.QuestList.Length; i++)
-                {
-                    if (i < runningQuest.Length)
-                    {
-                        var quest = runningQuest[i];
-                        generalViewModel.QuestList[i].Id = quest.Id;
-                        generalViewModel.QuestList[i].Name = quest.Title;
-                        generalViewModel.QuestList[i].Detail = quest.Detail;
-                        generalViewModel.QuestList[i].State = quest.State;
-                        generalViewModel.QuestList[i].ProgressFlag = quest.ProgressFlag;
-                    }
-                    else
-                        generalViewModel.QuestList[i].Reset();
-                }
-
-                foreach (var plugin in pluginManager.Plugins)
-                {
-                    plugin.OnQuestUpdated(generalViewModel, e.GameData);
-                }
-            };
-
-            gameContext.OnBasicInfoUpdated += e =>
-            {
-                generalViewModel.Level = "Lv." + e.GameData.BasicInfo.Level;
-                generalViewModel.Rank = e.GameData.BasicInfo.Rank;
-                generalViewModel.NickName = e.GameData.BasicInfo.NickName;
-                generalViewModel.ShipCount = e.GameData.BasicInfo.OwnedShipCount;
-                generalViewModel.MaxShipCount = e.GameData.BasicInfo.MaxShipCount;
-                generalViewModel.MaxItemCount = e.GameData.BasicInfo.MaxSlotItemCount;
-            };
-
             gameContext.OnGameDataUpdated += e =>
             {
-                //battleContext.OnGameDataUpdatedHandler(gameContext.GameData);
+                UpdateViewModel(e.GameData);
+
+                foreach (var plugin in pluginManager.Plugins)
+                {
+                    plugin.OnGameDataUpdated(generalViewModel, e.GameData);
+                }
             };
+        }
+
+        private void UpdateViewModel(KancolleGameData gameData)
+        {
+            //基本信息
+            generalViewModel.Level = "Lv." + gameData.BasicInfo.Level;
+            generalViewModel.Rank = gameData.BasicInfo.Rank;
+            generalViewModel.NickName = gameData.BasicInfo.NickName;
+            generalViewModel.ShipCount = gameData.BasicInfo.OwnedShipCount;
+            generalViewModel.MaxShipCount = gameData.BasicInfo.MaxShipCount;
+            generalViewModel.MaxItemCount = gameData.BasicInfo.MaxSlotItemCount;
+
+            //资源
+            generalViewModel.Ran =gameData.Material.Ran;
+            generalViewModel.Dan = gameData.Material.Dan;
+            generalViewModel.Gang = gameData.Material.Gang;
+            generalViewModel.Lv = gameData.Material.Lv;
+            generalViewModel.Jianzao = gameData.Material.Jianzao;
+            generalViewModel.Gaixiu =gameData.Material.Gaixiu;
+            generalViewModel.Xiufu = gameData.Material.Xiufu;
+            generalViewModel.Kaifa = gameData.Material.Kaifa;
+
+            //编成
+            for (int i = 0; i < generalViewModel.Decks.Length; i++)
+            {
+                generalViewModel.Decks[i].Name = (i + 1) + "";
+                for (int j = 0; j < generalViewModel.Decks[i].Ships.Length; j++)
+                {
+                    int ownedShipId = gameData.OwnedShipPlaceArray[i, j];
+                    if (ownedShipId > 0)
+                    {
+                        int shipId = gameData.OwnedShipDictionary[ownedShipId].ShipId;
+                        generalViewModel.Decks[i].Ships[j].Name = gameData.ShipDataDictionary[shipId].Name;
+                    }
+                    else
+                        generalViewModel.Decks[i].Ships[j].Reset();
+                }
+
+
+            };
+
+            //任务相关
+            var runningQuest = (from q in gameData.QuestDictionary
+                                where q.Value.State > 1
+                                orderby q.Value.Id
+                                select q.Value).ToArray();
+
+            for (int i = 0; i < generalViewModel.QuestList.Length; i++)
+            {
+                if (i < runningQuest.Length)
+                {
+                    var quest = runningQuest[i];
+                    generalViewModel.QuestList[i].Id = quest.Id;
+                    generalViewModel.QuestList[i].Name = quest.Title;
+                    generalViewModel.QuestList[i].Detail = quest.Detail;
+                    generalViewModel.QuestList[i].State = quest.State;
+                    generalViewModel.QuestList[i].ProgressFlag = quest.ProgressFlag;
+                }
+                else
+                    generalViewModel.QuestList[i].Reset();
+            }
         }
 
 

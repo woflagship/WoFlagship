@@ -49,24 +49,27 @@ namespace WoFlagship.Plugins.QuestInfo
             smart.AddExtensions(formatter);   
         }
 
-        public void OnMaterialUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
+
+       
+
+        public void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData)
         {
 
         }
 
-        public void OnQuestUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
+        public void OnGameDataUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
         {
             formatter.GameData = gameData;
             foreach (var quest in generalViewModel.QuestList)
             {
                 KancolleQuestData.KancolleQuestInfoItem questInfo;
-                if(gameData.QuestInfoDictionary.TryGetValue(quest.Id, out questInfo))
+                if (gameData.QuestInfoDictionary.TryGetValue(quest.Id, out questInfo))
                 {
-                    if(questInfo.Requirements is AGouQuestRequirement)
+                    if (questInfo.Requirements is AGouQuestRequirement)
                     {
                         quest.Detail = Resources.agou_format;
                     }
-                    else if(questInfo.Requirements is SortieQuestRequirement)
+                    else if (questInfo.Requirements is SortieQuestRequirement)
                     {
                         quest.Detail = getSortieString(questInfo.Requirements as SortieQuestRequirement);
                     }
@@ -83,21 +86,6 @@ namespace WoFlagship.Plugins.QuestInfo
             string str = smart.Format(Resources.sortie_format, require);
 
             return str;
-        }
-
-        public void OnShipUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
-        {
-
-        }
-
-        public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
-        {
-           
-        }
-
-        public void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData)
-        {
-            
         }
     }
 

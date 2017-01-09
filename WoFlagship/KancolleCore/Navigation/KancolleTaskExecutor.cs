@@ -343,9 +343,11 @@ namespace WoFlagship.KancolleCore.Navigation
             //悬停补给全部的按钮
             actionExector.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Supply_SupplyDeck));
             Thread.Sleep(1000);
+            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
+
             //点击补给全部的按钮
             result = LockNowAndWaitForResponse();
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
+            
             if (!result)
                 return false;
 

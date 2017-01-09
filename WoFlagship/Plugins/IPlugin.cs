@@ -4,7 +4,7 @@ using WoFlagship.ViewModels;
 
 namespace WoFlagship.Plugins
 {
-    public interface IPlugin : IKancolleAPIReceiver
+    public interface IPlugin
     {
         int Version { get; }
 
@@ -20,12 +20,7 @@ namespace WoFlagship.Plugins
 
         void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData);
 
-        void OnMaterialUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
+        void OnGameDataUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
 
-        void OnQuestUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
-
-        void OnShipUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
-
-        void OnDeckUpdated(GeneralViewModel generalViewModel, KancolleCore.KancolleGameData gameData);
     }
 }
