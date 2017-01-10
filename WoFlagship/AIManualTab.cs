@@ -98,5 +98,45 @@ namespace WoFlagship
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Night);
             taskExecutor.EnqueueTask(task);
         }
+
+        //改装
+        private void Btn_AIManual_Remodel_Click(object sender, RoutedEventArgs e)
+        {
+            int deck = int.Parse(Txt_AIManual_Remodel_Deck.Text);
+            int position = int.Parse(Txt_AIManual_Remodel_Position.Text);
+            int[] itemNos = new int[]
+            {
+                int.Parse(Txt_AIManual_Remodel_Item1.Text),
+                int.Parse(Txt_AIManual_Remodel_Item2.Text),
+                int.Parse(Txt_AIManual_Remodel_Item3.Text),
+                int.Parse(Txt_AIManual_Remodel_Item4.Text),
+            };
+            RemodelTask task = new RemodelTask(deck - 1, position - 1, itemNos);
+            taskExecutor.EnqueueTask(task);
+        }
+
+        private void Txt_AIManual_Remodel_Item_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Txt_AIManual_Remodel_Item1_name != null)
+            {
+                Txt_AIManual_Remodel_Item1_name.Text = getItemName(Txt_AIManual_Remodel_Item1);
+                Txt_AIManual_Remodel_Item2_name.Text = getItemName(Txt_AIManual_Remodel_Item2);
+                Txt_AIManual_Remodel_Item3_name.Text = getItemName(Txt_AIManual_Remodel_Item3);
+                Txt_AIManual_Remodel_Item4_name.Text = getItemName(Txt_AIManual_Remodel_Item4);
+            }
+        }
+
+        private string getItemName(TextBox tb)
+        {
+            int no;
+            if (int.TryParse(tb.Text, out no))
+            {
+                string name = gameContext.GameData.GetSlotItemName(no);
+                if (name == null)
+                    return "未知";
+                return name;
+            }
+            return "未知";
+        }
     }
 }

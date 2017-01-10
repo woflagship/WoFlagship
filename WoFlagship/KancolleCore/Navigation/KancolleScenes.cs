@@ -78,8 +78,12 @@
         Organize = 0x20,//编成
         Organize_ShipSelect = 0x21,//舰娘选择
         Organzie_Change_Decide = 0x22,//决定变换
+
         Supply = 0x30,//补给
+
         Remodel = 0x40,//改装
+        Remodel_ItemList = 0x41,//装备列表
+
         RepairMain = 0x50,//入渠
         ArsenalMain = 0x60,//工厂,
         SallyMain = 0x70,//任务选择
@@ -107,6 +111,9 @@
     {
         Unknown,
         Organize_SortByNew,
+
+        Remodel_ItemList_Normal,//装备列表（一般情况）
+        Remodel_ItemList_Other,//装备列表（已被别人装备）
 
         Map_Start_True,
         Map_Start_False,

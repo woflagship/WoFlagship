@@ -149,6 +149,10 @@ namespace WoFlagship.KancolleCore.Navigation
                 {
                     success = Battle(currentTask as BattleTask);
                 }
+                else if(currentTask is RemodelTask)
+                {
+                    success = Remodel(currentTask as RemodelTask);
+                }
 
                 TaskResult result = new TaskResult()
                 {
@@ -478,6 +482,17 @@ namespace WoFlagship.KancolleCore.Navigation
             }
 
             return true;
+        }
+
+        //改装
+        private bool Remodel(RemodelTask task)
+        {
+            bool result;
+            //先到改装地图界面
+            result = ReachScene(KancolleSceneTypes.Remodel);
+            if (!result)
+                return false;
+            return false;
         }
 
         private bool WaitForScene(KancolleSceneTypes scene, double timeout)

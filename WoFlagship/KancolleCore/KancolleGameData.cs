@@ -121,6 +121,32 @@ namespace WoFlagship.KancolleCore
         }
 
         /// <summary>
+        /// 获取装备名，若不存在则返回null
+        /// </summary>
+        /// <param name="ownedItem"></param>
+        /// <returns></returns>
+        public string GetSlotItemName(KancolleSlotItem ownedItem)
+        {
+            KancolleSlotItemData itemData;
+            if (SlotDictionary.TryGetValue(ownedItem.SlotItemId, out itemData))
+                return itemData.Name;
+            return null;
+        }
+
+        /// <summary>
+        /// 获取装备名，若不存在则返回null
+        /// </summary>
+        /// <param name="ownedItemNo"></param>
+        /// <returns></returns>
+        public string GetSlotItemName(int ownedItemNo)
+        {
+            KancolleSlotItem item;
+            if (OwnedSlotDictionary.TryGetValue(ownedItemNo, out item))
+                return GetSlotItemName(item);
+            return null;
+        }
+
+        /// <summary>
         /// 舰娘能否佩戴该装备，可以返回true，否则返回false；舰娘、装备没有找到都返回false
         /// </summary>
         /// <param name="shipId">舰娘id</param>

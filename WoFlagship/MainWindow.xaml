@@ -161,7 +161,7 @@
                                     <Button Width="60" Content="编成" Height="30" Click="Btn_AIManual_Organize_Click"/>
                                     <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Organize_Deck"/>
-                                    <Label Content="舰娘(ownedId)" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <Label Content="舰娘(ownedNo)" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship1" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
                                     <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship2" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
                                     <TextBox Width="30" Text="-1" VerticalContentAlignment="Center" Name="Txt_AIManual_Organize_Ship3" TextChanged="Txt_AIManual_Organize_Ship_TextChanged"/>
@@ -196,6 +196,24 @@
                                     <Button Content="回港" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Return_Click"/>
                                     <Button Content="撤退" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Back_Click"/>
                                     <Button Content="夜战" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Night_Click"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <Button Content="改装" Width="60" Height="30"  Click="Btn_AIManual_Remodel_Click"/>
+                                    <Label Content="舰队(1~4)" VerticalAlignment="Center"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Remodel_Deck"/>
+                                    <Label Content="位置(1~6)"  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Remodel_Position"/>
+                                    <Label Content="装备（ownedNo）"  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="-1" Name="Txt_AIManual_Remodel_Item1" TextChanged="Txt_AIManual_Remodel_Item_TextChanged"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="-1" Name="Txt_AIManual_Remodel_Item2" TextChanged="Txt_AIManual_Remodel_Item_TextChanged"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="-1" Name="Txt_AIManual_Remodel_Item3" TextChanged="Txt_AIManual_Remodel_Item_TextChanged"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="-1" Name="Txt_AIManual_Remodel_Item4" TextChanged="Txt_AIManual_Remodel_Item_TextChanged"/>
+                                    <Label Content="装备名"  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item1_name" IsReadOnly="True"/>
+                                    <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item2_name" IsReadOnly="True"/>
+                                    <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item3_name" IsReadOnly="True"/>
+                                    <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item4_name" IsReadOnly="True"/>
+
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

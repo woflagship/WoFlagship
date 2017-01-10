@@ -185,4 +185,36 @@ namespace WoFlagship.KancolleCore.Navigation
             MissionFleet = missionFleet;
         }
     }
+
+    class RemodelTask : KancolleTask
+    {
+        /// <summary>
+        /// 要改装的船所在的港口，从0开始
+        /// </summary>
+        public int TargetDeck { get; private set; }
+
+        /// <summary>
+        /// 要改装的船所在的未知，从0开始
+        /// </summary>
+        public int TargetPosition { get; private set; }
+
+        /// <summary>
+        /// 要改装的装备id，不放的位置为-1，-1不能在中间
+        /// </summary>
+        public int[] SlotItemNos { get; private set; }
+
+        /// <summary>
+        /// 改修
+        /// </summary>
+        /// <param name="targetDeck">要改装的船所在的港口，从0开始</param>
+        /// <param name="targetPosition">要改装的船所在的未知，从0开始</param>
+        /// <param name="slotItemNos">要改装的装备id，不放的位置为-1，-1不能在中间</param>
+        public RemodelTask(int targetDeck, int targetPosition, int[] slotItemNos)
+        {
+            TargetDeck = targetDeck;
+            TargetPosition = targetPosition;
+            SlotItemNos = slotItemNos;
+        }
+
+    }
 }

@@ -20,6 +20,9 @@ namespace WoFlagship.KancolleCore.Navigation
         private Rectangle Rect_Organize_Change_Decide { get; set; } = new Rectangle(630, 425, 120, 35);
         private Rectangle Rect_Organize_Sort { get; set; } = new Rectangle(750, 105, 45, 15);
 
+        private Rectangle Rect_Remodel_Remodel = new Rectangle(600, 410, 110, 70);
+        private Rectangle Rect_Remodel_ItemList_Mode = new Rectangle(710, 100, 80, 20);
+
         private Rectangle Rect_Mission_Decide { get; set; } = new Rectangle(620, 420, 120, 60);
         private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 190, 60);
 
@@ -108,7 +111,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     return scene;
                 }
 
-                //编成
+                //编成，修改舰娘
                 if (SceneSimilarity(screenBitmap, Rect_Organize_ShipSelect, Organize_ShipSelect) > Threshold)
                 {
                     scene.SceneType = KancolleSceneTypes.Organize_ShipSelect;
