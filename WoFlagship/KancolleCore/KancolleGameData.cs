@@ -39,7 +39,14 @@ namespace WoFlagship.KancolleCore
 
         public ReadOnlyDictionary<int, KancolleSlotItemData> SlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItemData>(new Dictionary<int, KancolleSlotItemData>());
         public ReadOnlyDictionary<int, KancolleSlotItem> OwnedSlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItem>(new Dictionary<int, KancolleSlotItem>());
-
+        /// <summary>
+        /// 已经装备的装备字典；key:itemNo,value:装备的舰娘no
+        /// </summary>
+        public ReadOnlyDictionary<int, int> EquipedSlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, int>(new Dictionary<int,int>());
+        /// <summary>
+        /// 尚未装备的装备列表，每个元素为itemNo
+        /// </summary>
+        public ReadOnlyCollection<int> UnEquipedSlotArray { get; internal set; } = new ReadOnlyCollection<int>(new List<int>());
 
         #region public methods
         /// <summary>

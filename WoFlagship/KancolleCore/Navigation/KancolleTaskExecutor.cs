@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using CefSharp.Wpf;
 using System.Windows;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
@@ -252,7 +254,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (CurrentScene.SceneState != KancolleSceneStates.Organize_SortByNew)
                     return false;
 
-                int index = indexOf(sortedShip, ships[i]);
+                int index = indexOfShips(sortedShip, ships[i]);
                 if (index == -1)//没找到
                     return false;
 
@@ -287,7 +289,7 @@ namespace WoFlagship.KancolleCore.Navigation
             return true;
         }
 
-        private int indexOf(KancolleShip[] shipArray, int noToFind)
+        private int indexOfShips(KancolleShip[] shipArray, int noToFind)
         {
             for(int i=0; i<shipArray.Length; i++)
             {
@@ -488,11 +490,122 @@ namespace WoFlagship.KancolleCore.Navigation
         private bool Remodel(RemodelTask task)
         {
             bool result;
-            //先到改装地图界面
+
+            //需要改装的舰娘no
+            var shipNo = GameData.OwnedShipPlaceArray[task.TargetDeck, task.TargetPosition];
+            if (shipNo == -1)
+                return false;
+
+            //先到改装界面
             result = ReachScene(KancolleSceneTypes.Remodel);
             if (!result)
                 return false;
+
+            //选择正确的舰队
+            actionExector.Execute(KancolleWidgetPositions.Remodel_Decks[task.TargetDeck]);
+            Thread.Sleep(1000);
+
+            //选择正确的舰娘
+            actionExector.Execute(KancolleWidgetPositions.Remodel_Ships[task.TargetPosition]);
+            Thread.Sleep(1000);
+
+
+            //对每一个装备
+            for(int i=0; i<task.SlotItemNos.Length; i++)
+            {
+                int itemNo = task.SlotItemNos[i];
+                if (itemNo < 0)
+                    continue;
+                if (GameData.OwnedShipDictionary[shipNo].Slot[i] == itemNo)
+                    continue;
+                IEnumerable<int> items;
+                bool isEquipedSlot = false;
+                if (GameData.EquipedSlotDictionary.ContainsKey(itemNo))//该装备已经被别的舰娘装备
+                {
+                    //不能在本船
+                    items = from es in GameData.EquipedSlotDictionary
+                            where es.Value!=shipNo && GameData.CanShipEquipItem(GameData.OwnedShipDictionary[shipNo].ShipId, GameData.OwnedSlotDictionary[es.Key].SlotItemId)
+                            select es.Key;
+                    isEquipedSlot = true;
+                }
+                else
+                {
+                    items = from s in GameData.UnEquipedSlotArray
+                            where GameData.CanShipEquipItem(GameData.OwnedShipDictionary[shipNo].ShipId, GameData.OwnedSlotDictionary[s].SlotItemId)
+                            select s;
+                }
+                //以slotItemId为第一关键字，no为第二关键字
+                var sortedItem = (from s in items
+                                 orderby GameData.OwnedSlotDictionary[s].SlotItemId, GameData.OwnedSlotDictionary[s].No
+                                  select GameData.OwnedSlotDictionary[s]).ToArray();
+              
+                //找到装备位置
+                int index = indexOfItems(sortedItem, itemNo);
+                if (index < 0)
+                    return false;
+                //选择装备槽
+                actionExector.Execute(KancolleWidgetPositions.Remodel_Items[i]);
+                Thread.Sleep(1000);
+
+                if(isEquipedSlot)//选择已装备列表
+                {
+                    if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Other)
+                    {
+                        actionExector.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
+                        Thread.Sleep(1000);
+                        if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Other)
+                            return false;
+                    }
+                }
+                else
+                {
+                    if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Normal)
+                    {
+                        actionExector.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
+                        Thread.Sleep(1000);
+                        if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Normal)
+                            return false;
+                    }
+                }
+
+                int maxPage = sortedItem.Length / 10;//最大的页数
+                int page = index / 10;//所在的页数，每页最多可以放10个
+                Tuple<int, int> pageTurn = getPageTurn(maxPage, page);
+                int page5 = pageTurn.Item1;//每5页翻一次
+                int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
+                int item = index % 10;//每页第几个
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_FirstPage));//转到第1页
+                Thread.Sleep(1000);
+                for (int p = 0; p < page5; p++)//先5页5页的翻
+                {
+                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Next5Page));
+                    Thread.Sleep(1000);
+                }
+
+
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Pages[pageIn5]));
+                Thread.Sleep(1000);
+
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
+                Thread.Sleep(500);
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
+                result = LockNowAndWaitForResponse();
+                if (!result)
+                    return false;
+                Thread.Sleep(1000);
+            }
+
             return false;
+        }
+
+        private int indexOfItems(KancolleSlotItem[] items, int itemNo)
+        {
+            for(int i=0; i<items.Length; i++)
+            {
+                if (itemNo == items[i].No)
+                    return i;
+            }
+            return -1;
         }
 
         private bool WaitForScene(KancolleSceneTypes scene, double timeout)

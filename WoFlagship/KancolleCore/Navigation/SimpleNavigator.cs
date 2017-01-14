@@ -60,7 +60,8 @@ namespace WoFlagship.KancolleCore.Navigation
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Remodel, KancolleSceneTypes.RepairMain, new KancolleAction(KancolleWidgetPositions.Left_Repair)));
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Remodel, KancolleSceneTypes.ArsenalMain, new KancolleAction(KancolleWidgetPositions.Left_Arsenal)));
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Remodel, KancolleSceneTypes.Quest, new KancolleAction(KancolleWidgetPositions.Quest)));
-
+            navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Remodel_ItemList, KancolleSceneTypes.Remodel, new KancolleAction(KancolleWidgetPositions.Remodel_Items_Return)));
+            navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Remodel_ItemList_Decide, KancolleSceneTypes.Remodel_ItemList, new KancolleAction(KancolleWidgetPositions.Remodel_Items_Return)));
 
             //入渠
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.RepairMain, KancolleSceneTypes.Port, new KancolleAction(KancolleWidgetPositions.Port)));

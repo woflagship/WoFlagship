@@ -478,6 +478,26 @@ namespace WoFlagship.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Remodel_ItemList {
+            get {
+                object obj = ResourceManager.GetObject("Remodel_ItemList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Remodel_ItemList_Decide_True {
+            get {
+                object obj = ResourceManager.GetObject("Remodel_ItemList_Decide_True", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Remodel_ItemList_Normal {
             get {
                 object obj = ResourceManager.GetObject("Remodel_ItemList_Normal", resourceCulture);

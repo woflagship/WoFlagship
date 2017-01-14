@@ -21,7 +21,9 @@ namespace WoFlagship.KancolleCore.Navigation
         private Rectangle Rect_Organize_Sort { get; set; } = new Rectangle(750, 105, 45, 15);
 
         private Rectangle Rect_Remodel_Remodel = new Rectangle(600, 410, 110, 70);
+        private Rectangle Rect_Remodel_ItemList = new Rectangle(355, 70, 55, 25);
         private Rectangle Rect_Remodel_ItemList_Mode = new Rectangle(710, 100, 80, 20);
+        private Rectangle Rect_Remodel_ItemList_Decide = new Rectangle(640, 420, 110, 60);
 
         private Rectangle Rect_Mission_Decide { get; set; } = new Rectangle(620, 420, 120, 60);
         private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 190, 60);
@@ -94,6 +96,7 @@ namespace WoFlagship.KancolleCore.Navigation
             //bm_battle_formation = new Bitmap(Path.Combine(ComparisonFolder, "Battle_Formation.bmp"));
         }
 
+        //以下所有的判断逻辑可能存在不同的写法...
         public KancolleScene GetSceneTypeFromBitmap(Bitmap screenBitmap)
         {
             KancolleScene scene = new KancolleScene();
@@ -206,7 +209,29 @@ namespace WoFlagship.KancolleCore.Navigation
                 sim = SceneSimilarity(screenBitmap, Rect_LeftToolbar, Arsenal);
                 if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.ArsenalMain; }
                 if (maxSim > Threshold)
+                {
+                    if(scene.SceneType == KancolleSceneTypes.Remodel)
+                    {
+                        //装备决定
+                        if(SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Decide, Remodel_ItemList_Decide_True) > Threshold)
+                        {
+                            scene.SceneType = KancolleSceneTypes.Remodel_ItemList_Decide;
+                            return scene;
+                        }
+
+                        //装备列表
+                        if(SceneSimilarity(screenBitmap, Rect_Remodel_ItemList, Remodel_ItemList) > Threshold)
+                        {
+                            scene.SceneType = KancolleSceneTypes.Remodel_ItemList;
+                            if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Mode, Remodel_ItemList_Normal) > Threshold)
+                                scene.SceneState = KancolleSceneStates.Remodel_ItemList_Normal;
+                            else
+                                scene.SceneState = KancolleSceneStates.Remodel_ItemList_Other;
+                            return scene;
+                        }
+                    }
                     return scene;
+                }
 
                 if (SceneSimilarity(screenBitmap, Rect_Quest, Quest) > Threshold)
                 {

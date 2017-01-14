@@ -45,11 +45,13 @@ namespace WoFlagship.KancolleCore
         public readonly static Point[] Remodel_Decks = new Point[] { new Point(145, 115), new Point(175, 115), new Point(205, 115), new Point(235, 115) };
         public readonly static Point[] Remodel_Ships = new Point[] { new Point(210, 165), new Point(210, 220), new Point(210, 275), new Point(210, 330), new Point(210, 385), new Point(210, 440) };
         public readonly static Point[] Remodel_Items = new Point[] { new Point(430, 175), new Point(430, 210), new Point(430, 245), new Point(430, 289) };
+        public readonly static Point Remodel_Items_Return = new Point(200, 260);
         public readonly static Point Remodel_ChangeItemMode = new Point(750,110);
         public readonly static Point[] Remodel_Changes_ItemList = new Point[] { new Point(570, 150), new Point(570, 180), new Point(570, 210), new Point(570, 240), new Point(570, 270), new Point(570, 300), new Point(570, 330), new Point(570, 360), new Point(570, 390), new Point(570, 420) };
         public readonly static Point Remodel_Changes_FirstPage = new Point(410, 450);
         public readonly static Point Remodel_Changes_Next5Page = new Point(650, 450);
-        public readonly static Point Remodel_Change_Button = new Point(700, 440);
+        public readonly static Point[] Remodel_Changes_Pages = new Point[] { new Point(490, 445), new Point(520, 445), new Point(550, 445), new Point(580, 445), new Point(610, 445), };
+        public readonly static Point Remodel_Change_Decide = new Point(700, 440);
 
         public readonly static Point Sally_Map = new Point(220, 220);
         public readonly static Point Sally_Practice = new Point(450, 220);

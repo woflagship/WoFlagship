@@ -81,6 +81,9 @@ namespace WoFlagship.KancolleCore
             }
             if (gameDataUpdated)
             {
+                //更新装备情况
+                UpadteOwnedSotItemEquipInfo();
+  
                 try
                 {
                     OnGameDataUpdated?.InvokeAll(this);
@@ -109,8 +112,6 @@ namespace WoFlagship.KancolleCore
                 k=>k.api_id,
                 k=>new KancolleShipData(k)
                 ));
-
-       
         }
 
         private void UpdateItemEquipTypeDictionary(api_mst_slotitem_equiptype_item[] items)
@@ -383,6 +384,34 @@ namespace WoFlagship.KancolleCore
                     gameData.QuestDictionary = new ReadOnlyDictionary<int, KancolleQuest>(dic);
                 }
             }
+        }
+
+        /// <summary>
+        /// 更新装备是否倍装备的情况，需要放在api处理switch之后
+        /// </summary>
+        private void UpadteOwnedSotItemEquipInfo()
+        {
+            Dictionary<int, int> equipDic = new Dictionary<int, int>();
+            List<int> unEquipArray = new List<int>();
+            foreach(var ship in gameData.OwnedShipDictionary.Values)
+            {
+                foreach(var slot in ship.Slot)
+                {
+                    if(slot>0)
+                    {
+                        equipDic.Add(slot, ship.No);
+                    }
+                }
+            }
+
+            foreach(var slot in gameData.OwnedSlotDictionary.Keys)
+            {
+                if (!equipDic.ContainsKey(slot))
+                    unEquipArray.Add(slot);
+            }
+
+            gameData.EquipedSlotDictionary = new ReadOnlyDictionary<int, int>(equipDic);
+            gameData.UnEquipedSlotArray = new ReadOnlyCollection<int>(unEquipArray);
         }
 
         /// <summary>
