@@ -24,6 +24,7 @@ namespace WoFlagship.KancolleCore.Navigation
         private Rectangle Rect_Remodel_ItemList = new Rectangle(355, 70, 55, 25);
         private Rectangle Rect_Remodel_ItemList_Mode = new Rectangle(710, 100, 80, 20);
         private Rectangle Rect_Remodel_ItemList_Decide = new Rectangle(640, 420, 110, 60);
+        private Rectangle Rect_Remodel_ItemList_Other_Decide = new Rectangle(250, 300, 130, 40);
 
         private Rectangle Rect_Mission_Decide { get; set; } = new Rectangle(620, 420, 120, 60);
         private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 190, 60);
@@ -101,6 +102,14 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             KancolleScene scene = new KancolleScene();
             double maxSim = 0, sim;
+
+            //需要特殊处理的
+            //装备从别人那拿过来决定，remodel衍生出来的场景
+            if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Other_Decide, Remodel_ItemList_Other_Decide) > Threshold)
+            {
+                scene.SceneType = KancolleSceneTypes.Remodel_ItemList_Other_Decide;
+                return scene;
+            }
 
             //判断是否存在港口的title
             sim = SceneSimilarity(screenBitmap, Rect_MainPort_Title, MainPort_title);
@@ -213,7 +222,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     if(scene.SceneType == KancolleSceneTypes.Remodel)
                     {
                         //装备决定
-                        if(SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Decide, Remodel_ItemList_Decide_True) > Threshold)
+                        if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Decide, Remodel_ItemList_Decide_True) > Threshold)
                         {
                             scene.SceneType = KancolleSceneTypes.Remodel_ItemList_Decide;
                             return scene;

@@ -407,6 +407,7 @@
     <Resource Include="Resources\Images\Comparison\Remodel_Remodel_True.bmp" />
     <Resource Include="Resources\Images\Comparison\Remodel_ItemList.bmp" />
     <Resource Include="Resources\Images\Comparison\Remodel_ItemList_Decide_True.bmp" />
+    <Resource Include="Resources\Images\Comparison\Remodel_ItemList_Other_Decide.bmp" />
     <Content Include="Resources\PepperFlash\pepflashplayer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

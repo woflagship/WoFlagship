@@ -84,6 +84,7 @@
         Remodel = 0x40,//改装
         Remodel_ItemList = 0x41,//装备列表
         Remodel_ItemList_Decide = 0x42,//装备详细，决定按钮
+        Remodel_ItemList_Other_Decide,//奖装备从别人那拿过来
 
         RepairMain = 0x50,//入渠
         ArsenalMain = 0x60,//工厂,
@@ -115,7 +116,7 @@
 
         Remodel_ItemList_Normal,//装备列表（一般情况）
         Remodel_ItemList_Other,//装备列表（已被别人装备）
-
+        
         Map_Start_True,
         Map_Start_False,
 

@@ -589,6 +589,15 @@ namespace WoFlagship.KancolleCore.Navigation
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
                 Thread.Sleep(500);
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
+                Thread.Sleep(1000);
+                if (isEquipedSlot)
+                {
+                    //如果是已装备的，则还有一个确认列表
+                    if (CurrentScene.SceneType !=  KancolleSceneTypes.Remodel_ItemList_Other_Decide)
+                        return false;
+                    actionExector.Execute(KancolleWidgetPositions.Remodel_Change_Other_Decide);
+                    Thread.Sleep(500);
+                }
                 result = LockNowAndWaitForResponse();
                 if (!result)
                     return false;
