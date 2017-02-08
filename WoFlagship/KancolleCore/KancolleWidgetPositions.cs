@@ -53,6 +53,7 @@ namespace WoFlagship.KancolleCore
         public readonly static Point[] Remodel_Changes_Pages = new Point[] { new Point(490, 445), new Point(520, 445), new Point(550, 445), new Point(580, 445), new Point(610, 445), };
         public readonly static Point Remodel_Change_Decide = new Point(700, 440);
         public readonly static Point Remodel_Change_Other_Decide = new Point(315, 320);
+        public readonly static Point[] Remodel_RemoveItem = new Point[] { new Point(545, 175), new Point(545, 210) , new Point(545, 245) , new Point(545, 280) };
 
         public readonly static Point Sally_Map = new Point(220, 220);
         public readonly static Point Sally_Practice = new Point(450, 220);

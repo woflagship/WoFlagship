@@ -509,9 +509,31 @@ namespace WoFlagship.KancolleCore.Navigation
             actionExector.Execute(KancolleWidgetPositions.Remodel_Ships[task.TargetPosition]);
             Thread.Sleep(1000);
 
+            //先移除自己的所有装备，不过已经在正确位置的装备就不动了
+            int correctSlotNum = 0;
+            int slotNum = GameData.GetShip(shipNo).SlotNum;
+            for(; correctSlotNum<slotNum; correctSlotNum++)
+            {
+                int itemNo = task.SlotItemNos[correctSlotNum];
+                if (itemNo < 0)
+                    break;
+                if (GameData.OwnedShipDictionary[shipNo].Slot[correctSlotNum] != itemNo)
+                    break;
+            }
+
+            for (int i = correctSlotNum; i < slotNum; i++)
+            {
+                if (GameData.OwnedShipDictionary[shipNo].Slot[correctSlotNum] < 0)//当前位置没有装备
+                    break;
+                //移除装备，因为装备移除后，下面的会补上来，所以始终是correntSlotNum的位置
+                actionExector.Execute(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]);
+                result = LockNowAndWaitForResponse();
+                if (!result)
+                    return false;
+            }
 
             //对每一个装备
-            for(int i=0; i<task.SlotItemNos.Length; i++)
+            for (int i=0; i<task.SlotItemNos.Length; i++)
             {
                 int itemNo = task.SlotItemNos[i];
                 if (itemNo < 0)
@@ -589,14 +611,12 @@ namespace WoFlagship.KancolleCore.Navigation
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
                 Thread.Sleep(500);
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
-                Thread.Sleep(1000);
                 if (isEquipedSlot)
                 {
                     //如果是已装备的，则还有一个确认列表
                     if (CurrentScene.SceneType !=  KancolleSceneTypes.Remodel_ItemList_Other_Decide)
                         return false;
                     actionExector.Execute(KancolleWidgetPositions.Remodel_Change_Other_Decide);
-                    Thread.Sleep(500);
                 }
                 result = LockNowAndWaitForResponse();
                 if (!result)

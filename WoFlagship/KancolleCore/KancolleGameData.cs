@@ -390,11 +390,17 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int Type { get; private set; }
 
+        /// <summary>
+        /// 可装备的装备数
+        /// </summary>
+        public int SlotNum { get; private set; }
+
         public KancolleShipData(api_mst_ship_item mst_ship_item)
         {
             ShipId = mst_ship_item.api_id;
             Name = mst_ship_item.api_name;
             Type = mst_ship_item.api_stype;
+            SlotNum = mst_ship_item.api_slot_num;
         }
     }
 
