@@ -155,15 +155,39 @@
         private int _id;
         public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
 
+        private string[] _slots;
+        public string[] Slots
+        {
+            get { return _slots; }
+            set
+            {
+                _slots = value; OnPropertyChanged();
+                SlotsStr = "";
+                if (_slots != null)
+                {   
+                    foreach(var s in _slots)
+                    {
+                        SlotsStr += s + "; "; 
+                    }
+                }
+                OnPropertyChanged("SlotsStr");
+            }
+        }
+
+        public string SlotsStr { get; private set; }
+
         public void Reset()
         {
             Name = "空";
+            Slots = null;
         }
 
         public DeckShipViewModel Clone()
         {
             DeckShipViewModel ship = new DeckShipViewModel();
             ship.Name = this.Name;
+            ship.Id = Id;
+            ship.Slots = Slots;
             return ship;
         }
     }

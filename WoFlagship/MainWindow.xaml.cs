@@ -22,6 +22,7 @@ using WoFlagship.ToolWindows;
 using WoFlagship.ViewModels;
 using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleCore.KancolleBattle;
+using System.Windows.Documents;
 
 namespace WoFlagship
 {
@@ -170,6 +171,9 @@ namespace WoFlagship
                     {
                         int shipId = gameData.OwnedShipDictionary[ownedShipId].ShipId;
                         generalViewModel.Decks[i].Ships[j].Name = gameData.ShipDataDictionary[shipId].Name;
+                        generalViewModel.Decks[i].Ships[j].Slots = (from slotId in gameData.OwnedShipDictionary[ownedShipId].Slot
+                                                                    where slotId>0
+                                                                    select gameData.GetSlotItemName(slotId)).ToArray();
                     }
                     else
                         generalViewModel.Decks[i].Ships[j].Reset();
@@ -291,6 +295,7 @@ namespace WoFlagship
             try
             {
                 taskExecutor = new KancolleTaskExecutor(webView, () => GetCurrentScene(), () => gameContext.GameData);
+                taskExecutor.OnTaskFinished += TaskExecutor_OnTaskFinished;
                 taskExecutor.Start();
             }
             catch(Exception ex)
@@ -299,6 +304,24 @@ namespace WoFlagship
                 MessageBox.Show("taskExecutor启动失败\n" + ex.Message);
 #endif
             }
+        }
+
+        private void TaskExecutor_OnTaskFinished(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
+        {
+            Dispatcher.Invoke(new Action(()=>
+            {
+                Run line = new Run(arg2.ToString() + "\n");
+                if (arg2.IsSuccess)
+                    line.Foreground = Brushes.Green;
+                else
+                    line.Foreground = Brushes.Red;
+                Txt_MainLogger.Inlines.Add(line);
+                if(Txt_MainLogger.Parent is ScrollViewer)
+                {
+                    ScrollViewer sv = Txt_MainLogger.Parent as ScrollViewer;
+                    sv.ScrollToEnd();
+                }
+            }));
         }
 
         public RenderTargetBitmap GetWebViewBitmap()
@@ -420,7 +443,7 @@ namespace WoFlagship
         private void Btn_RefreshFilter_Click(object sender, RoutedEventArgs e)
         {
             var screen = GetWebViewBitmap();
-            Img_Filter.Source = screen;
+            //Img_Filter.Source = screen;
             
             var sceneType = sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
             Txt_CurrentScene.Content = sceneType.ToString();

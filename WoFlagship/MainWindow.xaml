@@ -15,10 +15,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Grid Name="Panel_MainBrowser"  Width="800" Height="480" Loaded="Panel_MainBrowser_Loaded" />
-            <Canvas Name="Grid_PaintCanvas" Width="800" Height="480" Margin="20,0,0,0">
+            <Grid Name="Panel_MainBrowser"  Width="800" Height="480" Loaded="Panel_MainBrowser_Loaded" Margin="5"/>
+            <!--<Canvas Name="Grid_PaintCanvas" Width="800" Height="480" Margin="20,0,0,0">
                 <Image Name="Img_Filter" Width="800" Height="480" />
-            </Canvas>
+            </Canvas>-->
+            <ScrollViewer Width="800" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
+                <TextBlock Name="Txt_MainLogger" />
+            </ScrollViewer>
         </StackPanel>
         <StackPanel Orientation="Horizontal"  Grid.Row="1" Margin="5">
             <Button Name="Btn_ShowDevTool" Click="Btn_ShowDevTool_Click" Content="开发者工具"/>
@@ -120,7 +123,7 @@
                                                                 <ColumnDefinition Width="*"/>
                                                                 <ColumnDefinition Width="50"/>
                                                             </Grid.ColumnDefinitions>
-                                                            <Label  Content="{Binding Name}"  Height="30" VerticalContentAlignment="Center"/>
+                                                            <Label  Content="{Binding Name}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding SlotsStr}"/>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>

@@ -75,6 +75,10 @@ namespace WoFlagship.KancolleCore
                     var ownedMissionItems = api_object.ToObject<api_mission_item[]>();
                     UpdateOwnedMissionDictionary(ownedMissionItems);
                     break;
+                case "api_get_member/ship3":
+                    var ship3_data = api_object.ToObject<api_ship3_data>();
+                    UpdateShip3(ship3_data);
+                    break;
                 default:
                     gameDataUpdated = false;
                     break;
@@ -529,6 +533,30 @@ namespace WoFlagship.KancolleCore
                     LogFactory.SystemLogger.Error("任务信息资源初始化失败！", ex);
                 }
             }
+        }
+
+        private void UpdateShip3(api_ship3_data ship3)
+        {
+            if(ship3.api_ship_data?.Length > 0)
+            {
+                var dic = gameData.OwnedShipDictionary.ToDictionary(k=>k.Key, k=>k.Value);
+                foreach(var ship in ship3.api_ship_data)
+                {
+                    dic[ship.api_id] = new KancolleShip(ship);
+                }
+                gameData.OwnedShipDictionary = new ReadOnlyDictionary<int, KancolleShip>(dic);
+            }
+
+            if (ship3.api_deck_data?.Length > 0)
+            {
+                //TODO!!
+            }
+
+            //if(ship3.api_slot_data != null)
+            //{
+            //    var dic = gameData.OwnedSlotDictionary.ToDictionary(k => k.Key, k => k.Value);
+
+            //}
         }
 
         #endregion

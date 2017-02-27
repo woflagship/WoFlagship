@@ -205,6 +205,8 @@
     <Compile Include="KancolleCore\KancolleBattle\StageTypes.cs" />
     <Compile Include="KancolleCore\KancolleGameContext.cs" />
     <Compile Include="KancolleCore\KancolleGameData.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleTaskResult.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleTaskResultType.cs" />
     <Compile Include="KancolleMap\KancolleMapInfo.cs" />
     <Compile Include="KancolleMap\MapInfoItem.cs" />
     <Compile Include="KancolleQuestData\AGouQuestRequirement.cs" />

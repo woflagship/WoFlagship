@@ -432,6 +432,16 @@ namespace WoFlagship.KancolleCore
 
     #endregion
 
+    #region api_get_member/ship3
+    public class api_ship3_data
+    {
+        public api_ship_item[] api_ship_data { get; set; }
+        public api_deck_item[] api_deck_data { get; set; }
+        //public api_slot_item_item api_slot_data { get; set; }
+    }
+
+    #endregion
+
     [Serializable]
     public class api_ship_item
     {
