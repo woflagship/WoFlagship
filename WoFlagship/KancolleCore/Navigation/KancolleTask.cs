@@ -159,6 +159,14 @@ namespace WoFlagship.KancolleCore.Navigation
         }
     }
 
+    /// <summary>
+    /// 跳过战斗之间的画面，比如航线、出新舰娘等这些情况
+    /// </summary>
+    class BattleSkipTask : BattleTask
+    {
+
+    }
+
     //远征
     class MissionTask : KancolleTask
     {
@@ -216,5 +224,36 @@ namespace WoFlagship.KancolleCore.Navigation
             SlotItemNos = slotItemNos;
         }
 
+    }
+
+    class RepairTask : KancolleTask
+    {
+        /// <summary>
+        /// 需要入渠的舰娘no
+        /// </summary>
+        public int ShipNo { get; private set; }
+
+        /// <summary>
+        /// 入渠的位置，取值：0-3
+        /// </summary>
+        public int Dock { get; private set; }
+
+        /// <summary>
+        /// 是否使用高速修复
+        /// </summary>
+        public bool UseFastRepair { get; private set; }
+
+        /// <summary>
+        /// 入渠
+        /// </summary>
+        /// <param name="shipNo">需要入渠的舰娘no</param>
+        /// <param name="dock">入渠的位置，取值：0-3</param>
+        /// <param name="useFastRepair">是否使用高速修复</param>
+        public RepairTask(int shipNo, int dock, bool useFastRepair)
+        {
+            ShipNo = shipNo;
+            Dock = dock;
+            UseFastRepair = useFastRepair;
+        }
     }
 }

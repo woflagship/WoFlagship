@@ -548,6 +548,26 @@ namespace WoFlagship.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Repair_ShipSelect {
+            get {
+                object obj = ResourceManager.GetObject("Repair_ShipSelect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Repair_SortByNew {
+            get {
+                object obj = ResourceManager.GetObject("Repair_SortByNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Sally {
             get {
                 object obj = ResourceManager.GetObject("Sally", resourceCulture);

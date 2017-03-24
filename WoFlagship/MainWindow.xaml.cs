@@ -23,6 +23,7 @@ using WoFlagship.ViewModels;
 using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleCore.KancolleBattle;
 using System.Windows.Documents;
+using System.Windows.Threading;
 
 namespace WoFlagship
 {
@@ -61,9 +62,9 @@ namespace WoFlagship
 
         private INavigator navigator = new SimpleNavigator();
         private KancolleActionExecutor actionExecutor;
-       
 
 
+        private DispatcherTimer timer;
         private KancolleTaskExecutor taskExecutor;
 
         public MainWindow()
@@ -108,7 +109,8 @@ namespace WoFlagship
             Txt_Xiufu.SetBinding(Label.ContentProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Xiufu") });
             Lb_Mission.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("QuestList") });
             Tc_Deck.SetBinding(TabControl.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Decks") });
-            
+            Lb_Dock.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Docks") });
+
             LogFactory.SystemLogger.Info("开始插件初始化");
             foreach (var plugin in pluginManager.Plugins)
             {
@@ -123,6 +125,34 @@ namespace WoFlagship
                     MessageBox.Show("Plugin init\n" + ex.Message);
 #endif
                     LogFactory.SystemLogger.Error($"插件'{plugin.Name}'初始化失败", ex);
+                }
+            }
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (generalViewModel.Docks != null && gameContext.GameData != null)
+            {
+                for (int i = 0; i < gameContext.GameData.DockArray.Count; i++)
+                {
+                    var dock = gameContext.GameData.DockArray[i];
+                    if(dock.State > 0)
+                    {
+                        TimeSpan remainTime;
+                        if (dock.CompleteTime > DateTime.Now)
+                        {
+                            remainTime = dock.CompleteTime - DateTime.Now;
+                        }
+                        else {
+                            remainTime = TimeSpan.FromTicks(0);
+                        }
+                        generalViewModel.Docks[i].RemainingTime = String.Format("{0:00}:{1:00}:{2:00}", (int)(remainTime.TotalHours), remainTime.Minutes, remainTime.Seconds); 
+                    }
                 }
             }
         }
@@ -201,6 +231,25 @@ namespace WoFlagship
                 }
                 else
                     generalViewModel.QuestList[i].Reset();
+            }
+
+            //入渠相关
+            for(int i=0; i<gameData.DockArray.Count; i++)
+            {
+                var dock = gameData.DockArray[i];
+                if (dock.State == -1)
+                {
+                    generalViewModel.Docks[i].Lock();
+                }
+                else if (dock.State == 0)
+                {
+                    generalViewModel.Docks[i].Empty();
+                }
+                else
+                {
+                    generalViewModel.Docks[i].ShipName = gameData.GetShipName(dock.ShipId);
+                    generalViewModel.Docks[i].CompleteTime = dock.CompleteTime.ToString("yyyy-MM-dd HH:mm:ss");
+                }
             }
         }
 
@@ -316,6 +365,7 @@ namespace WoFlagship
                 else
                     line.Foreground = Brushes.Red;
                 Txt_MainLogger.Inlines.Add(line);
+                Txt_MainLogger.Inlines.Add("剩余任务数：" + arg1.TaskRemaining + "\n");
                 if(Txt_MainLogger.Parent is ScrollViewer)
                 {
                     ScrollViewer sv = Txt_MainLogger.Parent as ScrollViewer;
@@ -722,6 +772,5 @@ namespace WoFlagship
             me.ShowDialog();
         }
 
-        
     }
 }

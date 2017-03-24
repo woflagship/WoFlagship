@@ -58,6 +58,10 @@ namespace WoFlagship.Plugins.ItemInfo
                     {
                         if (itemNo > 0)
                         {
+                            if (!gameData.OwnedSlotDictionary.ContainsKey(itemNo))
+                            {
+                                continue;
+                            }
                             var itemId = gameData.OwnedSlotDictionary[itemNo].SlotItemId;
                             if (!belongDic.ContainsKey(itemId))
                                 belongDic.Add(itemId, new List<int>());

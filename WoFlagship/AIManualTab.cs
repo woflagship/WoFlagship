@@ -71,6 +71,13 @@ namespace WoFlagship
             taskExecutor.EnqueueTask(task);
         }
 
+        //阵型选择
+        private void Btn_AIManual_Battle_Formation_Click(object sender, RoutedEventArgs e)
+        {
+            BattleFormationTask task = new BattleFormationTask(Cbx_AIManual_Battle_Formation.SelectedIndex+1);
+            taskExecutor.EnqueueTask(task);
+        }
+
         //进击
         private void Btn_AIManual_Battle_Next_Click(object sender, RoutedEventArgs e)
         {
@@ -96,6 +103,13 @@ namespace WoFlagship
         private void Btn_AIManual_Battle_Night_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Night);
+            taskExecutor.EnqueueTask(task);
+        }
+
+        //跳过过场
+        private void Btn_AIManual_Battle_Skip_Click(object sender, RoutedEventArgs e)
+        {
+            BattleSkipTask task = new BattleSkipTask();
             taskExecutor.EnqueueTask(task);
         }
 
@@ -125,6 +139,25 @@ namespace WoFlagship
                 Txt_AIManual_Remodel_Item4_name.Text = getItemName(Txt_AIManual_Remodel_Item4);
             }
         }
+
+        //入渠
+        private void Btn_AIManual_Repair_Click(object sender, RoutedEventArgs e)
+        {
+            int shipNo = int.Parse(Txt_AIManual_Repair_ShipNo.Text);
+            int dock = int.Parse(Txt_AIManual_Repair_Dock.Text);
+            RepairTask task = new RepairTask(shipNo, dock-1, false);
+            taskExecutor.EnqueueTask(task);
+        }
+
+
+        private void Txt_AIManual_Repair_ShipNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(Txt_AIManual_Repair_Ship_name != null)
+            {
+                Txt_AIManual_Repair_Ship_name.Text = getShipName(Txt_AIManual_Repair_ShipNo);
+            }
+        }
+
 
         private string getItemName(TextBox tb)
         {

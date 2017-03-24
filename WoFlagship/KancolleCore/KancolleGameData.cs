@@ -48,6 +48,8 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public ReadOnlyCollection<int> UnEquipedSlotArray { get; internal set; } = new ReadOnlyCollection<int>(new List<int>());
 
+        public ReadOnlyCollection<KancolleDockData> DockArray { get; internal set; } = new ReadOnlyCollection<KancolleDockData>(new KancolleDockData[0]);
+
         #region public methods
         /// <summary>
         /// 从ownedShip获得数据库的shipData，若不存在返回null
@@ -871,5 +873,44 @@ namespace WoFlagship.KancolleCore
             Info = mst_slotitem_item.api_info;
             UseBull = mst_slotitem_item.api_usebull;
         }
+    }
+
+    /// <summary>
+    /// 入渠信息
+    /// </summary>
+    public class KancolleDockData
+    {
+        /// <summary>
+        /// 入渠的舰娘ownedNo
+        /// </summary>
+        public int ShipId { get; private set; }
+
+        /// <summary>
+        /// 完成时间
+        /// </summary>
+        public DateTime CompleteTime { get; private set; }
+
+        /// <summary>
+        /// -1:未拥有；0：已拥有，且空着；1：已拥有，但是被占用
+        /// </summary>
+        public int State { get; private set; }
+
+        public KancolleDockData(api_ndock_item dock)
+        {
+            ShipId = dock.api_id;
+            CompleteTime = ParseLongTime(dock.api_complete_time);
+            State = dock.api_state;
+        }
+
+
+        public static DateTime ParseLongTime(long time)
+        {
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            long lTime = long.Parse(time + "0000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            DateTime dtResult = dtStart.Add(toNow);
+            return dtResult;
+        }
+    
     }
 }

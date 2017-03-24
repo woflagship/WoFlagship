@@ -84,9 +84,11 @@
         Remodel = 0x40,//改装
         Remodel_ItemList = 0x41,//装备列表
         Remodel_ItemList_Decide = 0x42,//装备详细，决定按钮
-        Remodel_ItemList_Other_Decide,//奖装备从别人那拿过来
+        Remodel_ItemList_Other_Decide = 0x43,//奖装备从别人那拿过来
 
         RepairMain = 0x50,//入渠
+        Repair_ShipList = 0x51,//舰娘列表
+
         ArsenalMain = 0x60,//工厂,
         SallyMain = 0x70,//任务选择
 
@@ -113,10 +115,13 @@
     {
         Unknown,
         Organize_SortByNew,
+        
 
         Remodel_ItemList_Normal,//装备列表（一般情况）
         Remodel_ItemList_Other,//装备列表（已被别人装备）
-        
+
+        Repair_SortByNew,
+
         Map_Start_True,
         Map_Start_False,
 

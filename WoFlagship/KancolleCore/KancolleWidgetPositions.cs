@@ -55,6 +55,15 @@ namespace WoFlagship.KancolleCore
         public readonly static Point Remodel_Change_Other_Decide = new Point(315, 320);
         public readonly static Point[] Remodel_RemoveItem = new Point[] { new Point(545, 175), new Point(545, 210) , new Point(545, 245) , new Point(545, 280) };
 
+        //入渠
+        public readonly static Point[] Repair_Docks = new Point[] { new Point(240, 160), new Point(240, 240), new Point(240, 320), new Point(240, 400) };
+        public readonly static Point[] Repair_FastRepairs = new Point[] { new Point(750, 160), new Point(750, 240), new Point(750, 320), new Point(750, 400) };
+        public readonly static Point Repair_ShipList_SortMode = new Point(770, 110);
+        public readonly static Point[] Repair_ShipList = new Point[] { new Point(570, 150), new Point(570, 180), new Point(570, 210), new Point(570, 240), new Point(570, 270), new Point(570, 300), new Point(570, 330), new Point(570, 360), new Point(570, 390), new Point(570, 420) };
+        public readonly static Point Repair_Ships_FirstPage = new Point(430, 460);
+        public readonly static Point Repair_Ships_Next5Page = new Point(680, 460);
+        public readonly static Point[] Repair_Ships_Pages = new Point[] { new Point(510, 460), new Point(545, 460), new Point(580, 460), new Point(615, 460), new Point(650, 460)};
+
         public readonly static Point Sally_Map = new Point(220, 220);
         public readonly static Point Sally_Practice = new Point(450, 220);
         public readonly static Point Sally_Mission = new Point(680, 220);
@@ -89,6 +98,7 @@ namespace WoFlagship.KancolleCore
         public readonly static Point Battle_LeftChoice = new Point(295, 235);
         public readonly static Point Battle_RightChoice = new Point(505, 235);
         public readonly static Point[] Battle_Formation = new Point[] { new Point(450,185), new Point(580,185), new Point(710,185), new Point(530,345), new Point(650, 345)};
+        public readonly static Rect Battle_SafeRect = new Rect(650, 330, 100, 100);
 
 
         public readonly static Point Quest = new Point(555, 50);

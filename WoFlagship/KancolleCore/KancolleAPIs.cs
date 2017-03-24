@@ -245,6 +245,7 @@ namespace WoFlagship.KancolleCore
     {
         public api_material_item[] api_material { get; set; }
         public api_deck_port_item[] api_deck_port { get; set; }
+        //都是4个元素，没开的渠state为-1，开了的为0
         public api_ndock_item[] api_ndock { get; set; }
         public api_ship_item[] api_ship { get; set; }
         public api_basic api_basic { get; set; }
@@ -273,9 +274,18 @@ namespace WoFlagship.KancolleCore
     {
         public int api_member_id { get; set; }
         public int api_id { get; set; }
+        /// <summary>
+        /// -1:未拥有；0：已拥有，且空着；1：已拥有，但是被占用
+        /// </summary>
         public int api_state { get; set; }
         public int api_ship_id { get; set; }
+        /// <summary>
+        /// 完成时间
+        /// </summary>
         public long api_complete_time { get; set; }
+        /// <summary>
+        /// 日本时间
+        /// </summary>
         public string api_complete_time_str { get; set; }
         public int api_item1 { get; set; }
         public int api_item2 { get; set; }
@@ -442,7 +452,26 @@ namespace WoFlagship.KancolleCore
 
     #endregion
 
-    [Serializable]
+    #region api_req_kaisou/slot_deprive
+    public class api_slot_deprive_data
+    {
+        public api_slot_deprive_ship_data api_ship_data { get; set; }
+        public api_slot_deprive_unset_list api_unset_list { get; set; }
+    }
+
+    public class api_slot_deprive_ship_data
+    {
+        public api_ship_item api_unset_ship { get; set; }
+        public api_ship_item api_set_ship { get; set; }
+    }
+
+    public class api_slot_deprive_unset_list {
+        public int api_type3No { get; set; }
+        public int[] api_slot_list { get; set; }
+    }
+
+    #endregion
+
     public class api_ship_item
     {
         /// <summary>

@@ -51,7 +51,7 @@ namespace WoFlagship.KancolleCore
                     UpdateMaterial(port_data.api_material);
                     UpdatePort(port_data);
                     UpdateDeck(port_data.api_deck_port);
-                   
+                    UpdateDock(port_data.api_ndock);
                     break;
                 case "api_req_hensei/change"://舰队编成修改
                     UpdateDeck(requestInfo.Data);
@@ -67,6 +67,10 @@ namespace WoFlagship.KancolleCore
                     var getmember_data = api_object.ToObject<api_requireinfo_data>();
                     UpdateOwnedSlotDictionary(getmember_data.api_slot_item);
                     break;
+                case "api_get_member/slot_item":
+                    var slot_items = api_object.ToObject<api_slot_item_item[]>();
+                    UpdateOwnedSlotDictionary(slot_items);
+                    break;
                 case "api_get_member/questlist":
                     var questlist_data = api_object.ToObject<api_questlist_data>();
                     UpdateQuest(questlist_data);
@@ -79,6 +83,15 @@ namespace WoFlagship.KancolleCore
                     var ship3_data = api_object.ToObject<api_ship3_data>();
                     UpdateShip3(ship3_data);
                     break;
+                case "api_req_kaisou/slot_deprive"://更换在已有舰娘身上的装备
+                    var deprive_data = api_object.ToObject<api_slot_deprive_data>();
+                    UpdateDeprived(deprive_data);
+                    break;
+                case "api_get_member/ndock"://获取入渠信息
+                    var ndock = api_object.ToObject<api_ndock_item[]>();
+                    UpdateDock(ndock);
+                    break;
+               
                 default:
                     gameDataUpdated = false;
                     break;
@@ -86,7 +99,7 @@ namespace WoFlagship.KancolleCore
             if (gameDataUpdated)
             {
                 //更新装备情况
-                UpadteOwnedSotItemEquipInfo();
+                UpadteOwnedSlotItemEquipInfo();
   
                 try
                 {
@@ -356,6 +369,16 @@ namespace WoFlagship.KancolleCore
             }
         }
 
+        private void UpdateDock(api_ndock_item[] api_docks)
+        {
+            KancolleDockData[] docks = new KancolleDockData[api_docks.Length];
+            for(int i=0; i<api_docks.Length; i++)
+            {
+                docks[i] = new KancolleDockData(api_docks[i]);
+            }
+            gameData.DockArray = new ReadOnlyCollection<KancolleDockData>(docks);
+        }
+
         /// <summary>
         /// 更新任务信息
         /// </summary>
@@ -393,7 +416,7 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 更新装备是否倍装备的情况，需要放在api处理switch之后
         /// </summary>
-        private void UpadteOwnedSotItemEquipInfo()
+        private void UpadteOwnedSlotItemEquipInfo()
         {
             Dictionary<int, int> equipDic = new Dictionary<int, int>();
             List<int> unEquipArray = new List<int>();
@@ -559,6 +582,13 @@ namespace WoFlagship.KancolleCore
             //}
         }
 
+        private void UpdateDeprived(api_slot_deprive_data deprive)
+        {
+            var dic = gameData.OwnedShipDictionary.ToDictionary(k => k.Key, k => k.Value);
+            dic[deprive.api_ship_data.api_set_ship.api_id] = new KancolleShip(deprive.api_ship_data.api_set_ship);
+            dic[deprive.api_ship_data.api_unset_ship.api_id] = new KancolleShip(deprive.api_ship_data.api_unset_ship);
+            gameData.OwnedShipDictionary = new ReadOnlyDictionary<int, KancolleShip>(dic);
+        }
         #endregion
     }
 }

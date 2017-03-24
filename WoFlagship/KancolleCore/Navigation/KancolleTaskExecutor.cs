@@ -20,6 +20,11 @@ namespace WoFlagship.KancolleCore.Navigation
         /// </summary>
         public double ActionTimeout { get; set; } = 10000;
 
+        /// <summary>
+        /// 战斗之间的转场间隔，比如等待罗盘娘，等待新舰娘等时间间隔
+        /// </summary>
+        public double BattleSkipTimeout { get; set; } = 10000;
+
         private Thread aiThread = null;
         private SimplePriorityQueue<KancolleTask> taskQueue = new SimplePriorityQueue<KancolleTask>();
         private bool bExit = false;
@@ -36,6 +41,7 @@ namespace WoFlagship.KancolleCore.Navigation
         private Func<KancolleScene> GetCurrentScene;
         private Func<KancolleGameData> GetGameData;
 
+        private Random random = new Random();
 
         protected KancolleScene CurrentScene
         {
@@ -146,6 +152,10 @@ namespace WoFlagship.KancolleCore.Navigation
                 else if(currentTask is RemodelTask)
                 {
                     result = Remodel(currentTask as RemodelTask);
+                }
+                else if(currentTask is RepairTask)
+                {
+                    result = Repair(currentTask as RepairTask);
                 }
 
                 if(result == null)
@@ -445,9 +455,11 @@ namespace WoFlagship.KancolleCore.Navigation
         {
            
             bool result;
+            string taskContent = "作战行动";
             if(task is BattleChoiceTask)
             {
                 var t = task as BattleChoiceTask;
+                taskContent = $"作战行动【{t.BattleChoice.ToString()}】";
                 if(t.BattleChoice == BattleChoiceTask.BattleChoices.Back || t.BattleChoice == BattleChoiceTask.BattleChoices.Night)
                 {
                     //夜战选择
@@ -475,13 +487,39 @@ namespace WoFlagship.KancolleCore.Navigation
             else if(task is BattleFormationTask)
             {
                 var t = task as BattleFormationTask;
+                if(t.Formation<=0 || t.Formation>5)
+                    return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"阵型参数错误，应为1-5，实际为【{t.Formation}】", IllegalFormation);
+                taskContent = $"阵型选择【{t.Formation}】";
                 result = WaitForScene(KancolleSceneTypes.Battle_Formation, ActionTimeout);
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Battle_Formation}】不符", UnexceptedScene);
                 actionExector.Execute(KancolleWidgetPositions.Battle_Formation[t.Formation-1]);
             }
+            else if(task is BattleSkipTask)
+            {
+                //var t = task as BattleSkipTask;
+                taskContent = "跳过战斗过场";
+                DateTime start = DateTime.Now;
+                while ((DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
+                {
+                    Thread.Sleep(500);
+                    //一直点击屏幕空白处，直到场景跳转为已知，且不为罗盘娘界面
+                    if (CurrentScene != KancolleSceneTypes.Unknown && CurrentScene != KancolleSceneTypes.Battle_Compass)
+                        break;
+                    actionExector.Execute(GetBattleRandomSafePoint());            
+                }
+  
+            }
 
-            return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"作战行动{task.GetType().Name}完成", Success);
+            return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"{taskContent}完成", Success);
+        }
+
+        private Point GetBattleRandomSafePoint()
+        {
+            double randX = random.NextDouble();
+            double randY = random.NextDouble();
+            var rect = KancolleWidgetPositions.Battle_SafeRect;
+            return new Point(rect.X + rect.Width * randX, rect.Y + rect.Height * randY);
         }
 
         //改装
@@ -625,6 +663,65 @@ namespace WoFlagship.KancolleCore.Navigation
             }
 
             return new KancolleTaskResult(task, KancolleTaskResultType.Success, "改装成功", Success);
+        }
+
+        //入渠
+        private KancolleTaskResult Repair(RepairTask task)
+        {
+            KancolleTaskResult tresult;
+            //先到入渠界面
+            tresult = ReachScene(KancolleSceneTypes.RepairMain);
+            if (!tresult.IsSuccess)
+                return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
+
+            Thread.Sleep(500);
+            actionExector.Execute(KancolleWidgetPositions.Repair_Docks[task.Dock]);
+
+            var sortedShip = (from s in GameData.OwnedShipDictionary.Values
+                              orderby s.No descending
+                              select s).ToArray();//按照降序排列，和new的顺序相同
+            Thread.Sleep(1000);
+            //将排序方式改为new
+            DateTime start = DateTime.Now;
+            while (CurrentScene.SceneState != KancolleSceneStates.Repair_SortByNew && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
+            {
+                //点击变更排序
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList_SortMode));
+                Thread.Sleep(1000);
+            }
+
+            if (CurrentScene.SceneState != KancolleSceneStates.Repair_SortByNew)
+                return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景状态【{CurrentScene.SceneState}】与预期场景状态【{KancolleSceneStates.Repair_SortByNew}】不符", UnexceptedState);
+
+            int index = indexOfShips(sortedShip, task.ShipNo);
+            if (index == -1)//没找到
+                return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未在已有舰娘中找到舰娘序号【{task.ShipNo}】", UnfoundShipNo);
+
+            int maxPage = sortedShip.Length / 10;//最大的页数
+            int page = index / 10;//所在的页数，每页最多可以放10个
+            Tuple<int, int> pageTurn = getPageTurn(maxPage, page);
+            int page5 = pageTurn.Item1;//每5页翻一次
+            int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
+            int item = index % 10;//每页第几个
+            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_FirstPage));//转到第1页
+
+            Thread.Sleep(1000);
+            for (int p = 0; p < page5; p++)//先5页5页的翻
+            {
+                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Next5Page));
+                Thread.Sleep(1000);
+            }
+
+
+            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Pages[pageIn5]));
+            Thread.Sleep(1000);
+
+            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList[item]));
+            Thread.Sleep(500);
+            //actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair));
+            //bool result = LockNowAndWaitForResponse();
+
+            return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"入渠舰娘【{task.ShipNo}】于【{task.Dock}】成功", Success);
         }
 
         private int indexOfItems(KancolleSlotItem[] items, int itemNo)

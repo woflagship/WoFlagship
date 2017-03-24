@@ -4,28 +4,34 @@
     {
         public GeneralViewModel()
         {
-            for(int i=0; i<QuestList.Length; i++)
+            for (int i = 0; i < QuestList.Length; i++)
             {
                 QuestList[i] = new QuestViewModel();
                 QuestList[i].Reset();
             }
 
-            for(int i=0; i<Decks.Length; i++)
+            for (int i = 0; i < Decks.Length; i++)
             {
                 Decks[i] = new DeckViewModel();
-                Decks[i].Name = (i+1) + "";
+                Decks[i].Name = (i + 1) + "";
             }
-            
+
+            for(int i=0; i<Docks.Length; i++)
+            {
+                Docks[i] = new DockViewModel();
+                Docks[i].ShipName = "未解锁";
+            }
+
         }
 
         private string _level;
-        public string Level { get { return _level; } set { _level = value;OnPropertyChanged(); } }
+        public string Level { get { return _level; } set { _level = value; OnPropertyChanged(); } }
 
         private string _rank;
         public string Rank { get { return _rank; } set { _rank = value; OnPropertyChanged(); } }
 
         private string _nickName;
-        public string NickName { get { return _nickName; } set { _nickName = value;OnPropertyChanged(); } }
+        public string NickName { get { return _nickName; } set { _nickName = value; OnPropertyChanged(); } }
 
         private int _shipCount;
         public int ShipCount { get { return _shipCount; } set { _shipCount = value; OnPropertyChanged(); } }
@@ -56,7 +62,7 @@
         public int Gaixiu { get { return _gaixiu; } set { _gaixiu = value; OnPropertyChanged(); } }
 
         private int _kaifa;
-        public int Kaifa { get { return _kaifa; } set { _kaifa = value;OnPropertyChanged(); } }
+        public int Kaifa { get { return _kaifa; } set { _kaifa = value; OnPropertyChanged(); } }
 
         private int _xiufu;
         public int Xiufu { get { return _xiufu; } set { _xiufu = value; OnPropertyChanged(); } }
@@ -69,6 +75,9 @@
 
         private DeckViewModel[] _decks = new DeckViewModel[4];
         public DeckViewModel[] Decks { get { return _decks; } set { _decks = value; OnPropertyChanged(); } }
+
+        private DockViewModel[] _docks = new DockViewModel[4];
+        public DockViewModel[] Docks { get{ return _docks; } set{_docks=value; OnPropertyChanged(); } }
     }
 
     public class QuestViewModel : ViewModelBase
@@ -191,5 +200,32 @@
             return ship;
         }
     }
+
+    public class DockViewModel : ViewModelBase
+    {
+        private string _ShipName;
+        public string ShipName { get { return _ShipName; } set { _ShipName = value; OnPropertyChanged(); } }
+
+        private string _CompleteTime;
+        public string CompleteTime { get { return _CompleteTime; } set { _CompleteTime = value; OnPropertyChanged(); } }
+
+        private string _RemainingTime;
+        public string RemainingTime { get { return _RemainingTime; } set { _RemainingTime = value; OnPropertyChanged(); } }
+
+        public void Lock()
+        {
+            ShipName = "未解锁";
+            CompleteTime = "";
+            RemainingTime = "";
+        }
+
+        public void Empty()
+        {
+            ShipName = "空闲";
+            CompleteTime = "";
+            RemainingTime = "";
+        }
+    }
+
 
 }

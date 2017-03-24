@@ -19,8 +19,11 @@
             <!--<Canvas Name="Grid_PaintCanvas" Width="800" Height="480" Margin="20,0,0,0">
                 <Image Name="Img_Filter" Width="800" Height="480" />
             </Canvas>-->
-            <ScrollViewer Width="800" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
+            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
                 <TextBlock Name="Txt_MainLogger" />
+            </ScrollViewer>
+            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
+                <TextBox Name="Txt_Battle" IsReadOnly="True"/>
             </ScrollViewer>
         </StackPanel>
         <StackPanel Orientation="Horizontal"  Grid.Row="1" Margin="5">
@@ -131,11 +134,30 @@
                                         </DataTemplate>
                                     </TabControl.ContentTemplate>
                                 </TabControl>
+                                <TabControl Grid.Column="2">
+                                    <TabItem Header="入渠">
+                                        <ListBox Name="Lb_Dock" HorizontalContentAlignment="Stretch">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid HorizontalAlignment="Stretch">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="120"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label  Content="{Binding ShipName}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding CompleteTime}"/>
+                                                        <Label Grid.Column="1" Content="{Binding RemainingTime}" Height="30" HorizontalAlignment="Right" VerticalContentAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </TabItem>
+                                    <TabItem Header="建造">
+         
+                                    </TabItem>
+                                </TabControl>
                             </Grid>
                         </Grid>
-                        <Grid Grid.Column="1">
-                            <TextBox Name="Txt_Battle" IsReadOnly="True"/>
-                        </Grid>
+                       
                     </Grid>
                 </TabItem>
                 <TabItem Name="Ti_AIs">
@@ -195,10 +217,19 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Label Content="战斗" Width="60" Height="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="DimGray" BorderThickness="1"/>
+                                    <Button Content="阵型" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Formation_Click"/>
+                                    <ComboBox Name="Cbx_AIManual_Battle_Formation" SelectedIndex="0" VerticalContentAlignment="Center" Width="60">
+                                        <ComboBoxItem Content="单纵" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <ComboBoxItem Content="复纵" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <ComboBoxItem Content="轮形" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <ComboBoxItem Content="梯形" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                        <ComboBoxItem Content="单横" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+                                    </ComboBox>
                                     <Button Content="进击" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Next_Click"/>
                                     <Button Content="回港" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Return_Click"/>
                                     <Button Content="撤退" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Back_Click"/>
                                     <Button Content="夜战" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Night_Click"/>
+                                    <Button Content="跳过过场" Width="60"  Margin="5,0,0,0" Click="Btn_AIManual_Battle_Skip_Click"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="5">
                                     <Button Content="改装" Width="60" Height="30"  Click="Btn_AIManual_Remodel_Click"/>
@@ -217,6 +248,15 @@
                                     <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item3_name" IsReadOnly="True"/>
                                     <TextBox Width="100" VerticalContentAlignment="Center" Text="未知" Name="Txt_AIManual_Remodel_Item4_name" IsReadOnly="True"/>
 
+                                </StackPanel>
+                                <StackPanel  Orientation="Horizontal" Margin="5">
+                                    <Button Content="入渠" Width="60" Height="30"  Click="Btn_AIManual_Repair_Click"/>
+                                    <Label Content="舰娘(ownedNo)" VerticalAlignment="Center"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Repair_ShipNo" TextChanged="Txt_AIManual_Repair_ShipNo_TextChanged"/>
+                                    <Label Content="入渠位置(1~4)"  Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Repair_Dock"/>
+                                    <Label Content="舰娘名" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                    <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Repair_Ship_name" IsReadOnly="True"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

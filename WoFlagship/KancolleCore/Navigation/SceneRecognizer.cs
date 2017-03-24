@@ -7,7 +7,7 @@ namespace WoFlagship.KancolleCore.Navigation
 {
     public class SceneRecognizer
     {
-        public string ComparisonFolder { get; set; } = "Comparison";
+        public const string ComparisonFolder = "Comparison";
 
         private Rectangle Rect_WholeScreen { get; set; } = new Rectangle(0, 0, 800, 480);
         private Rectangle Rect_MainPort_Title { get; set; } = new Rectangle(0, 0, 800, 70);
@@ -26,12 +26,15 @@ namespace WoFlagship.KancolleCore.Navigation
         private Rectangle Rect_Remodel_ItemList_Decide = new Rectangle(640, 420, 110, 60);
         private Rectangle Rect_Remodel_ItemList_Other_Decide = new Rectangle(250, 300, 130, 40);
 
+        private Rectangle Rect_Repair_ShipSelect = new Rectangle(400, 100, 310, 20);
+        private Rectangle Rect_Repair_Sort = new Rectangle(750, 105, 45, 15);
+
         private Rectangle Rect_Mission_Decide { get; set; } = new Rectangle(620, 420, 120, 60);
-        private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 190, 60);
+        private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 170, 60);
 
         private Rectangle Rect_Map_Decide { get; set; } = new Rectangle(630, 420, 110, 60);
-        private Rectangle Rect_Map_Start { get; set; } = new Rectangle(530, 420, 190, 60);
-        private Rectangle Rect_Map_Start2 { get; set; } = new Rectangle(120, 105, 100, 25);//这块区域用于区分Mission_start
+        private Rectangle Rect_Map_Start { get; set; } = new Rectangle(530, 420, 170, 60);
+        private Rectangle Rect_Map_Start2 { get; set; } = new Rectangle(120, 105, 100, 25);//这块区域用于区分Mission_start（主要是false的情况）,因为两者比较像
 
         private Rectangle Rect_Battle_LeftChoice { get; set; } = new Rectangle(250, 190, 90, 90);
         private Rectangle Rect_Battle_RightChoice { get; set; } = new Rectangle(460, 190, 90, 90);
@@ -134,6 +137,17 @@ namespace WoFlagship.KancolleCore.Navigation
                     return scene;
                 }
 
+                //入渠，选择舰娘
+                if (SceneSimilarity(screenBitmap, Rect_Repair_ShipSelect, Repair_ShipSelect) > Threshold)
+                {
+                    scene.SceneType = KancolleSceneTypes.Repair_ShipList;
+                    maxSim = 0;
+                    sim = SceneSimilarity(screenBitmap, Rect_Repair_Sort, Repair_SortByNew);
+                    if (sim > maxSim && sim > Threshold) { maxSim = sim; scene.SceneState = KancolleSceneStates.Repair_SortByNew; }
+
+                    return scene;
+                }
+
                 if (SceneSimilarity(screenBitmap, Rect_Organize_Change_Decide, Organize_Change_Decide_True) > Threshold || SceneSimilarity(screenBitmap, Rect_Organize_Change_Decide, Organize_Change_Decide_False) > Threshold)
                 {
                     scene.SceneType = KancolleSceneTypes.Organzie_Change_Decide;
@@ -219,7 +233,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (sim > maxSim) { maxSim = sim; scene.SceneType = KancolleSceneTypes.ArsenalMain; }
                 if (maxSim > Threshold)
                 {
-                    if(scene.SceneType == KancolleSceneTypes.Remodel)
+                    if (scene.SceneType == KancolleSceneTypes.Remodel)
                     {
                         //装备决定
                         if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Decide, Remodel_ItemList_Decide_True) > Threshold)
@@ -229,7 +243,7 @@ namespace WoFlagship.KancolleCore.Navigation
                         }
 
                         //装备列表
-                        if(SceneSimilarity(screenBitmap, Rect_Remodel_ItemList, Remodel_ItemList) > Threshold)
+                        if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList, Remodel_ItemList) > Threshold)
                         {
                             scene.SceneType = KancolleSceneTypes.Remodel_ItemList;
                             if (SceneSimilarity(screenBitmap, Rect_Remodel_ItemList_Mode, Remodel_ItemList_Normal) > Threshold)

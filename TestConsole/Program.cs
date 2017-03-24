@@ -211,9 +211,10 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            Test t = new Test();
-            t.TestAction += ttt;
-            t.invoke();
+            DateTime dt1 = new DateTime(1999, 10, 12, 3, 3, 3);
+            DateTime dt2 = new DateTime(2000,10,13,19,4,4);
+            var remainTime = dt2 - dt1;
+            Console.WriteLine(String.Format("{0:00}:{1:00}:{2:00}", (int)(remainTime.TotalHours), remainTime.Minutes, remainTime.Seconds));
             Console.Read();
         }
 

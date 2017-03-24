@@ -53,7 +53,8 @@ namespace WoFlagship.KancolleCore.Navigation
     {
         public const int Success = 0;
         public const int UnknownTaskType = 1;
-      
+
+        
 
         #region ReachScene
         public const int NoNavigationPath = 0x0101;
@@ -81,6 +82,10 @@ namespace WoFlagship.KancolleCore.Navigation
         #region Remodel
         public const int NoShipAtPosition = 0x3001;
         public const int UnfoundItemNo = 0x3002;
+        #endregion
+
+        #region Battle
+        public const int IllegalFormation = 0x4001;
         #endregion
     }
 }
