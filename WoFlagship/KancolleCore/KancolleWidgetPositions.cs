@@ -63,6 +63,9 @@ namespace WoFlagship.KancolleCore
         public readonly static Point Repair_Ships_FirstPage = new Point(430, 460);
         public readonly static Point Repair_Ships_Next5Page = new Point(680, 460);
         public readonly static Point[] Repair_Ships_Pages = new Point[] { new Point(510, 460), new Point(545, 460), new Point(580, 460), new Point(615, 460), new Point(650, 460)};
+        public readonly static Point Repair_Start = new Point(680,445);
+        public readonly static Point Repair_Ships_Return = new Point(200, 260);
+        public readonly static Point Repair_Start_Decide = new Point(500, 400);
 
         public readonly static Point Sally_Map = new Point(220, 220);
         public readonly static Point Sally_Practice = new Point(450, 220);

@@ -412,6 +412,8 @@
     <Resource Include="Resources\Images\Comparison\Remodel_ItemList_Other_Decide.bmp" />
     <None Include="Resources\Images\Comparison\Repair_SortByNew.bmp" />
     <None Include="Resources\Images\Comparison\Repair_ShipSelect.bmp" />
+    <None Include="Resources\Images\Comparison\Repair_Start_True.bmp" />
+    <None Include="Resources\Images\Comparison\Repair_Start_False.bmp" />
     <Content Include="Resources\PepperFlash\pepflashplayer.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

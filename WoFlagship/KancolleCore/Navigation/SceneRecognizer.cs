@@ -28,6 +28,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
         private Rectangle Rect_Repair_ShipSelect = new Rectangle(400, 100, 310, 20);
         private Rectangle Rect_Repair_Sort = new Rectangle(750, 105, 45, 15);
+        private Rectangle Rect_Repair_Start = new Rectangle(600, 410, 170, 70);
 
         private Rectangle Rect_Mission_Decide { get; set; } = new Rectangle(620, 420, 120, 60);
         private Rectangle Rect_Mission_Start { get; set; } = new Rectangle(530, 420, 170, 60);
@@ -126,6 +127,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     return scene;
                 }
 
+                //在编成、改装等界面选取列表时，左侧图片会变暗，所以识别会有些问题，因此就在这里识别列表选取的相关场景
                 //编成，修改舰娘
                 if (SceneSimilarity(screenBitmap, Rect_Organize_ShipSelect, Organize_ShipSelect) > Threshold)
                 {
@@ -145,6 +147,20 @@ namespace WoFlagship.KancolleCore.Navigation
                     sim = SceneSimilarity(screenBitmap, Rect_Repair_Sort, Repair_SortByNew);
                     if (sim > maxSim && sim > Threshold) { maxSim = sim; scene.SceneState = KancolleSceneStates.Repair_SortByNew; }
 
+                    return scene;
+                }
+                else if (SceneSimilarity(screenBitmap, Rect_Repair_Start, Repair_Start_True) > Threshold)
+                {
+                    scene.SceneType = KancolleSceneTypes.Repair_Start;
+                    scene.SceneState = KancolleSceneStates.Repair_Start_True;
+                    return scene;
+
+                }
+                else if (SceneSimilarity(screenBitmap, Rect_Repair_Start, Repair_Start_False) > Threshold)
+                {
+
+                    scene.SceneType = KancolleSceneTypes.Repair_Start;
+                    scene.SceneState = KancolleSceneStates.Repair_Start_False;
                     return scene;
                 }
 
@@ -252,6 +268,7 @@ namespace WoFlagship.KancolleCore.Navigation
                                 scene.SceneState = KancolleSceneStates.Remodel_ItemList_Other;
                             return scene;
                         }
+                       
                     }
                     return scene;
                 }

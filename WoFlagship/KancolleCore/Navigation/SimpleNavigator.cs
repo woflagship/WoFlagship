@@ -70,6 +70,8 @@ namespace WoFlagship.KancolleCore.Navigation
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.RepairMain, KancolleSceneTypes.Remodel, new KancolleAction(KancolleWidgetPositions.Left_Remodel)));
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.RepairMain, KancolleSceneTypes.ArsenalMain, new KancolleAction(KancolleWidgetPositions.Left_Arsenal)));
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.RepairMain, KancolleSceneTypes.Quest, new KancolleAction(KancolleWidgetPositions.Quest)));
+            navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Repair_ShipList, KancolleSceneTypes.RepairMain, new KancolleAction(KancolleWidgetPositions.Repair_Ships_Return)));
+            navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.Repair_Start, KancolleSceneTypes.Repair_ShipList, new KancolleAction(KancolleWidgetPositions.Repair_Ships_Return)));
 
             //工厂
             navGraph.AddEdge(new KancolleActionEdge(KancolleSceneTypes.ArsenalMain, KancolleSceneTypes.Port, new KancolleAction(KancolleWidgetPositions.Port)));

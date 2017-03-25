@@ -88,6 +88,7 @@
 
         RepairMain = 0x50,//入渠
         Repair_ShipList = 0x51,//舰娘列表
+        Repair_Start = 0x51,
 
         ArsenalMain = 0x60,//工厂,
         SallyMain = 0x70,//任务选择
@@ -121,6 +122,9 @@
         Remodel_ItemList_Other,//装备列表（已被别人装备）
 
         Repair_SortByNew,
+        Repair_Start_True,
+        Repair_Start_False,
+        
 
         Map_Start_True,
         Map_Start_False,
