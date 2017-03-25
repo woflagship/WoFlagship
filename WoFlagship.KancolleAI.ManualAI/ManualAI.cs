@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.KancolleCore.Navigation;
-using WoFlagship.Utils.BehaviorTree;
 
-namespace WoFlagship.KancolleAI.SimpleAI
+namespace WoFlagship.KancolleAI.ManualAI
 {
-    class SimpleAI : IKancolleAI
+    class ManualAI : IKancolleAI
     {
+        private ManualAIPanel panel = new ManualAIPanel();
+
+        public ManualAI()
+        {
+            panel.OnTaskGenerated += Panel_OnTaskGenerated;
+        }
+
         public UserControl AIPanel
         {
             get
             {
-                return null;
+                return panel;
             }
         }
 
@@ -24,7 +30,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
         {
             get
             {
-                return "测试用AI";
+                return "手动控制Task";
             }
         }
 
@@ -32,59 +38,58 @@ namespace WoFlagship.KancolleAI.SimpleAI
         {
             get
             {
-                return "测试用AI";
+                return "手动控制";
             }
         }
 
-       
+      
 
         public int Version
         {
             get
             {
-                return 1;
+                return 0;
             }
         }
 
+        event Action<KancolleTask> OnTaskGenerated;
         event Action<KancolleTask> IKancolleAI.OnTaskGenerated
         {
             add
             {
-                
+                OnTaskGenerated += value;
             }
 
             remove
             {
+                OnTaskGenerated -= value;
             }
-        }
-
-        public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
-        {
-           
         }
 
         public void OnGameDataUpdatedHandler(KancolleGameData gameData)
         {
-           
+            panel.UpdateGameContext(gameData);
         }
 
         public void Start()
         {
-            BehaviorTreeBuilder builder = new BehaviorTreeBuilder();
-            IBehaviorNode rootNode;
-            builder .Selector("总任务分类")
-                        .Sequence("做日常")
-                        .EndComposite()
-                        
-                        .Sequence("练级")
-                        .EndComposite()
+            
+        }
 
-                    .EndComposite(out rootNode);
+        private void Panel_OnTaskGenerated(KancolleTask obj)
+        {
+            OnTaskGenerated?.Invoke(obj);
         }
 
         public void Stop()
         {
-            
+            if (OnTaskGenerated != null)
+            {
+                foreach(var listener in OnTaskGenerated.GetInvocationList())
+                {
+                    OnTaskGenerated -= listener as Action<KancolleTask>;
+                }
+            }
         }
     }
 }

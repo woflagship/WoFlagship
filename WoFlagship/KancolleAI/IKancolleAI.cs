@@ -1,9 +1,11 @@
 ﻿using WoFlagship.KancolleCore;
 using System.Windows.Controls;
+using WoFlagship.KancolleCore.Navigation;
+using System;
 
 namespace WoFlagship.KancolleAI
 {
-    public interface IKancolleAI : IKancolleAPIReceiver, IKancolleGameDataReceiver
+    public interface IKancolleAI : IKancolleGameDataReceiver
     {
         /// <summary>
         /// ai名字
@@ -22,5 +24,7 @@ namespace WoFlagship.KancolleAI
         void Stop();
 
         UserControl AIPanel { get; }
+
+        event Action<KancolleTask> OnTaskGenerated;
     }
 }

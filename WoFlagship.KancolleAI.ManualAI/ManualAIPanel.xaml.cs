@@ -1,15 +1,42 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using WoFlagship.KancolleCore;
 using WoFlagship.KancolleCore.Navigation;
 
-
-namespace WoFlagship
+namespace WoFlagship.KancolleAI.ManualAI
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// ManualAIPanel.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ManualAIPanel : UserControl
     {
+        public event Action<KancolleTask> OnTaskGenerated;
+        
+
+        public ManualAIPanel()
+        {
+            InitializeComponent();
+        }
+
+        private KancolleGameData gameData = null;
+
+        public void UpdateGameContext(KancolleGameData gameData)
+        {
+            this.gameData = gameData;
+        }
+
         //编成
         private void Btn_AIManual_Organize_Click(object sender, RoutedEventArgs e)
         {
@@ -23,8 +50,8 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Organize_Ship5.Text),
                 int.Parse(Txt_AIManual_Organize_Ship6.Text),
             };
-            OrganizeTask task = new OrganizeTask(deck-1, ships);
-            taskExecutor.EnqueueTask(task);
+            OrganizeTask task = new OrganizeTask(deck - 1, ships);
+            OnTaskGenerated?.Invoke(task);
 
         }
 
@@ -45,9 +72,9 @@ namespace WoFlagship
         private string getShipName(TextBox tb)
         {
             int no;
-            if(int.TryParse(tb.Text, out no))
+            if (gameData != null && int.TryParse(tb.Text, out no))
             {
-                string name = gameContext.GameData.GetShipName(no);
+                string name = gameData.GetShipName(no);
                 if (name == null)
                     return "未知";
                 return name;
@@ -58,8 +85,8 @@ namespace WoFlagship
         private void Btn_AIManual_Supply_Click(object sender, RoutedEventArgs e)
         {
             int supplyDeck = int.Parse(Txt_AIManual_Supply_Deck.Text);
-            SupplyTask task = new SupplyTask(supplyDeck-1);
-            taskExecutor.EnqueueTask(task);
+            SupplyTask task = new SupplyTask(supplyDeck - 1);
+            OnTaskGenerated?.Invoke(task);
         }
 
         private void Btn_AIManual_Map_Click(object sender, RoutedEventArgs e)
@@ -67,50 +94,50 @@ namespace WoFlagship
             int area = int.Parse(Txt_AIManual_Map_Area.Text);
             int map = int.Parse(Txt_AIManual_Map_Map.Text);
             int deck = int.Parse(Txt_AIManual_Map_Deck.Text);
-            MapTask task = new MapTask(deck-1, area * 10 + map);
-            taskExecutor.EnqueueTask(task);
+            MapTask task = new MapTask(deck - 1, area * 10 + map);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //阵型选择
         private void Btn_AIManual_Battle_Formation_Click(object sender, RoutedEventArgs e)
         {
-            BattleFormationTask task = new BattleFormationTask(Cbx_AIManual_Battle_Formation.SelectedIndex+1);
-            taskExecutor.EnqueueTask(task);
+            BattleFormationTask task = new BattleFormationTask(Cbx_AIManual_Battle_Formation.SelectedIndex + 1);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //进击
         private void Btn_AIManual_Battle_Next_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Next);
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //回港
         private void Btn_AIManual_Battle_Return_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Return);
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //撤退
         private void Btn_AIManual_Battle_Back_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Back);
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //夜战
         private void Btn_AIManual_Battle_Night_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Night);
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //跳过过场
         private void Btn_AIManual_Battle_Skip_Click(object sender, RoutedEventArgs e)
         {
             BattleSkipTask task = new BattleSkipTask();
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         //改装
@@ -126,7 +153,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Remodel_Item4.Text),
             };
             RemodelTask task = new RemodelTask(deck - 1, position - 1, itemNos);
-            taskExecutor.EnqueueTask(task);
+            OnTaskGenerated?.Invoke(task);
         }
 
         private void Txt_AIManual_Remodel_Item_TextChanged(object sender, TextChangedEventArgs e)
@@ -145,14 +172,14 @@ namespace WoFlagship
         {
             int shipNo = int.Parse(Txt_AIManual_Repair_ShipNo.Text);
             int dock = int.Parse(Txt_AIManual_Repair_Dock.Text);
-            RepairTask task = new RepairTask(shipNo, dock-1, (bool)Chk_AIManual_Repair_UseFastRepair.IsChecked);
-            taskExecutor.EnqueueTask(task);
+            RepairTask task = new RepairTask(shipNo, dock - 1, (bool)Chk_AIManual_Repair_UseFastRepair.IsChecked);
+            OnTaskGenerated?.Invoke(task);
         }
 
 
         private void Txt_AIManual_Repair_ShipNo_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(Txt_AIManual_Repair_Ship_name != null)
+            if (Txt_AIManual_Repair_Ship_name != null)
             {
                 Txt_AIManual_Repair_Ship_name.Text = getShipName(Txt_AIManual_Repair_ShipNo);
             }
@@ -162,9 +189,9 @@ namespace WoFlagship
         private string getItemName(TextBox tb)
         {
             int no;
-            if (int.TryParse(tb.Text, out no))
+            if (gameData!= null && int.TryParse(tb.Text, out no))
             {
-                string name = gameContext.GameData.GetSlotItemName(no);
+                string name = gameData.GetSlotItemName(no);
                 if (name == null)
                     return "未知";
                 return name;

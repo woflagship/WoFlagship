@@ -205,17 +205,31 @@ namespace TestConsole
         }
     }
 
+    class TestEvent {
+        public event Action TestA;
+
+        public void Invoke()
+        {
+            TestA?.Invoke();
+        }
+    }
+    
+
     class Program
     {
         static readonly int[,] dd = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
 
         static void Main(string[] args)
         {
-            DateTime dt1 = new DateTime(1999, 10, 12, 3, 3, 3);
-            DateTime dt2 = new DateTime(2000,10,13,19,4,4);
-            var remainTime = dt2 - dt1;
-            Console.WriteLine(String.Format("{0:00}:{1:00}:{2:00}", (int)(remainTime.TotalHours), remainTime.Minutes, remainTime.Seconds));
+            TestEvent tv = new TestEvent();
+            tv.TestA += t;
+            tv.Invoke();
             Console.Read();
+        }
+
+        static void t()
+        {
+            Console.WriteLine("tetetetetet");
         }
 
         static void ttt(int i)

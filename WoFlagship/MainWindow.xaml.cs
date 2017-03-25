@@ -167,6 +167,11 @@ namespace WoFlagship
                 {
                     plugin.OnGameDataUpdated(generalViewModel, e.GameData);
                 }
+
+                if(currentAI != null)
+                {
+                    currentAI.OnGameDataUpdatedHandler(e.GameData);
+                }
             };
         }
 
@@ -257,7 +262,7 @@ namespace WoFlagship
         private void AiManager_OnAILoaded(List<IKancolleAI> obj)
         {
             aiNames.Clear();
-            aiNames.Add("手动控制");
+            //aiNames.Add("手动控制");
             foreach(var ai in obj)
             {
                 aiNames.Add(ai.Name);
@@ -714,7 +719,7 @@ namespace WoFlagship
             else
             {
                 //切换至新ai
-                if (lb.SelectedIndex > 0)
+                if (lb.SelectedIndex >= 0)//=0的情况下，永远不会有手动项，因为手动项已经被添加到了一般AI
                 {
                     if (GetCurrentScene() != KancolleSceneTypes.Port)
                     {
@@ -738,7 +743,11 @@ namespace WoFlagship
                         if(ai.AIPanel != null)
                             aiGrid.Children.Add(ai.AIPanel);
                         currentAI = ai;
+                        currentAI.Start();
+                        currentAI.OnGameDataUpdatedHandler(gameContext.GameData);
+                        currentAI.OnTaskGenerated += AITaskHandler;
                         aiButton.Content = ai.Name;
+                        
                     }
                     
                 }
@@ -772,5 +781,9 @@ namespace WoFlagship
             me.ShowDialog();
         }
 
+        private void AITaskHandler(KancolleTask task)
+        {
+            taskExecutor.EnqueueTask(task);
+        }
     }
 }

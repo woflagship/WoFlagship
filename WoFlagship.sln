@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoFlagship.Plugins.ItemInfo", "WoFlagship.Plugins.ItemInfo\WoFlagship.Plugins.ItemInfo.csproj", "{EE4B4214-B12C-4E88-8CCA-7ADBF05DF854}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoFlagship.KancolleAI.ManualAI", "WoFlagship.KancolleAI.ManualAI\WoFlagship.KancolleAI.ManualAI.csproj", "{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,14 @@ Global
 		{EE4B4214-B12C-4E88-8CCA-7ADBF05DF854}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE4B4214-B12C-4E88-8CCA-7ADBF05DF854}.Release|x86.ActiveCfg = Release|Any CPU
 		{EE4B4214-B12C-4E88-8CCA-7ADBF05DF854}.Release|x86.Build.0 = Release|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Debug|x86.Build.0 = Debug|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -66,7 +66,7 @@ namespace WoFlagship.KancolleCore.Navigation
         }
     }
 
-    class QuestTask : KancolleTask
+    public class QuestTask : KancolleTask
     {
         public QuestTask(int[] requireTasks)
         {
@@ -77,7 +77,7 @@ namespace WoFlagship.KancolleCore.Navigation
     /// <summary>
     /// 出击选择地图
     /// </summary>
-    class MapTask : KancolleTask
+    public class MapTask : KancolleTask
     {
         /// <summary>
         /// 出击的舰队，从0开始
@@ -104,12 +104,12 @@ namespace WoFlagship.KancolleCore.Navigation
     }
 
 
-    class BattleTask : KancolleTask
+    public class BattleTask : KancolleTask
     {
        
     }
 
-    class BattleChoiceTask : BattleTask
+    public class BattleChoiceTask : BattleTask
     {
         public enum BattleChoices
         {
@@ -142,7 +142,7 @@ namespace WoFlagship.KancolleCore.Navigation
         }
     }
 
-    class BattleFormationTask : BattleTask
+    public class BattleFormationTask : BattleTask
     {
         /// <summary>
         /// 单纵-1，复纵-2，轮形-3，梯形-4，单横-5
@@ -162,13 +162,13 @@ namespace WoFlagship.KancolleCore.Navigation
     /// <summary>
     /// 跳过战斗之间的画面，比如航线、出新舰娘等这些情况
     /// </summary>
-    class BattleSkipTask : BattleTask
+    public class BattleSkipTask : BattleTask
     {
 
     }
 
     //远征
-    class MissionTask : KancolleTask
+    public class MissionTask : KancolleTask
     {
         public int MissionId { get; private set; }
         public int MissionFleet { get; private set; }
@@ -194,7 +194,7 @@ namespace WoFlagship.KancolleCore.Navigation
         }
     }
 
-    class RemodelTask : KancolleTask
+    public class RemodelTask : KancolleTask
     {
         /// <summary>
         /// 要改装的船所在的港口，从0开始
@@ -226,7 +226,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
     }
 
-    class RepairTask : KancolleTask
+    public class RepairTask : KancolleTask
     {
         /// <summary>
         /// 需要入渠的舰娘no

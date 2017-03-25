@@ -717,14 +717,17 @@ namespace WoFlagship.KancolleCore.Navigation
             Thread.Sleep(1000);
 
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList[item]));
-            bool result = WaitForScene(KancolleSceneTypes.Repair_Start, ActionTimeout);
             Thread.Sleep(500);
             if(CurrentScene.SceneState != KancolleSceneStates.Repair_Start_True)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景状态【{CurrentScene.SceneState}】与预期场景状态【{KancolleSceneStates.Repair_Start_True}】不符", UnexceptedState);
+
+            if (task.UseFastRepair)
+                actionExector.Execute(KancolleWidgetPositions.Repair_Start_UseFastRepair);
+            Thread.Sleep(500);
             actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Start));
             Thread.Sleep(1000);
             actionExector.Execute(KancolleWidgetPositions.Repair_Start_Decide);
-            result = LockNowAndWaitForResponse();
+            bool result = LockNowAndWaitForResponse();
             if(!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
             Thread.Sleep(500);

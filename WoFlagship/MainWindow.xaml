@@ -163,7 +163,7 @@
                 <TabItem Name="Ti_AIs">
                     <TabItem.Template>
                         <ControlTemplate>
-                            <xctk:SplitButton Width="120" Content="手动控制"  Click="Btn_AIs_Click" Loaded="Btn_AIs_Loaded">
+                            <xctk:SplitButton Width="120" Content="AI选择"  Click="Btn_AIs_Click" Loaded="Btn_AIs_Loaded">
                                 <xctk:SplitButton.DropDownContent>
                                     <ListBox Width="120"  Loaded="Lb_AIs_Loaded" SelectionChanged="Lb_AIs_SelectionChanged"/>
                                 </xctk:SplitButton.DropDownContent>
@@ -171,7 +171,7 @@
                         </ControlTemplate>
                     </TabItem.Template>
                     <Grid>
-                        <Grid Name="Grid_ManualAI" >
+                        <Grid Name="Grid_ManualAI" Visibility="Collapsed">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="当前场景" Width="60"/>
@@ -255,6 +255,7 @@
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Repair_ShipNo" TextChanged="Txt_AIManual_Repair_ShipNo_TextChanged"/>
                                     <Label Content="入渠位置(1~4)"  Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     <TextBox Width="30" VerticalContentAlignment="Center" Text="1" Name="Txt_AIManual_Repair_Dock"/>
+                                    <CheckBox Content="高速修复" Name="Chk_AIManual_Repair_UseFastRepair" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                     <Label Content="舰娘名" Margin="10,0,0,0" VerticalAlignment="Center"/>
                                     <TextBox Width="50" Text="未知" VerticalContentAlignment="Center" Name="Txt_AIManual_Repair_Ship_name" IsReadOnly="True"/>
                                 </StackPanel>
