@@ -20,12 +20,20 @@ namespace WoFlagship.KancolleCore.Navigation
         /// 等待新Scenes响应的超时，单位为毫秒
         /// ActionTimeout为了容忍网络延迟，或者在切换过程中出现新的场景（一般这种情况需要修改navigator）
         /// </summary>
-        public double ActionTimeout { get; set; } = 10000;
+        public double ActionTimeout { get; private set; } = 10000;
 
         /// <summary>
         /// 战斗之间的转场间隔，比如等待罗盘娘，等待新舰娘等时间间隔
         /// </summary>
-        public double BattleSkipTimeout { get; set; } = 10000;
+        public double BattleSkipTimeout { get; private set; } = 10000;
+
+        /// <summary>
+        /// 当前剩余任务数
+        /// </summary>
+        public int TaskRemaining
+        {
+            get { return taskQueue.Count; }
+        }
 
         private Thread aiThread = null;
         private SimplePriorityQueue<KancolleTask> taskQueue = new SimplePriorityQueue<KancolleTask>();
@@ -101,10 +109,7 @@ namespace WoFlagship.KancolleCore.Navigation
             EnqueueTask(task);
         }
 
-        public int TaskRemaining
-        {
-            get { return taskQueue.Count; }
-        }
+       
 
         public void Start()
         {
@@ -177,6 +182,10 @@ namespace WoFlagship.KancolleCore.Navigation
                 else if(currentTask is RepairTask)
                 {
                     result = Repair(currentTask as RepairTask);
+                }
+                else if(currentTask is RefreshDataTask)
+                {
+                    result = RefreshData(currentTask as RefreshDataTask);
                 }
 
                 if(result == null)
@@ -754,6 +763,29 @@ namespace WoFlagship.KancolleCore.Navigation
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
             Thread.Sleep(500);
             return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"入渠舰娘【{task.ShipNo}】于【{task.Dock}】成功", Success);
+        }
+
+        private KancolleTaskResult RefreshData(RefreshDataTask task)
+        {
+            KancolleTaskResult result;
+            if(CurrentScene == KancolleSceneTypes.Port)
+            {
+                result = ReachScene(KancolleSceneTypes.Organize);
+                if (result.IsSuccess)
+                {
+                    Thread.Sleep(1000);
+                    result = ReachScene(KancolleSceneTypes.Port);
+                }
+            }
+            else
+            {
+                result = ReachScene(KancolleSceneTypes.Port);
+            }
+
+            if (result.IsSuccess)
+                return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"刷新成功", Success);
+            else
+                return result;
         }
 
         private int indexOfItems(KancolleSlotItem[] items, int itemNo)

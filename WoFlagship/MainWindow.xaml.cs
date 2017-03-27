@@ -85,7 +85,9 @@ namespace WoFlagship
             settingViewModel.WebSetting.ProxyHost = "127.0.0.1";
             settingViewModel.WebSetting.ProxyPort = 8099;
             settingViewModel.WebSetting.ProxyType = ProxyTypes.Http;
+
             InitializeComponent();
+            LogFactory.ConsoleLogger = new ConsoleLogger(Txt_MainLogger);
 
             battleContext.OnBattleHappened += BattleContext_OnBattleHappened;
 

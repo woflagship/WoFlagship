@@ -246,6 +246,7 @@
     <Compile Include="KancolleRequirement\ShipCondition.cs" />
     <Compile Include="KancolleRequirement\ShipConstraint.cs" />
     <Compile Include="KancolleCore\KancolleResponseFilter.cs" />
+    <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Logger\LogFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Plugins\PluginManager.cs" />
@@ -325,6 +326,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Log4Net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

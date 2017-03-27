@@ -14,8 +14,12 @@ namespace WoFlagship.Logger
         private readonly static ILog _systemLogger = LogManager.GetLogger("SystemLogger");
         private readonly static ILog _aiLogger = LogManager.GetLogger("AILogger");
 
-        public static ILog SystemLogger { get { return _systemLogger; } }
-        public static ILog AILogger { get { return _aiLogger; } }
+        //以下Logger用于系统内部使用
+        internal static ILog SystemLogger { get { return _systemLogger; } }
+        internal static ILog AILogger { get { return _aiLogger; } }
+
+        //控制台输出，用于给用户最常用的输出
+        public static ConsoleLogger ConsoleLogger { get; internal set; }
 
     }
 }

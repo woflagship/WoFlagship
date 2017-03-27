@@ -22,11 +22,9 @@ namespace WoFlagship.KancolleCore.Navigation
 
     public abstract class KancolleTask
     {
-        public DateTime TimeStamp{get; private set;} = DateTime.Now;
+        public DateTime TimeStamp { get; private set; } = DateTime.Now;
 
         public TaskPriority Priority { get; set; } = TaskPriority.Normal;
-
-        //public abstract bool IsTaskFinished();
     }
 
     public class OrganizeTask : KancolleTask
@@ -50,6 +48,7 @@ namespace WoFlagship.KancolleCore.Navigation
             OrganizedDeck = organizeDeck;
             Ships = ships;
         }
+
     }
 
     public class SupplyTask : KancolleTask
@@ -88,25 +87,25 @@ namespace WoFlagship.KancolleCore.Navigation
         /// 地图id
         /// </summary>
         public int MapId { get; private set; }
-       
 
-        public MapTask( int mapId)
+
+        public MapTask(int mapId)
         {
             MapId = mapId;
             Fleet = 0;
         }
 
-        public MapTask( int deck, int mapId)
+        public MapTask(int deck, int mapId)
         {
             Fleet = deck;
-            MapId = mapId;         
+            MapId = mapId;
         }
     }
 
 
-    public class BattleTask : KancolleTask
+    public abstract class BattleTask : KancolleTask
     {
-       
+
     }
 
     public class BattleChoiceTask : BattleTask
@@ -157,6 +156,7 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             Formation = formation;
         }
+
     }
 
     /// <summary>
@@ -172,10 +172,10 @@ namespace WoFlagship.KancolleCore.Navigation
     {
         public int MissionId { get; private set; }
         public int MissionFleet { get; private set; }
-       /// <summary>
-       /// 默认为第2舰队远征
-       /// </summary>
-       /// <param name="missionId">远征id</param>
+        /// <summary>
+        /// 默认为第2舰队远征
+        /// </summary>
+        /// <param name="missionId">远征id</param>
         public MissionTask(int missionId)
         {
             MissionId = missionId;
@@ -192,6 +192,8 @@ namespace WoFlagship.KancolleCore.Navigation
             MissionId = missionId;
             MissionFleet = missionFleet;
         }
+
+
     }
 
     public class RemodelTask : KancolleTask
@@ -224,6 +226,7 @@ namespace WoFlagship.KancolleCore.Navigation
             SlotItemNos = slotItemNos;
         }
 
+
     }
 
     public class RepairTask : KancolleTask
@@ -255,5 +258,11 @@ namespace WoFlagship.KancolleCore.Navigation
             Dock = dock;
             UseFastRepair = useFastRepair;
         }
+    }
+
+    /// <summary>
+    /// 用于手动刷新数据的任务
+    /// </summary>
+    public class RefreshDataTask : KancolleTask{
     }
 }

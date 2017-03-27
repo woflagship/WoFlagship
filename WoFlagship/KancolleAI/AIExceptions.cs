@@ -2,6 +2,7 @@
 
 namespace WoFlagship.KancolleAI
 {
+    [Serializable]
     class UnExpectedSceneException : Exception
     {
         public UnExpectedSceneException() : base() { }
