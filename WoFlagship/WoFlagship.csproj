@@ -190,6 +190,7 @@
     <Compile Include="AIManualTab.cs" />
     <Compile Include="KancolleAI\AIExceptions.cs" />
     <Compile Include="KancolleAI\AIManager.cs" />
+    <Compile Include="KancolleCore\IKancolleSceneRevceiver.cs" />
     <Compile Include="KancolleCore\IMetadata.cs" />
     <Compile Include="KancolleCore\KancolleBattle\Attack.cs" />
     <Compile Include="KancolleCore\KancolleBattle\AttackTypes.cs" />

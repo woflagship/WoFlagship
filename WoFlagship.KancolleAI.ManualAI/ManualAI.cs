@@ -52,19 +52,6 @@ namespace WoFlagship.KancolleAI.ManualAI
             }
         }
 
-        event Action<KancolleTask> OnTaskGenerated;
-        event Action<KancolleTask> IKancolleAI.OnTaskGenerated
-        {
-            add
-            {
-                OnTaskGenerated += value;
-            }
-
-            remove
-            {
-                OnTaskGenerated -= value;
-            }
-        }
 
         public void OnGameDataUpdatedHandler(KancolleGameData gameData)
         {
@@ -78,18 +65,17 @@ namespace WoFlagship.KancolleAI.ManualAI
 
         private void Panel_OnTaskGenerated(KancolleTask obj)
         {
-            OnTaskGenerated?.Invoke(obj);
+            KancolleTaskExecutor.Get().EnqueueTask(obj);
         }
 
         public void Stop()
         {
-            if (OnTaskGenerated != null)
-            {
-                foreach(var listener in OnTaskGenerated.GetInvocationList())
-                {
-                    OnTaskGenerated -= listener as Action<KancolleTask>;
-                }
-            }
+            
+        }
+
+        public void OnSceneUpdatedHandler(KancolleScene scene)
+        {
+            
         }
     }
 }

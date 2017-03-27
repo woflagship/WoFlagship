@@ -65,7 +65,7 @@ namespace WoFlagship
 
 
         private DispatcherTimer timer;
-        private KancolleTaskExecutor taskExecutor;
+        //private KancolleTaskExecutor taskExecutor;
 
         public MainWindow()
         {
@@ -121,9 +121,9 @@ namespace WoFlagship
                 }
                 catch (Exception ex)
                 {
-#if DEBUG
+
                     MessageBox.Show("Plugin init\n" + ex.Message);
-#endif
+
                     LogFactory.SystemLogger.Error($"插件'{plugin.Name}'初始化失败", ex);
                 }
             }
@@ -341,22 +341,34 @@ namespace WoFlagship
             webView.IsBrowserInitializedChanged += WebView_IsBrowserInitializedChanged;
             requsetHandler.OnAPIResponseReceived += RequsetHandler_OnAPIResponseReceived;
             webView.RequestHandler = requsetHandler;
-           
+            webView.FrameLoadEnd += WebView_FrameLoadEnd;
             webView.LoadError += WebView_LoadError;
             webView.MouseMove += WebView_MouseMove;
 
             actionExecutor = new KancolleActionExecutor(webView);
+            actionExecutor.OnActionExecuted += ActionExecutor_OnActionExecuted;
             try
             {
-                taskExecutor = new KancolleTaskExecutor(webView, () => GetCurrentScene(), () => gameContext.GameData);
-                taskExecutor.OnTaskFinished += TaskExecutor_OnTaskFinished;
-                taskExecutor.Start();
+                //创建单例类TaskExecutor，只能初始化这一次！访问方式为 KancolleTaskExecutor.Get()
+                new KancolleTaskExecutor(actionExecutor, () => GetCurrentScene(), () => gameContext.GameData);
+                KancolleTaskExecutor.Get().OnTaskFinished_Internal += TaskExecutor_OnTaskFinished;
+                KancolleTaskExecutor.Get().Start();
             }
             catch(Exception ex)
             {
 #if DEBUG
                 MessageBox.Show("taskExecutor启动失败\n" + ex.Message);
 #endif
+            }
+        }
+
+        
+
+        private void ActionExecutor_OnActionExecuted(KancolleAction obj)
+        {
+            if(currentAI != null)
+            {
+                currentAI.OnSceneUpdatedHandler(GetCurrentScene());
             }
         }
 
@@ -401,6 +413,15 @@ namespace WoFlagship
             }
         }
 
+        private void WebView_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
+        {
+            if (e.Frame.Name == "game_frame")
+            {
+                //在这里修正偏移
+                e.Frame.ExecuteJavaScriptAsync("document.getElementById('spacing_top').style.height='0px'");
+            }
+        }
+
         private void RequsetHandler_OnAPIResponseReceived(RequestInfo arg1, string arg2)
         {
             try
@@ -440,7 +461,7 @@ namespace WoFlagship
                 }
 
                 battleContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
-                taskExecutor.OnAPIResponseReceivedHandler(arg1, arg2, api);
+                KancolleTaskExecutor.Get().OnAPIResponseReceivedHandler(arg1, arg2, api);
             }
             catch(Exception ex)
             {
@@ -469,14 +490,7 @@ namespace WoFlagship
            
         }
 
-        
-        private void UpdatfePort(api_port_data portdata)
-        {
-            if(portdata != null)
-            {
-               
-            }
-        }
+       
 
 
         private void Btn_ShowDevTool_Click(object sender, RoutedEventArgs e)
@@ -682,7 +696,7 @@ namespace WoFlagship
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            taskExecutor?.Stop();
+            KancolleTaskExecutor.Get()?.Stop();
             sw.Close();
         }
 
@@ -743,23 +757,31 @@ namespace WoFlagship
                         if(ai.AIPanel != null)
                             aiGrid.Children.Add(ai.AIPanel);
                         currentAI = ai;
-                        currentAI.Start();
-                        currentAI.OnGameDataUpdatedHandler(gameContext.GameData);
-                        currentAI.OnTaskGenerated += AITaskHandler;
-                        aiButton.Content = ai.Name;
+                        try
+                        {
+                            currentAI.Start();
+                            currentAI.OnGameDataUpdatedHandler(gameContext.GameData);                        
+                            aiButton.Content = currentAI.Name;
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show("AI Change error\n" + ex.Message);
+                            LogFactory.SystemLogger.Error($"AI切换失败", ex);
+                            currentAI = null;
+                        }
                         
                     }
                     
                 }
-                else//切换至手动
-                {
-                    currentAI.Stop();
-                    aiGrid.Visibility = Visibility.Collapsed;
-                    Grid_ManualAI.Visibility = Visibility.Visible;
-                    Grid_ManualAI.IsEnabled = true;
-                    currentAI = null;
-                    aiButton.Content = aiNames[0];
-                }
+                //else//切换至手动
+                //{
+                //    currentAI.Stop();
+                //    aiGrid.Visibility = Visibility.Collapsed;
+                //    Grid_ManualAI.Visibility = Visibility.Visible;
+                //    Grid_ManualAI.IsEnabled = true;
+                //    currentAI = null;
+                //    aiButton.Content = aiNames[0];
+                //}
 
                 Tc_Tool.SelectedItem = Tc_Tool.FindName("Ti_AIs");
                 
@@ -781,9 +803,23 @@ namespace WoFlagship
             me.ShowDialog();
         }
 
-        private void AITaskHandler(KancolleTask task)
+        //重载ai
+        private void Btn_AIs_ReLoadAIs_Click(object sender, RoutedEventArgs e)
         {
-            taskExecutor.EnqueueTask(task);
+            try
+            {
+                if (currentAI != null)
+                {
+                    currentAI.Stop();
+                }
+
+                aiManager.LoadAIs();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("AI Reload\n" + ex.Message);
+                LogFactory.SystemLogger.Error($"AI重载失败", ex);
+            }
         }
     }
 }

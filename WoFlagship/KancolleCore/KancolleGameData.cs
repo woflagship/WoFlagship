@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Utils;
 
@@ -202,6 +203,31 @@ namespace WoFlagship.KancolleCore
                 return false;
             return CanShipEquipItem(ship.ShipId, item.Id);
         }
+
+        /// <summary>
+        /// 舰娘是否已经入渠
+        /// </summary>
+        /// <param name="shipNo"></param>
+        /// <returns></returns>
+        public bool IsShipRepairing(int shipNo)
+        {
+            for(int i=0; i<DockArray.Count; i++)
+            {
+                if (DockArray[i].State > 0 && DockArray[i].ShipId == shipNo)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 舰娘是否已经入渠
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        public bool IsShipRepairing(KancolleShip ship)
+        {
+            return IsShipRepairing(ship.No);
+        }
         #endregion
 
     }
@@ -341,6 +367,11 @@ namespace WoFlagship.KancolleCore
         public int NowHP { get; private set; }
 
         /// <summary>
+        /// 入渠所需时间
+        /// </summary>
+        public TimeSpan DockTime { get; private set; }
+
+        /// <summary>
         /// 当前装备,No集合
         /// </summary>
         public int[] Slot { get; private set; }
@@ -367,7 +398,9 @@ namespace WoFlagship.KancolleCore
             Locked = ship.api_locked == 0;
             MaxHP = ship.api_maxhp;
             NowHP = ship.api_nowhp;
+            DockTime = TimeSpan.FromMilliseconds(ship.api_ndock_time);
             Slot = ship.api_slot.ToArray();
+
             OnSlot = ship.api_onslot.ToArray();
         }
     }
@@ -897,7 +930,7 @@ namespace WoFlagship.KancolleCore
 
         public KancolleDockData(api_ndock_item dock)
         {
-            ShipId = dock.api_id;
+            ShipId = dock.api_ship_id;
             CompleteTime = ParseLongTime(dock.api_complete_time);
             State = dock.api_state;
         }

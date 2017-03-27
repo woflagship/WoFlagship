@@ -12,5 +12,10 @@
 5、生成平台改为合适的（x86）平台
 6、修改dll输出目录到WoFlagship的插件AI目录方便调试
 
+AI调试方式
+1、将AI工程设为启动项目
+2、修改VS调试选项：工具->选项->调试->常规->使用托管兼容模式 勾选
+3、运行WoFlagShip.exe，将AI工程附加到该进程进行调试
+
 Note:
 1、问题就在于[assembly: log4net.Config.XmlConfigurator(Watch = true)]，wpf编译会加载解析log4net，这样就会报错，在LogFactory中配置初始化

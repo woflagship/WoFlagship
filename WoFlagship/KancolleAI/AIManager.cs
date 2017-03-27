@@ -31,7 +31,8 @@ namespace WoFlagship.KancolleAI
                     {
                         try
                         {
-                            Assembly assembly = Assembly.LoadFile(dll.FullName);
+
+                            Assembly assembly = Assembly.Load(File.ReadAllBytes(dll.FullName));// Assembly.LoadFile(dll.FullName);
                             var types = from t in assembly.GetTypes()
                                         where t.IsClass && t.Namespace.StartsWith("WoFlagship.KancolleAI")
                                         select t;
@@ -84,5 +85,7 @@ namespace WoFlagship.KancolleAI
             LogFactory.SystemLogger.Info($"AI载入完毕，共载入{AIs.Count}个AI");
             OnAILoaded?.InvokeAll(AIs);
         }
+
+       
     }
 }

@@ -15,14 +15,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <Grid Name="Panel_MainBrowser"  Width="800" Height="480" Loaded="Panel_MainBrowser_Loaded" Margin="5"/>
+            <Grid Name="Panel_MainBrowser"  Width="800" Height="480" Loaded="Panel_MainBrowser_Loaded"/>
             <!--<Canvas Name="Grid_PaintCanvas" Width="800" Height="480" Margin="20,0,0,0">
                 <Image Name="Img_Filter" Width="800" Height="480" />
             </Canvas>-->
-            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
-                <TextBlock Name="Txt_MainLogger" />
+            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,0,0,0">
+                <TextBlock Name="Txt_MainLogger"/>
             </ScrollViewer>
-            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5">
+            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5,0,0,0">
                 <TextBox Name="Txt_Battle" IsReadOnly="True"/>
             </ScrollViewer>
         </StackPanel>
@@ -165,7 +165,10 @@
                         <ControlTemplate>
                             <xctk:SplitButton Width="120" Content="AI选择"  Click="Btn_AIs_Click" Loaded="Btn_AIs_Loaded">
                                 <xctk:SplitButton.DropDownContent>
-                                    <ListBox Width="120"  Loaded="Lb_AIs_Loaded" SelectionChanged="Lb_AIs_SelectionChanged"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <ListBox Width="120"  Loaded="Lb_AIs_Loaded" SelectionChanged="Lb_AIs_SelectionChanged"/>
+                                        <Button Name="Btn_AIs_ReloadAIs" Content="重载AI" Margin="0,5,0,0" Click="Btn_AIs_ReLoadAIs_Click"/>
+                                    </StackPanel>
                                 </xctk:SplitButton.DropDownContent>
                             </xctk:SplitButton>
                         </ControlTemplate>

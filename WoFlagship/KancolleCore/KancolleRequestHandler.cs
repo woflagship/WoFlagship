@@ -1,6 +1,7 @@
 ﻿using CefSharp;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace WoFlagship.KancolleCore
 {
@@ -27,19 +28,21 @@ namespace WoFlagship.KancolleCore
 
         public bool GetAuthCredentials(IWebBrowser browserControl, IBrowser browser, IFrame frame, bool isProxy, string host, int port, string realm, string scheme, IAuthCallback callback)
         {
+            
             return false;
         }
 
         public IResponseFilter GetResourceResponseFilter(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
         {
-
+            
             if (request.Url == KancolleCore.DMMUrls.KanColleUrl)
             {
                 return responseFilter;
             }
             else if (request.Url.StartsWith(KancolleCore.DMMUrls.KanColleFrameSrcPrefix))
             {
-                return gameFrameFilter;
+                //本打算用这个过滤器修改偏移，但是不知道为什么会导致岛风GO无法识别游戏的运行
+                //return gameFrameFilter;
             }
             else if (request.Url.StartsWith(KancolleCore.DMMUrls.KanColleAPIUrl))
             {
@@ -51,7 +54,6 @@ namespace WoFlagship.KancolleCore
 
         public bool OnBeforeBrowse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, bool isRedirect)
         {
-            
             return false;
         }
 
@@ -62,6 +64,7 @@ namespace WoFlagship.KancolleCore
 
         public bool OnCertificateError(IWebBrowser browserControl, IBrowser browser, CefErrorCode errorCode, string requestUrl, ISslInfo sslInfo, IRequestCallback callback)
         {
+
             return false;
         }
 
@@ -88,21 +91,22 @@ namespace WoFlagship.KancolleCore
 
         public void OnRenderProcessTerminated(IWebBrowser browserControl, IBrowser browser, CefTerminationStatus status)
         {
-
+            
         }
 
         public void OnRenderViewReady(IWebBrowser browserControl, IBrowser browser)
         {
-
+            
         }
 
         public void OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
         {
-
+           
         }
 
         public void OnResourceRedirect(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, ref string newUrl)
-        {
+        { 
+            
         }
 
         public bool OnResourceResponse(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response)
@@ -113,7 +117,7 @@ namespace WoFlagship.KancolleCore
                     responseFilter.ContentLength = int.Parse(response.ResponseHeaders["Content-Length"]);
             }
             else if(request.Url.StartsWith(KancolleCore.DMMUrls.KanColleFrameSrcPrefix))
-            {//过滤掉多余的页面信息
+            {//过滤掉多余的页面信息（貌似使用filter会出问题，使得岛风GO无法识别）
                 gameFrame = frame;
                 var script = "document.body.style.margin='0px';";
                 browserControl.ExecuteScriptAsync(script);

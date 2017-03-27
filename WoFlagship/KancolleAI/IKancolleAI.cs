@@ -5,7 +5,7 @@ using System;
 
 namespace WoFlagship.KancolleAI
 {
-    public interface IKancolleAI : IKancolleGameDataReceiver
+    public interface IKancolleAI : IKancolleGameDataReceiver, IKancolleSceneRevceiver
     {
         /// <summary>
         /// ai名字
@@ -24,7 +24,5 @@ namespace WoFlagship.KancolleAI
         void Stop();
 
         UserControl AIPanel { get; }
-
-        event Action<KancolleTask> OnTaskGenerated;
     }
 }

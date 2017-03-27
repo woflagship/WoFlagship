@@ -98,13 +98,17 @@ namespace WoFlagship.KancolleCore
         public int ContentLength { get; set; } = 0;
 
         private List<byte> dataAll = new List<byte>();
-
-
+        private const string TopSpaceTag = "id=\"spacing_top\"";
+        private const string TopSpaceStr = "id=\"spacing_top\" style=\"height:16px;\"";
+        private const string TopSpaceModifiedStr = "id=\"spacing_top\" style=\"height:0px;\"";
+        
         public void Dispose()
         {
 
         }
 
+
+        
         public FilterStatus Filter(Stream dataIn, out long dataInRead, Stream dataOut, out long dataOutWritten)
         {
             try
@@ -121,20 +125,24 @@ namespace WoFlagship.KancolleCore
                 dataIn.Seek(0, SeekOrigin.Begin);
                 byte[] bs = new byte[dataIn.Length];
                 dataIn.Read(bs, 0, bs.Length);
+                int beforeSize = dataAll.Count; 
                 dataAll.AddRange(bs);
 
                 string originHtml = Encoding.UTF8.GetString(bs.ToArray());
-                string content = originHtml.Replace("16px", "0px");
+                string content = originHtml;
+
+                //content = originHtml.Replace(TopSpaceStr, TopSpaceModifiedStr);
+
                 StreamWriter sw = new StreamWriter(dataOut);
                 sw.Write(content);
                 sw.Flush();
                 dataOutWritten = content.Length;
 
-                if (dataAll.Count == this.ContentLength)
+                if (dataAll.Count  == this.ContentLength)
                 { 
                     return FilterStatus.Done;
                 }
-                else if (dataAll.Count < this.ContentLength)
+                else if (dataAll.Count  < this.ContentLength)
                 {
                     dataInRead = dataIn.Length;
                     //dataOutWritten = dataIn.Length;
@@ -162,6 +170,8 @@ namespace WoFlagship.KancolleCore
             dataAll.Clear();
             return true;
         }
+
+        
     }
 
     class KancollePostResponseFilter : IResponseFilter

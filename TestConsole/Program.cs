@@ -210,7 +210,11 @@ namespace TestConsole
 
         public void Invoke()
         {
-            TestA?.Invoke();
+            //TestA?.Invoke();
+            foreach(var i in TestA.GetInvocationList())
+            {
+              
+            }
         }
     }
     
@@ -224,6 +228,7 @@ namespace TestConsole
             TestEvent tv = new TestEvent();
             tv.TestA += t;
             tv.Invoke();
+            
             Console.Read();
         }
 

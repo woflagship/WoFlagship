@@ -2,7 +2,7 @@
 using CefSharp.Wpf;
 using System;
 using System.Windows;
-
+using WoFlagship.Utils;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
@@ -30,6 +30,8 @@ namespace WoFlagship.KancolleCore.Navigation
         private static extern int mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         private ChromiumWebBrowser webBrowser;
+
+        public event Action<KancolleAction> OnActionExecuted;
 
         public KancolleActionExecutor(ChromiumWebBrowser webBrowser)
         {
@@ -67,6 +69,8 @@ namespace WoFlagship.KancolleCore.Navigation
                         host.SendMouseMoveEvent((int)action.ActionPosition.X, (int)action.ActionPosition.Y, false, CefEventFlags.None);
                         break;
                 }
+
+                OnActionExecuted?.InvokeAll(action);
             }));
 
             return true;

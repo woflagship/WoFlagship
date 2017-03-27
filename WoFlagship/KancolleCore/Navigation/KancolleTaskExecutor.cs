@@ -7,11 +7,13 @@ using System.Windows;
 using System.Collections;
 using System.Collections.Generic;
 using static WoFlagship.KancolleCore.Navigation.KancolleTaskResultErrors;
+using System.Diagnostics;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
-    class KancolleTaskExecutor : IKancolleAPIReceiver
+    public class KancolleTaskExecutor : IKancolleAPIReceiver
     {
+        internal event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished_Internal;
         public event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished;
 
         /// <summary>
@@ -34,7 +36,7 @@ namespace WoFlagship.KancolleCore.Navigation
         private DateTime actionTimeStamp;
         private Object actionTimeStampLock = new object();
 
-        private KancolleActionExecutor actionExector;
+        private KancolleActionExecutor actionExecutor;
 
         private INavigator navigator = new SimpleNavigator();
 
@@ -42,6 +44,9 @@ namespace WoFlagship.KancolleCore.Navigation
         private Func<KancolleGameData> GetGameData;
 
         private Random random = new Random();
+
+        private static KancolleTaskExecutor s_instance = null;
+        public static KancolleTaskExecutor Get() { return s_instance; }
 
         protected KancolleScene CurrentScene
         {
@@ -57,27 +62,43 @@ namespace WoFlagship.KancolleCore.Navigation
             get { return Application.Current.Dispatcher.Invoke(GetGameData); }
         }
 
-        private ChromiumWebBrowser _webBrowser;
-        protected ChromiumWebBrowser WebBrowser
-        {
-            get
-            {
-                return _webBrowser;
-            }
-        }
 
-
-        public KancolleTaskExecutor(ChromiumWebBrowser webBrowser,Func<KancolleScene> GetCurrentScene, Func<KancolleGameData> GetGameData)
+        internal KancolleTaskExecutor(KancolleActionExecutor actionExecutor, Func<KancolleScene> GetCurrentScene, Func<KancolleGameData> GetGameData)
         {
             this.GetCurrentScene = GetCurrentScene;
             this.GetGameData = GetGameData;
-            _webBrowser = webBrowser;
-            actionExector = new KancolleActionExecutor(WebBrowser);
+            this.actionExecutor = actionExecutor;
+            //单例类，只允许一个实例
+            Debug.Assert(s_instance == null);
+            s_instance = this;
         }
 
+        /// <summary>
+        /// 在优先级队列中插入一个新的任务
+        /// </summary>
+        /// <param name="task"></param>
         public void EnqueueTask(KancolleTask task)
         {
             taskQueue.Enqueue(task, (int)task.Priority);
+        }
+
+        /// <summary>
+        /// 清空所有的任务
+        /// </summary>
+        public void ClearTaskList()
+        {
+            taskQueue.Clear();
+        }
+
+        /// <summary>
+        /// 执行新的task
+        /// 与EnqueueTask不同，DoTask将清空之前所有的任务，然后加入该任务
+        /// </summary>
+        /// <param name="task"></param>
+        public void DoTask(KancolleTask task)
+        {
+            ClearTaskList();
+            EnqueueTask(task);
         }
 
         public int TaskRemaining
@@ -163,6 +184,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     result = new KancolleTaskResult(currentTask, KancolleTaskResultType.Fail, $"未能处理当前类型任务【{currentTask.GetType().Name}】", UnknownTaskType);
                 }
 
+                OnTaskFinished_Internal?.Invoke(this, result);
                 OnTaskFinished?.Invoke(this, result);
                 Thread.Sleep(1000);
 
@@ -199,7 +221,7 @@ namespace WoFlagship.KancolleCore.Navigation
             if (!tresult.IsSuccess)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
             //切换到正确的舰队
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Decks[deck]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Decks[deck]));
             Thread.Sleep(1000);
 
             //先移除除旗舰外所有的位置
@@ -232,9 +254,9 @@ namespace WoFlagship.KancolleCore.Navigation
                         if (GameData.OwnedShipPlaceArray[deck, i] == -1)//始终判断第i个
                             break;
                         //点击变更按钮
-                        actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));//始终移除第i个位置的，因为删了之后后面会补上来
+                        actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));//始终移除第i个位置的，因为删了之后后面会补上来
                         Thread.Sleep(1000);
-                        actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Remove));//移除
+                        actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Remove));//移除
                         LockNowAndWaitForResponse();
                         Thread.Sleep(1000);
                     }
@@ -243,14 +265,14 @@ namespace WoFlagship.KancolleCore.Navigation
 
 
                 //点击变更按钮
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));
                 Thread.Sleep(1000);
                 //将排序方式改为new
                 DateTime start = DateTime.Now;
                 while (CurrentScene.SceneState != KancolleSceneStates.Organize_SortByNew && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
                 {
                     //点击变更排序
-                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_SortType));
+                    actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_SortType));
                     Thread.Sleep(1000);
                 }
                 if (CurrentScene.SceneState != KancolleSceneStates.Organize_SortByNew)
@@ -267,21 +289,21 @@ namespace WoFlagship.KancolleCore.Navigation
                 int page5 = pageTurn.Item1;//每5页翻一次
                 int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
                 int item = index % 10;//每页第几个
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_FirstPage));//转到第1页
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_FirstPage));//转到第1页
                 Thread.Sleep(1000);
                 for (int p = 0; p < page5; p++)//先5页5页的翻
                 {
-                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Next5Page));
+                    actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Next5Page));
                     Thread.Sleep(1000);
                 }
 
                 
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Pages[pageIn5]));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Pages[pageIn5]));
                 Thread.Sleep(1000);
 
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_ShipList[item]));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_ShipList[item]));
                 Thread.Sleep(500);
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
                 result = LockNowAndWaitForResponse();
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
@@ -345,13 +367,13 @@ namespace WoFlagship.KancolleCore.Navigation
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
 
             //转到正确的补给舰队
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Supply_Decks[task.SupplyDeck]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Supply_Decks[task.SupplyDeck]));
             Thread.Sleep(1000);
 
             //悬停补给全部的按钮
-            actionExector.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Supply_SupplyDeck));
+            actionExecutor.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Supply_SupplyDeck));
             Thread.Sleep(1000);
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
 
             //点击补给全部的按钮
             result = LockNowAndWaitForResponse();
@@ -388,26 +410,26 @@ namespace WoFlagship.KancolleCore.Navigation
             int page = (task.MissionId - 1) / 8;
             int item = (task.MissionId - 1) % 8;
             //先找到页数
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Maps[page]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Maps[page]));
             Thread.Sleep(1000);
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_MissionItems[item]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Mission_MissionItems[item]));
             Thread.Sleep(500);
             if (CurrentScene != KancolleSceneTypes.Mission_Decide)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Mission_Decide}】不符", UnexceptedScene);
             //决定按钮
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Decide));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Decide));
             //鼠标移开
-            actionExector.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Port));
+            actionExecutor.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Port));
             Thread.Sleep(500);
             if (CurrentScene != KancolleSceneTypes.Mission_Decide)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Mission_Start}】不符", UnexceptedScene);
             //选择舰队
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Start_Decks[task.MissionFleet]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Start_Decks[task.MissionFleet]));
             
             Thread.Sleep(500);
             /*if (CurrentScene != Scenes.Mission_Start_True)
                 return false;*/
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Start));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Mission_Start));
             return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"开始远征【{task.MissionId}】", Success);
         }
 
@@ -428,23 +450,23 @@ namespace WoFlagship.KancolleCore.Navigation
             int mapIndex = mapinfo.MapAreaId - 1;
 
             //先转到海域
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_Areas[areaIndex]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Areas[areaIndex]));
             Thread.Sleep(1000);
 
             //选择地图
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_Maps[mapIndex]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Maps[mapIndex]));
             Thread.Sleep(1000);
 
             //点击决定
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_Decide));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Decide));
             Thread.Sleep(1000);
 
             //选择舰队
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_SelectDeck[task.Fleet]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_SelectDeck[task.Fleet]));
             Thread.Sleep(1000);
 
             //点击出击
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Map_Start));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Start));
             result = LockNowAndWaitForResponse();
             if (!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
@@ -468,9 +490,9 @@ namespace WoFlagship.KancolleCore.Navigation
                         return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Battle_NightChoice}】不符", UnexceptedScene);
                     //左为返回，右为夜战
                     if (t.BattleChoice == BattleChoiceTask.BattleChoices.Back)
-                        actionExector.Execute(KancolleWidgetPositions.Battle_LeftChoice);
+                        actionExecutor.Execute(KancolleWidgetPositions.Battle_LeftChoice);
                     else
-                        actionExector.Execute(KancolleWidgetPositions.Battle_RightChoice);
+                        actionExecutor.Execute(KancolleWidgetPositions.Battle_RightChoice);
                 }
                 else if(t.BattleChoice == BattleChoiceTask.BattleChoices.Next || t.BattleChoice == BattleChoiceTask.BattleChoices.Return)
                 {
@@ -479,9 +501,9 @@ namespace WoFlagship.KancolleCore.Navigation
                         return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Battle_NextChoice}】不符", UnexceptedScene);
                     //左为进击，右为回港
                     if (t.BattleChoice == BattleChoiceTask.BattleChoices.Next)
-                        actionExector.Execute(KancolleWidgetPositions.Battle_LeftChoice);
+                        actionExecutor.Execute(KancolleWidgetPositions.Battle_LeftChoice);
                     else
-                        actionExector.Execute(KancolleWidgetPositions.Battle_RightChoice);
+                        actionExecutor.Execute(KancolleWidgetPositions.Battle_RightChoice);
                 }
             }
             else if(task is BattleFormationTask)
@@ -493,7 +515,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 result = WaitForScene(KancolleSceneTypes.Battle_Formation, ActionTimeout);
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Battle_Formation}】不符", UnexceptedScene);
-                actionExector.Execute(KancolleWidgetPositions.Battle_Formation[t.Formation-1]);
+                actionExecutor.Execute(KancolleWidgetPositions.Battle_Formation[t.Formation-1]);
             }
             else if(task is BattleSkipTask)
             {
@@ -506,7 +528,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     //一直点击屏幕空白处，直到场景跳转为已知，且不为罗盘娘界面
                     if (CurrentScene != KancolleSceneTypes.Unknown && CurrentScene != KancolleSceneTypes.Battle_Compass)
                         break;
-                    actionExector.Execute(GetBattleRandomSafePoint());            
+                    actionExecutor.Execute(GetBattleRandomSafePoint());            
                 }
   
             }
@@ -538,11 +560,11 @@ namespace WoFlagship.KancolleCore.Navigation
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
 
             //选择正确的舰队
-            actionExector.Execute(KancolleWidgetPositions.Remodel_Decks[task.TargetDeck]);
+            actionExecutor.Execute(KancolleWidgetPositions.Remodel_Decks[task.TargetDeck]);
             Thread.Sleep(1000);
 
             //选择正确的舰娘
-            actionExector.Execute(KancolleWidgetPositions.Remodel_Ships[task.TargetPosition]);
+            actionExecutor.Execute(KancolleWidgetPositions.Remodel_Ships[task.TargetPosition]);
             Thread.Sleep(1000);
 
             //先移除自己的所有装备，不过已经在正确位置的装备就不动了
@@ -561,7 +583,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (GameData.OwnedShipDictionary[shipNo].Slot[correctSlotNum] < 0)//当前位置没有装备
                     break;
                 //移除装备，因为装备移除后，下面的会补上来，所以始终是correntSlotNum的位置
-                actionExector.Execute(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]);
+                actionExecutor.Execute(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]);
                 result = LockNowAndWaitForResponse();
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
@@ -603,14 +625,14 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (index < 0)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未找到装备【{itemNo}】", UnfoundItemNo);
                 //选择装备槽
-                actionExector.Execute(KancolleWidgetPositions.Remodel_Items[i]);
+                actionExecutor.Execute(KancolleWidgetPositions.Remodel_Items[i]);
                 Thread.Sleep(1000);
 
                 if(isEquipedSlot)//选择已装备列表
                 {
                     if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Other)
                     {
-                        actionExector.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
+                        actionExecutor.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
                         Thread.Sleep(1000);
                         if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Other)
                             return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景状态【{CurrentScene.SceneState}】与预期场景状态【{KancolleSceneStates.Remodel_ItemList_Other}】不符", UnexceptedState);
@@ -620,7 +642,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 {
                     if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Normal)
                     {
-                        actionExector.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
+                        actionExecutor.Execute(KancolleWidgetPositions.Remodel_ChangeItemMode);
                         Thread.Sleep(1000);
                         if (CurrentScene.SceneState != KancolleSceneStates.Remodel_ItemList_Normal)
                             return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景状态【{CurrentScene.SceneState}】与预期场景状态【{KancolleSceneStates.Remodel_ItemList_Normal}】不符", UnexceptedState);
@@ -633,28 +655,28 @@ namespace WoFlagship.KancolleCore.Navigation
                 int page5 = pageTurn.Item1;//每5页翻一次
                 int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
                 int item = index % 10;//每页第几个
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_FirstPage));//转到第1页
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_FirstPage));//转到第1页
                 Thread.Sleep(1000);
                 for (int p = 0; p < page5; p++)//先5页5页的翻
                 {
-                    actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Next5Page));
+                    actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Next5Page));
                     Thread.Sleep(1000);
                 }
 
 
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Pages[pageIn5]));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_Pages[pageIn5]));
                 Thread.Sleep(1000);
 
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
                 Thread.Sleep(500);
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
                 if (isEquipedSlot)
                 {
                     Thread.Sleep(1000);
                     //如果是已装备的，则还有一个确认列表
                     if (CurrentScene.SceneType !=  KancolleSceneTypes.Remodel_ItemList_Other_Decide)
                         return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Remodel_ItemList_Other_Decide}】不符", UnexceptedScene);
-                    actionExector.Execute(KancolleWidgetPositions.Remodel_Change_Other_Decide);
+                    actionExecutor.Execute(KancolleWidgetPositions.Remodel_Change_Other_Decide);
                 }
                 result = LockNowAndWaitForResponse();
                 if (!result)
@@ -675,7 +697,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
 
             Thread.Sleep(500);
-            actionExector.Execute(KancolleWidgetPositions.Repair_Docks[task.Dock]);
+            actionExecutor.Execute(KancolleWidgetPositions.Repair_Docks[task.Dock]);
 
             var sortedShip = (from s in GameData.OwnedShipDictionary.Values
                               orderby s.No descending
@@ -686,7 +708,7 @@ namespace WoFlagship.KancolleCore.Navigation
             while (CurrentScene.SceneState != KancolleSceneStates.Repair_SortByNew && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
             {
                 //点击变更排序
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList_SortMode));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList_SortMode));
                 Thread.Sleep(1000);
             }
 
@@ -703,30 +725,30 @@ namespace WoFlagship.KancolleCore.Navigation
             int page5 = pageTurn.Item1;//每5页翻一次
             int pageIn5 = pageTurn.Item2;//5页翻完后还有几页
             int item = index % 10;//每页第几个
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_FirstPage));//转到第1页
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_FirstPage));//转到第1页
 
             Thread.Sleep(1000);
             for (int p = 0; p < page5; p++)//先5页5页的翻
             {
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Next5Page));
+                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Next5Page));
                 Thread.Sleep(1000);
             }
 
 
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Pages[pageIn5]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Ships_Pages[pageIn5]));
             Thread.Sleep(1000);
 
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList[item]));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_ShipList[item]));
             Thread.Sleep(500);
             if(CurrentScene.SceneState != KancolleSceneStates.Repair_Start_True)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景状态【{CurrentScene.SceneState}】与预期场景状态【{KancolleSceneStates.Repair_Start_True}】不符", UnexceptedState);
 
             if (task.UseFastRepair)
-                actionExector.Execute(KancolleWidgetPositions.Repair_Start_UseFastRepair);
+                actionExecutor.Execute(KancolleWidgetPositions.Repair_Start_UseFastRepair);
             Thread.Sleep(500);
-            actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Start));
+            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Start));
             Thread.Sleep(1000);
-            actionExector.Execute(KancolleWidgetPositions.Repair_Start_Decide);
+            actionExecutor.Execute(KancolleWidgetPositions.Repair_Start_Decide);
             bool result = LockNowAndWaitForResponse();
             if(!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
@@ -801,12 +823,12 @@ namespace WoFlagship.KancolleCore.Navigation
         /// <returns>如果新的场景为scene，返回true，否则为false</returns>
         private bool DoActionAndWaitForScene(KancolleActionEdge edge, double timeout)
         {
-            if (!actionExector.Execute(edge))//未能执行成功
+            if (!actionExecutor.Execute(edge))//未能执行成功
                 return false;
             if (edge.Target == KancolleSceneTypes.Quest)
             {
                 Thread.Sleep(2000);//等待明石动画
-                if (!actionExector.Execute(edge))//点掉明石
+                if (!actionExecutor.Execute(edge))//点掉明石
                     return false;
             }
             return WaitForScene(edge.Target, timeout);
