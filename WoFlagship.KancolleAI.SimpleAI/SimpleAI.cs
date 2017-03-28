@@ -32,13 +32,14 @@ namespace WoFlagship.KancolleAI.SimpleAI
             {
                 if (gameData != null)
                 {
-                    if (panel.AutoRepair)
-                    {
+                    //没有别的任务才可以自动维修
+                    if (panel.AutoRepair && KancolleTaskExecutor.Get().TaskRemaining != 0)
+                    {                 
                         for (int i = 0; i < gameData.DockArray.Count; i++)
                         {
                             var dock = gameData.DockArray[i];
-                            //当前为空闲，或者应该为空闲，即预计完成时间已经超过当前时间10miao
-                            if (dock.State == 0 || (dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10)))
+                            //当前为空闲
+                            if (dock.State == 0 )
                             {
                                 int no = tryFindAShipToRepair();
                                 if (no > 0)
@@ -46,6 +47,12 @@ namespace WoFlagship.KancolleAI.SimpleAI
                                     RepairTask task = new RepairTask(no, i, false);
                                     KancolleTaskExecutor.Get().DoTask(task);
                                 }
+                                break;
+                            }
+                            else if(dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
+                            {
+                                //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
+                                KancolleTaskExecutor.Get().DoTask(KancolleTask.RefreshDataTask);
                                 break;
                             }
                         }

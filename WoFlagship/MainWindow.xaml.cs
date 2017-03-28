@@ -37,7 +37,7 @@ namespace WoFlagship
         private PluginManager pluginManager = new PluginManager();
         private List<PluginWindow> pluginWindowList = new List<PluginWindow>();
         private AIManager aiManager = new AIManager();
-       
+
 
         private Xceed.Wpf.Toolkit.SplitButton pluginButton = null;
         private Grid pluginGrid = null;
@@ -63,9 +63,9 @@ namespace WoFlagship
         private INavigator navigator = new SimpleNavigator();
         private KancolleActionExecutor actionExecutor;
 
-
+        //当前场景
+        public KancolleScene CurrentScene { get; private set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
         private DispatcherTimer timer;
-        //private KancolleTaskExecutor taskExecutor;
 
         public MainWindow()
         {
@@ -352,7 +352,7 @@ namespace WoFlagship
             try
             {
                 //创建单例类TaskExecutor，只能初始化这一次！访问方式为 KancolleTaskExecutor.Get()
-                new KancolleTaskExecutor(actionExecutor, () => GetCurrentScene(), () => gameContext.GameData);
+                new KancolleTaskExecutor(actionExecutor, () => CurrentScene, () => gameContext.GameData);
                 KancolleTaskExecutor.Get().OnTaskFinished_Internal += TaskExecutor_OnTaskFinished;
                 KancolleTaskExecutor.Get().Start();
             }
@@ -363,14 +363,15 @@ namespace WoFlagship
 #endif
             }
         }
-
-        
+      
 
         private void ActionExecutor_OnActionExecuted(KancolleAction obj)
         {
+            //我们认为只有当界面被action操作后，场景才有可能发生变化
+            RefreshCurrentScene();
             if(currentAI != null)
             {
-                currentAI.OnSceneUpdatedHandler(GetCurrentScene());
+                currentAI.OnSceneUpdatedHandler(CurrentScene);
             }
         }
 
@@ -520,11 +521,11 @@ namespace WoFlagship
             Txt_CurrentScene.Content = sceneType.ToString();
         }
 
-        private KancolleScene GetCurrentScene()
+        private void RefreshCurrentScene()
         {
             var screen = GetWebViewBitmap();
-            var scene = sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
-            return scene;
+            CurrentScene = sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
+            
         }
 
         public System.Drawing.Bitmap ToBitmap(RenderTargetBitmap rbitmap)
@@ -608,9 +609,8 @@ namespace WoFlagship
 
         private void Btn_NavigateTo_Click(object sender, RoutedEventArgs e)
         {
-            var currentScene = GetCurrentScene();
             KancolleSceneTypes toSceneType = (KancolleSceneTypes)Cbx_NavigateTarget.SelectedItem;
-            var edges = navigator.Navigate(currentScene.SceneType, toSceneType);
+            var edges = navigator.Navigate(CurrentScene.SceneType, toSceneType);
             Txt_Navigation.Text = ToNavigationString(edges);
             /*
            switch(toScene)
@@ -737,7 +737,7 @@ namespace WoFlagship
                 //切换至新ai
                 if (lb.SelectedIndex >= 0)//=0的情况下，永远不会有手动项，因为手动项已经被添加到了一般AI
                 {
-                    if (GetCurrentScene() != KancolleSceneTypes.Port)
+                    if (CurrentScene != KancolleSceneTypes.Port)
                     {
                         MessageBox.Show("请将当前场景切换至[母港]再更改AI！");
                     }

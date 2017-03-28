@@ -22,6 +22,11 @@ namespace WoFlagship.KancolleCore.Navigation
 
     public abstract class KancolleTask
     {
+        /// <summary>
+        /// 刷新数据用的任务，和new RefreshDataTask()等价，用这个的话就不用再new了，效率比较高
+        /// </summary>
+        public static RefreshDataTask RefreshDataTask { get; private set; } = new RefreshDataTask();
+
         public DateTime TimeStamp { get; private set; } = DateTime.Now;
 
         public TaskPriority Priority { get; set; } = TaskPriority.Normal;

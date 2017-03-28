@@ -51,6 +51,8 @@ namespace WoFlagship.KancolleCore
 
         public ReadOnlyCollection<KancolleDockData> DockArray { get; internal set; } = new ReadOnlyCollection<KancolleDockData>(new KancolleDockData[0]);
 
+        public KancolleScene CurrentScene { get; internal set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
+
         #region public methods
         /// <summary>
         /// 从ownedShip获得数据库的shipData，若不存在返回null
