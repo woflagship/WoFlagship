@@ -13,7 +13,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
         /// </summary>
         public string WinRank { get; private set; }
 
-        public BattleResult(api_battleresult_data battlersult_data)
+        internal BattleResult(api_battleresult_data battlersult_data)
         {
             WinRank = battlersult_data.api_win_rank;
         }

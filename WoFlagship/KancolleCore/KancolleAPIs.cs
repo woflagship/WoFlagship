@@ -4,11 +4,26 @@ using WoFlagship.Properties;
 
 namespace WoFlagship.KancolleCore
 {
+    /// <summary>
+    /// 舰娘游戏中的API信息
+    /// </summary>
     public class KancolleAPIs
     {
+        /// <summary>
+        /// Kancolle API 版本
+        /// </summary>
         public const int Version = 1;
+
+        /// <summary>
+        /// Kancolle API 更新日期
+        /// </summary>
         public const string UpdateTime = "20161212";
 
+        /// <summary>
+        /// 获得URL当中的API信息
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static string GetAPI(string url)
         {
             int index = url.IndexOf(DMMUrls.KanColleAPIKeyword);
@@ -19,9 +34,20 @@ namespace WoFlagship.KancolleCore
             return "";
         }
 
+        /// <summary>
+        /// 头衔
+        /// </summary>
         public static string[] RankText { get; } = { "", "元帥", "大将", "中将", "少将", "大佐", "中佐", "新米中佐", "少佐", "中堅少佐", "新米少佐" };
+
+        /// <summary>
+        /// 舰娘种类
+        /// </summary>
         public static string[] ShipTypeText { get; } = { Resources.unkown, Resources.dd, Resources.cl, Resources.clt, Resources.ca, Resources.cav, Resources.cvl, Resources.fbb, Resources.bb, Resources.bbv,
             Resources.cv, Resources.unkown, Resources.ss, Resources.ssv, Resources.av_e, Resources.av, Resources.ls, Resources.acv, Resources.ws, Resources.ssm, Resources.pcl, Resources.sp};
+
+        /// <summary>
+        /// 舰娘种类编号
+        /// </summary>
         public static Dictionary<string, int> ShipTypeDic { get; } = new Dictionary<string, int>()
         {
             { "艦",0}, { "他の艦",0}, { "駆逐",1}, { "軽巡",2}, {"重雷装巡洋舰", 3 }, { "重巡",4}, { "航巡",5}, { "轻母",6 }, { "軽母", 6}, {"高速战舰",7 },  {"高速战艦",7 }, { "高速艦", 7},{"戦艦",8 }, {"航戦",9 }, { "空母",10}, { "轻母/空母", 10}, {"11(未知)",11 },
@@ -35,7 +61,7 @@ namespace WoFlagship.KancolleCore
 
     #region api structure
 
-    public class get_incentive
+    internal class get_incentive
     {
         public int api_result { get; set; }
         public string api_result_mgs { get; set; }
@@ -45,7 +71,7 @@ namespace WoFlagship.KancolleCore
     #endregion
 
 
-    public class svdata
+    internal class svdata
     {
         public int api_result { get; set; }
         public string api_result_msg { get; set; }
@@ -60,7 +86,7 @@ namespace WoFlagship.KancolleCore
     #region api_start2
 
 
-    public class api_start_data
+    internal class api_start_data
     {
         public api_mst_ship_item[] api_mst_ship { get; set; }
         public api_mst_shipgraph_item[] api_mst_shipgraph { get; set; }
@@ -82,8 +108,7 @@ namespace WoFlagship.KancolleCore
         //bgm
     }
 
-    [Serializable]
-    public class api_mst_ship_item
+    internal class api_mst_ship_item
     {
         public int api_id { get; set; }
         public int api_sortno { get; set; }
@@ -114,9 +139,9 @@ namespace WoFlagship.KancolleCore
         public int api_voice { get; set; }
     }
 
-   
 
-    public class api_mst_shipgraph_item
+
+    internal class api_mst_shipgraph_item
     {
         public int api_id { get; set; }
         public int api_sortno { get; set; }
@@ -139,14 +164,14 @@ namespace WoFlagship.KancolleCore
         public int[] api_wedb { get; set; }
     }
 
-    public class api_mst_slotitem_equiptype_item
+    internal class api_mst_slotitem_equiptype_item
     {
         public int api_id { get; set; }
         public string api_name { get; set; }
         public int api_show_flg { get; set; }
     }
 
-    public class api_mst_stype_item
+    internal class api_mst_stype_item
     {
         public int api_id { get; set; }
         public int api_sortno { get; set; }
@@ -156,8 +181,7 @@ namespace WoFlagship.KancolleCore
         public Dictionary<string, int> api_equip_type { get; set; }
     }
 
-    [Serializable]
-    public class api_mst_slotitem_item
+    internal class api_mst_slotitem_item
     {
         public int api_id { get; set; }
         public int api_sortno { get; set; }
@@ -187,15 +211,14 @@ namespace WoFlagship.KancolleCore
         public string api_usebull { get; set; }
     }
 
-    public class api_mst_maparea_item
+    internal class api_mst_maparea_item
     {
         public int api_id { get; set; }
         public string api_name { get; set; }
         public int api_type { get; set; }
     }
 
-    [Serializable]
-    public class api_mst_mapinfo_item
+    internal class api_mst_mapinfo_item
     {
         public int api_id { get; set; }
         public int api_maparea_id { get; set; }
@@ -209,8 +232,7 @@ namespace WoFlagship.KancolleCore
         public int[] api_sally_flat { get; set; }
     }
 
-    [Serializable]
-    public class api_mst_mission_item
+    internal class api_mst_mission_item
     {
         public int api_id { get; set; }
         public int api_maparea_id { get; set; }
@@ -225,7 +247,7 @@ namespace WoFlagship.KancolleCore
         public int api_return_flag { get; set; }
     }
 
-    public class api_mst_shipupgrade_item
+    internal class api_mst_shipupgrade_item
     {
         public int api_id { get; set; }
         public int api_current_ship_id { get; set; }
@@ -241,7 +263,7 @@ namespace WoFlagship.KancolleCore
     #region api_port/port
 
 
-    public class api_port_data
+    internal class api_port_data
     {
         public api_material_item[] api_material { get; set; }
         public api_deck_port_item[] api_deck_port { get; set; }
@@ -256,7 +278,7 @@ namespace WoFlagship.KancolleCore
 
 
 
-    public class api_deck_port_item
+    internal class api_deck_port_item
     {
         public int api_member_id { get; set; }
         public int api_id { get; set; }
@@ -270,7 +292,7 @@ namespace WoFlagship.KancolleCore
     /// <summary>
     /// 入渠情况
     /// </summary>
-    public class api_ndock_item
+    internal class api_ndock_item
     {
         public int api_member_id { get; set; }
         public int api_id { get; set; }
@@ -295,7 +317,7 @@ namespace WoFlagship.KancolleCore
 
 
 
-    public class api_basic
+    internal class api_basic
     {
         public string api_member_id { get; set; }
         public string api_nickname { get; set; }
@@ -335,7 +357,7 @@ namespace WoFlagship.KancolleCore
         public int api_large_dock { get; set; }
     }
 
-    public class api_log_item
+    internal class api_log_item
     {
         public int api_no { get; set; }
         public string api_type { get; set; }
@@ -348,7 +370,7 @@ namespace WoFlagship.KancolleCore
 
     #region api_get_member/material
 
-    public class api_material_item
+    internal class api_material_item
     {
         public int api_member_id { get; set; }
         public int api_id { get; set; }
@@ -363,7 +385,7 @@ namespace WoFlagship.KancolleCore
 
     #region api_get_member/require_info
 
-    public class api_requireinfo_data
+    internal class api_requireinfo_data
     {
         public api_basic api_basic { get; set; }
         public api_slot_item_item[] api_slot_item { get; set; }
@@ -376,7 +398,7 @@ namespace WoFlagship.KancolleCore
 
     #region api_req_kousyou/createitem
 
-    public class api_createitem_data
+    internal class api_createitem_data
     {
         public int api_create_flag { get; set; }
         public int api_shizai_flag { get; set; }
@@ -392,14 +414,14 @@ namespace WoFlagship.KancolleCore
     #region api_req_kousyou/destroyitem2
     namespace destroyitem2_api
     {
-        public class svdata
+        internal class svdata
         {
             public int api_result { get; set; }
             public string api_result_msg { get; set; }
             public api_data api_data { get; set; }
         }
 
-        public class api_data
+        internal class api_data
         {
             public int[] api_get_material { get; set; }
         }
@@ -409,7 +431,7 @@ namespace WoFlagship.KancolleCore
     #region api_get_member/questlist
 
 
-    public class api_questlist_data
+    internal class api_questlist_data
     {
         public int api_count { get; set; }
         public int api_completed_kind { get; set; }
@@ -422,7 +444,7 @@ namespace WoFlagship.KancolleCore
     }
 
     [Serializable]
-    public class api_questlist_item
+    internal class api_questlist_item
     {
         public api_questlist_item() { }
         // public api_questlist_item(int i) { }
@@ -443,7 +465,7 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_get_member/ship3
-    public class api_ship3_data
+    internal class api_ship3_data
     {
         public api_ship_item[] api_ship_data { get; set; }
         public api_deck_item[] api_deck_data { get; set; }
@@ -453,26 +475,26 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_req_kaisou/slot_deprive
-    public class api_slot_deprive_data
+    internal class api_slot_deprive_data
     {
         public api_slot_deprive_ship_data api_ship_data { get; set; }
         public api_slot_deprive_unset_list api_unset_list { get; set; }
     }
 
-    public class api_slot_deprive_ship_data
+    internal class api_slot_deprive_ship_data
     {
         public api_ship_item api_unset_ship { get; set; }
         public api_ship_item api_set_ship { get; set; }
     }
 
-    public class api_slot_deprive_unset_list {
+    internal class api_slot_deprive_unset_list {
         public int api_type3No { get; set; }
         public int[] api_slot_list { get; set; }
     }
 
     #endregion
 
-    public class api_ship_item
+    internal class api_ship_item
     {
         /// <summary>
         /// ownedShip id，按照获得的先后顺序排序，后获得的id大
@@ -552,8 +574,8 @@ namespace WoFlagship.KancolleCore
 
     }
 
-    [Serializable]
-    public class api_slot_item_item
+
+    internal class api_slot_item_item
     {
         public int api_id { get; set; }
         public int api_slotitem_id { get; set; }
@@ -561,7 +583,7 @@ namespace WoFlagship.KancolleCore
         public int api_level { get; set; }
     }
 
-    public class api_kdock_item
+    internal class api_kdock_item
     {
         public int api_id { get; set; }
         public int api_state { get; set; }
@@ -576,8 +598,7 @@ namespace WoFlagship.KancolleCore
     }
 
     #region api_get_member/mission
-    [Serializable]
-    public class api_mission_item
+    internal class api_mission_item
     {
         public int api_mission_id { get; set; }
         public int api_state { get; set; }
@@ -589,7 +610,7 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_req_map/next
-    public class api_mapnext_data
+    internal class api_mapnext_data
     {
         public object api_cell_data { get; set; }
         public int api_rashin_flg { get; set; }
@@ -611,7 +632,7 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_req_sortie/battle
-    public class api_battle_data
+    internal class api_battle_data
     {
         //出击的编队号
         public int api_dock_id { get; set; }
@@ -674,7 +695,7 @@ namespace WoFlagship.KancolleCore
         public int[] api_active_deck { get; internal set; }
     }
 
-    public class api_kouku
+    internal class api_kouku
     {
         //自军，敌军的舰载机発艦舰艇座次排列,[[n],[n]]的二维数组方式
         public int[][] api_plane_from { get; set; }
@@ -688,7 +709,7 @@ namespace WoFlagship.KancolleCore
         public api_plane_stage3 api_stage3_combined { get; set; }
     }
 
-    public class api_plane_stage
+    internal class api_plane_stage
     {
         public int api_f_cout { get; set; }
         public int api_f_lostcount { get; set; }
@@ -699,7 +720,7 @@ namespace WoFlagship.KancolleCore
         public int[] api_touch_plane { get; set; }
     }
 
-    public class api_plane_stage3
+    internal class api_plane_stage3
     {
         public int[] api_ebak_flag { get; set; }
         public int[] api_ecl_flag { get; set; }
@@ -712,7 +733,7 @@ namespace WoFlagship.KancolleCore
     }
 
     //炮击战
-    public class api_hougeki
+    internal class api_hougeki
     {
         //攻击顺序表，0不使用[1-12]敌方伙伴的攻击顺序排列在舰队序列号码上，双方都混在一起
         public int[] api_at_list { get; set; }
@@ -733,7 +754,7 @@ namespace WoFlagship.KancolleCore
     }
 
     //雷击战
-    public class api_raigeki
+    internal class api_raigeki
     {
         //第0位都不用！
         //自军的雷击对方座次排列，敌军只席次
@@ -755,7 +776,7 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_req_sortie/battleresult
-    public class api_battleresult_data
+    internal class api_battleresult_data
     {
         public int[] api_ship_id { get; set; }
         public string api_win_rank { get; set; }
@@ -781,7 +802,7 @@ namespace WoFlagship.KancolleCore
         public int api_get_exmap_useitem_id { get; set; }
     }
 
-    public class api_get_ship
+    internal class api_get_ship
     {
         public int api_ship_id { get; set; }
         public string api_ship_type { get; set; }
@@ -796,13 +817,13 @@ namespace WoFlagship.KancolleCore
     #endregion
 
     #region api_get_member/ship_deck
-    public class api_shipdeck_data
+    internal class api_shipdeck_data
     {
         public api_ship_item[] api_ship_data { get; set; }
         public api_deck_item[] api_deck_data { get; set; }
     }
 
-    public class api_deck_item
+    internal class api_deck_item
     {
         public int api_member_id { get; set; }
         public int api_id { get; set; }

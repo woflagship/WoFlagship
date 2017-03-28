@@ -6,51 +6,139 @@ using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Utils;
 
+
 namespace WoFlagship.KancolleCore
 {
-
+    
+    /// <summary>
+    /// 游戏数据
+    /// </summary>
     public class KancolleGameData
     {
+        /// <summary>
+        /// 任务额外信息地址
+        /// </summary>
         public const string QuestInfoFile = "Resources\\Infos\\questinfo.json";
 
+        /// <summary>
+        /// 舰娘类型字典
+        /// key: 舰娘类型ID
+        /// value: 舰娘类型信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleShipType> ShipTypeDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleShipType>(new Dictionary<int, KancolleShipType>());
+
+        /// <summary>
+        /// 装备类型字典
+        /// key: 装备类型ID
+        /// value: 装备类型信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleItemEquipType> ItemEquipTypeDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleItemEquipType>(new Dictionary<int, KancolleItemEquipType>());
 
+        /// <summary>
+        /// 海域信息字典
+        /// key: 海域ID
+        /// value: 海域信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleMapInfoData> MapInfoDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleMapInfoData>(new Dictionary<int, KancolleMapInfoData>());
+
+        /// <summary>
+        /// 基本信息
+        /// </summary>
         public KancolleBasicInfo BasicInfo { get; internal set; } = new KancolleBasicInfo();
+
+        /// <summary>
+        /// 任务字典
+        /// key: 任务ID
+        /// value: 任务信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleQuest> QuestDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleQuest>(new Dictionary<int, KancolleQuest>());
+
+        /// <summary>
+        /// 任务额外信息字典,其信息不是游戏本身中的,而是由第三方整理、翻译等得到的
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleQuestInfoItem> QuestInfoDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(new Dictionary<int, KancolleQuestInfoItem>());
+
+        /// <summary>
+        /// 当前资源
+        /// </summary>
         public KancolleMaterial Material { get; internal set; } = new KancolleMaterial();
+
+        /// <summary>
+        /// 舰娘（数据库）信息字典
+        /// key: 舰娘ID
+        /// value: 舰娘（数据库）信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleShipData> ShipDataDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleShipData>(new Dictionary<int, KancolleShipData>());
+
+        /// <summary>
+        /// 拥有的舰娘信息字典
+        /// key: 舰娘No
+        /// value: 舰娘信息
+        /// </summary>
         public ReadOnlyDictionary<int, KancolleShip> OwnedShipDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleShip>(new Dictionary<int, KancolleShip>());
 
-        public ReadOnlyDictionary<int, KancolleMissionData> MissionDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleMissionData>(new Dictionary<int, KancolleMissionData>());
-        public ReadOnlyDictionary<int, KancolleMissson> OwnedMissionDic { get; internal set; } = new ReadOnlyDictionary<int, KancolleMissson>(new Dictionary<int, KancolleMissson>());
-        //用于双向查询舰娘的位置
         /// <summary>
-        /// key:ownedShipId 
-        /// value:Tuple(i,j),表示第i个舰队，第j个位置，从0开始算
+        /// 远征信息（数据库）字典
+        /// key: 远征ID
+        /// value: 远征（数据库）信息
+        /// </summary>
+        public ReadOnlyDictionary<int, KancolleMissionData> MissionDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleMissionData>(new Dictionary<int, KancolleMissionData>());
+
+        /// <summary>
+        /// 正在跑的远征信息字典
+        /// key: 远征ID
+        /// value: 远征信息
+        /// </summary>
+        public ReadOnlyDictionary<int, KancolleMissson> OwnedMissionDic { get; internal set; } = new ReadOnlyDictionary<int, KancolleMissson>(new Dictionary<int, KancolleMissson>());
+
+        /// <summary>
+        /// 舰娘的位置字典，用于双向查询舰娘的位置
+        /// key: 舰娘No
+        /// value: 舰娘位置，Tuple(i,j),表示第i个舰队，第j个位置，从0开始算
         /// </summary>
         public ReadOnlyDictionary<int, Tuple<int, int>> OwnedShipPlaceDictionary { get; internal set; } = new ReadOnlyDictionary<int, Tuple<int, int>>(new Dictionary<int, Tuple<int, int>>());
+
         /// <summary>
-        /// (i,j),表示第i个舰队，第j个位置，从0开始算
-        /// 返回的是ownedShipId
+        /// 位置为[i,j]的舰娘，用于双向查询舰娘的位置
+        /// 索引[i,j],表示第i个舰队，第j个位置，从0开始算
+        /// 返回的是再[i,j]的舰娘No
         /// </summary>
         public ReadOnlyArray2<int> OwnedShipPlaceArray { get; internal set; } = new ReadOnlyArray2<int>(new int[4, 6]);
 
-        public ReadOnlyDictionary<int, KancolleSlotItemData> SlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItemData>(new Dictionary<int, KancolleSlotItemData>());
-        public ReadOnlyDictionary<int, KancolleSlotItem> OwnedSlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItem>(new Dictionary<int, KancolleSlotItem>());
         /// <summary>
-        /// 已经装备的装备字典；key:itemNo,value:装备的舰娘no
+        /// 装备（数据库）字典
+        /// key: 装备ID
+        /// value: 装备（数据库）信息
+        /// </summary>
+        public ReadOnlyDictionary<int, KancolleSlotItemData> SlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItemData>(new Dictionary<int, KancolleSlotItemData>());
+
+        /// <summary>
+        /// 拥有的装备字典
+        /// key: 装备NO
+        /// value: 装备信息
+        /// </summary>
+        public ReadOnlyDictionary<int, KancolleSlotItem> OwnedSlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleSlotItem>(new Dictionary<int, KancolleSlotItem>());
+
+        /// <summary>
+        /// 已经装备的装备字典
+        /// key:装备NO
+        /// value:装备的舰娘NO
         /// </summary>
         public ReadOnlyDictionary<int, int> EquipedSlotDictionary { get; internal set; } = new ReadOnlyDictionary<int, int>(new Dictionary<int,int>());
+
         /// <summary>
-        /// 尚未装备的装备列表，每个元素为itemNo
+        /// 尚未装备的装备列表，每个元素为装备NO
         /// </summary>
         public ReadOnlyCollection<int> UnEquipedSlotArray { get; internal set; } = new ReadOnlyCollection<int>(new List<int>());
 
+        /// <summary>
+        /// 修理渠信息
+        /// </summary>
         public ReadOnlyCollection<KancolleDockData> DockArray { get; internal set; } = new ReadOnlyCollection<KancolleDockData>(new KancolleDockData[0]);
 
+        /// <summary>
+        /// 当前场景
+        /// </summary>
         public KancolleScene CurrentScene { get; internal set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
 
         #region public methods
@@ -70,7 +158,7 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 从ownedShipId获得数据库的shipData，若不存在返回null
         /// </summary>
-        /// <param name="ownedShip"></param>
+        /// <param name="ownedShipNo"></param>
         /// <returns></returns>
         public KancolleShipData GetShip(int ownedShipNo)
         {
@@ -276,7 +364,7 @@ namespace WoFlagship.KancolleCore
 
         internal KancolleBasicInfo() { }
 
-        public KancolleBasicInfo(api_port_data portdata)
+        internal KancolleBasicInfo(api_port_data portdata)
         {
             Level = portdata.api_basic.api_level;
             RankId = portdata.api_basic.api_rank;
@@ -383,7 +471,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int[] OnSlot { get; private set; }
 
-        public KancolleShip(api_ship_item ship)
+        internal KancolleShip(api_ship_item ship)
         {
             No = ship.api_id;
             ShipId = ship.api_ship_id;
@@ -432,7 +520,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int SlotNum { get; private set; }
 
-        public KancolleShipData(api_mst_ship_item mst_ship_item)
+        internal KancolleShipData(api_mst_ship_item mst_ship_item)
         {
             ShipId = mst_ship_item.api_id;
             Name = mst_ship_item.api_name;
@@ -441,6 +529,9 @@ namespace WoFlagship.KancolleCore
         }
     }
 
+    /// <summary>
+    /// 装备类型
+    /// </summary>
     public class KancolleItemEquipType
     {
         /// <summary>
@@ -458,7 +549,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int ShowFlag { get; private set; }
 
-        public KancolleItemEquipType(api_mst_slotitem_equiptype_item equiptype_item)
+        internal KancolleItemEquipType(api_mst_slotitem_equiptype_item equiptype_item)
         {
             TypeId = equiptype_item.api_id;
             Name = equiptype_item.api_name;
@@ -498,7 +589,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public ReadOnlyDictionary<int, int> EquipItemType { get; private set; }
 
-        public KancolleShipType(api_mst_stype_item stype_item)
+        internal KancolleShipType(api_mst_stype_item stype_item)
         {
             TypeId = stype_item.api_id;
             SortNo = stype_item.api_sortno;
@@ -512,6 +603,9 @@ namespace WoFlagship.KancolleCore
 
     }
 
+    /// <summary>
+    /// 远征信息
+    /// </summary>
     public class KancolleMissson
     {
         /// <summary>
@@ -519,9 +613,12 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int MissionId { get; private set; }
 
+        /// <summary>
+        /// 远征状态
+        /// </summary>
         public int State { get; private set; }
 
-        public KancolleMissson(api_mission_item mission_item)
+        internal KancolleMissson(api_mission_item mission_item)
         {
             MissionId = mission_item.api_mission_id;
             State = mission_item.api_state;
@@ -544,7 +641,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public string Name { get; set; }
 
-        public KancolleMissionData(api_mst_mission_item mst_mission_item)
+        internal KancolleMissionData(api_mst_mission_item mst_mission_item)
         {
             MissionId = mst_mission_item.api_id;
             Name = mst_mission_item.api_name;
@@ -556,9 +653,24 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleMaterial
     {
+        /// <summary>
+        /// 燃
+        /// </summary>
         public int Ran { get; private set; }
+
+        /// <summary>
+        /// 弹
+        /// </summary>
         public int Dan { get; private set; }
+
+        /// <summary>
+        /// 钢
+        /// </summary>
         public int Gang { get; private set; }
+
+        /// <summary>
+        /// 铝
+        /// </summary>
         public int Lv { get; private set; }
 
         /// <summary>
@@ -583,7 +695,7 @@ namespace WoFlagship.KancolleCore
 
         internal KancolleMaterial() { }
 
-        public KancolleMaterial(api_material_item[] materials)
+        internal KancolleMaterial(api_material_item[] materials)
         {
             if (materials != null)
             {
@@ -647,10 +759,19 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleQuest
     {
+        /// <summary>
+        /// 任务Id
+        /// </summary>
         public int Id { get; private set; }
 
+        /// <summary>
+        /// 任务种类
+        /// </summary>
         public int Category { get; private set; }
 
+        /// <summary>
+        /// 任务类型
+        /// </summary>
         public int Type { get; private set; }
 
         /// <summary>
@@ -658,10 +779,19 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int State { get; private set; }
 
+        /// <summary>
+        /// 任务标题
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// 任务细节
+        /// </summary>
         public string Detail { get; private set; }
 
+        /// <summary>
+        /// 资源报酬
+        /// </summary>
         public Tuple<int, int, int, int> Material { get; private set; }
 
         /// <summary>
@@ -669,7 +799,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int ProgressFlag { get; private set; }
 
-        public KancolleQuest(api_questlist_item api_questlist)
+        internal KancolleQuest(api_questlist_item api_questlist)
         {
             Id = api_questlist.api_no;
             Category = api_questlist.api_category;
@@ -687,6 +817,9 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleMapInfoData
     {
+        /// <summary>
+        /// 地图Id
+        /// </summary>
         public int Id { get; private set; }
 
         /// <summary>
@@ -705,8 +838,8 @@ namespace WoFlagship.KancolleCore
 
         public string InfoText { get; private set; }
 
-        public KancolleMapInfoData(api_mst_mapinfo_item mapinfo_item)
-        {
+        internal KancolleMapInfoData(api_mst_mapinfo_item mapinfo_item)
+        { 
             Id = mapinfo_item.api_id;
             MapAreaId = mapinfo_item.api_maparea_id;
             MapNo = mapinfo_item.api_no;
@@ -735,7 +868,7 @@ namespace WoFlagship.KancolleCore
 
         public int Level { get; private set; }
 
-        public KancolleSlotItem(api_slot_item_item slot_item_item)
+        internal KancolleSlotItem(api_slot_item_item slot_item_item)
         {
             No = slot_item_item.api_id;
             SlotItemId = slot_item_item.api_slotitem_id;
@@ -880,7 +1013,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public string UseBull { get; private set; }
 
-        public KancolleSlotItemData(api_mst_slotitem_item mst_slotitem_item)
+        internal KancolleSlotItemData(api_mst_slotitem_item mst_slotitem_item)
         {
             Id = mst_slotitem_item.api_id;
             SortNo = mst_slotitem_item.api_sortno;
@@ -930,7 +1063,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int State { get; private set; }
 
-        public KancolleDockData(api_ndock_item dock)
+        internal KancolleDockData(api_ndock_item dock)
         {
             ShipId = dock.api_ship_id;
             CompleteTime = ParseLongTime(dock.api_complete_time);

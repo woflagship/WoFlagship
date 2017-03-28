@@ -78,7 +78,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return str;
         }
 
-        public void Simulate(api_battle_data packet)
+        internal void Simulate(api_battle_data packet)
         {
             if (EnemyFleet == null)
             {
@@ -229,7 +229,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return SimulateAerial(MainFleet, EscortFleet, EnemyFleet, EnemyEscort, kouku);
         }
 
-        public static Stage SimulateAerial(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_kouku kouku)
+        internal static Stage SimulateAerial(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_kouku kouku)
         {
             if (kouku == null)
                 return null;
@@ -273,7 +273,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return attacks;
         }
 
-        public static Stage SimulateTorpedo(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_raigeki raigeki, StageTypes subType = StageTypes.SUndefined)
+        internal static Stage SimulateTorpedo(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_raigeki raigeki, StageTypes subType = StageTypes.SUndefined)
         {
             if (raigeki == null)
                 return null;
@@ -315,7 +315,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return attacks;
         }
 
-        public static Stage SimulateShelling(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_hougeki hougeki, StageTypes subType = StageTypes.SUndefined)
+        internal static Stage SimulateShelling(Fleet mainFleet, Fleet escortFleet, Fleet enemyFleet, Fleet enemyEscort, api_hougeki hougeki, StageTypes subType = StageTypes.SUndefined)
         {
             if (hougeki == null)
                 return null;
@@ -381,7 +381,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             };
         }
 
-        public static Stage SimulateNight(int fleetType, Fleet mainFleet, Fleet escortFleet, int enemyType, Fleet enemyFleet, Fleet enemyEscort, api_hougeki hougeki, api_battle_data packet)
+        internal static Stage SimulateNight(int fleetType, Fleet mainFleet, Fleet escortFleet, int enemyType, Fleet enemyFleet, Fleet enemyEscort, api_hougeki hougeki, api_battle_data packet)
         {
             if (hougeki == null)
                 return null;
@@ -411,7 +411,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return stage;
         }
 
-        public static Stage SimulateSupport(Fleet enemyFleet, Fleet enemyEscort, dynamic support, Nullable<int> flag)
+        internal static Stage SimulateSupport(Fleet enemyFleet, Fleet enemyEscort, dynamic support, Nullable<int> flag)
         {
             if (support == null || flag == null)
             {
@@ -460,7 +460,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             return null;
         }
 
-        public static Stage SimulateLandBase(Fleet enemyFleet, Fleet enemyEscort, api_kouku kouku)
+        internal static Stage SimulateLandBase(Fleet enemyFleet, Fleet enemyEscort, api_kouku kouku)
         {
             var stage = SimulateAerial(null, null, enemyFleet, enemyEscort, kouku);
             stage.StageType = StageTypes.LandBase;
@@ -468,7 +468,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
         }
 
         //未完成！！！！！！
-        public static Stage GetEngagementStage(api_battle_data packet)
+        internal static Stage GetEngagementStage(api_battle_data packet)
         {
             return new Stage()
             {

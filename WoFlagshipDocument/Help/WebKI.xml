@@ -1,0 +1,1237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Action property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Action.htm" />
+  <HelpKINode Title="ActionPosition property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionPosition.htm" />
+  <HelpKINode Title="ActionTimeout property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ActionTimeout.htm" />
+  <HelpKINode Title="ActionType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionType.htm" />
+  <HelpKINode Title="ActionTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_ActionTypes.htm" />
+  <HelpKINode Title="Aerial enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="ArsenalMain enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Atap property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Atap.htm" />
+  <HelpKINode Title="Attack class">
+    <HelpKINode Title="Attack Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm" />
+    <HelpKINode Title="about Attack class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Attack.Attack constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack__ctor.htm" />
+  <HelpKINode Title="Attack.AttackType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_AttackType.htm" />
+  <HelpKINode Title="Attack.Damages property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Damages.htm" />
+  <HelpKINode Title="Attack.FromShip property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_FromShip.htm" />
+  <HelpKINode Title="Attack.Hits property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Hits.htm" />
+  <HelpKINode Title="Attack.ToShip property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_ToShip.htm" />
+  <HelpKINode Title="Attack.ToString method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack_ToString.htm" />
+  <HelpKINode Title="Attacks property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_Attacks.htm" />
+  <HelpKINode Title="AttackType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_AttackType.htm" />
+  <HelpKINode Title="AttackTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Back enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="Bakk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Bakk.htm" />
+  <HelpKINode Title="Baku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Baku.htm" />
+  <HelpKINode Title="BasicInfo property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_BasicInfo.htm" />
+  <HelpKINode Title="Battle class">
+    <HelpKINode Title="Battle Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm" />
+    <HelpKINode Title="about Battle class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Battle.Battle constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle__ctor.htm" />
+  <HelpKINode Title="Battle.BattleType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_BattleType.htm" />
+  <HelpKINode Title="Battle.EnemyEscort property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyEscort.htm" />
+  <HelpKINode Title="Battle.EnemyFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyFleet.htm" />
+  <HelpKINode Title="Battle.EnemyType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyType.htm" />
+  <HelpKINode Title="Battle.EscortFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EscortFleet.htm" />
+  <HelpKINode Title="Battle.FleetType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_FleetType.htm" />
+  <HelpKINode Title="Battle.MainFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_MainFleet.htm" />
+  <HelpKINode Title="Battle.SimulateAerialAttack method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateAerialAttack.htm" />
+  <HelpKINode Title="Battle.SimulateTorpedoAttack method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateTorpedoAttack.htm" />
+  <HelpKINode Title="Battle.Stages property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_Stages.htm" />
+  <HelpKINode Title="Battle.SupportFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_SupportFleet.htm" />
+  <HelpKINode Title="Battle.ToString method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_ToString.htm" />
+  <HelpKINode Title="BattleChoice property" Url="html/P_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoice.htm" />
+  <HelpKINode Title="BattleChoiceTask class">
+    <HelpKINode Title="BattleChoiceTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
+    <HelpKINode Title="about BattleChoiceTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleChoiceTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BattleChoiceTask.BattleChoice property" Url="html/P_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoice.htm" />
+  <HelpKINode Title="BattleChoiceTask.BattleChoices enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="BattleChoiceTask.BattleChoiceTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleChoiceTask__ctor.htm" />
+  <HelpKINode Title="BattleFormationTask class">
+    <HelpKINode Title="BattleFormationTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
+    <HelpKINode Title="about BattleFormationTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleFormationTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BattleFormationTask.BattleFormationTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleFormationTask__ctor.htm" />
+  <HelpKINode Title="BattleFormationTask.Formation property" Url="html/P_WoFlagship_KancolleCore_Navigation_BattleFormationTask_Formation.htm" />
+  <HelpKINode Title="BattleResult class">
+    <HelpKINode Title="BattleResult Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
+    <HelpKINode Title="about BattleResult class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BattleResult.WinRank property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_BattleResult_WinRank.htm" />
+  <HelpKINode Title="BattleSkipTask class">
+    <HelpKINode Title="BattleSkipTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
+    <HelpKINode Title="about BattleSkipTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleSkipTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BattleSkipTask.BattleSkipTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleSkipTask__ctor.htm" />
+  <HelpKINode Title="BattleSkipTimeout property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_BattleSkipTimeout.htm" />
+  <HelpKINode Title="BattleTask class">
+    <HelpKINode Title="BattleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
+    <HelpKINode Title="about BattleTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BattleTask.BattleTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_BattleTask__ctor.htm" />
+  <HelpKINode Title="BattleType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_BattleType.htm" />
+  <HelpKINode Title="BattleTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
+  <HelpKINode Title="Battle_Compass enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Battle_Formation enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Battle_Formation field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_Formation.htm" />
+  <HelpKINode Title="Battle_LeftChoice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_LeftChoice.htm" />
+  <HelpKINode Title="Battle_NextChoice enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Battle_NightChoice enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Battle_RightChoice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_RightChoice.htm" />
+  <HelpKINode Title="Battle_SafeRect field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_SafeRect.htm" />
+  <HelpKINode Title="Boss enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
+  <HelpKINode Title="BossSF property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_BossSF.htm" />
+  <HelpKINode Title="Broken property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Broken.htm" />
+  <HelpKINode Title="BuildItem enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  <HelpKINode Title="BuildShip enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  <HelpKINode Title="CanShipEquipItem method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem.htm" />
+  <HelpKINode Title="Category property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Category.htm" />
+  <HelpKINode Title="ClearTaskList method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ClearTaskList.htm" />
+  <HelpKINode Title="Click enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_ActionTypes.htm" />
+  <HelpKINode Title="ComparisonFolder field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_ComparisonFolder.htm" />
+  <HelpKINode Title="CompleteTime property" Url="html/P_WoFlagship_KancolleCore_KancolleDockData_CompleteTime.htm" />
+  <HelpKINode Title="Condition property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Condition.htm" />
+  <HelpKINode Title="Count property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Count.htm" />
+  <HelpKINode Title="Critical enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
+  <HelpKINode Title="CurrentBattle property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_CurrentBattle.htm" />
+  <HelpKINode Title="CurrentScene property">
+    <HelpKINode Title="KancolleGameData.CurrentScene Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_CurrentScene.htm" />
+    <HelpKINode Title="KancolleTaskExecutor.CurrentScene Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_CurrentScene.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Damages property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Damages.htm" />
+  <HelpKINode Title="Dan property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Dan.htm" />
+  <HelpKINode Title="Detail property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Detail.htm" />
+  <HelpKINode Title="Dock property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_Dock.htm" />
+  <HelpKINode Title="DockArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_DockArray.htm" />
+  <HelpKINode Title="DockTime property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_DockTime.htm" />
+  <HelpKINode Title="DoTask method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_DoTask.htm" />
+  <HelpKINode Title="Double enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="EmptyFirstShip field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyFirstShip.htm" />
+  <HelpKINode Title="EmptyInterveningShip field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyInterveningShip.htm" />
+  <HelpKINode Title="Enemy enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_ShipOwner.htm" />
+  <HelpKINode Title="EnemyEscort property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyEscort.htm" />
+  <HelpKINode Title="EnemyFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyFleet.htm" />
+  <HelpKINode Title="EnemyType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyType.htm" />
+  <HelpKINode Title="Engagement enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="EnqueueTask method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_EnqueueTask.htm" />
+  <HelpKINode Title="Equality operator" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality.htm" />
+  <HelpKINode Title="Equals method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_Equals.htm" />
+  <HelpKINode Title="EquipedSlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_EquipedSlotDictionary.htm" />
+  <HelpKINode Title="EquipItemType property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_EquipItemType.htm" />
+  <HelpKINode Title="ErrorCode property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ErrorCode.htm" />
+  <HelpKINode Title="EscortFleet property">
+    <HelpKINode Title="Battle.EscortFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EscortFleet.htm" />
+    <HelpKINode Title="KancolleBattleContext.EscortFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_EscortFleet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Fail enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultType.htm" />
+  <HelpKINode Title="FinishedTask property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_FinishedTask.htm" />
+  <HelpKINode Title="Fleet class">
+    <HelpKINode Title="Fleet Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm" />
+    <HelpKINode Title="about Fleet class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Fleet property" Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_Fleet.htm" />
+  <HelpKINode Title="Fleet.Count property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Count.htm" />
+  <HelpKINode Title="Fleet.Fleet constructor" Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor.htm" />
+  <HelpKINode Title="Fleet.GetEnumerator method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Fleet_GetEnumerator.htm" />
+  <HelpKINode Title="Fleet.Item property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Item.htm" />
+  <HelpKINode Title="FleetType property">
+    <HelpKINode Title="Battle.FleetType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_FleetType.htm" />
+    <HelpKINode Title="KancolleBattleContext.FleetType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_FleetType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Formation property" Url="html/P_WoFlagship_KancolleCore_Navigation_BattleFormationTask_Formation.htm" />
+  <HelpKINode Title="Friend enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_ShipOwner.htm" />
+  <HelpKINode Title="FromHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_FromHP.htm" />
+  <HelpKINode Title="FromShip property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_FromShip.htm" />
+  <HelpKINode Title="Gaixiu property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gaixiu.htm" />
+  <HelpKINode Title="GameData property">
+    <HelpKINode Title="KancolleBattleContext.GameData Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_GameData.htm" />
+    <HelpKINode Title="KancolleGameContext.GameData Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameContext_GameData.htm" />
+    <HelpKINode Title="KancolleTaskExecutor.GameData Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_GameData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Gang property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gang.htm" />
+  <HelpKINode Title="Get method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Get.htm" />
+  <HelpKINode Title="GetAPI method" Url="html/M_WoFlagship_KancolleCore_KancolleAPIs_GetAPI.htm" />
+  <HelpKINode Title="GetEnumerator method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Fleet_GetEnumerator.htm" />
+  <HelpKINode Title="GetHashCode method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_GetHashCode.htm" />
+  <HelpKINode Title="GetSceneTypeFromBitmap method" Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer_GetSceneTypeFromBitmap.htm" />
+  <HelpKINode Title="GetShip method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShip.htm" />
+  <HelpKINode Title="GetShipName method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipName.htm" />
+  <HelpKINode Title="GetShipType method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipType.htm" />
+  <HelpKINode Title="GetSlotItemName method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName.htm" />
+  <HelpKINode Title="High enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  <HelpKINode Title="Hit enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
+  <HelpKINode Title="Hits property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Hits.htm" />
+  <HelpKINode Title="HitTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
+  <HelpKINode Title="Houg property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houg.htm" />
+  <HelpKINode Title="Houk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houk.htm" />
+  <HelpKINode Title="Houm property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houm.htm" />
+  <HelpKINode Title="Id property">
+    <HelpKINode Title="KancolleMapInfoData.Id Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Id.htm" />
+    <HelpKINode Title="KancolleQuest.Id Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Id.htm" />
+    <HelpKINode Title="KancolleSlotItemData.Id Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Id.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IKancolleAPIReceiver interface">
+    <HelpKINode Title="IKancolleAPIReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm" />
+    <HelpKINode Title="about IKancolleAPIReceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IKancolleAPIReceiver.OnAPIResponseReceivedHandler method" Url="html/M_WoFlagship_KancolleCore_IKancolleAPIReceiver_OnAPIResponseReceivedHandler.htm" />
+  <HelpKINode Title="IKancolleGameDataReceiver interface">
+    <HelpKINode Title="IKancolleGameDataReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm" />
+    <HelpKINode Title="about IKancolleGameDataReceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IKancolleGameDataReceiver.OnGameDataUpdatedHandler method" Url="html/M_WoFlagship_KancolleCore_IKancolleGameDataReceiver_OnGameDataUpdatedHandler.htm" />
+  <HelpKINode Title="IKancolleSceneRevceiver interface">
+    <HelpKINode Title="IKancolleSceneRevceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm" />
+    <HelpKINode Title="about IKancolleSceneRevceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IKancolleSceneRevceiver.OnSceneUpdatedHandler method" Url="html/M_WoFlagship_KancolleCore_IKancolleSceneRevceiver_OnSceneUpdatedHandler.htm" />
+  <HelpKINode Title="IllegalFormation field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IllegalFormation.htm" />
+  <HelpKINode Title="IllegalShipCount field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IllegalShipCount.htm" />
+  <HelpKINode Title="IncorrectDeckIndex field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IncorrectDeckIndex.htm" />
+  <HelpKINode Title="Inequality operator" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality.htm" />
+  <HelpKINode Title="Info property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Info.htm" />
+  <HelpKINode Title="InfoText property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_InfoText.htm" />
+  <HelpKINode Title="IsShipRepairing method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing.htm" />
+  <HelpKINode Title="IsSuccess property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_IsSuccess.htm" />
+  <HelpKINode Title="Item property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Item.htm" />
+  <HelpKINode Title="ItemEquipTypeDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ItemEquipTypeDictionary.htm" />
+  <HelpKINode Title="Items property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Items.htm" />
+  <HelpKINode Title="ItemUsed property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ItemUsed.htm" />
+  <HelpKINode Title="Jianzao property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Jianzao.htm" />
+  <HelpKINode Title="Kaifa property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Kaifa.htm" />
+  <HelpKINode Title="Kaihi property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Kaihi.htm" />
+  <HelpKINode Title="KancolleAction class">
+    <HelpKINode Title="KancolleAction Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
+    <HelpKINode Title="about KancolleAction class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleAction.ActionPosition property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionPosition.htm" />
+  <HelpKINode Title="KancolleAction.ActionType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionType.htm" />
+  <HelpKINode Title="KancolleAction.KancolleAction constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor.htm" />
+  <HelpKINode Title="KancolleActionEdge class">
+    <HelpKINode Title="KancolleActionEdge Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
+    <HelpKINode Title="about KancolleActionEdge class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleActionEdge__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleActionEdge.Action property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Action.htm" />
+  <HelpKINode Title="KancolleActionEdge.KancolleActionEdge constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleActionEdge__ctor.htm" />
+  <HelpKINode Title="KancolleActionEdge.Source property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Source.htm" />
+  <HelpKINode Title="KancolleActionEdge.Target property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Target.htm" />
+  <HelpKINode Title="KancolleAPIs class">
+    <HelpKINode Title="KancolleAPIs Class" Url="html/T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+    <HelpKINode Title="about KancolleAPIs class" Url="html/T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleAPIs__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleAPIs.GetAPI method" Url="html/M_WoFlagship_KancolleCore_KancolleAPIs_GetAPI.htm" />
+  <HelpKINode Title="KancolleAPIs.KancolleAPIs constructor" Url="html/M_WoFlagship_KancolleCore_KancolleAPIs__ctor.htm" />
+  <HelpKINode Title="KancolleAPIs.RankText property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_RankText.htm" />
+  <HelpKINode Title="KancolleAPIs.ShipTypeDic property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeDic.htm" />
+  <HelpKINode Title="KancolleAPIs.ShipTypeText property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeText.htm" />
+  <HelpKINode Title="KancolleAPIs.UpdateTime field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_UpdateTime.htm" />
+  <HelpKINode Title="KancolleAPIs.Version field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_Version.htm" />
+  <HelpKINode Title="KancolleBasicInfo class">
+    <HelpKINode Title="KancolleBasicInfo Class" Url="html/T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
+    <HelpKINode Title="about KancolleBasicInfo class" Url="html/T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleBasicInfo.Level property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_Level.htm" />
+  <HelpKINode Title="KancolleBasicInfo.MaxShipCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxShipCount.htm" />
+  <HelpKINode Title="KancolleBasicInfo.MaxSlotItemCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxSlotItemCount.htm" />
+  <HelpKINode Title="KancolleBasicInfo.NickName property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_NickName.htm" />
+  <HelpKINode Title="KancolleBasicInfo.OwnedShipCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_OwnedShipCount.htm" />
+  <HelpKINode Title="KancolleBasicInfo.Rank property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_Rank.htm" />
+  <HelpKINode Title="KancolleBasicInfo.RankId property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_RankId.htm" />
+  <HelpKINode Title="KancolleBattleContext class">
+    <HelpKINode Title="KancolleBattleContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+    <HelpKINode Title="about KancolleBattleContext class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleBattleContext.BossSF property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_BossSF.htm" />
+  <HelpKINode Title="KancolleBattleContext.CurrentBattle property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_CurrentBattle.htm" />
+  <HelpKINode Title="KancolleBattleContext.EscortFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_EscortFleet.htm" />
+  <HelpKINode Title="KancolleBattleContext.FleetType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_FleetType.htm" />
+  <HelpKINode Title="KancolleBattleContext.GameData property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_GameData.htm" />
+  <HelpKINode Title="KancolleBattleContext.KancolleBattleContext constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext__ctor.htm" />
+  <HelpKINode Title="KancolleBattleContext.MainFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_MainFleet.htm" />
+  <HelpKINode Title="KancolleBattleContext.NormalSF property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_NormalSF.htm" />
+  <HelpKINode Title="KancolleBattleContext.OnAPIResponseReceivedHandler method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnAPIResponseReceivedHandler.htm" />
+  <HelpKINode Title="KancolleBattleContext.OnBattleHappened event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleHappened.htm" />
+  <HelpKINode Title="KancolleBattleContext.OnBattleResultReceived event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleResultReceived.htm" />
+  <HelpKINode Title="KancolleBattleContext.SupportFleet property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_SupportFleet.htm" />
+  <HelpKINode Title="KancolleDockData class">
+    <HelpKINode Title="KancolleDockData Class" Url="html/T_WoFlagship_KancolleCore_KancolleDockData.htm" />
+    <HelpKINode Title="about KancolleDockData class" Url="html/T_WoFlagship_KancolleCore_KancolleDockData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleDockData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleDockData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleDockData.CompleteTime property" Url="html/P_WoFlagship_KancolleCore_KancolleDockData_CompleteTime.htm" />
+  <HelpKINode Title="KancolleDockData.ParseLongTime method" Url="html/M_WoFlagship_KancolleCore_KancolleDockData_ParseLongTime.htm" />
+  <HelpKINode Title="KancolleDockData.ShipId property" Url="html/P_WoFlagship_KancolleCore_KancolleDockData_ShipId.htm" />
+  <HelpKINode Title="KancolleDockData.State property" Url="html/P_WoFlagship_KancolleCore_KancolleDockData_State.htm" />
+  <HelpKINode Title="KancolleGameContext class">
+    <HelpKINode Title="KancolleGameContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+    <HelpKINode Title="about KancolleGameContext class" Url="html/T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleGameContext__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleGameContext.GameData property" Url="html/P_WoFlagship_KancolleCore_KancolleGameContext_GameData.htm" />
+  <HelpKINode Title="KancolleGameContext.KancolleGameContext constructor" Url="html/M_WoFlagship_KancolleCore_KancolleGameContext__ctor.htm" />
+  <HelpKINode Title="KancolleGameContext.OnAPIResponseReceivedHandler method" Url="html/M_WoFlagship_KancolleCore_KancolleGameContext_OnAPIResponseReceivedHandler.htm" />
+  <HelpKINode Title="KancolleGameContext.OnGameDataUpdated event" Url="html/E_WoFlagship_KancolleCore_KancolleGameContext_OnGameDataUpdated.htm" />
+  <HelpKINode Title="KancolleGameData class">
+    <HelpKINode Title="KancolleGameData Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+    <HelpKINode Title="about KancolleGameData class" Url="html/T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleGameData__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleGameData.BasicInfo property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_BasicInfo.htm" />
+  <HelpKINode Title="KancolleGameData.CanShipEquipItem method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem.htm" />
+  <HelpKINode Title="KancolleGameData.CurrentScene property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_CurrentScene.htm" />
+  <HelpKINode Title="KancolleGameData.DockArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_DockArray.htm" />
+  <HelpKINode Title="KancolleGameData.EquipedSlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_EquipedSlotDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.GetShip method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShip.htm" />
+  <HelpKINode Title="KancolleGameData.GetShipName method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipName.htm" />
+  <HelpKINode Title="KancolleGameData.GetShipType method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipType.htm" />
+  <HelpKINode Title="KancolleGameData.GetSlotItemName method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName.htm" />
+  <HelpKINode Title="KancolleGameData.IsShipRepairing method" Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing.htm" />
+  <HelpKINode Title="KancolleGameData.ItemEquipTypeDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ItemEquipTypeDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.KancolleGameData constructor" Url="html/M_WoFlagship_KancolleCore_KancolleGameData__ctor.htm" />
+  <HelpKINode Title="KancolleGameData.MapInfoDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_MapInfoDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.Material property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_Material.htm" />
+  <HelpKINode Title="KancolleGameData.MissionDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_MissionDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.OwnedMissionDic property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedMissionDic.htm" />
+  <HelpKINode Title="KancolleGameData.OwnedShipDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.OwnedShipPlaceArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipPlaceArray.htm" />
+  <HelpKINode Title="KancolleGameData.OwnedShipPlaceDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipPlaceDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.OwnedSlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedSlotDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.QuestDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_QuestDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.QuestInfoDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_QuestInfoDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.QuestInfoFile field" Url="html/F_WoFlagship_KancolleCore_KancolleGameData_QuestInfoFile.htm" />
+  <HelpKINode Title="KancolleGameData.ShipDataDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ShipDataDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.ShipTypeDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ShipTypeDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.SlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_SlotDictionary.htm" />
+  <HelpKINode Title="KancolleGameData.UnEquipedSlotArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_UnEquipedSlotArray.htm" />
+  <HelpKINode Title="KancolleItemEquipType class">
+    <HelpKINode Title="KancolleItemEquipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
+    <HelpKINode Title="about KancolleItemEquipType class" Url="html/T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleItemEquipType.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_Name.htm" />
+  <HelpKINode Title="KancolleItemEquipType.ShowFlag property" Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_ShowFlag.htm" />
+  <HelpKINode Title="KancolleItemEquipType.TypeId property" Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_TypeId.htm" />
+  <HelpKINode Title="KancolleMapInfoData class">
+    <HelpKINode Title="KancolleMapInfoData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
+    <HelpKINode Title="about KancolleMapInfoData class" Url="html/T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleMapInfoData.Id property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Id.htm" />
+  <HelpKINode Title="KancolleMapInfoData.InfoText property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_InfoText.htm" />
+  <HelpKINode Title="KancolleMapInfoData.Level property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Level.htm" />
+  <HelpKINode Title="KancolleMapInfoData.MapAreaId property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_MapAreaId.htm" />
+  <HelpKINode Title="KancolleMapInfoData.MapNo property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_MapNo.htm" />
+  <HelpKINode Title="KancolleMapInfoData.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Name.htm" />
+  <HelpKINode Title="KancolleMaterial class">
+    <HelpKINode Title="KancolleMaterial Class" Url="html/T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
+    <HelpKINode Title="about KancolleMaterial class" Url="html/T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleMaterial__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleMaterial.Dan property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Dan.htm" />
+  <HelpKINode Title="KancolleMaterial.Gaixiu property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gaixiu.htm" />
+  <HelpKINode Title="KancolleMaterial.Gang property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gang.htm" />
+  <HelpKINode Title="KancolleMaterial.Jianzao property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Jianzao.htm" />
+  <HelpKINode Title="KancolleMaterial.Kaifa property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Kaifa.htm" />
+  <HelpKINode Title="KancolleMaterial.KancolleMaterial constructor" Url="html/M_WoFlagship_KancolleCore_KancolleMaterial__ctor.htm" />
+  <HelpKINode Title="KancolleMaterial.Lv property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Lv.htm" />
+  <HelpKINode Title="KancolleMaterial.Ran property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Ran.htm" />
+  <HelpKINode Title="KancolleMaterial.Xiufu property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Xiufu.htm" />
+  <HelpKINode Title="KancolleMissionData class">
+    <HelpKINode Title="KancolleMissionData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
+    <HelpKINode Title="about KancolleMissionData class" Url="html/T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleMissionData.MissionId property" Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_MissionId.htm" />
+  <HelpKINode Title="KancolleMissionData.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_Name.htm" />
+  <HelpKINode Title="KancolleMissson class">
+    <HelpKINode Title="KancolleMissson Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissson.htm" />
+    <HelpKINode Title="about KancolleMissson class" Url="html/T_WoFlagship_KancolleCore_KancolleMissson.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMissson.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissson.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleMissson.MissionId property" Url="html/P_WoFlagship_KancolleCore_KancolleMissson_MissionId.htm" />
+  <HelpKINode Title="KancolleMissson.State property" Url="html/P_WoFlagship_KancolleCore_KancolleMissson_State.htm" />
+  <HelpKINode Title="KancolleQuest class">
+    <HelpKINode Title="KancolleQuest Class" Url="html/T_WoFlagship_KancolleCore_KancolleQuest.htm" />
+    <HelpKINode Title="about KancolleQuest class" Url="html/T_WoFlagship_KancolleCore_KancolleQuest.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleQuest.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleQuest.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleQuest.Category property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Category.htm" />
+  <HelpKINode Title="KancolleQuest.Detail property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Detail.htm" />
+  <HelpKINode Title="KancolleQuest.Id property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Id.htm" />
+  <HelpKINode Title="KancolleQuest.Material property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Material.htm" />
+  <HelpKINode Title="KancolleQuest.ProgressFlag property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_ProgressFlag.htm" />
+  <HelpKINode Title="KancolleQuest.State property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_State.htm" />
+  <HelpKINode Title="KancolleQuest.Title property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Title.htm" />
+  <HelpKINode Title="KancolleQuest.Type property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Type.htm" />
+  <HelpKINode Title="KancolleScene class">
+    <HelpKINode Title="KancolleScene Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+    <HelpKINode Title="about KancolleScene class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleScene.Equality operator" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality.htm" />
+  <HelpKINode Title="KancolleScene.Equals method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_Equals.htm" />
+  <HelpKINode Title="KancolleScene.GetHashCode method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_GetHashCode.htm" />
+  <HelpKINode Title="KancolleScene.Inequality operator" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality.htm" />
+  <HelpKINode Title="KancolleScene.KancolleScene constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor.htm" />
+  <HelpKINode Title="KancolleScene.SceneState property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneState.htm" />
+  <HelpKINode Title="KancolleScene.SceneType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneType.htm" />
+  <HelpKINode Title="KancolleScene.ToString method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_ToString.htm" />
+  <HelpKINode Title="KancolleSceneStates enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="KancolleSceneTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="KancolleShip class">
+    <HelpKINode Title="KancolleShip Class" Url="html/T_WoFlagship_KancolleCore_KancolleShip.htm" />
+    <HelpKINode Title="about KancolleShip class" Url="html/T_WoFlagship_KancolleCore_KancolleShip.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShip.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShip.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleShip.Condition property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Condition.htm" />
+  <HelpKINode Title="KancolleShip.DockTime property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_DockTime.htm" />
+  <HelpKINode Title="KancolleShip.Kaihi property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Kaihi.htm" />
+  <HelpKINode Title="KancolleShip.Karyoku property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Karyoku.htm" />
+  <HelpKINode Title="KancolleShip.Level property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Level.htm" />
+  <HelpKINode Title="KancolleShip.Locked property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Locked.htm" />
+  <HelpKINode Title="KancolleShip.Lucky property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Lucky.htm" />
+  <HelpKINode Title="KancolleShip.MaxHP property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_MaxHP.htm" />
+  <HelpKINode Title="KancolleShip.No property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_No.htm" />
+  <HelpKINode Title="KancolleShip.NowHP property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_NowHP.htm" />
+  <HelpKINode Title="KancolleShip.OnSlot property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_OnSlot.htm" />
+  <HelpKINode Title="KancolleShip.Raisou property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Raisou.htm" />
+  <HelpKINode Title="KancolleShip.Sakuteki property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Sakuteki.htm" />
+  <HelpKINode Title="KancolleShip.ShipId property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_ShipId.htm" />
+  <HelpKINode Title="KancolleShip.Slot property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Slot.htm" />
+  <HelpKINode Title="KancolleShip.Soukou property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Soukou.htm" />
+  <HelpKINode Title="KancolleShip.Taiku property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Taiku.htm" />
+  <HelpKINode Title="KancolleShip.Taisen property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Taisen.htm" />
+  <HelpKINode Title="KancolleShipData class">
+    <HelpKINode Title="KancolleShipData Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipData.htm" />
+    <HelpKINode Title="about KancolleShipData class" Url="html/T_WoFlagship_KancolleCore_KancolleShipData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShipData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleShipData.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleShipData_Name.htm" />
+  <HelpKINode Title="KancolleShipData.ShipId property" Url="html/P_WoFlagship_KancolleCore_KancolleShipData_ShipId.htm" />
+  <HelpKINode Title="KancolleShipData.SlotNum property" Url="html/P_WoFlagship_KancolleCore_KancolleShipData_SlotNum.htm" />
+  <HelpKINode Title="KancolleShipData.Type property" Url="html/P_WoFlagship_KancolleCore_KancolleShipData_Type.htm" />
+  <HelpKINode Title="KancolleShipType class">
+    <HelpKINode Title="KancolleShipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipType.htm" />
+    <HelpKINode Title="about KancolleShipType class" Url="html/T_WoFlagship_KancolleCore_KancolleShipType.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShipType.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipType.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleShipType.EquipItemType property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_EquipItemType.htm" />
+  <HelpKINode Title="KancolleShipType.Kcnt property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Kcnt.htm" />
+  <HelpKINode Title="KancolleShipType.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Name.htm" />
+  <HelpKINode Title="KancolleShipType.Scnt property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Scnt.htm" />
+  <HelpKINode Title="KancolleShipType.SortNo property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_SortNo.htm" />
+  <HelpKINode Title="KancolleShipType.TypeId property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_TypeId.htm" />
+  <HelpKINode Title="KancolleSlotItem class">
+    <HelpKINode Title="KancolleSlotItem Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
+    <HelpKINode Title="about KancolleSlotItem class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleSlotItem.Level property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Level.htm" />
+  <HelpKINode Title="KancolleSlotItem.Locked property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Locked.htm" />
+  <HelpKINode Title="KancolleSlotItem.No property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_No.htm" />
+  <HelpKINode Title="KancolleSlotItem.SlotItemId property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_SlotItemId.htm" />
+  <HelpKINode Title="KancolleSlotItemData class">
+    <HelpKINode Title="KancolleSlotItemData Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
+    <HelpKINode Title="about KancolleSlotItemData class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleSlotItemData.Atap property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Atap.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Bakk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Bakk.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Baku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Baku.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Broken property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Broken.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Houg property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houg.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Houk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houk.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Houm property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Houm.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Id property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Id.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Info property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Info.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Leng property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Leng.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Luck property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Luck.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Name property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Name.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Raig property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raig.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Raik property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raik.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Raim property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raim.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Rare property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Rare.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Sakb property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Sakb.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Saku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Saku.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Soku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Soku.htm" />
+  <HelpKINode Title="KancolleSlotItemData.SortNo property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_SortNo.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Souk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Souk.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Taik property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Taik.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Tais property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Tais.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Tyku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Tyku.htm" />
+  <HelpKINode Title="KancolleSlotItemData.Type property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Type.htm" />
+  <HelpKINode Title="KancolleSlotItemData.UseBull property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_UseBull.htm" />
+  <HelpKINode Title="KancolleTask class">
+    <HelpKINode Title="KancolleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
+    <HelpKINode Title="about KancolleTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleTask.KancolleTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTask__ctor.htm" />
+  <HelpKINode Title="KancolleTask.Priority property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_Priority.htm" />
+  <HelpKINode Title="KancolleTask.RefreshDataTask property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_RefreshDataTask.htm" />
+  <HelpKINode Title="KancolleTask.TimeStamp property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_TimeStamp.htm" />
+  <HelpKINode Title="KancolleTaskExecutor class">
+    <HelpKINode Title="KancolleTaskExecutor Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+    <HelpKINode Title="about KancolleTaskExecutor class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleTaskExecutor.ActionTimeout property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ActionTimeout.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.BattleSkipTimeout property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_BattleSkipTimeout.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.ClearTaskList method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ClearTaskList.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.CurrentScene property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_CurrentScene.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.DoTask method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_DoTask.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.EnqueueTask method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_EnqueueTask.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.GameData property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_GameData.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.Get method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Get.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.OnAPIResponseReceivedHandler method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_OnAPIResponseReceivedHandler.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.OnTaskFinished event" Url="html/E_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_OnTaskFinished.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.Start method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Start.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.Stop method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Stop.htm" />
+  <HelpKINode Title="KancolleTaskExecutor.TaskRemaining property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_TaskRemaining.htm" />
+  <HelpKINode Title="KancolleTaskResult class">
+    <HelpKINode Title="KancolleTaskResult Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm" />
+    <HelpKINode Title="about KancolleTaskResult class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleTaskResult.ErrorCode property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ErrorCode.htm" />
+  <HelpKINode Title="KancolleTaskResult.FinishedTask property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_FinishedTask.htm" />
+  <HelpKINode Title="KancolleTaskResult.IsSuccess property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_IsSuccess.htm" />
+  <HelpKINode Title="KancolleTaskResult.KancolleTaskResult constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult__ctor.htm" />
+  <HelpKINode Title="KancolleTaskResult.Message property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_Message.htm" />
+  <HelpKINode Title="KancolleTaskResult.ResultType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ResultType.htm" />
+  <HelpKINode Title="KancolleTaskResult.ToString method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ToString.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors class">
+    <HelpKINode Title="KancolleTaskResultErrors Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
+    <HelpKINode Title="about KancolleTaskResultErrors class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleTaskResultErrors.EmptyFirstShip field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyFirstShip.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.EmptyInterveningShip field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyInterveningShip.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.IllegalFormation field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IllegalFormation.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.IllegalShipCount field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IllegalShipCount.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.IncorrectDeckIndex field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IncorrectDeckIndex.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.KancolleTaskResultErrors constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors__ctor.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.NoNavigationPath field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoNavigationPath.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.NoResponse field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoResponse.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.NoShipAtPosition field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoShipAtPosition.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.Success field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_Success.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnexceptedScene field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnexceptedScene.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnexceptedState field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnexceptedState.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnfoundItemNo field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundItemNo.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnfoundMapId field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundMapId.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnfoundShipNo field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundShipNo.htm" />
+  <HelpKINode Title="KancolleTaskResultErrors.UnknownTaskType field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnknownTaskType.htm" />
+  <HelpKINode Title="KancolleTaskResultType enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultType.htm" />
+  <HelpKINode Title="KancolleWidgetPositions class">
+    <HelpKINode Title="KancolleWidgetPositions Class" Url="html/T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
+    <HelpKINode Title="about KancolleWidgetPositions class" Url="html/T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleWidgetPositions__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KancolleWidgetPositions.Battle_Formation field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_Formation.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Battle_LeftChoice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_LeftChoice.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Battle_RightChoice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_RightChoice.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Battle_SafeRect field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_SafeRect.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.KancolleWidgetPositions constructor" Url="html/M_WoFlagship_KancolleCore_KancolleWidgetPositions__ctor.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Left_Arsenal field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Arsenal.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Left_Organize field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Organize.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Left_Remodel field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Remodel.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Left_Repair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Repair.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Left_Supply field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Supply.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Areas field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Areas.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Decide_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Decide_Back.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Maps field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Maps.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Mission.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Practice.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_SelectDeck field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_SelectDeck.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Start.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Map_Start_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Start_Back.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Map.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Maps field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Maps.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_MissionItems field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_MissionItems.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Practice.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Start_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start_Back.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Mission_Start_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start_Decks.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_ChangeButtons field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_ChangeButtons.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Changes_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_FirstPage.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Changes_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Next5Page.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Changes_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Pages.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Changes_Remove field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Remove.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Changes_ShipList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_ShipList.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Change_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Change_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Change_Decide_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Change_Decide_Back.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Decks.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_DetailButtons field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_DetailButtons.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_RemoveAllExceptFirst field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_RemoveAllExceptFirst.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_ShipList_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_ShipList_Back.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Organize_SortType field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_SortType.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Arsenal field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Arsenal.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Organize field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Organize.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Remodel field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Remodel.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Repair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Repair.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Sally field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Sally.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Port_Supply field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Supply.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Practice_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Practice_Map.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Practice_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Practice_Mission.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Pratice_Pratices field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Pratice_Pratices.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Quest field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Quest.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_ChangeItemMode field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_ChangeItemMode.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Changes_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_FirstPage.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Changes_ItemList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_ItemList.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Changes_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_Next5Page.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Changes_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_Pages.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Change_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Change_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Change_Other_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Change_Other_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Decks.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Items field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Items.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Items_Return field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Items_Return.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_RemoveItem field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_RemoveItem.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Remodel_Ships field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Ships.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Docks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Docks.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_FastRepairs field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_FastRepairs.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_ShipList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_ShipList.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_ShipList_SortMode field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_ShipList_SortMode.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Ships_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_FirstPage.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Ships_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Next5Page.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Ships_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Pages.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Ships_Return field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Return.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Start_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start_Decide.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Repair_Start_UseFastRepair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start_UseFastRepair.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Sally_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Map.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Sally_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Mission.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Sally_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Practice.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Supply_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Supply_Decks.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Supply_SupplyDeck field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Supply_SupplyDeck.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.UpdateTime field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_UpdateTime.htm" />
+  <HelpKINode Title="KancolleWidgetPositions.Version field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Version.htm" />
+  <HelpKINode Title="Karyoku property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Karyoku.htm" />
+  <HelpKINode Title="Kcnt property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Kcnt.htm" />
+  <HelpKINode Title="LandBase enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Laser enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Left_Arsenal field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Arsenal.htm" />
+  <HelpKINode Title="Left_Organize field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Organize.htm" />
+  <HelpKINode Title="Left_Remodel field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Remodel.htm" />
+  <HelpKINode Title="Left_Repair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Repair.htm" />
+  <HelpKINode Title="Left_Supply field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Left_Supply.htm" />
+  <HelpKINode Title="Leng property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Leng.htm" />
+  <HelpKINode Title="Level property">
+    <HelpKINode Title="KancolleBasicInfo.Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_Level.htm" />
+    <HelpKINode Title="KancolleMapInfoData.Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Level.htm" />
+    <HelpKINode Title="KancolleShip.Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_Level.htm" />
+    <HelpKINode Title="KancolleSlotItem.Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Level.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Locked property">
+    <HelpKINode Title="KancolleShip.Locked Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_Locked.htm" />
+    <HelpKINode Title="KancolleSlotItem.Locked Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Locked.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Low enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  <HelpKINode Title="Luck property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Luck.htm" />
+  <HelpKINode Title="Lucky property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Lucky.htm" />
+  <HelpKINode Title="Lv property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Lv.htm" />
+  <HelpKINode Title="MainFleet property">
+    <HelpKINode Title="Battle.MainFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_MainFleet.htm" />
+    <HelpKINode Title="KancolleBattleContext.MainFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_MainFleet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Map enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="MapAreaId property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_MapAreaId.htm" />
+  <HelpKINode Title="MapId property" Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_MapId.htm" />
+  <HelpKINode Title="MapInfoDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_MapInfoDictionary.htm" />
+  <HelpKINode Title="MapNo property" Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_MapNo.htm" />
+  <HelpKINode Title="MapTask class">
+    <HelpKINode Title="MapTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
+    <HelpKINode Title="about MapTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_MapTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MapTask.Fleet property" Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_Fleet.htm" />
+  <HelpKINode Title="MapTask.MapId property" Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_MapId.htm" />
+  <HelpKINode Title="MapTask.MapTask constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_MapTask__ctor.htm" />
+  <HelpKINode Title="Map_Areas field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Areas.htm" />
+  <HelpKINode Title="Map_Decide enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Map_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Decide.htm" />
+  <HelpKINode Title="Map_Decide_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Decide_Back.htm" />
+  <HelpKINode Title="Map_Maps field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Maps.htm" />
+  <HelpKINode Title="Map_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Mission.htm" />
+  <HelpKINode Title="Map_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Practice.htm" />
+  <HelpKINode Title="Map_SelectDeck field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_SelectDeck.htm" />
+  <HelpKINode Title="Map_Start enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Map_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Start.htm" />
+  <HelpKINode Title="Map_Start_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Map_Start_Back.htm" />
+  <HelpKINode Title="Map_Start_False enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Map_Start_True enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Material property">
+    <HelpKINode Title="KancolleGameData.Material Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_Material.htm" />
+    <HelpKINode Title="KancolleQuest.Material Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Material.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MaxHP property">
+    <HelpKINode Title="KancolleShip.MaxHP Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_MaxHP.htm" />
+    <HelpKINode Title="Ship.MaxHP Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_MaxHP.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MaxShipCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxShipCount.htm" />
+  <HelpKINode Title="MaxSlotItemCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxSlotItemCount.htm" />
+  <HelpKINode Title="Message property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_Message.htm" />
+  <HelpKINode Title="Miss enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
+  <HelpKINode Title="Mission enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="MissionDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_MissionDictionary.htm" />
+  <HelpKINode Title="MissionFleet property" Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionFleet.htm" />
+  <HelpKINode Title="MissionId property">
+    <HelpKINode Title="KancolleMissionData.MissionId Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_MissionId.htm" />
+    <HelpKINode Title="KancolleMissson.MissionId Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissson_MissionId.htm" />
+    <HelpKINode Title="MissionTask.MissionId Property " Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MissionTask class">
+    <HelpKINode Title="MissionTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
+    <HelpKINode Title="about MissionTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_MissionTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MissionTask.MissionFleet property" Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionFleet.htm" />
+  <HelpKINode Title="MissionTask.MissionId property" Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionId.htm" />
+  <HelpKINode Title="MissionTask.MissionTask constructor" Url="html/Overload_WoFlagship_KancolleCore_Navigation_MissionTask__ctor.htm" />
+  <HelpKINode Title="Mission_Decide enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Mission_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Decide.htm" />
+  <HelpKINode Title="Mission_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Map.htm" />
+  <HelpKINode Title="Mission_Maps field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Maps.htm" />
+  <HelpKINode Title="Mission_MissionItems field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_MissionItems.htm" />
+  <HelpKINode Title="Mission_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Practice.htm" />
+  <HelpKINode Title="Mission_Start enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Mission_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start.htm" />
+  <HelpKINode Title="Mission_Start_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start_Back.htm" />
+  <HelpKINode Title="Mission_Start_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Mission_Start_Decks.htm" />
+  <HelpKINode Title="Mission_Start_False enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Mission_Start_True enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Move enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_ActionTypes.htm" />
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="KancolleItemEquipType.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_Name.htm" />
+    <HelpKINode Title="KancolleMapInfoData.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Name.htm" />
+    <HelpKINode Title="KancolleMissionData.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_Name.htm" />
+    <HelpKINode Title="KancolleShipData.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_Name.htm" />
+    <HelpKINode Title="KancolleShipType.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Name.htm" />
+    <HelpKINode Title="KancolleSlotItemData.Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Navigate method" Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator_Navigate.htm" />
+  <HelpKINode Title="Next enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="NickName property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_NickName.htm" />
+  <HelpKINode Title="Night enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="No property">
+    <HelpKINode Title="KancolleShip.No Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_No.htm" />
+    <HelpKINode Title="KancolleSlotItem.No Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_No.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NoNavigationPath field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoNavigationPath.htm" />
+  <HelpKINode Title="NoResponse field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoResponse.htm" />
+  <HelpKINode Title="Normal enumeration member">
+    <HelpKINode Title="AttackTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+    <HelpKINode Title="BattleTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
+    <HelpKINode Title="TaskPriority Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NormalSF property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_NormalSF.htm" />
+  <HelpKINode Title="NoShipAtPosition field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_NoShipAtPosition.htm" />
+  <HelpKINode Title="NowHP property">
+    <HelpKINode Title="KancolleShip.NowHP Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_NowHP.htm" />
+    <HelpKINode Title="Ship.NowHP Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_NowHP.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnAPIResponseReceivedHandler method">
+    <HelpKINode Title="IKancolleAPIReceiver.OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_IKancolleAPIReceiver_OnAPIResponseReceivedHandler.htm" />
+    <HelpKINode Title="KancolleBattleContext.OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnAPIResponseReceivedHandler.htm" />
+    <HelpKINode Title="KancolleGameContext.OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_KancolleGameContext_OnAPIResponseReceivedHandler.htm" />
+    <HelpKINode Title="KancolleTaskExecutor.OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_OnAPIResponseReceivedHandler.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnBattleHappened event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleHappened.htm" />
+  <HelpKINode Title="OnBattleResultReceived event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleResultReceived.htm" />
+  <HelpKINode Title="OnGameDataUpdated event" Url="html/E_WoFlagship_KancolleCore_KancolleGameContext_OnGameDataUpdated.htm" />
+  <HelpKINode Title="OnGameDataUpdatedHandler method" Url="html/M_WoFlagship_KancolleCore_IKancolleGameDataReceiver_OnGameDataUpdatedHandler.htm" />
+  <HelpKINode Title="OnSceneUpdatedHandler method" Url="html/M_WoFlagship_KancolleCore_IKancolleSceneRevceiver_OnSceneUpdatedHandler.htm" />
+  <HelpKINode Title="OnSlot property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_OnSlot.htm" />
+  <HelpKINode Title="OnTaskFinished event" Url="html/E_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_OnTaskFinished.htm" />
+  <HelpKINode Title="Organize enumeration member">
+    <HelpKINode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+    <HelpKINode Title="TaskTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OrganizedDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_OrganizedDeck.htm" />
+  <HelpKINode Title="OrganizeTask class">
+    <HelpKINode Title="OrganizeTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
+    <HelpKINode Title="about OrganizeTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_OrganizeTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OrganizeTask.OrganizedDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_OrganizedDeck.htm" />
+  <HelpKINode Title="OrganizeTask.OrganizeTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_OrganizeTask__ctor.htm" />
+  <HelpKINode Title="OrganizeTask.Ships property" Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_Ships.htm" />
+  <HelpKINode Title="Organize_ChangeButtons field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_ChangeButtons.htm" />
+  <HelpKINode Title="Organize_Changes_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_FirstPage.htm" />
+  <HelpKINode Title="Organize_Changes_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Next5Page.htm" />
+  <HelpKINode Title="Organize_Changes_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Pages.htm" />
+  <HelpKINode Title="Organize_Changes_Remove field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_Remove.htm" />
+  <HelpKINode Title="Organize_Changes_ShipList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Changes_ShipList.htm" />
+  <HelpKINode Title="Organize_Change_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Change_Decide.htm" />
+  <HelpKINode Title="Organize_Change_Decide_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Change_Decide_Back.htm" />
+  <HelpKINode Title="Organize_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_Decks.htm" />
+  <HelpKINode Title="Organize_DetailButtons field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_DetailButtons.htm" />
+  <HelpKINode Title="Organize_RemoveAllExceptFirst field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_RemoveAllExceptFirst.htm" />
+  <HelpKINode Title="Organize_ShipList_Back field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_ShipList_Back.htm" />
+  <HelpKINode Title="Organize_ShipSelect enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Organize_SortByNew enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Organize_SortType field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Organize_SortType.htm" />
+  <HelpKINode Title="Organzie_Change_Decide enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="OwnedMissionDic property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedMissionDic.htm" />
+  <HelpKINode Title="OwnedShipCount property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_OwnedShipCount.htm" />
+  <HelpKINode Title="OwnedShipDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipDictionary.htm" />
+  <HelpKINode Title="OwnedShipPlaceArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipPlaceArray.htm" />
+  <HelpKINode Title="OwnedShipPlaceDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedShipPlaceDictionary.htm" />
+  <HelpKINode Title="OwnedSlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_OwnedSlotDictionary.htm" />
+  <HelpKINode Title="ParseLongTime method" Url="html/M_WoFlagship_KancolleCore_KancolleDockData_ParseLongTime.htm" />
+  <HelpKINode Title="Port enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Port field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port.htm" />
+  <HelpKINode Title="Port_Arsenal field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Arsenal.htm" />
+  <HelpKINode Title="Port_Organize field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Organize.htm" />
+  <HelpKINode Title="Port_Remodel field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Remodel.htm" />
+  <HelpKINode Title="Port_Repair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Repair.htm" />
+  <HelpKINode Title="Port_Sally field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Sally.htm" />
+  <HelpKINode Title="Port_Supply field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Port_Supply.htm" />
+  <HelpKINode Title="Position property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Position.htm" />
+  <HelpKINode Title="Practice enumeration member">
+    <HelpKINode Title="BattleTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
+    <HelpKINode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Practice_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Practice_Map.htm" />
+  <HelpKINode Title="Practice_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Practice_Mission.htm" />
+  <HelpKINode Title="Pratice_Pratices field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Pratice_Pratices.htm" />
+  <HelpKINode Title="Primary_AP_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Primary_Primary_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Primary_Radar_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Primary_Secondary_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Primary_Torpedo_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="Priority property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_Priority.htm" />
+  <HelpKINode Title="ProgressFlag property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_ProgressFlag.htm" />
+  <HelpKINode Title="Quest enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Quest field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Quest.htm" />
+  <HelpKINode Title="QuestDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_QuestDictionary.htm" />
+  <HelpKINode Title="QuestInfoDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_QuestInfoDictionary.htm" />
+  <HelpKINode Title="QuestInfoFile field" Url="html/F_WoFlagship_KancolleCore_KancolleGameData_QuestInfoFile.htm" />
+  <HelpKINode Title="QuestTask class">
+    <HelpKINode Title="QuestTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
+    <HelpKINode Title="about QuestTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_QuestTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="QuestTask.QuestTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_QuestTask__ctor.htm" />
+  <HelpKINode Title="Raig property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raig.htm" />
+  <HelpKINode Title="Raik property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raik.htm" />
+  <HelpKINode Title="Raim property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Raim.htm" />
+  <HelpKINode Title="Raisou property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Raisou.htm" />
+  <HelpKINode Title="Ran property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Ran.htm" />
+  <HelpKINode Title="Rank property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_Rank.htm" />
+  <HelpKINode Title="RankId property" Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_RankId.htm" />
+  <HelpKINode Title="RankText property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_RankText.htm" />
+  <HelpKINode Title="Rare property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Rare.htm" />
+  <HelpKINode Title="Raw property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Raw.htm" />
+  <HelpKINode Title="Realtime enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  <HelpKINode Title="RefreshDataTask class">
+    <HelpKINode Title="RefreshDataTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
+    <HelpKINode Title="about RefreshDataTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RefreshDataTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RefreshDataTask property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_RefreshDataTask.htm" />
+  <HelpKINode Title="RefreshDataTask.RefreshDataTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RefreshDataTask__ctor.htm" />
+  <HelpKINode Title="Remodel enumeration member">
+    <HelpKINode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+    <HelpKINode Title="TaskTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemodelTask class">
+    <HelpKINode Title="RemodelTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
+    <HelpKINode Title="about RemodelTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RemodelTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemodelTask.RemodelTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RemodelTask__ctor.htm" />
+  <HelpKINode Title="RemodelTask.SlotItemNos property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_SlotItemNos.htm" />
+  <HelpKINode Title="RemodelTask.TargetDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetDeck.htm" />
+  <HelpKINode Title="RemodelTask.TargetPosition property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetPosition.htm" />
+  <HelpKINode Title="Remodel_ChangeItemMode field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_ChangeItemMode.htm" />
+  <HelpKINode Title="Remodel_Changes_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_FirstPage.htm" />
+  <HelpKINode Title="Remodel_Changes_ItemList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_ItemList.htm" />
+  <HelpKINode Title="Remodel_Changes_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_Next5Page.htm" />
+  <HelpKINode Title="Remodel_Changes_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Changes_Pages.htm" />
+  <HelpKINode Title="Remodel_Change_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Change_Decide.htm" />
+  <HelpKINode Title="Remodel_Change_Other_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Change_Other_Decide.htm" />
+  <HelpKINode Title="Remodel_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Decks.htm" />
+  <HelpKINode Title="Remodel_ItemList enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Remodel_ItemList_Decide enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Remodel_ItemList_Normal enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Remodel_ItemList_Other enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Remodel_ItemList_Other_Decide enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Remodel_Items field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Items.htm" />
+  <HelpKINode Title="Remodel_Items_Return field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Items_Return.htm" />
+  <HelpKINode Title="Remodel_RemoveItem field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_RemoveItem.htm" />
+  <HelpKINode Title="Remodel_Ships field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Remodel_Ships.htm" />
+  <HelpKINode Title="Repair enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  <HelpKINode Title="RepairMain enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="RepairTask class">
+    <HelpKINode Title="RepairTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
+    <HelpKINode Title="about RepairTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RepairTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RepairTask.Dock property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_Dock.htm" />
+  <HelpKINode Title="RepairTask.RepairTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_RepairTask__ctor.htm" />
+  <HelpKINode Title="RepairTask.ShipNo property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_ShipNo.htm" />
+  <HelpKINode Title="RepairTask.UseFastRepair property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_UseFastRepair.htm" />
+  <HelpKINode Title="Repair_Docks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Docks.htm" />
+  <HelpKINode Title="Repair_FastRepairs field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_FastRepairs.htm" />
+  <HelpKINode Title="Repair_ShipList enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Repair_ShipList field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_ShipList.htm" />
+  <HelpKINode Title="Repair_ShipList_SortMode field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_ShipList_SortMode.htm" />
+  <HelpKINode Title="Repair_Ships_FirstPage field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_FirstPage.htm" />
+  <HelpKINode Title="Repair_Ships_Next5Page field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Next5Page.htm" />
+  <HelpKINode Title="Repair_Ships_Pages field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Pages.htm" />
+  <HelpKINode Title="Repair_Ships_Return field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Ships_Return.htm" />
+  <HelpKINode Title="Repair_SortByNew enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Repair_Start enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Repair_Start field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start.htm" />
+  <HelpKINode Title="Repair_Start_Decide field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start_Decide.htm" />
+  <HelpKINode Title="Repair_Start_False enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Repair_Start_True enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="Repair_Start_UseFastRepair field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Repair_Start_UseFastRepair.htm" />
+  <HelpKINode Title="ResultType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ResultType.htm" />
+  <HelpKINode Title="Return enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="Sakb property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Sakb.htm" />
+  <HelpKINode Title="Saku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Saku.htm" />
+  <HelpKINode Title="Sakuteki property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Sakuteki.htm" />
+  <HelpKINode Title="SallyMain enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="Sally_Map field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Map.htm" />
+  <HelpKINode Title="Sally_Mission field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Mission.htm" />
+  <HelpKINode Title="Sally_Practice field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Sally_Practice.htm" />
+  <HelpKINode Title="SceneRecognizer class">
+    <HelpKINode Title="SceneRecognizer Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm" />
+    <HelpKINode Title="about SceneRecognizer class" Url="html/T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SceneRecognizer.ComparisonFolder field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_ComparisonFolder.htm" />
+  <HelpKINode Title="SceneRecognizer.GetSceneTypeFromBitmap method" Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer_GetSceneTypeFromBitmap.htm" />
+  <HelpKINode Title="SceneRecognizer.SceneRecognizer constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer__ctor.htm" />
+  <HelpKINode Title="SceneRecognizer.Threshold field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_Threshold.htm" />
+  <HelpKINode Title="SceneState property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneState.htm" />
+  <HelpKINode Title="SceneType property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneType.htm" />
+  <HelpKINode Title="SClosing enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Scnt property" Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Scnt.htm" />
+  <HelpKINode Title="SEscort enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Shelling enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Ship class">
+    <HelpKINode Title="Ship Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
+    <HelpKINode Title="about Ship class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Ship.FromHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_FromHP.htm" />
+  <HelpKINode Title="Ship.Items property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Items.htm" />
+  <HelpKINode Title="Ship.ItemUsed property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ItemUsed.htm" />
+  <HelpKINode Title="Ship.MaxHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_MaxHP.htm" />
+  <HelpKINode Title="Ship.NowHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_NowHP.htm" />
+  <HelpKINode Title="Ship.Position property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Position.htm" />
+  <HelpKINode Title="Ship.Raw property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Raw.htm" />
+  <HelpKINode Title="Ship.Ship constructor" Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor.htm" />
+  <HelpKINode Title="Ship.ShipId property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ShipId.htm" />
+  <HelpKINode Title="Ship.ShipOwner property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ShipOwner.htm" />
+  <HelpKINode Title="Ship.ToHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ToHP.htm" />
+  <HelpKINode Title="ShipDataDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ShipDataDictionary.htm" />
+  <HelpKINode Title="ShipId property">
+    <HelpKINode Title="KancolleDockData.ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleDockData_ShipId.htm" />
+    <HelpKINode Title="KancolleShip.ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_ShipId.htm" />
+    <HelpKINode Title="KancolleShipData.ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_ShipId.htm" />
+    <HelpKINode Title="Ship.ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ShipId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ShipNo property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_ShipNo.htm" />
+  <HelpKINode Title="ShipOwner enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_ShipOwner.htm" />
+  <HelpKINode Title="ShipOwner property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ShipOwner.htm" />
+  <HelpKINode Title="Ships property" Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_Ships.htm" />
+  <HelpKINode Title="ShipTypeDic property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeDic.htm" />
+  <HelpKINode Title="ShipTypeDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_ShipTypeDictionary.htm" />
+  <HelpKINode Title="ShipTypeText property" Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeText.htm" />
+  <HelpKINode Title="ShowFlag property" Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_ShowFlag.htm" />
+  <HelpKINode Title="SimpleNavigator class">
+    <HelpKINode Title="SimpleNavigator Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm" />
+    <HelpKINode Title="about SimpleNavigator class" Url="html/T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SimpleNavigator.Navigate method" Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator_Navigate.htm" />
+  <HelpKINode Title="SimpleNavigator.SimpleNavigator constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator__ctor.htm" />
+  <HelpKINode Title="SimulateAerialAttack method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateAerialAttack.htm" />
+  <HelpKINode Title="SimulateTorpedoAttack method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateTorpedoAttack.htm" />
+  <HelpKINode Title="Slot property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Slot.htm" />
+  <HelpKINode Title="SlotDictionary property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_SlotDictionary.htm" />
+  <HelpKINode Title="SlotItemId property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_SlotItemId.htm" />
+  <HelpKINode Title="SlotItemNos property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_SlotItemNos.htm" />
+  <HelpKINode Title="SlotNum property" Url="html/P_WoFlagship_KancolleCore_KancolleShipData_SlotNum.htm" />
+  <HelpKINode Title="SMain enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="SNight enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Soku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Soku.htm" />
+  <HelpKINode Title="SOpening enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="SortNo property">
+    <HelpKINode Title="KancolleShipType.SortNo Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_SortNo.htm" />
+    <HelpKINode Title="KancolleSlotItemData.SortNo Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_SortNo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Souk property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Souk.htm" />
+  <HelpKINode Title="Soukou property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Soukou.htm" />
+  <HelpKINode Title="Source property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Source.htm" />
+  <HelpKINode Title="Stage class">
+    <HelpKINode Title="Stage Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm" />
+    <HelpKINode Title="about Stage class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Stage.Attacks property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_Attacks.htm" />
+  <HelpKINode Title="Stage.Stage constructor" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage__ctor.htm" />
+  <HelpKINode Title="Stage.StageType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_StageType.htm" />
+  <HelpKINode Title="Stage.SubType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_SubType.htm" />
+  <HelpKINode Title="Stage.ToString method" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage_ToString.htm" />
+  <HelpKINode Title="Stages property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_Stages.htm" />
+  <HelpKINode Title="StageType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_StageType.htm" />
+  <HelpKINode Title="StageTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Start method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Start.htm" />
+  <HelpKINode Title="State property">
+    <HelpKINode Title="KancolleDockData.State Property " Url="html/P_WoFlagship_KancolleCore_KancolleDockData_State.htm" />
+    <HelpKINode Title="KancolleMissson.State Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissson_State.htm" />
+    <HelpKINode Title="KancolleQuest.State Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_State.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Stop method" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Stop.htm" />
+  <HelpKINode Title="SubType property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_SubType.htm" />
+  <HelpKINode Title="Success enumeration member" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultType.htm" />
+  <HelpKINode Title="Success field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_Success.htm" />
+  <HelpKINode Title="SUndefined enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Supply enumeration member">
+    <HelpKINode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+    <HelpKINode Title="TaskTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SupplyDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_SupplyTask_SupplyDeck.htm" />
+  <HelpKINode Title="SupplyTask class">
+    <HelpKINode Title="SupplyTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
+    <HelpKINode Title="about SupplyTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SupplyTask__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SupplyTask.SupplyDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_SupplyTask_SupplyDeck.htm" />
+  <HelpKINode Title="SupplyTask.SupplyTask constructor" Url="html/M_WoFlagship_KancolleCore_Navigation_SupplyTask__ctor.htm" />
+  <HelpKINode Title="Supply_Decks field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Supply_Decks.htm" />
+  <HelpKINode Title="Supply_SupplyDeck field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Supply_SupplyDeck.htm" />
+  <HelpKINode Title="Support enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="SupportFleet property">
+    <HelpKINode Title="Battle.SupportFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_SupportFleet.htm" />
+    <HelpKINode Title="KancolleBattleContext.SupportFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_SupportFleet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Taik property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Taik.htm" />
+  <HelpKINode Title="Taiku property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Taiku.htm" />
+  <HelpKINode Title="Tais property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Tais.htm" />
+  <HelpKINode Title="Taisen property" Url="html/P_WoFlagship_KancolleCore_KancolleShip_Taisen.htm" />
+  <HelpKINode Title="Target property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Target.htm" />
+  <HelpKINode Title="TargetDeck property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetDeck.htm" />
+  <HelpKINode Title="TargetPosition property" Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetPosition.htm" />
+  <HelpKINode Title="TaskPriority enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  <HelpKINode Title="TaskRemaining property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_TaskRemaining.htm" />
+  <HelpKINode Title="TaskTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  <HelpKINode Title="Threshold field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_Threshold.htm" />
+  <HelpKINode Title="TimeStamp property" Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_TimeStamp.htm" />
+  <HelpKINode Title="Title property" Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Title.htm" />
+  <HelpKINode Title="ToHP property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ToHP.htm" />
+  <HelpKINode Title="Torpedo enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="Torpedo_Torpedo_CI enumeration member" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="ToShip property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_ToShip.htm" />
+  <HelpKINode Title="ToString method">
+    <HelpKINode Title="Attack.ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack_ToString.htm" />
+    <HelpKINode Title="Battle.ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_ToString.htm" />
+    <HelpKINode Title="KancolleScene.ToString Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_ToString.htm" />
+    <HelpKINode Title="KancolleTaskResult.ToString Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ToString.htm" />
+    <HelpKINode Title="Stage.ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage_ToString.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Tyku property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Tyku.htm" />
+  <HelpKINode Title="Type property">
+    <HelpKINode Title="KancolleQuest.Type Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Type.htm" />
+    <HelpKINode Title="KancolleShipData.Type Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_Type.htm" />
+    <HelpKINode Title="KancolleSlotItemData.Type Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Type.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TypeId property">
+    <HelpKINode Title="KancolleItemEquipType.TypeId Property " Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_TypeId.htm" />
+    <HelpKINode Title="KancolleShipType.TypeId Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_TypeId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnEquipedSlotArray property" Url="html/P_WoFlagship_KancolleCore_KancolleGameData_UnEquipedSlotArray.htm" />
+  <HelpKINode Title="UnexceptedScene field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnexceptedScene.htm" />
+  <HelpKINode Title="UnexceptedState field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnexceptedState.htm" />
+  <HelpKINode Title="UnfoundItemNo field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundItemNo.htm" />
+  <HelpKINode Title="UnfoundMapId field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundMapId.htm" />
+  <HelpKINode Title="UnfoundShipNo field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnfoundShipNo.htm" />
+  <HelpKINode Title="Unknown enumeration member">
+    <HelpKINode Title="KancolleSceneStates Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+    <HelpKINode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UnknownTaskType field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_UnknownTaskType.htm" />
+  <HelpKINode Title="UpdateTime field">
+    <HelpKINode Title="KancolleAPIs.UpdateTime Field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_UpdateTime.htm" />
+    <HelpKINode Title="KancolleWidgetPositions.UpdateTime Field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_UpdateTime.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UseBull property" Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_UseBull.htm" />
+  <HelpKINode Title="UseFastRepair property" Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_UseFastRepair.htm" />
+  <HelpKINode Title="Version field">
+    <HelpKINode Title="KancolleAPIs.Version Field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_Version.htm" />
+    <HelpKINode Title="KancolleWidgetPositions.Version Field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Version.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WinRank property" Url="html/P_WoFlagship_KancolleCore_KancolleBattle_BattleResult_WinRank.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore namespace" Url="html/N_WoFlagship_KancolleCore.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.IKancolleAPIReceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.IKancolleGameDataReceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.IKancolleSceneRevceiver interface" Url="html/T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleAPIs class" Url="html/T_WoFlagship_KancolleCore_KancolleAPIs.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBasicInfo class" Url="html/T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle namespace" Url="html/N_WoFlagship_KancolleCore_KancolleBattle.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.Attack class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.AttackTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.Battle class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.BattleResult class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.BattleTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.Fleet class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.HitTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.KancolleBattleContext class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.Ship class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.ShipOwner enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_ShipOwner.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.Stage class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleBattle.StageTypes enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleDockData class" Url="html/T_WoFlagship_KancolleCore_KancolleDockData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleGameContext class" Url="html/T_WoFlagship_KancolleCore_KancolleGameContext.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleGameData class" Url="html/T_WoFlagship_KancolleCore_KancolleGameData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleItemEquipType class" Url="html/T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleMapInfoData class" Url="html/T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleMaterial class" Url="html/T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleMissionData class" Url="html/T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleMissson class" Url="html/T_WoFlagship_KancolleCore_KancolleMissson.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleQuest class" Url="html/T_WoFlagship_KancolleCore_KancolleQuest.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleShip class" Url="html/T_WoFlagship_KancolleCore_KancolleShip.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleShipData class" Url="html/T_WoFlagship_KancolleCore_KancolleShipData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleShipType class" Url="html/T_WoFlagship_KancolleCore_KancolleShipType.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleSlotItem class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleSlotItemData class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.KancolleWidgetPositions class" Url="html/T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation namespace" Url="html/N_WoFlagship_KancolleCore_Navigation.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.ActionTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_ActionTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.BattleChoiceTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.BattleChoiceTask.BattleChoices enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.BattleFormationTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.BattleSkipTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.BattleTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleAction class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleActionEdge class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleScene class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleSceneStates enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleSceneTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleTaskExecutor class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleTaskResult class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleTaskResultErrors class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.KancolleTaskResultType enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultType.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.MapTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.MissionTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.OrganizeTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.QuestTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.RefreshDataTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.RemodelTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.RepairTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.SceneRecognizer class" Url="html/T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.SimpleNavigator class" Url="html/T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.SupplyTask class" Url="html/T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.TaskPriority enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskPriority.htm" />
+  <HelpKINode Title="WoFlagship.KancolleCore.Navigation.TaskTypes enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_TaskTypes.htm" />
+  <HelpKINode Title="Xiufu property" Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Xiufu.htm" />
+</HelpKI>

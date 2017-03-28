@@ -156,7 +156,7 @@ namespace WoFlagship.KancolleCore.Navigation
         /// <summary>
         /// 单纵-1，复纵-2，轮形-3，梯形-4，单横-5
         /// </summary>
-        /// <param name="Formation"></param>
+        /// <param name="formation"></param>
         public BattleFormationTask(int formation)
         {
             Formation = formation;
