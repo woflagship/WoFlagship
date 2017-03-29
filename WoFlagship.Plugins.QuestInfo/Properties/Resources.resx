@@ -124,6 +124,10 @@
   <data name="group_format" xml:space="preserve">
     <value>{Ship:Ship()} {Select:Select()}; </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="questinfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\questinfo.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="result_a" xml:space="preserve">
     <value>获得A胜或以上</value>
   </data>

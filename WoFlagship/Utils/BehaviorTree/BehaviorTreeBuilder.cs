@@ -15,7 +15,7 @@ namespace WoFlagship.Utils.BehaviorTree
         /// <summary>
         /// 创建一个ActionNode
         /// </summary>
-        /// <param name="">节点名</param>
+        /// <param name="name">节点名</param>
         /// <param name="actionFunc">行为</param>
         /// <returns>创建的行为树</returns>
         public BehaviorTreeBuilder Do(string name, Func<DateTime, BehaviorTreeStatus> actionFunc)

@@ -191,7 +191,7 @@ namespace WoFlagship.KancolleCore.Navigation
         /// 远征
         /// </summary>
         /// <param name="missionId">远征id</param>
-        /// <param name="MissionDeck">远征舰队，从0开始算第一舰队</param>
+        /// <param name="missionFleet">远征舰队，从0开始算第一舰队</param>
         public MissionTask(int missionId, int missionFleet)
         {
             MissionId = missionId;

@@ -852,6 +852,7 @@ namespace WoFlagship.KancolleCore.Navigation
         /// 如果新的场景为edge.Target，返回true，否则为false
         /// </summary>
         /// <param name="edge"></param>
+        /// <param name="timeout"></param>
         /// <returns>如果新的场景为scene，返回true，否则为false</returns>
         private bool DoActionAndWaitForScene(KancolleActionEdge edge, double timeout)
         {

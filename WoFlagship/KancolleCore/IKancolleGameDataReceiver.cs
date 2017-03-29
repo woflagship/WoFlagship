@@ -2,6 +2,6 @@
 {
     public interface IKancolleGameDataReceiver
     {
-        void OnGameDataUpdatedHandler(KancolleGameData gameData);
+        void OnGameDataUpdated(KancolleGameData gameData);
     }
 }

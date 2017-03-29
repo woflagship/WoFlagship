@@ -15,10 +15,7 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleGameData
     {
-        /// <summary>
-        /// 任务额外信息地址
-        /// </summary>
-        public const string QuestInfoFile = "Resources\\Infos\\questinfo.json";
+      
 
         /// <summary>
         /// 舰娘类型字典
@@ -53,11 +50,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public ReadOnlyDictionary<int, KancolleQuest> QuestDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleQuest>(new Dictionary<int, KancolleQuest>());
 
-        /// <summary>
-        /// 任务额外信息字典,其信息不是游戏本身中的,而是由第三方整理、翻译等得到的
-        /// </summary>
-        public ReadOnlyDictionary<int, KancolleQuestInfoItem> QuestInfoDictionary { get; internal set; } = new ReadOnlyDictionary<int, KancolleQuestInfoItem>(new Dictionary<int, KancolleQuestInfoItem>());
-
+       
         /// <summary>
         /// 当前资源
         /// </summary>

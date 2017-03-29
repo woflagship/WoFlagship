@@ -8,7 +8,7 @@ namespace WoFlagship.KancolleRequirement
         /// 表示约束的linq的where语句
         /// 不要再加额外的where关键字
         /// 注意变量名为s
-        /// 例如 s.Id == 3 && s.TypeId == -2
+        /// 例如 s.Id == 3 且 s.TypeId == -2
         /// </summary>
         public string ConstraintLinq { get; set; }
 

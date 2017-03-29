@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SmartFormat;
 using SmartFormat.Core.Extensions;
 using System;
@@ -19,12 +20,19 @@ namespace WoFlagship.Plugins.QuestInfo
 {
     public class QuestInfoPlugin : IPlugin
     {
+        //public const string QuestInfoFile = "Infos\\questinfo.json";
         private QuestInfoPanel panel = new QuestInfoPanel();
 
         public int Version { get { return 1; } }
         public string Name { get { return "任务信息插件"; } }
         public string Description { get { return "任务辅助"; } }
         public UserControl PluginPanel { get { return panel; } }
+
+        /// <summary>
+        /// 任务额外信息字典,其信息不是游戏本身中的,而是由第三方整理、翻译等得到的
+        /// </summary>
+        private Dictionary<int, KancolleQuestInfoItem> QuestInfoDictionary = new Dictionary<int, KancolleQuestInfoItem>();
+
 
         private SmartFormatter smart;
         private KancolleQuestFormatter formatter;
@@ -46,15 +54,16 @@ namespace WoFlagship.Plugins.QuestInfo
         {
             smart = Smart.CreateDefaultSmartFormat();
             formatter = new KancolleQuestFormatter();
-            smart.AddExtensions(formatter);   
+            smart.AddExtensions(formatter);
+           
         }
 
 
-       
+
 
         public void OnGameStart(GeneralViewModel generalViewModel, KancolleGameData gameData)
         {
-
+            UpdateQuestInfo();
         }
 
         public void OnGameDataUpdated(GeneralViewModel generalViewModel, KancolleGameData gameData)
@@ -63,7 +72,7 @@ namespace WoFlagship.Plugins.QuestInfo
             foreach (var quest in generalViewModel.QuestList)
             {
                 KancolleQuestData.KancolleQuestInfoItem questInfo;
-                if (gameData.QuestInfoDictionary.TryGetValue(quest.Id, out questInfo))
+                if (QuestInfoDictionary.TryGetValue(quest.Id, out questInfo))
                 {
                     if (questInfo.Requirements is AGouQuestRequirement)
                     {
@@ -86,6 +95,114 @@ namespace WoFlagship.Plugins.QuestInfo
             string str = smart.Format(Resources.sortie_format, require);
 
             return str;
+        }
+
+        /// <summary>
+        /// 从questinfo文件中更新任务信息
+        /// </summary>
+        private void UpdateQuestInfo()
+        {
+            try
+            {
+
+                string content = Encoding.UTF8.GetString(Resources.questinfo);
+                var questInfoObject = JsonConvert.DeserializeObject(content) as JToken;
+                int version = questInfoObject["Version"].ToObject<int>();
+                string updateTime = questInfoObject["UpdateTime"].ToString();
+                QuestInfoDictionary.Clear();
+                QuestInfoDictionary = new Dictionary<int, KancolleQuestInfoItem>();
+                foreach (var quest in questInfoObject["QuestInfos"])
+                {
+                    KancolleQuestInfoItem qi = new KancolleQuestInfoItem()
+                    {
+                        Id = quest["Id"].ToString(),
+                        Name = quest["Name"].ToString(),
+                        Detail = quest["Detail"].ToString(),
+                        Ran = quest["Ran"].ToObject<int>(),
+                        Dan = quest["Dan"].ToObject<int>(),
+                        Gang = quest["Gang"].ToObject<int>(),
+                        Lu = quest["Lu"].ToObject<int>(),
+                        Other = quest["Other"].ToString(),
+                        Note = quest["Note"].ToString(),
+                        GameId = quest["GameId"].ToObject<int>(),
+                        Prerequisite = quest["Prerequisite"].ToObject<int[]>(),
+                        Category = quest["Category"].ToString(),
+                    };
+
+                    IQuestRequirement re = null;
+                    bool unknownCat = false;
+                    switch (qi.Category)
+                    {
+                        case "sortie":
+                            re = quest["Requirements"].ToObject<SortieQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "excercise":
+                            re = quest["Requirements"].ToObject<ExerciseQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "expedition":
+                            re = quest["Requirements"].ToObject<ExpeditionQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "equipexchange":
+                            re = quest["Requirements"].ToObject<EquipexchangeQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "modernization":
+                            re = quest["Requirements"].ToObject<ModernizationQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "fleet":
+                            re = quest["Requirements"].ToObject<FleetQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "sink":
+                            re = quest["Requirements"].ToObject<SinkQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "and":
+                            re = quest["Requirements"].ToObject<AndQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "simple":
+                            re = quest["Requirements"].ToObject<SimpleQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "a-gou":
+                            qi.Requirements = new AGouQuestRequirement();
+                            break;
+                        case "modelconversion":
+                            re = quest["Requirements"].ToObject<ModelconversionQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        case "scrapequipment":
+                            re = quest["Requirements"].ToObject<ScrapequipmentQuestRequirement>();
+                            qi.Requirements = re;
+                            break;
+                        default:
+                            if (!string.IsNullOrEmpty(qi.Category))
+                            {
+                                MessageBox.Show($"未知任务类型[{qi.Category}]!");
+                                // LogFactory.SystemLogger.Warn($"未知任务类型[{qi.Category}]!");
+                            }
+                            unknownCat = true;
+                            break;
+                    }
+                    if (!unknownCat)
+                    {
+                        qi.Requirements = re;
+                        QuestInfoDictionary.Add(qi.GameId, qi);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"任务信息资源初始化失败！\n{ex.Message}");
+                // LogFactory.SystemLogger.Error("任务信息资源初始化失败！", ex);
+            }
+
+
         }
     }
 

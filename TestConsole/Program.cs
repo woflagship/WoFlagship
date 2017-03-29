@@ -225,10 +225,38 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            TestEvent tv = new TestEvent();
-            tv.TestA += t;
-            tv.Invoke();
-            
+            for (int num1 = 2; num1 <= 1235465467; num1++)
+            {
+                for (int num2 = 1; num2 < num1; num2++)
+                {
+                    int a = num2, b = num1;
+                    int an = Convert.ToString(a, 2).Length, bn = Convert.ToString(b, 2).Length;
+                    int d = 0, c = a << (bn - an);
+                    for (int i = 0; i <= bn - an; i++)
+                    {
+                        if (c > b)
+                        {
+                            d = d << 1;
+                            c = c >> 1;
+                        }
+                        else
+                        {
+                            b = b - c;
+                            d = (d << 1) + 1;
+                            c = c >> 1;
+                        }
+                    }
+                    if(num1/num2 != d || num1%num2 != b)
+                    {
+                        Console.WriteLine($"a={num2},b={num1}, b/a={num1 / num2}, b%a={num1 % num2}, answer is {d} {b}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"success {num1} {num2}");
+                    }
+                  
+                }
+            }
             Console.Read();
         }
 

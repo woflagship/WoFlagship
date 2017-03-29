@@ -53,7 +53,7 @@ namespace WoFlagship.KancolleAI.ManualAI
         }
 
 
-        public void OnGameDataUpdatedHandler(KancolleGameData gameData)
+        public void OnGameDataUpdated(KancolleGameData gameData)
         {
             panel.UpdateGameContext(gameData);
         }

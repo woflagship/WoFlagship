@@ -79,6 +79,16 @@ namespace WoFlagship.Plugins.QuestInfo.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] questinfo {
+            get {
+                object obj = ResourceManager.GetObject("questinfo", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 获得A胜或以上 的本地化字符串。
         /// </summary>
         internal static string result_a {

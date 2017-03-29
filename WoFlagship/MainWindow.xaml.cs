@@ -63,8 +63,6 @@ namespace WoFlagship
         private INavigator navigator = new SimpleNavigator();
         private KancolleActionExecutor actionExecutor;
 
-        //当前场景
-        public KancolleScene CurrentScene { get; private set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
         private DispatcherTimer timer;
 
         public MainWindow()
@@ -75,11 +73,13 @@ namespace WoFlagship
             battleContext = new KancolleBattleContext(gameContext.GameData);
 
             LogFactory.SystemLogger.Info("程序启动");
-            pluginManager.OnPluginsLoaded += PluginManager_OnPluginsLoaded;
-            pluginManager.LoadPlugins();
+            
 
             aiManager.OnAILoaded += AiManager_OnAILoaded;
             aiManager.LoadAIs();
+
+            pluginManager.OnPluginsLoaded += PluginManager_OnPluginsLoaded;
+            pluginManager.LoadPlugins();
 
             settingViewModel.WebSetting = new WebSettingViewModel();
             settingViewModel.WebSetting.ProxyHost = "127.0.0.1";
@@ -172,7 +172,7 @@ namespace WoFlagship
 
                 if(currentAI != null)
                 {
-                    currentAI.OnGameDataUpdatedHandler(e.GameData);
+                    currentAI.OnGameDataUpdated(e.GameData);
                 }
             };
         }
@@ -352,7 +352,7 @@ namespace WoFlagship
             try
             {
                 //创建单例类TaskExecutor，只能初始化这一次！访问方式为 KancolleTaskExecutor.Get()
-                new KancolleTaskExecutor(actionExecutor, () => CurrentScene, () => gameContext.GameData);
+                new KancolleTaskExecutor(actionExecutor, () => GetCurrentScene(), () => gameContext.GameData);
                 KancolleTaskExecutor.Get().OnTaskFinished_Internal += TaskExecutor_OnTaskFinished;
                 KancolleTaskExecutor.Get().Start();
             }
@@ -367,11 +367,9 @@ namespace WoFlagship
 
         private void ActionExecutor_OnActionExecuted(KancolleAction obj)
         {
-            //我们认为只有当界面被action操作后，场景才有可能发生变化
-            RefreshCurrentScene();
             if(currentAI != null)
             {
-                currentAI.OnSceneUpdatedHandler(CurrentScene);
+                currentAI.OnSceneUpdatedHandler(GetCurrentScene());
             }
         }
 
@@ -438,15 +436,16 @@ namespace WoFlagship
                 var data = JsonConvert.DeserializeObject(arg2) as JObject;
                 var api_object = data["api_data"];
                 string api = KancolleAPIs.GetAPI(arg1.RequestUrl);//= arg1.RequestUrl.Substring(KancolleCommon.DMMUrls.KanColleAPIUrl.Length);
+                if(api == "api_start2")
+                {
+                    foreach (var plugin in pluginManager.Plugins)
+                    {
+                        plugin.OnGameStart(generalViewModel, gameContext.GameData);
+                    }
+                }
                 gameContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
                 switch (api)
                 {
-                    case "api_start2":
-                        foreach(var plugin in pluginManager.Plugins)
-                        {
-                            plugin.OnGameStart(generalViewModel, gameContext.GameData);
-                        }
-                        break;;
                     case "api_get_member/require_info":
                         var getmember_data = api_object.ToObject<api_requireinfo_data>();
                         generalViewModel.ItemCount = getmember_data.api_slot_item.Length;
@@ -521,10 +520,10 @@ namespace WoFlagship
             Txt_CurrentScene.Content = sceneType.ToString();
         }
 
-        private void RefreshCurrentScene()
+        private KancolleScene GetCurrentScene()
         {
             var screen = GetWebViewBitmap();
-            CurrentScene = sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
+            return sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
             
         }
 
@@ -610,7 +609,7 @@ namespace WoFlagship
         private void Btn_NavigateTo_Click(object sender, RoutedEventArgs e)
         {
             KancolleSceneTypes toSceneType = (KancolleSceneTypes)Cbx_NavigateTarget.SelectedItem;
-            var edges = navigator.Navigate(CurrentScene.SceneType, toSceneType);
+            var edges = navigator.Navigate(GetCurrentScene().SceneType, toSceneType);
             Txt_Navigation.Text = ToNavigationString(edges);
             /*
            switch(toScene)
@@ -737,7 +736,7 @@ namespace WoFlagship
                 //切换至新ai
                 if (lb.SelectedIndex >= 0)//=0的情况下，永远不会有手动项，因为手动项已经被添加到了一般AI
                 {
-                    if (CurrentScene != KancolleSceneTypes.Port)
+                    if (GetCurrentScene() != KancolleSceneTypes.Port)
                     {
                         MessageBox.Show("请将当前场景切换至[母港]再更改AI！");
                     }
@@ -762,7 +761,7 @@ namespace WoFlagship
                         try
                         {
                             currentAI.Start();
-                            currentAI.OnGameDataUpdatedHandler(gameContext.GameData);                        
+                            currentAI.OnGameDataUpdated(gameContext.GameData);                        
                             aiButton.Content = currentAI.Name;
                         }
                         catch(Exception ex)

@@ -33,27 +33,26 @@ namespace WoFlagship.KancolleAI.SimpleAI
                 if (gameData != null)
                 {
                     //没有别的任务才可以自动维修
-                    if (panel.AutoRepair && KancolleTaskExecutor.Get().TaskRemaining != 0)
-                    {                 
-                        for (int i = 0; i < gameData.DockArray.Count; i++)
+                    if (panel.AutoRepair && KancolleTaskExecutor.Get().TaskRemaining == 0)
+                    {
+                        var repairNos = findAShipToRepair();
+                        if (repairNos != null)
                         {
-                            var dock = gameData.DockArray[i];
-                            //当前为空闲
-                            if (dock.State == 0 )
+                            int repairIndex = 0;
+                            for (int i = 0; i < gameData.DockArray.Count && repairIndex<repairNos.Length; i++)
                             {
-                                int no = tryFindAShipToRepair();
-                                if (no > 0)
+                                var dock = gameData.DockArray[i];
+                                //当前为空闲
+                                if (dock.State == 0)
                                 {
-                                    RepairTask task = new RepairTask(no, i, false);
-                                    KancolleTaskExecutor.Get().DoTask(task);
+                                    KancolleTaskExecutor.Get().EnqueueTask(new RepairTask(repairNos[repairIndex++], i, false));
                                 }
-                                break;
-                            }
-                            else if(dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
-                            {
-                                //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
-                                KancolleTaskExecutor.Get().DoTask(KancolleTask.RefreshDataTask);
-                                break;
+                                else if (dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
+                                {
+                                    //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
+                                    KancolleTaskExecutor.Get().EnqueueTask(KancolleTask.RefreshDataTask);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -63,23 +62,24 @@ namespace WoFlagship.KancolleAI.SimpleAI
             
         }
 
-        private int tryFindAShipToRepair()
+        private int[] findAShipToRepair()
         {
            
             if(gameData != null)
             {
-                var shipBorkens = (from s in gameData.OwnedShipDictionary.Values
-                                  where s.NowHP < s.MaxHP && !gameData.IsShipRepairing(s) orderby s.DockTime ascending
-                                  select s).ToArray();
-                if(shipBorkens.Length > 0)
-                {
-                    if (DateTime.Now.TimeOfDay.Hours < 6 || DateTime.Now.TimeOfDay.Hours > 23)
-                        return shipBorkens[shipBorkens.Length - 1].No;
-                    else
-                        return shipBorkens[0].No;
-                }
+                if (DateTime.Now.TimeOfDay.Hours < 6 || DateTime.Now.TimeOfDay.Hours > 23)
+                    return (from s in gameData.OwnedShipDictionary.Values
+                            where s.NowHP < s.MaxHP && !gameData.IsShipRepairing(s)
+                            orderby s.DockTime descending
+                            select s.No).ToArray();
+                else
+                    return (from s in gameData.OwnedShipDictionary.Values
+                            where s.NowHP < s.MaxHP && !gameData.IsShipRepairing(s)
+                            orderby s.DockTime ascending
+                            select s.No).ToArray();
+               
             }
-            return -1;
+            return null;
         }
 
         public UserControl AIPanel
@@ -118,7 +118,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
 
      
 
-        public void OnGameDataUpdatedHandler(KancolleGameData gameData)
+        public void OnGameDataUpdated(KancolleGameData gameData)
         {
             this.gameData = gameData;
             Application.Current.Dispatcher.Invoke(new Action(() =>

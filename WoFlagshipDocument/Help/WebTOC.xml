@@ -1,39 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="d422e526-9408-4a43-9465-4803689350ce" Title="WoFlagship.KancolleCore" Url="html/N_WoFlagship_KancolleCore.htm">
-    <HelpTOCNode Id="aad2f722-ca06-4651-a70a-fed137e75bfd" Title="IKancolleAPIReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm">
-      <HelpTOCNode Id="42e94515-edf5-4963-ae20-ae1e7bc52b12" Title="IKancolleAPIReceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm">
+  <HelpTOCNode Id="02a7a304-73a7-4b7c-b486-63facb00e6b9" Title="WoFlagship.KancolleCore" Url="html/N_WoFlagship_KancolleCore.htm">
+    <HelpTOCNode Id="1ad9618d-a2b0-4967-93c0-c57fd0ada3b9" Title="IKancolleAPIReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm">
+      <HelpTOCNode Id="e5743993-dca0-4123-b63e-8d7461ef9b14" Title="IKancolleAPIReceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleAPIReceiver.htm">
         <HelpTOCNode Title="OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_IKancolleAPIReceiver_OnAPIResponseReceivedHandler.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ab9f7b48-86d0-4ce0-95e1-b3c2498356cb" Title="IKancolleGameDataReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm">
-      <HelpTOCNode Id="6bbeab6a-6bcc-4944-8caf-b01573427292" Title="IKancolleGameDataReceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm">
+    <HelpTOCNode Id="c18691da-05e0-4119-8e72-f227c8b306b9" Title="IKancolleGameDataReceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm">
+      <HelpTOCNode Id="f22eb08a-994d-48f1-9f08-1eb023e71635" Title="IKancolleGameDataReceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleGameDataReceiver.htm">
         <HelpTOCNode Title="OnGameDataUpdatedHandler Method " Url="html/M_WoFlagship_KancolleCore_IKancolleGameDataReceiver_OnGameDataUpdatedHandler.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f7d7ea79-5cd6-4e7f-90ef-261c8eae3799" Title="IKancolleSceneRevceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm">
-      <HelpTOCNode Id="51600b94-678e-4931-8000-bee4af4caa68" Title="IKancolleSceneRevceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm">
+    <HelpTOCNode Id="edab87c2-28df-4f7b-be28-076dc9125856" Title="IKancolleSceneRevceiver Interface" Url="html/T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm">
+      <HelpTOCNode Id="8effb945-1b45-4fcf-b406-f87b11074bde" Title="IKancolleSceneRevceiver Methods" Url="html/Methods_T_WoFlagship_KancolleCore_IKancolleSceneRevceiver.htm">
         <HelpTOCNode Title="OnSceneUpdatedHandler Method " Url="html/M_WoFlagship_KancolleCore_IKancolleSceneRevceiver_OnSceneUpdatedHandler.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="8562b196-75d0-4175-b841-8968e5d1ba0a" Title="KancolleAPIs Class" Url="html/T_WoFlagship_KancolleCore_KancolleAPIs.htm">
+    <HelpTOCNode Id="6c2235ec-7d9a-4aa3-8cb0-666766843db3" Title="KancolleAPIs Class" Url="html/T_WoFlagship_KancolleCore_KancolleAPIs.htm">
       <HelpTOCNode Title="KancolleAPIs Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleAPIs__ctor.htm" />
-      <HelpTOCNode Id="0f025b49-fec7-4c16-a9c1-f60cd32dc5be" Title="KancolleAPIs Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
+      <HelpTOCNode Id="fd9eeec2-98c3-4c21-94fc-809fc8ed4ee3" Title="KancolleAPIs Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
         <HelpTOCNode Title="RankText Property " Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_RankText.htm" />
         <HelpTOCNode Title="ShipTypeDic Property " Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeDic.htm" />
         <HelpTOCNode Title="ShipTypeText Property " Url="html/P_WoFlagship_KancolleCore_KancolleAPIs_ShipTypeText.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="411166dd-50e3-4403-95e1-24dca70040cf" Title="KancolleAPIs Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
+      <HelpTOCNode Id="59749c72-61f5-493d-a16d-142e492416e0" Title="KancolleAPIs Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
         <HelpTOCNode Title="GetAPI Method " Url="html/M_WoFlagship_KancolleCore_KancolleAPIs_GetAPI.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c6de8b6a-3e97-4b7a-a8eb-2d30b4904d32" Title="KancolleAPIs Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
+      <HelpTOCNode Id="22dced63-07fc-4ce3-85f7-acf2579f18f4" Title="KancolleAPIs Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleAPIs.htm">
         <HelpTOCNode Title="UpdateTime Field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_UpdateTime.htm" />
         <HelpTOCNode Title="Version Field" Url="html/F_WoFlagship_KancolleCore_KancolleAPIs_Version.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="fec68a06-ea6f-41f1-9a69-6991505776dd" Title="KancolleBasicInfo Class" Url="html/T_WoFlagship_KancolleCore_KancolleBasicInfo.htm">
-      <HelpTOCNode Id="91fd1efe-42bb-4cad-ae81-9f7cca46bc42" Title="KancolleBasicInfo Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBasicInfo.htm">
+    <HelpTOCNode Id="e336fa21-89c7-40a7-83f9-8b309b9eebd8" Title="KancolleBasicInfo Class" Url="html/T_WoFlagship_KancolleCore_KancolleBasicInfo.htm">
+      <HelpTOCNode Id="2815898d-1c5d-48a0-bb2e-ed22dafaecef" Title="KancolleBasicInfo Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBasicInfo.htm">
         <HelpTOCNode Title="Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_Level.htm" />
         <HelpTOCNode Title="MaxShipCount Property " Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxShipCount.htm" />
         <HelpTOCNode Title="MaxSlotItemCount Property " Url="html/P_WoFlagship_KancolleCore_KancolleBasicInfo_MaxSlotItemCount.htm" />
@@ -44,31 +44,31 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleBasicInfo Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBasicInfo.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="70a5a80d-8070-4fc8-8b79-7077a56eac21" Title="KancolleDockData Class" Url="html/T_WoFlagship_KancolleCore_KancolleDockData.htm">
-      <HelpTOCNode Id="a8173f3d-f0b9-4f28-9e12-e0e7e23816b1" Title="KancolleDockData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleDockData.htm">
+    <HelpTOCNode Id="d9c2ac78-d9ac-4832-a0d1-bec05510992b" Title="KancolleDockData Class" Url="html/T_WoFlagship_KancolleCore_KancolleDockData.htm">
+      <HelpTOCNode Id="171d4bdc-479e-46fe-ae6c-a5a0be516dd8" Title="KancolleDockData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleDockData.htm">
         <HelpTOCNode Title="CompleteTime Property " Url="html/P_WoFlagship_KancolleCore_KancolleDockData_CompleteTime.htm" />
         <HelpTOCNode Title="ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleDockData_ShipId.htm" />
         <HelpTOCNode Title="State Property " Url="html/P_WoFlagship_KancolleCore_KancolleDockData_State.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="84dda421-f403-4422-a122-5d23f3be5300" Title="KancolleDockData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleDockData.htm">
+      <HelpTOCNode Id="791a22ab-5607-4507-aaa1-ff783385b61b" Title="KancolleDockData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleDockData.htm">
         <HelpTOCNode Title="ParseLongTime Method " Url="html/M_WoFlagship_KancolleCore_KancolleDockData_ParseLongTime.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5dc4a2ff-4e24-448b-8b3b-624f08a4b56c" Title="KancolleGameContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameContext.htm">
+    <HelpTOCNode Id="6d9a14e0-536f-4d24-a647-ce990c29b7f4" Title="KancolleGameContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameContext.htm">
       <HelpTOCNode Title="KancolleGameContext Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleGameContext__ctor.htm" />
-      <HelpTOCNode Id="4f2bc53e-7749-4f6d-ade4-1e29af687493" Title="KancolleGameContext Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
+      <HelpTOCNode Id="49b7a5aa-9513-4fe9-9975-9889e7c1c0d6" Title="KancolleGameContext Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
         <HelpTOCNode Title="GameData Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameContext_GameData.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="cb8b465e-ab9c-4e5b-b691-ccdfd580bc6a" Title="KancolleGameContext Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
+      <HelpTOCNode Id="fd7d4550-f0c9-4537-aa65-167a2353dbb4" Title="KancolleGameContext Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
         <HelpTOCNode Title="OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_KancolleGameContext_OnAPIResponseReceivedHandler.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="223b1400-27b9-48c4-9d00-2642b1147703" Title="KancolleGameContext Events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
+      <HelpTOCNode Id="2a753af4-1ff1-4059-9635-78ec03bec0c2" Title="KancolleGameContext Events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleGameContext.htm">
         <HelpTOCNode Title="OnGameDataUpdated Event" Url="html/E_WoFlagship_KancolleCore_KancolleGameContext_OnGameDataUpdated.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="31d7bbda-b996-4264-9831-a1e8bf1634eb" Title="KancolleGameData Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameData.htm">
+    <HelpTOCNode Id="84190081-695e-4136-acb0-975474cdb43f" Title="KancolleGameData Class" Url="html/T_WoFlagship_KancolleCore_KancolleGameData.htm">
       <HelpTOCNode Title="KancolleGameData Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleGameData__ctor.htm" />
-      <HelpTOCNode Id="4aa8cc89-ab2b-40ae-bf90-c313003decf8" Title="KancolleGameData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameData.htm">
+      <HelpTOCNode Id="fdd75ecd-8abd-4c7f-8801-bcd0793726ce" Title="KancolleGameData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleGameData.htm">
         <HelpTOCNode Title="BasicInfo Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_BasicInfo.htm" />
         <HelpTOCNode Title="CurrentScene Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_CurrentScene.htm" />
         <HelpTOCNode Title="DockArray Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_DockArray.htm" />
@@ -89,46 +89,46 @@
         <HelpTOCNode Title="SlotDictionary Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_SlotDictionary.htm" />
         <HelpTOCNode Title="UnEquipedSlotArray Property " Url="html/P_WoFlagship_KancolleCore_KancolleGameData_UnEquipedSlotArray.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="49e35549-e643-4de2-b9d1-82b1e53cc9f7" Title="KancolleGameData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameData.htm">
-        <HelpTOCNode Id="16ccde61-c8a1-4f11-835b-cd29a73dce9d" Title="CanShipEquipItem Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem.htm">
+      <HelpTOCNode Id="3ef2224a-5dad-4fa5-9634-df41fbf0e3bb" Title="KancolleGameData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleGameData.htm">
+        <HelpTOCNode Id="570ac88f-dead-46fd-849e-866d7c380cae" Title="CanShipEquipItem Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem.htm">
           <HelpTOCNode Title="CanShipEquipItem Method (Int32, Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem.htm" />
           <HelpTOCNode Title="CanShipEquipItem Method (KancolleShipData, KancolleSlotItemData)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_CanShipEquipItem_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="ad7f18e6-f15d-419b-a9fa-c4bcb3e433dd" Title="GetShip Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShip.htm">
+        <HelpTOCNode Id="d81a77fb-970c-4fd8-acb7-6b8b973d9d0c" Title="GetShip Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShip.htm">
           <HelpTOCNode Title="GetShip Method (Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShip.htm" />
           <HelpTOCNode Title="GetShip Method (KancolleShip)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShip_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="261a7ece-7d08-4628-85ed-a6e228ae6a10" Title="GetShipName Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipName.htm">
+        <HelpTOCNode Id="ba7b4443-a60c-48eb-9b4b-d3c5745db899" Title="GetShipName Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipName.htm">
           <HelpTOCNode Title="GetShipName Method (Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShipName.htm" />
           <HelpTOCNode Title="GetShipName Method (KancolleShip)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShipName_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="4a89b24b-4dae-496c-bbe8-023bf4c4b9d6" Title="GetShipType Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipType.htm">
+        <HelpTOCNode Id="553f9c82-7aef-42dc-be78-ba6ea26762da" Title="GetShipType Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetShipType.htm">
           <HelpTOCNode Title="GetShipType Method (Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShipType.htm" />
           <HelpTOCNode Title="GetShipType Method (KancolleShip)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetShipType_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="ed881952-4bcf-4f1b-87b6-15dbe8593c03" Title="GetSlotItemName Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName.htm">
+        <HelpTOCNode Id="3b61ea72-7945-4119-806e-893e22aba193" Title="GetSlotItemName Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName.htm">
           <HelpTOCNode Title="GetSlotItemName Method (Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName.htm" />
           <HelpTOCNode Title="GetSlotItemName Method (KancolleSlotItem)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_GetSlotItemName_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="f0f10e0e-2945-4759-ba33-4146d7d7314a" Title="IsShipRepairing Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing.htm">
+        <HelpTOCNode Id="ccf11fc6-b863-4e57-822c-215a6fc3a54e" Title="IsShipRepairing Method " Url="html/Overload_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing.htm">
           <HelpTOCNode Title="IsShipRepairing Method (Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing.htm" />
           <HelpTOCNode Title="IsShipRepairing Method (KancolleShip)" Url="html/M_WoFlagship_KancolleCore_KancolleGameData_IsShipRepairing_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="f5ede382-bf45-4aff-ac31-967c81e0b20b" Title="KancolleGameData Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleGameData.htm">
+      <HelpTOCNode Id="02091a44-a67d-4e9b-b904-982348831d95" Title="KancolleGameData Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleGameData.htm">
         <HelpTOCNode Title="QuestInfoFile Field" Url="html/F_WoFlagship_KancolleCore_KancolleGameData_QuestInfoFile.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e9286ce1-270e-47dc-80c7-c34e79d045d5" Title="KancolleItemEquipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleItemEquipType.htm">
-      <HelpTOCNode Id="a4a93a03-0d03-480c-a45e-6f2a705e99ed" Title="KancolleItemEquipType Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleItemEquipType.htm">
+    <HelpTOCNode Id="0dbc9357-dbfb-428d-8a53-d3634843568e" Title="KancolleItemEquipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleItemEquipType.htm">
+      <HelpTOCNode Id="d51e17a4-936e-43a4-9891-d753b269156b" Title="KancolleItemEquipType Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleItemEquipType.htm">
         <HelpTOCNode Title="Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_Name.htm" />
         <HelpTOCNode Title="ShowFlag Property " Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_ShowFlag.htm" />
         <HelpTOCNode Title="TypeId Property " Url="html/P_WoFlagship_KancolleCore_KancolleItemEquipType_TypeId.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleItemEquipType Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleItemEquipType.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="06feafee-b9e7-4996-afb6-3a80446fd8e8" Title="KancolleMapInfoData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMapInfoData.htm">
-      <HelpTOCNode Id="bceedd40-accf-43d0-8688-3cb6ae17026c" Title="KancolleMapInfoData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMapInfoData.htm">
+    <HelpTOCNode Id="e55516f2-9b56-4ae3-b85d-cb9b33a08f2c" Title="KancolleMapInfoData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMapInfoData.htm">
+      <HelpTOCNode Id="b665cd44-82df-4f4c-82fd-1835dacefda2" Title="KancolleMapInfoData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMapInfoData.htm">
         <HelpTOCNode Title="Id Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Id.htm" />
         <HelpTOCNode Title="InfoText Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_InfoText.htm" />
         <HelpTOCNode Title="Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleMapInfoData_Level.htm" />
@@ -138,9 +138,9 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleMapInfoData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMapInfoData.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="e0b30e6d-c8d6-4a79-a6a8-16b1d4224998" Title="KancolleMaterial Class" Url="html/T_WoFlagship_KancolleCore_KancolleMaterial.htm">
+    <HelpTOCNode Id="0ba6915e-b199-4a60-b371-834a03d92997" Title="KancolleMaterial Class" Url="html/T_WoFlagship_KancolleCore_KancolleMaterial.htm">
       <HelpTOCNode Title="KancolleMaterial Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleMaterial__ctor.htm" />
-      <HelpTOCNode Id="1b7421ee-e570-4ce5-9353-1885c54bc35b" Title="KancolleMaterial Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMaterial.htm">
+      <HelpTOCNode Id="cac3383f-1c00-4cf8-a481-ffe14740bc65" Title="KancolleMaterial Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMaterial.htm">
         <HelpTOCNode Title="Dan Property " Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Dan.htm" />
         <HelpTOCNode Title="Gaixiu Property " Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gaixiu.htm" />
         <HelpTOCNode Title="Gang Property " Url="html/P_WoFlagship_KancolleCore_KancolleMaterial_Gang.htm" />
@@ -152,22 +152,22 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleMaterial Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMaterial.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="4d7bae42-df9f-4876-85a4-bc7c8952d9dc" Title="KancolleMissionData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissionData.htm">
-      <HelpTOCNode Id="1b24f13c-5777-40cd-a742-8abf0bcb6285" Title="KancolleMissionData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissionData.htm">
+    <HelpTOCNode Id="8f10c666-dbc0-4b30-9e03-d1ffd55bec43" Title="KancolleMissionData Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissionData.htm">
+      <HelpTOCNode Id="963eb1e7-7d1f-4589-bbf9-648c3be9bc92" Title="KancolleMissionData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissionData.htm">
         <HelpTOCNode Title="MissionId Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_MissionId.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissionData_Name.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleMissionData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMissionData.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f8d728b0-b74a-48a6-94b9-6355b020034c" Title="KancolleMissson Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissson.htm">
-      <HelpTOCNode Id="39424db9-e167-4f48-b9e9-833c0d6ed5ff" Title="KancolleMissson Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissson.htm">
+    <HelpTOCNode Id="65e4f7c1-d53a-4cf2-9f1b-d2980b9efbbc" Title="KancolleMissson Class" Url="html/T_WoFlagship_KancolleCore_KancolleMissson.htm">
+      <HelpTOCNode Id="2f276f6b-0d49-4436-96d8-b11bec865a66" Title="KancolleMissson Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleMissson.htm">
         <HelpTOCNode Title="MissionId Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissson_MissionId.htm" />
         <HelpTOCNode Title="State Property " Url="html/P_WoFlagship_KancolleCore_KancolleMissson_State.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleMissson Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleMissson.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="cc695b59-9cb1-44cf-ae0a-54ce27ba104f" Title="KancolleQuest Class" Url="html/T_WoFlagship_KancolleCore_KancolleQuest.htm">
-      <HelpTOCNode Id="026b7cc9-570d-49b7-a57a-31eec3c9c6ae" Title="KancolleQuest Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleQuest.htm">
+    <HelpTOCNode Id="3c8b0482-806c-42a2-abac-4f94d6ca425d" Title="KancolleQuest Class" Url="html/T_WoFlagship_KancolleCore_KancolleQuest.htm">
+      <HelpTOCNode Id="4d00af3b-2861-407f-95db-5b8b723afe33" Title="KancolleQuest Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleQuest.htm">
         <HelpTOCNode Title="Category Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Category.htm" />
         <HelpTOCNode Title="Detail Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Detail.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P_WoFlagship_KancolleCore_KancolleQuest_Id.htm" />
@@ -179,8 +179,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleQuest Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleQuest.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="32993f66-eadf-48d9-8d58-d0e2327c6d2a" Title="KancolleShip Class" Url="html/T_WoFlagship_KancolleCore_KancolleShip.htm">
-      <HelpTOCNode Id="b8f5d3c4-28b0-41c5-9285-fdcaea7ead87" Title="KancolleShip Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShip.htm">
+    <HelpTOCNode Id="287c8bf8-c851-4e4c-a1af-2a7aab0a63f6" Title="KancolleShip Class" Url="html/T_WoFlagship_KancolleCore_KancolleShip.htm">
+      <HelpTOCNode Id="d0e7b8b7-8416-4f68-876d-6dd4e7e34482" Title="KancolleShip Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShip.htm">
         <HelpTOCNode Title="Condition Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_Condition.htm" />
         <HelpTOCNode Title="DockTime Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_DockTime.htm" />
         <HelpTOCNode Title="Kaihi Property " Url="html/P_WoFlagship_KancolleCore_KancolleShip_Kaihi.htm" />
@@ -202,8 +202,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleShip Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShip.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="70a9d54a-eee7-447c-a23a-911aa43a9d77" Title="KancolleShipData Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipData.htm">
-      <HelpTOCNode Id="92d4c31b-eaf6-4307-b80b-05c169e62ae1" Title="KancolleShipData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipData.htm">
+    <HelpTOCNode Id="4137982c-1893-4082-910a-818c47d0381e" Title="KancolleShipData Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipData.htm">
+      <HelpTOCNode Id="e3fc3466-8f83-4750-9c55-0fa1c11badb6" Title="KancolleShipData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipData.htm">
         <HelpTOCNode Title="Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_Name.htm" />
         <HelpTOCNode Title="ShipId Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_ShipId.htm" />
         <HelpTOCNode Title="SlotNum Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipData_SlotNum.htm" />
@@ -211,8 +211,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleShipData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShipData.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="3d7ab3b4-27d2-4892-9626-e27bc95ae5bf" Title="KancolleShipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipType.htm">
-      <HelpTOCNode Id="4057901e-567f-4f29-bafa-aaaefa9802cb" Title="KancolleShipType Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipType.htm">
+    <HelpTOCNode Id="af03c384-752b-42d4-b9bc-d8d97cfad69d" Title="KancolleShipType Class" Url="html/T_WoFlagship_KancolleCore_KancolleShipType.htm">
+      <HelpTOCNode Id="0b2548cd-8dad-479b-b360-377bce628e53" Title="KancolleShipType Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleShipType.htm">
         <HelpTOCNode Title="EquipItemType Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_EquipItemType.htm" />
         <HelpTOCNode Title="Kcnt Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Kcnt.htm" />
         <HelpTOCNode Title="Name Property " Url="html/P_WoFlagship_KancolleCore_KancolleShipType_Name.htm" />
@@ -222,8 +222,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleShipType Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleShipType.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="3f6710ba-a44f-479c-8440-47d13d940acb" Title="KancolleSlotItem Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItem.htm">
-      <HelpTOCNode Id="b8ffd2f0-b6fd-4b74-8d72-a7f08988ba4e" Title="KancolleSlotItem Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItem.htm">
+    <HelpTOCNode Id="9985721f-a6d7-4a7e-a147-de8b958f3375" Title="KancolleSlotItem Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItem.htm">
+      <HelpTOCNode Id="471f09eb-ca02-444b-9132-0939832713aa" Title="KancolleSlotItem Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItem.htm">
         <HelpTOCNode Title="Level Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Level.htm" />
         <HelpTOCNode Title="Locked Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_Locked.htm" />
         <HelpTOCNode Title="No Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItem_No.htm" />
@@ -231,8 +231,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleSlotItem Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleSlotItem.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="11e62dd3-e247-4ba9-9d1c-b394554f073d" Title="KancolleSlotItemData Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItemData.htm">
-      <HelpTOCNode Id="fa280a9f-751c-4e1a-956e-6cc9827b1721" Title="KancolleSlotItemData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItemData.htm">
+    <HelpTOCNode Id="3fd801ca-f747-42b2-8c4c-e0b07b325918" Title="KancolleSlotItemData Class" Url="html/T_WoFlagship_KancolleCore_KancolleSlotItemData.htm">
+      <HelpTOCNode Id="1ba534a2-5a8c-44d7-b801-0a40dd5c3d1b" Title="KancolleSlotItemData Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleSlotItemData.htm">
         <HelpTOCNode Title="Atap Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Atap.htm" />
         <HelpTOCNode Title="Bakk Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Bakk.htm" />
         <HelpTOCNode Title="Baku Property " Url="html/P_WoFlagship_KancolleCore_KancolleSlotItemData_Baku.htm" />
@@ -262,10 +262,10 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleSlotItemData Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleSlotItemData.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="c51ab2ca-fa15-4a7a-bed0-169babe6801f" Title="KancolleWidgetPositions Class" Url="html/T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm">
+    <HelpTOCNode Id="9966de34-6580-4b48-a832-dabb886aff12" Title="KancolleWidgetPositions Class" Url="html/T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm">
       <HelpTOCNode Title="KancolleWidgetPositions Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleWidgetPositions__ctor.htm" />
       <HelpTOCNode Title="KancolleWidgetPositions Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm" />
-      <HelpTOCNode Id="414d8672-f59b-45b3-a6ff-514eee47e075" Title="KancolleWidgetPositions Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm">
+      <HelpTOCNode Id="126b6d36-10bc-472b-8d74-f41f9b5e1362" Title="KancolleWidgetPositions Fields" Url="html/Fields_T_WoFlagship_KancolleCore_KancolleWidgetPositions.htm">
         <HelpTOCNode Title="Battle_Formation Field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_Formation.htm" />
         <HelpTOCNode Title="Battle_LeftChoice Field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_LeftChoice.htm" />
         <HelpTOCNode Title="Battle_RightChoice Field" Url="html/F_WoFlagship_KancolleCore_KancolleWidgetPositions_Battle_RightChoice.htm" />
@@ -349,24 +349,24 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="f4458cd7-fbc2-4bbc-86e2-02a8554eb745" Title="WoFlagship.KancolleCore.KancolleBattle" Url="html/N_WoFlagship_KancolleCore_KancolleBattle.htm">
-    <HelpTOCNode Id="98736ad0-94da-4bee-8acc-6671743a280f" Title="Attack Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
+  <HelpTOCNode Id="a12ac6fb-c13b-416e-8997-bf063e1aa375" Title="WoFlagship.KancolleCore.KancolleBattle" Url="html/N_WoFlagship_KancolleCore_KancolleBattle.htm">
+    <HelpTOCNode Id="80e87af2-ceec-423a-9d56-307908e9e502" Title="Attack Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
       <HelpTOCNode Title="Attack Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack__ctor.htm" />
-      <HelpTOCNode Id="0297218d-ea37-4543-b920-188a5f68ad34" Title="Attack Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
+      <HelpTOCNode Id="bba0f838-d8fb-40b7-8677-83caaf382b15" Title="Attack Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
         <HelpTOCNode Title="AttackType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_AttackType.htm" />
         <HelpTOCNode Title="Damages Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Damages.htm" />
         <HelpTOCNode Title="FromShip Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_FromShip.htm" />
         <HelpTOCNode Title="Hits Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_Hits.htm" />
         <HelpTOCNode Title="ToShip Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Attack_ToShip.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="fd119584-ff26-4982-818b-aea2dffc3d01" Title="Attack Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
+      <HelpTOCNode Id="44101840-ffaa-4947-96dc-3ad812057a18" Title="Attack Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Attack.htm">
         <HelpTOCNode Title="ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Attack_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="AttackTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_AttackTypes.htm" />
-    <HelpTOCNode Id="b99570e4-75a4-47b9-b857-cbfc7fd80353" Title="Battle Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
+    <HelpTOCNode Id="90319308-f74a-4083-8606-5ccfb8a284c7" Title="Battle Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
       <HelpTOCNode Title="Battle Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle__ctor.htm" />
-      <HelpTOCNode Id="e8beda6b-dfac-460d-a046-bbfe42e0e694" Title="Battle Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
+      <HelpTOCNode Id="14a2a404-1bbe-4a92-bf2e-fd90203ed8a6" Title="Battle Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
         <HelpTOCNode Title="BattleType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_BattleType.htm" />
         <HelpTOCNode Title="EnemyEscort Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyEscort.htm" />
         <HelpTOCNode Title="EnemyFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_EnemyFleet.htm" />
@@ -377,36 +377,36 @@
         <HelpTOCNode Title="Stages Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_Stages.htm" />
         <HelpTOCNode Title="SupportFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Battle_SupportFleet.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="6c609b0f-8363-4848-ad46-b98dd93dbd48" Title="Battle Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
+      <HelpTOCNode Id="5b46bc44-6f6f-449b-973f-d92aa576de8a" Title="Battle Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Battle.htm">
         <HelpTOCNode Title="SimulateAerialAttack Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateAerialAttack.htm" />
         <HelpTOCNode Title="SimulateTorpedoAttack Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_SimulateTorpedoAttack.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Battle_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="06a0037e-5a0e-4fc7-a1d9-38195c1ed696" Title="BattleResult Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm">
-      <HelpTOCNode Id="43b9fd6f-a991-403e-8699-c6acd0b5a842" Title="BattleResult Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm">
+    <HelpTOCNode Id="fd378663-9b83-47e6-a043-1c47b0091c8b" Title="BattleResult Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm">
+      <HelpTOCNode Id="fc331060-2da7-4f53-9e1c-6527d9815607" Title="BattleResult Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm">
         <HelpTOCNode Title="WinRank Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_BattleResult_WinRank.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BattleResult Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_BattleResult.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="BattleTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_BattleTypes.htm" />
-    <HelpTOCNode Id="2951dd1e-bef0-44ba-abdb-58641845c6c7" Title="Fleet Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
-      <HelpTOCNode Id="1c09cfa6-cbd5-4c21-b9df-acc8bf73400e" Title="Fleet Constructor " Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor.htm">
+    <HelpTOCNode Id="bb68bf2d-508e-491c-bfbb-92c51044bbb2" Title="Fleet Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
+      <HelpTOCNode Id="83e54c0f-5406-4b0e-929f-a396d2fc341a" Title="Fleet Constructor " Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor.htm">
         <HelpTOCNode Title="Fleet Constructor (KancolleShip[], ShipOwner, Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor_1.htm" />
         <HelpTOCNode Title="Fleet Constructor (JArray, Int32[][], Int32[], Int32[], Int32[], ShipOwner, Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Fleet__ctor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="dcc7c204-fd9a-4d13-a883-d522084d30af" Title="Fleet Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
+      <HelpTOCNode Id="d82f3ef4-3771-4f0e-a96c-2a604f57bd43" Title="Fleet Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
         <HelpTOCNode Title="Count Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Count.htm" />
         <HelpTOCNode Title="Item Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Fleet_Item.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="fec402c8-16df-4ee4-b3cf-078f6a1ddebd" Title="Fleet Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
+      <HelpTOCNode Id="18017ff1-8722-4484-accc-36c1a2a64d0b" Title="Fleet Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Fleet.htm">
         <HelpTOCNode Title="GetEnumerator Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Fleet_GetEnumerator.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="HitTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_HitTypes.htm" />
-    <HelpTOCNode Id="6dc6bcad-d265-4b91-ab28-362a791f9b57" Title="KancolleBattleContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
+    <HelpTOCNode Id="5018fed5-70b1-466c-a089-28a62234239a" Title="KancolleBattleContext Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
       <HelpTOCNode Title="KancolleBattleContext Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext__ctor.htm" />
-      <HelpTOCNode Id="5041a4ec-ffbf-4b1e-875d-891551425b80" Title="KancolleBattleContext Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
+      <HelpTOCNode Id="de54a3e4-3d48-4781-a910-71cc4885484c" Title="KancolleBattleContext Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
         <HelpTOCNode Title="BossSF Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_BossSF.htm" />
         <HelpTOCNode Title="CurrentBattle Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_CurrentBattle.htm" />
         <HelpTOCNode Title="EscortFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_EscortFleet.htm" />
@@ -416,20 +416,20 @@
         <HelpTOCNode Title="NormalSF Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_NormalSF.htm" />
         <HelpTOCNode Title="SupportFleet Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_SupportFleet.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e208696a-70fb-4508-b1f6-fef0c97947c0" Title="KancolleBattleContext Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
+      <HelpTOCNode Id="f4955128-7d06-443a-90b5-989ec9eb71b1" Title="KancolleBattleContext Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
         <HelpTOCNode Title="OnAPIResponseReceivedHandler Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnAPIResponseReceivedHandler.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="7b489b8e-3d10-43c5-a3ba-59fe1c1b3b42" Title="KancolleBattleContext Events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
+      <HelpTOCNode Id="173c8fc4-c1b4-404a-b6a0-62fdf84df913" Title="KancolleBattleContext Events" Url="html/Events_T_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext.htm">
         <HelpTOCNode Title="OnBattleHappened Event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleHappened.htm" />
         <HelpTOCNode Title="OnBattleResultReceived Event" Url="html/E_WoFlagship_KancolleCore_KancolleBattle_KancolleBattleContext_OnBattleResultReceived.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cf2c8601-3c80-4c5b-800d-48276f7acf21" Title="Ship Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm">
-      <HelpTOCNode Id="d52ae2c3-0b8b-42d7-9217-60ddf9d01d82" Title="Ship Constructor " Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor.htm">
+    <HelpTOCNode Id="643a8cb3-ac54-46f4-b4d2-26b19222c979" Title="Ship Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm">
+      <HelpTOCNode Id="9c84ca1d-a979-453c-b5b0-f7c838135a99" Title="Ship Constructor " Url="html/Overload_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor.htm">
         <HelpTOCNode Title="Ship Constructor (KancolleShip, ShipOwner, Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor_1.htm" />
         <HelpTOCNode Title="Ship Constructor (Int32, Int32, Int32, Int32[], ShipOwner, Int32)" Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Ship__ctor.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="9e842417-422f-4c79-bfa2-b22d0ea8bb21" Title="Ship Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm">
+      <HelpTOCNode Id="ac2414c6-6aec-41ae-b077-fe25eacce923" Title="Ship Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm">
         <HelpTOCNode Title="FromHP Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_FromHP.htm" />
         <HelpTOCNode Title="Items Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_Items.htm" />
         <HelpTOCNode Title="ItemUsed Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Ship_ItemUsed.htm" />
@@ -444,87 +444,87 @@
       <HelpTOCNode Title="Ship Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Ship.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="ShipOwner Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_ShipOwner.htm" />
-    <HelpTOCNode Id="d000b136-0061-4650-9ae2-cb7a9bf28da7" Title="Stage Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
+    <HelpTOCNode Id="2b7b9f9f-c174-4cb4-bd91-7fade8b5b8f3" Title="Stage Class" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
       <HelpTOCNode Title="Stage Constructor " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage__ctor.htm" />
-      <HelpTOCNode Id="e40ec59e-f13b-47ee-8ac4-e99f10bff02b" Title="Stage Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
+      <HelpTOCNode Id="22525a97-08f7-4c5a-b60d-b41f0c47a465" Title="Stage Properties" Url="html/Properties_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
         <HelpTOCNode Title="Attacks Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_Attacks.htm" />
         <HelpTOCNode Title="StageType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_StageType.htm" />
         <HelpTOCNode Title="SubType Property " Url="html/P_WoFlagship_KancolleCore_KancolleBattle_Stage_SubType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="4e6f6f29-d957-4223-a96b-ce2500277382" Title="Stage Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
+      <HelpTOCNode Id="71fdb65e-27eb-4ca1-a17f-3ebd2ba8eef5" Title="Stage Methods" Url="html/Methods_T_WoFlagship_KancolleCore_KancolleBattle_Stage.htm">
         <HelpTOCNode Title="ToString Method " Url="html/M_WoFlagship_KancolleCore_KancolleBattle_Stage_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="StageTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_KancolleBattle_StageTypes.htm" />
   </HelpTOCNode>
-  <HelpTOCNode Id="448b13da-6213-408e-bf46-55ad69fd7899" Title="WoFlagship.KancolleCore.Navigation" Url="html/N_WoFlagship_KancolleCore_Navigation.htm">
+  <HelpTOCNode Id="58e2efdf-8fa1-48b4-9384-73209a2034ee" Title="WoFlagship.KancolleCore.Navigation" Url="html/N_WoFlagship_KancolleCore_Navigation.htm">
     <HelpTOCNode Title="ActionTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_ActionTypes.htm" />
-    <HelpTOCNode Id="928ccf2a-6ba8-484a-988b-dc32afec21b9" Title="BattleChoiceTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm">
+    <HelpTOCNode Id="f0c65e30-be33-4c4e-b134-df7a1d85437b" Title="BattleChoiceTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm">
       <HelpTOCNode Title="BattleChoiceTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_BattleChoiceTask__ctor.htm" />
-      <HelpTOCNode Id="9a1d73fe-2684-47f8-a459-7b578796ec14" Title="BattleChoiceTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm">
+      <HelpTOCNode Id="85161731-8d47-498d-8f75-3a9556869cb5" Title="BattleChoiceTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm">
         <HelpTOCNode Title="BattleChoice Property " Url="html/P_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoice.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BattleChoiceTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask.htm" />
     </HelpTOCNode>
     <HelpTOCNode Title="BattleChoiceTask.BattleChoices Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleChoiceTask_BattleChoices.htm" />
-    <HelpTOCNode Id="d72012b7-17e2-44a5-a6b8-2e0d39d8c2ce" Title="BattleFormationTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm">
+    <HelpTOCNode Id="e687cc5f-56bf-4de1-a1b8-9df141d64e55" Title="BattleFormationTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm">
       <HelpTOCNode Title="BattleFormationTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_BattleFormationTask__ctor.htm" />
-      <HelpTOCNode Id="a107130e-fc9c-4d12-bfd5-e7e258f63879" Title="BattleFormationTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm">
+      <HelpTOCNode Id="6b62b660-a1db-43d3-879e-447f9402f7c9" Title="BattleFormationTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm">
         <HelpTOCNode Title="Formation Property " Url="html/P_WoFlagship_KancolleCore_Navigation_BattleFormationTask_Formation.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="BattleFormationTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleFormationTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="32ec632a-4143-4331-87ca-dfb4b54965e1" Title="BattleSkipTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm">
+    <HelpTOCNode Id="cc2587ea-75f4-4b84-9a6f-d78d8079650f" Title="BattleSkipTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm">
       <HelpTOCNode Title="BattleSkipTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_BattleSkipTask__ctor.htm" />
       <HelpTOCNode Title="BattleSkipTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
       <HelpTOCNode Title="BattleSkipTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleSkipTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="12f44def-40c8-4fba-8f71-a61a1c23d40c" Title="BattleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleTask.htm">
+    <HelpTOCNode Id="204f13a8-f47a-4752-ae4a-dbed393ca6ca" Title="BattleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_BattleTask.htm">
       <HelpTOCNode Title="BattleTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_BattleTask__ctor.htm" />
       <HelpTOCNode Title="BattleTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
       <HelpTOCNode Title="BattleTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_BattleTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="995fcc68-a7bd-4091-99e6-1e941ac2a46d" Title="KancolleAction Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm">
-      <HelpTOCNode Id="8d2d6fc1-2b82-4e4a-81a1-9fa21db18c5c" Title="KancolleAction Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor.htm">
+    <HelpTOCNode Id="ab1e3801-19dd-41dc-9f31-a8c8ef78b7df" Title="KancolleAction Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm">
+      <HelpTOCNode Id="9c033323-f736-4d6a-b0c0-719fec1f03b5" Title="KancolleAction Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor.htm">
         <HelpTOCNode Title="KancolleAction Constructor (Point)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor.htm" />
         <HelpTOCNode Title="KancolleAction Constructor (ActionTypes, Point)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleAction__ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="4929cb77-54ce-4c2e-9a6e-9d2e51abfff6" Title="KancolleAction Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm">
+      <HelpTOCNode Id="92e0ea8a-b011-481f-ba11-2f5e46edad02" Title="KancolleAction Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm">
         <HelpTOCNode Title="ActionPosition Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionPosition.htm" />
         <HelpTOCNode Title="ActionType Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleAction_ActionType.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleAction Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleAction.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="93d55621-d4ac-4f12-9901-b5d52204035b" Title="KancolleActionEdge Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm">
+    <HelpTOCNode Id="5d9a6951-206a-4796-aa85-60199d358f20" Title="KancolleActionEdge Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm">
       <HelpTOCNode Title="KancolleActionEdge Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleActionEdge__ctor.htm" />
-      <HelpTOCNode Id="8bd0589a-8f1b-4331-86ae-e8455bb0117d" Title="KancolleActionEdge Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm">
+      <HelpTOCNode Id="0df6e3cf-3982-4567-860e-befa2369b23f" Title="KancolleActionEdge Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm">
         <HelpTOCNode Title="Action Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Action.htm" />
         <HelpTOCNode Title="Source Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Source.htm" />
         <HelpTOCNode Title="Target Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleActionEdge_Target.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleActionEdge Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleActionEdge.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="586a4063-4484-40fd-9d63-69cd5fa930aa" Title="KancolleScene Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
-      <HelpTOCNode Id="132134e8-d265-4fb9-8443-11eb691ecd3d" Title="KancolleScene Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor.htm">
+    <HelpTOCNode Id="27a46217-f365-4146-8f93-912b06280a3c" Title="KancolleScene Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
+      <HelpTOCNode Id="0828a91d-4b4b-4c88-9afe-dde521e69d38" Title="KancolleScene Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor.htm">
         <HelpTOCNode Title="KancolleScene Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor.htm" />
         <HelpTOCNode Title="KancolleScene Constructor (KancolleSceneTypes)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor_1.htm" />
         <HelpTOCNode Title="KancolleScene Constructor (KancolleSceneTypes, KancolleSceneStates)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene__ctor_2.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="1a8471bd-cfa7-471e-a5be-5e0588c2fedd" Title="KancolleScene Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
+      <HelpTOCNode Id="906eb40f-cd1c-49cb-b325-7cb05e53bd87" Title="KancolleScene Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
         <HelpTOCNode Title="SceneState Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneState.htm" />
         <HelpTOCNode Title="SceneType Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleScene_SceneType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="cbe0e97e-ee99-4a3a-9f45-caaf9e9a9383" Title="KancolleScene Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
+      <HelpTOCNode Id="6d126479-f23e-4e91-89c4-bcc1d7bf1ef7" Title="KancolleScene Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
         <HelpTOCNode Title="Equals Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_Equals.htm" />
         <HelpTOCNode Title="GetHashCode Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_GetHashCode.htm" />
         <HelpTOCNode Title="ToString Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_ToString.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d71f2355-51ed-4bba-a79f-57c41d2cb2ba" Title="KancolleScene Operators" Url="html/Operators_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
-        <HelpTOCNode Id="fb3c6791-172c-42c0-95c0-7485ea46cc8f" Title="Equality Operator " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality.htm">
+      <HelpTOCNode Id="f610030b-5b00-4d0f-be46-7db9113f99a3" Title="KancolleScene Operators" Url="html/Operators_T_WoFlagship_KancolleCore_Navigation_KancolleScene.htm">
+        <HelpTOCNode Id="21d409ef-8bcc-44b2-8b75-735061c7ca78" Title="Equality Operator " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality.htm">
           <HelpTOCNode Title="Equality Operator (KancolleScene, KancolleScene)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality.htm" />
           <HelpTOCNode Title="Equality Operator (KancolleScene, KancolleSceneTypes)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Equality_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="5318d1bb-f0f4-40a3-ae4b-d4e452a1dac9" Title="Inequality Operator " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality.htm">
+        <HelpTOCNode Id="baf1fc68-70c0-4fd0-9a4a-0515c2e098f4" Title="Inequality Operator " Url="html/Overload_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality.htm">
           <HelpTOCNode Title="Inequality Operator (KancolleScene, KancolleScene)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality.htm" />
           <HelpTOCNode Title="Inequality Operator (KancolleScene, KancolleSceneTypes)" Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleScene_op_Inequality_1.htm" />
         </HelpTOCNode>
@@ -532,24 +532,24 @@
     </HelpTOCNode>
     <HelpTOCNode Title="KancolleSceneStates Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneStates.htm" />
     <HelpTOCNode Title="KancolleSceneTypes Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleSceneTypes.htm" />
-    <HelpTOCNode Id="488ad30d-8faf-4062-86e6-ad1ecff141bd" Title="KancolleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm">
+    <HelpTOCNode Id="7b218c00-21f0-4888-8b8c-83f120f750d8" Title="KancolleTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm">
       <HelpTOCNode Title="KancolleTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTask__ctor.htm" />
-      <HelpTOCNode Id="c3c5b14e-fd08-4200-9473-efd22c88ba08" Title="KancolleTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm">
+      <HelpTOCNode Id="d3080a7a-9e34-45d6-bc7a-e06952354525" Title="KancolleTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm">
         <HelpTOCNode Title="Priority Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_Priority.htm" />
         <HelpTOCNode Title="RefreshDataTask Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_RefreshDataTask.htm" />
         <HelpTOCNode Title="TimeStamp Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTask_TimeStamp.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="KancolleTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f3aef293-bca7-44e8-8bbd-2f8075fa4132" Title="KancolleTaskExecutor Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
-      <HelpTOCNode Id="8608b6f7-95e7-4bee-ba4e-abb7ba341598" Title="KancolleTaskExecutor Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
+    <HelpTOCNode Id="0a45bfc7-498b-4a4a-b95b-31de9b22c054" Title="KancolleTaskExecutor Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
+      <HelpTOCNode Id="595a6263-4b92-41f6-b46f-555e07fe5832" Title="KancolleTaskExecutor Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
         <HelpTOCNode Title="ActionTimeout Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ActionTimeout.htm" />
         <HelpTOCNode Title="BattleSkipTimeout Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_BattleSkipTimeout.htm" />
         <HelpTOCNode Title="CurrentScene Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_CurrentScene.htm" />
         <HelpTOCNode Title="GameData Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_GameData.htm" />
         <HelpTOCNode Title="TaskRemaining Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_TaskRemaining.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="113f4ea3-1218-4e69-8b8f-8ad43bf3daa3" Title="KancolleTaskExecutor Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
+      <HelpTOCNode Id="6e8bde38-fdee-4246-a42a-4545c57ac370" Title="KancolleTaskExecutor Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
         <HelpTOCNode Title="ClearTaskList Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_ClearTaskList.htm" />
         <HelpTOCNode Title="DoTask Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_DoTask.htm" />
         <HelpTOCNode Title="EnqueueTask Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_EnqueueTask.htm" />
@@ -558,27 +558,27 @@
         <HelpTOCNode Title="Start Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Start.htm" />
         <HelpTOCNode Title="Stop Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_Stop.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="a2234ee2-0889-4ec7-b715-ab3586d9538d" Title="KancolleTaskExecutor Events" Url="html/Events_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
+      <HelpTOCNode Id="0e0a2f90-fdbc-4c19-93bb-cbf45a4c2b65" Title="KancolleTaskExecutor Events" Url="html/Events_T_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor.htm">
         <HelpTOCNode Title="OnTaskFinished Event" Url="html/E_WoFlagship_KancolleCore_Navigation_KancolleTaskExecutor_OnTaskFinished.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a26b5bcc-eb8f-4ddb-a967-2d5ca26ce0ae" Title="KancolleTaskResult Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
+    <HelpTOCNode Id="8373c743-d38f-4fa4-9502-899fe6664891" Title="KancolleTaskResult Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
       <HelpTOCNode Title="KancolleTaskResult Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult__ctor.htm" />
-      <HelpTOCNode Id="278bf107-03cf-4629-93ff-a4729600dc6b" Title="KancolleTaskResult Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
+      <HelpTOCNode Id="de7508a2-d8ea-483d-af1d-4fbf3bdb3748" Title="KancolleTaskResult Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
         <HelpTOCNode Title="ErrorCode Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ErrorCode.htm" />
         <HelpTOCNode Title="FinishedTask Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_FinishedTask.htm" />
         <HelpTOCNode Title="IsSuccess Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_IsSuccess.htm" />
         <HelpTOCNode Title="Message Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_Message.htm" />
         <HelpTOCNode Title="ResultType Property " Url="html/P_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ResultType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="9d9b530b-0581-4ecc-ae2c-6b1b2129d95b" Title="KancolleTaskResult Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
+      <HelpTOCNode Id="ddaffeb3-3863-4fc6-9221-b5fd57c4a174" Title="KancolleTaskResult Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResult.htm">
         <HelpTOCNode Title="ToString Method " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResult_ToString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7217db24-62de-4b66-a335-d6f9d51f73dd" Title="KancolleTaskResultErrors Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm">
+    <HelpTOCNode Id="427b540c-0a85-4f58-838c-becc42c33f4b" Title="KancolleTaskResultErrors Class" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm">
       <HelpTOCNode Title="KancolleTaskResultErrors Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors__ctor.htm" />
       <HelpTOCNode Title="KancolleTaskResultErrors Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm" />
-      <HelpTOCNode Id="225e98c5-aa9c-414b-b543-892edb15179c" Title="KancolleTaskResultErrors Fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm">
+      <HelpTOCNode Id="f60f4d6b-fc93-42cc-b920-dfe5ded7fa06" Title="KancolleTaskResultErrors Fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors.htm">
         <HelpTOCNode Title="EmptyFirstShip Field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyFirstShip.htm" />
         <HelpTOCNode Title="EmptyInterveningShip Field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_EmptyInterveningShip.htm" />
         <HelpTOCNode Title="IllegalFormation Field" Url="html/F_WoFlagship_KancolleCore_Navigation_KancolleTaskResultErrors_IllegalFormation.htm" />
@@ -597,83 +597,83 @@
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="KancolleTaskResultType Enumeration" Url="html/T_WoFlagship_KancolleCore_Navigation_KancolleTaskResultType.htm" />
-    <HelpTOCNode Id="e2b076c8-406c-46df-84d8-46fedc07db40" Title="MapTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MapTask.htm">
-      <HelpTOCNode Id="38033d7d-e0a5-4c0f-aa4b-4ffe888aa7ae" Title="MapTask Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_MapTask__ctor.htm">
+    <HelpTOCNode Id="dceb6ee6-699e-4848-9770-d7e50ac69bf4" Title="MapTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MapTask.htm">
+      <HelpTOCNode Id="23c62e92-3f8c-42e6-90f9-cc6bc855257e" Title="MapTask Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_MapTask__ctor.htm">
         <HelpTOCNode Title="MapTask Constructor (Int32)" Url="html/M_WoFlagship_KancolleCore_Navigation_MapTask__ctor.htm" />
         <HelpTOCNode Title="MapTask Constructor (Int32, Int32)" Url="html/M_WoFlagship_KancolleCore_Navigation_MapTask__ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="ab3b3344-e275-4b9c-9ca9-cc78a2d340e0" Title="MapTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MapTask.htm">
+      <HelpTOCNode Id="b7437f66-6e5c-4c26-bc23-31d52431e34f" Title="MapTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MapTask.htm">
         <HelpTOCNode Title="Fleet Property " Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_Fleet.htm" />
         <HelpTOCNode Title="MapId Property " Url="html/P_WoFlagship_KancolleCore_Navigation_MapTask_MapId.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="MapTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_MapTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="cfdc64a2-c9b0-4de5-96a2-1e93d0627a52" Title="MissionTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MissionTask.htm">
-      <HelpTOCNode Id="36d9e28f-9069-4f56-8c00-a5933a79829c" Title="MissionTask Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_MissionTask__ctor.htm">
+    <HelpTOCNode Id="70113c11-b73c-4c89-9b86-fc8a1c1395c0" Title="MissionTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_MissionTask.htm">
+      <HelpTOCNode Id="20f4c15b-4c01-48c8-ae09-35403444ca5f" Title="MissionTask Constructor " Url="html/Overload_WoFlagship_KancolleCore_Navigation_MissionTask__ctor.htm">
         <HelpTOCNode Title="MissionTask Constructor (Int32)" Url="html/M_WoFlagship_KancolleCore_Navigation_MissionTask__ctor.htm" />
         <HelpTOCNode Title="MissionTask Constructor (Int32, Int32)" Url="html/M_WoFlagship_KancolleCore_Navigation_MissionTask__ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="b491d4b3-8e69-4c79-91dd-fc004d5902a4" Title="MissionTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MissionTask.htm">
+      <HelpTOCNode Id="85b677af-300a-4ed0-b7fd-5cf92a9e767c" Title="MissionTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_MissionTask.htm">
         <HelpTOCNode Title="MissionFleet Property " Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionFleet.htm" />
         <HelpTOCNode Title="MissionId Property " Url="html/P_WoFlagship_KancolleCore_Navigation_MissionTask_MissionId.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="MissionTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_MissionTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="67581163-f408-4c88-98ba-e006eb7f285d" Title="OrganizeTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm">
+    <HelpTOCNode Id="a7e691ae-f82c-4d96-93b9-a8de3eb35069" Title="OrganizeTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm">
       <HelpTOCNode Title="OrganizeTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_OrganizeTask__ctor.htm" />
-      <HelpTOCNode Id="0d50c719-231d-432f-ac1b-25f554eff7a1" Title="OrganizeTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm">
+      <HelpTOCNode Id="0c232f1d-dcf3-4096-8646-baa21f3e7262" Title="OrganizeTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm">
         <HelpTOCNode Title="OrganizedDeck Property " Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_OrganizedDeck.htm" />
         <HelpTOCNode Title="Ships Property " Url="html/P_WoFlagship_KancolleCore_Navigation_OrganizeTask_Ships.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="OrganizeTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_OrganizeTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="07fe84b4-8479-4fbc-a11b-569935187943" Title="QuestTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_QuestTask.htm">
+    <HelpTOCNode Id="7562f380-2da1-414d-b2f7-074df2210c8d" Title="QuestTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_QuestTask.htm">
       <HelpTOCNode Title="QuestTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_QuestTask__ctor.htm" />
       <HelpTOCNode Title="QuestTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
       <HelpTOCNode Title="QuestTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_QuestTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="ffc2e68a-b4d2-4f6a-b44c-a612ff6cc0c9" Title="RefreshDataTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm">
+    <HelpTOCNode Id="e8f71b7b-26a2-4ff7-8bbf-90dfa166c0f3" Title="RefreshDataTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm">
       <HelpTOCNode Title="RefreshDataTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_RefreshDataTask__ctor.htm" />
       <HelpTOCNode Title="RefreshDataTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
       <HelpTOCNode Title="RefreshDataTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RefreshDataTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="995ad8e6-ed37-4818-b92f-e2e47979f066" Title="RemodelTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm">
+    <HelpTOCNode Id="1a43b8c8-8600-4607-be00-5de6b743f261" Title="RemodelTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm">
       <HelpTOCNode Title="RemodelTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_RemodelTask__ctor.htm" />
-      <HelpTOCNode Id="a9e728d6-4df2-46a3-94b8-8eacd0faec41" Title="RemodelTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm">
+      <HelpTOCNode Id="4da154ce-a813-4302-8c06-2220db5414f1" Title="RemodelTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm">
         <HelpTOCNode Title="SlotItemNos Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_SlotItemNos.htm" />
         <HelpTOCNode Title="TargetDeck Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetDeck.htm" />
         <HelpTOCNode Title="TargetPosition Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RemodelTask_TargetPosition.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="RemodelTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RemodelTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="301565f8-5141-449a-94f5-0be9a38dc392" Title="RepairTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RepairTask.htm">
+    <HelpTOCNode Id="25dc0664-4a24-4dd5-ab37-e46d39857795" Title="RepairTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_RepairTask.htm">
       <HelpTOCNode Title="RepairTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_RepairTask__ctor.htm" />
-      <HelpTOCNode Id="584dc7e1-5b68-46bd-a331-ae760a1ed37b" Title="RepairTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RepairTask.htm">
+      <HelpTOCNode Id="5f60ff6c-3e27-40e0-8b12-12b803bfeaa5" Title="RepairTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_RepairTask.htm">
         <HelpTOCNode Title="Dock Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_Dock.htm" />
         <HelpTOCNode Title="ShipNo Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_ShipNo.htm" />
         <HelpTOCNode Title="UseFastRepair Property " Url="html/P_WoFlagship_KancolleCore_Navigation_RepairTask_UseFastRepair.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="RepairTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_RepairTask.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="dd83ad8e-5b7a-4a77-b7f9-697eeab8462a" Title="SceneRecognizer Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
+    <HelpTOCNode Id="ee15aeb1-f686-4251-aaab-da16b28ad0e0" Title="SceneRecognizer Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
       <HelpTOCNode Title="SceneRecognizer Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer__ctor.htm" />
-      <HelpTOCNode Id="2442407e-d534-4ade-a98e-0cf48606b812" Title="SceneRecognizer Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
+      <HelpTOCNode Id="600492c2-ea47-42b1-b39a-75719e5237db" Title="SceneRecognizer Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
         <HelpTOCNode Title="GetSceneTypeFromBitmap Method " Url="html/M_WoFlagship_KancolleCore_Navigation_SceneRecognizer_GetSceneTypeFromBitmap.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d382244f-2fb3-4a3b-882c-041c2536af45" Title="SceneRecognizer Fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
+      <HelpTOCNode Id="4a3b9203-8834-4107-a340-d60345cef706" Title="SceneRecognizer Fields" Url="html/Fields_T_WoFlagship_KancolleCore_Navigation_SceneRecognizer.htm">
         <HelpTOCNode Title="ComparisonFolder Field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_ComparisonFolder.htm" />
         <HelpTOCNode Title="Threshold Field" Url="html/F_WoFlagship_KancolleCore_Navigation_SceneRecognizer_Threshold.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="22acf31c-0fba-4c88-8e5c-1030deff22b5" Title="SimpleNavigator Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm">
+    <HelpTOCNode Id="58d880fa-8c25-499f-b8e6-a68f8e77124e" Title="SimpleNavigator Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm">
       <HelpTOCNode Title="SimpleNavigator Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator__ctor.htm" />
-      <HelpTOCNode Id="2ebbf94e-25e2-445b-91d1-62107114ecea" Title="SimpleNavigator Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm">
+      <HelpTOCNode Id="eba98cc6-9159-4a7c-b15c-8f6651081379" Title="SimpleNavigator Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SimpleNavigator.htm">
         <HelpTOCNode Title="Navigate Method " Url="html/M_WoFlagship_KancolleCore_Navigation_SimpleNavigator_Navigate.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="6551a476-e217-4927-b974-eae2bf99d04e" Title="SupplyTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm">
+    <HelpTOCNode Id="18aa8f7b-de00-4a88-bab5-86637d7eda87" Title="SupplyTask Class" Url="html/T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm">
       <HelpTOCNode Title="SupplyTask Constructor " Url="html/M_WoFlagship_KancolleCore_Navigation_SupplyTask__ctor.htm" />
-      <HelpTOCNode Id="c8dbb2d6-e16b-49fe-8d51-a7d7318968bb" Title="SupplyTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm">
+      <HelpTOCNode Id="c982cd39-60e3-4b59-b2c8-e636adb1ce22" Title="SupplyTask Properties" Url="html/Properties_T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm">
         <HelpTOCNode Title="SupplyDeck Property " Url="html/P_WoFlagship_KancolleCore_Navigation_SupplyTask_SupplyDeck.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="SupplyTask Methods" Url="html/Methods_T_WoFlagship_KancolleCore_Navigation_SupplyTask.htm" />
