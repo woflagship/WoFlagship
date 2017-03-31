@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rhyous.SimplePluginLoader;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,13 +18,57 @@ namespace WoFlagship.KancolleAI
 
         public List<IKancolleAI> AIs { get; private set; } = new List<IKancolleAI>();
 
+       
+        public AIManager()
+        {
+            
+        }
+
         public void LoadAIs()
         {
             LogFactory.SystemLogger.Info("开始载入AI");
             AIs.Clear();
+
             DirectoryInfo aiRootFoler = new DirectoryInfo(AIFolder);
             if (aiRootFoler.Exists)
             {
+
+                var pluginLoader = new PluginLoader<IKancolleAI>();
+                var aiFolders = (from di in aiRootFoler.GetDirectories()
+                                 select di.FullName).ToList();
+                var collection = pluginLoader.LoadPlugins(aiFolders);
+                if (collection.Count > 0)
+                {
+                    foreach (var pluginDll in collection)
+                    {
+                        foreach(var ai in pluginDll.PluginObjects)
+                        {
+                            if (ai.Name == null || ai.Name == "")
+                            {
+                                LogFactory.SystemLogger.Error($"AI文件'{pluginDll.Name}'中的类型{ai.GetType().FullName}'载入失败，AI名'Name'不能为空");
+                                continue;
+                            }
+                            var sameAI = AIs.Find(p => p.Name == ai.Name);
+                            if (sameAI != null)
+                            {
+                                IKancolleAI p;
+                                if (sameAI.Version > ai.Version)
+                                    p = sameAI;
+                                else
+                                    p = ai;
+                                LogFactory.SystemLogger.Error($"存在多个AI'{ai.Name}'，将只保留版本最高的一个[Version={p.Version}]");
+                                AIs.Remove(sameAI);
+                                AIs.Add(p);
+                            }
+                            else
+                            {
+                                AIs.Add(ai);
+                                LogFactory.SystemLogger.Info($"AI'{ai.Name}'载入成功");
+                            }
+                        }
+                    }
+                }
+                /*
                 foreach (var aiFolder in aiRootFoler.GetDirectories())
                 {
                     var aiDlls = aiFolder.GetFiles("*.dll");
@@ -31,8 +76,8 @@ namespace WoFlagship.KancolleAI
                     {
                         try
                         {
-
-                            Assembly assembly = Assembly.Load(File.ReadAllBytes(dll.FullName));// Assembly.LoadFile(dll.FullName);
+                         
+                           Assembly assembly = Assembly.LoadFrom(dll.FullName);// Assembly.Load(File.ReadAllBytes(dll.FullName));//
                             var types = from t in assembly.GetTypes()
                                         where t.IsClass && t.Namespace.StartsWith("WoFlagship.KancolleAI")
                                         select t;
@@ -80,12 +125,16 @@ namespace WoFlagship.KancolleAI
                             LogFactory.SystemLogger.Error($"AI文件'{dll.Name}'载入失败", ex);
                         }
                     }
-                }
+                }*/
             }
             LogFactory.SystemLogger.Info($"AI载入完毕，共载入{AIs.Count}个AI");
             OnAILoaded?.InvokeAll(AIs);
         }
 
+        public void UnloadAIs()
+        {
+
+        }
        
     }
 }

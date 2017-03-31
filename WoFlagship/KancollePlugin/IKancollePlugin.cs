@@ -2,9 +2,9 @@
 using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins
+namespace WoFlagship.KancollePlugin
 {
-    public interface IPlugin
+    public interface IKancollePlugin
     {
         int Version { get; }
 

@@ -141,6 +141,10 @@
       <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rhyous.SimplePluginLoader, Version=1.1.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>E:\Downloads\SimplePluginLoader-master\SimplePluginLoader-master\Rhyous.SimplePluginLoader\bin\Debug\Rhyous.SimplePluginLoader.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -253,8 +257,8 @@
     <Compile Include="KancolleCore\KancolleResponseFilter.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Logger\LogFactory.cs" />
-    <Compile Include="Plugins\IPlugin.cs" />
-    <Compile Include="Plugins\PluginManager.cs" />
+    <Compile Include="KancollePlugin\IKancollePlugin.cs" />
+    <Compile Include="KancollePlugin\PluginManager.cs" />
     <Compile Include="PluginWindow.xaml.cs">
       <DependentUpon>PluginWindow.xaml</DependentUpon>
     </Compile>
@@ -364,7 +368,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Plugins\Plugin规范文档.txt" />
+    <Resource Include="KancollePlugin\Plugin规范文档.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\woflagship_q.png" />

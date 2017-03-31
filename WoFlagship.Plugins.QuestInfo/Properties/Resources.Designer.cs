@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WoFlagship.Plugins.QuestInfo.Properties {
+namespace WoFlagship.KancollePlugin.QuestInfo.Properties {
     using System;
     
     

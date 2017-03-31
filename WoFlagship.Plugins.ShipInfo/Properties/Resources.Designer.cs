@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WoFlagship.Plugins.ShipInfo.Properties
+namespace WoFlagship.KancollePlugin.ShipInfo.Properties
 {
 
 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.KancolleCore.Navigation;
+using TestClassLibaray;
+using System.Windows;
 
 namespace WoFlagship.KancolleAI.ManualAI
 {
@@ -15,6 +17,9 @@ namespace WoFlagship.KancolleAI.ManualAI
 
         public ManualAI()
         {
+            //用于测试插件加载的依赖项
+            Class1 c1 = new Class1();
+            c1.i = 0;
             panel.OnTaskGenerated += Panel_OnTaskGenerated;
         }
 

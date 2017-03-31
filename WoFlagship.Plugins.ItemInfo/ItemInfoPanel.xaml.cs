@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins.ItemInfo
+namespace WoFlagship.KancollePlugin.ItemInfo
 {
     /// <summary>
     /// ItemInfoPanel.xaml 的交互逻辑

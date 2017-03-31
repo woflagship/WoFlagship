@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WoFlagship.Plugins;
+using WoFlagship.KancollePlugin;
 
 namespace WoFlagship
 {
@@ -20,8 +20,8 @@ namespace WoFlagship
     /// </summary>
     public partial class PluginWindow : Window
     {
-        public IPlugin Plugin { get; private set;}
-        public PluginWindow(IPlugin plugin)
+        public IKancollePlugin Plugin { get; private set;}
+        public PluginWindow(IKancollePlugin plugin)
         {
             if (plugin == null)
                 this.Close();

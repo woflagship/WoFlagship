@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoFlagship.Plugins.ItemInfo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoFlagship.KancolleAI.ManualAI", "WoFlagship.KancolleAI.ManualAI\WoFlagship.KancolleAI.ManualAI.csproj", "{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassLibaray", "TestClassLibaray\TestClassLibaray.csproj", "{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}"
+EndProject
 Global
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
@@ -90,6 +92,14 @@ Global
 		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{5C7631BC-1EFF-42C1-B38E-ABA3D1BBC1E4}.Release|x86.Build.0 = Release|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Debug|x86.Build.0 = Debug|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Release|x86.ActiveCfg = Release|Any CPU
+		{96919935-EA4E-4E20-A3E6-2FADAEAEDE0F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

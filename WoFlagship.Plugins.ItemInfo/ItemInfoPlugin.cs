@@ -8,9 +8,9 @@ using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins.ItemInfo
+namespace WoFlagship.KancollePlugin.ItemInfo
 {
-    public class ItemInfoPlugin : IPlugin
+    public class ItemInfoPlugin : IKancollePlugin
     {
         private ItemInfoPanel panel = new ItemInfoPanel();
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WoFlagship.Plugins.ItemInfo.Properties
+namespace WoFlagship.KancollePlugin.ItemInfo.Properties
 {
 
 

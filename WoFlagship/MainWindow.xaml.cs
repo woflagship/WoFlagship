@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using WoFlagship.KancolleCore;
 using WoFlagship.KancolleAI;
 using WoFlagship.Logger;
-using WoFlagship.Plugins;
+using WoFlagship.KancollePlugin;
 using WoFlagship.ToolWindows;
 using WoFlagship.ViewModels;
 using WoFlagship.KancolleCore.Navigation;
@@ -49,7 +49,7 @@ namespace WoFlagship
         private GeneralViewModel generalViewModel = new GeneralViewModel();
 
         private ObservableCollection<string> pluginNames { get; set; } = new ObservableCollection<string>();
-        private IPlugin currentPlugin = null;
+        private IKancollePlugin currentPlugin = null;
         private ObservableCollection<string> aiNames { get; set; } = new ObservableCollection<string>();
         private IKancolleAI currentAI = null;
 
@@ -312,7 +312,7 @@ namespace WoFlagship
             Dispatcher.Invoke(new Action(() => Txt_Battle.Text = battleText));
         }
 
-        private void PluginManager_OnPluginsLoaded(List<IPlugin> obj)
+        private void PluginManager_OnPluginsLoaded(List<IKancollePlugin> obj)
         {
             pluginNames.Clear();
             foreach(var plugin in obj)

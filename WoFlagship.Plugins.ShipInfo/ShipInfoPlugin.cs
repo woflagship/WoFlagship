@@ -4,9 +4,9 @@ using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins.ShipInfo
+namespace WoFlagship.KancollePlugin.ShipInfo
 {
-    class ShipInfoPlugin : IPlugin
+    class ShipInfoPlugin : IKancollePlugin
     {
         private ShipInfoPanel panel = new ShipInfoPanel();
 

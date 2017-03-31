@@ -21,7 +21,7 @@ using Microsoft.Win32;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace WoFlagship.Plugins.ShipInfo
+namespace WoFlagship.KancollePlugin.ShipInfo
 {
     /// <summary>
     /// ShipInfoPanel.xaml 的交互逻辑

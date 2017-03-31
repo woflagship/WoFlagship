@@ -13,12 +13,12 @@ using System.Windows;
 using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.KancolleQuestData;
-using WoFlagship.Plugins.QuestInfo.Properties;
+using WoFlagship.KancollePlugin.QuestInfo.Properties;
 using WoFlagship.ViewModels;
 
-namespace WoFlagship.Plugins.QuestInfo
+namespace WoFlagship.KancollePlugin.QuestInfo
 {
-    public class QuestInfoPlugin : IPlugin
+    public class QuestInfoPlugin : IKancollePlugin
     {
         //public const string QuestInfoFile = "Infos\\questinfo.json";
         private QuestInfoPanel panel = new QuestInfoPanel();
