@@ -286,6 +286,7 @@
     <Compile Include="Utils\ObservaleRangeCollection.cs" />
     <Compile Include="Utils\ReadOnlyArray2.cs" />
     <Compile Include="ViewModels\GeneralViewModel.cs" />
+    <Compile Include="ViewModels\MainInfoViewModel.cs" />
     <Compile Include="ViewModels\MapEditorViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

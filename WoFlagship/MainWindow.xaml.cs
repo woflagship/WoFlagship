@@ -24,6 +24,7 @@ using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleCore.KancolleBattle;
 using System.Windows.Documents;
 using System.Windows.Threading;
+using System.Collections.Specialized;
 
 namespace WoFlagship
 {
@@ -47,6 +48,7 @@ namespace WoFlagship
 
         private SettingViewModel settingViewModel = new SettingViewModel();
         private GeneralViewModel generalViewModel = new GeneralViewModel();
+        private MainInfoViewModel mainInfoViewModel = new MainInfoViewModel();
 
         private ObservableCollection<string> pluginNames { get; set; } = new ObservableCollection<string>();
         private IKancollePlugin currentPlugin = null;
@@ -70,7 +72,7 @@ namespace WoFlagship
             //初始化事件
             InitContextEvent();
 
-            battleContext = new KancolleBattleContext(gameContext.GameData);
+            battleContext = new KancolleBattleContext(KancolleGameData.Instance);
 
             LogFactory.SystemLogger.Info("程序启动");
             
@@ -113,6 +115,8 @@ namespace WoFlagship
             Tc_Deck.SetBinding(TabControl.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Decks") });
             Lb_Dock.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Docks") });
 
+            Lb_Task.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = mainInfoViewModel, Path = new PropertyPath("TaskList") });
+
             LogFactory.SystemLogger.Info("开始插件初始化");
             foreach (var plugin in pluginManager.Plugins)
             {
@@ -138,11 +142,11 @@ namespace WoFlagship
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (generalViewModel.Docks != null && gameContext.GameData != null)
+            if (generalViewModel.Docks != null && KancolleGameData.Instance != null)
             {
-                for (int i = 0; i < gameContext.GameData.DockArray.Count; i++)
+                for (int i = 0; i < KancolleGameData.Instance.DockArray.Count; i++)
                 {
-                    var dock = gameContext.GameData.DockArray[i];
+                    var dock = KancolleGameData.Instance.DockArray[i];
                     if(dock.State > 0)
                     {
                         TimeSpan remainTime;
@@ -163,16 +167,16 @@ namespace WoFlagship
         {
             gameContext.OnGameDataUpdated += e =>
             {
-                UpdateViewModel(e.GameData);
+                UpdateViewModel(KancolleGameData.Instance);
 
                 foreach (var plugin in pluginManager.Plugins)
                 {
-                    plugin.OnGameDataUpdated(generalViewModel, e.GameData);
+                    plugin.OnGameDataUpdated(generalViewModel, KancolleGameData.Instance);
                 }
 
                 if(currentAI != null)
                 {
-                    currentAI.OnGameDataUpdated(e.GameData);
+                    currentAI.OnGameDataUpdated(KancolleGameData.Instance);
                 }
             };
         }
@@ -279,7 +283,7 @@ namespace WoFlagship
             foreach(var ship in obj.MainFleet)
             {
                 if (ship != null && ship.ShipId > 0)
-                    battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                    battleText += KancolleGameData.Instance.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
             }
 
             if(obj.EscortFleet != null)
@@ -288,7 +292,7 @@ namespace WoFlagship
                 foreach (var ship in obj.EscortFleet)
                 {
                     if (ship != null && ship.ShipId > 0)
-                        battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                        battleText += KancolleGameData.Instance.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
                 }
             }
 
@@ -296,7 +300,7 @@ namespace WoFlagship
             foreach (var ship in obj.EnemyFleet)
             {
                 if (ship != null && ship.ShipId>0)
-                    battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                    battleText += KancolleGameData.Instance.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
             }
 
             if (obj.EnemyEscort != null)
@@ -305,7 +309,7 @@ namespace WoFlagship
                 foreach (var ship in obj.EnemyEscort)
                 {
                     if (ship != null && ship.ShipId > 0)
-                        battleText += gameContext.GameData.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
+                        battleText += KancolleGameData.Instance.ShipDataDictionary[ship.ShipId].Name + "\t" + ship.NowHP + "/" + ship.MaxHP + "\n";
                 }
             }
 
@@ -349,12 +353,15 @@ namespace WoFlagship
 
             actionExecutor = new KancolleActionExecutor(webView);
             actionExecutor.OnActionExecuted += ActionExecutor_OnActionExecuted;
+            
             try
             {
                 //创建单例类TaskExecutor，只能初始化这一次！访问方式为 KancolleTaskExecutor.Get()
-                new KancolleTaskExecutor(actionExecutor, () => GetCurrentScene(), () => gameContext.GameData);
-                KancolleTaskExecutor.Get().OnTaskFinished_Internal += TaskExecutor_OnTaskFinished;
-                KancolleTaskExecutor.Get().Start();
+                new KancolleTaskExecutor(actionExecutor, () => GetCurrentScene());
+                KancolleTaskExecutor.Instance.OnTaskStart_Internal += TaskExecutor_OnTaskStart_Internal;
+                KancolleTaskExecutor.Instance.OnTaskFinished_Internal += TaskExecutor_OnTaskFinished_Internal;
+                KancolleTaskExecutor.Instance.OnTasksChanged_Internal += TaskExecutor_OnTasksChanged_Internal;
+                KancolleTaskExecutor.Instance.Start();
             }
             catch(Exception ex)
             {
@@ -363,7 +370,35 @@ namespace WoFlagship
 #endif
             }
         }
-      
+
+        private void TaskExecutor_OnTaskStart_Internal(KancolleTaskExecutor obj)
+        {
+            
+        }
+
+        private void TaskExecutor_OnTasksChanged_Internal(KancolleTaskExecutor obj, NotifyCollectionChangedEventArgs args)
+        {
+            Dispatcher.Invoke(new Action(() =>
+            {
+                switch (args.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                        TaskViewModel task = new TaskViewModel();
+                        task.Task = args.NewItems[0] as KancolleTask;
+                        mainInfoViewModel.TaskList.Add(task);
+                        break;
+                    case NotifyCollectionChangedAction.Remove:
+                        mainInfoViewModel.TaskList.RemoveAt(0);
+                        break;
+                    case NotifyCollectionChangedAction.Reset:
+                        mainInfoViewModel.TaskList.Clear();
+                        break;
+                    default:
+                        break;
+                }
+            }));     
+        }
+
 
         private void ActionExecutor_OnActionExecuted(KancolleAction obj)
         {
@@ -373,7 +408,7 @@ namespace WoFlagship
             }
         }
 
-        private void TaskExecutor_OnTaskFinished(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
+        private void TaskExecutor_OnTaskFinished_Internal(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
         {
             Dispatcher.Invoke(new Action(()=>
             {
@@ -440,7 +475,7 @@ namespace WoFlagship
                 {
                     foreach (var plugin in pluginManager.Plugins)
                     {
-                        plugin.OnGameStart(generalViewModel, gameContext.GameData);
+                        plugin.OnGameStart(generalViewModel, KancolleGameData.Instance);
                     }
                 }
                 gameContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
@@ -463,7 +498,7 @@ namespace WoFlagship
                 }
 
                 battleContext.OnAPIResponseReceivedHandler(arg1, arg2, api);
-                KancolleTaskExecutor.Get().OnAPIResponseReceivedHandler(arg1, arg2, api);
+                KancolleTaskExecutor.Instance.OnAPIResponseReceivedHandler(arg1, arg2, api);
             }
             catch(Exception ex)
             {
@@ -584,7 +619,7 @@ namespace WoFlagship
 
         private void Btn_QuestEditor_Click(object sender, RoutedEventArgs e)
         {
-            QuestEditor questEditor = new QuestEditor(gameContext.GameData);
+            QuestEditor questEditor = new QuestEditor(KancolleGameData.Instance);
             questEditor.ShowDialog();
         }
 
@@ -697,7 +732,7 @@ namespace WoFlagship
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            KancolleTaskExecutor.Get()?.Stop();
+            KancolleTaskExecutor.Instance?.Stop();
             sw.Close();
         }
 
@@ -761,7 +796,7 @@ namespace WoFlagship
                         try
                         {
                             currentAI.Start();
-                            currentAI.OnGameDataUpdated(gameContext.GameData);                        
+                            currentAI.OnGameDataUpdated(KancolleGameData.Instance);                        
                             aiButton.Content = currentAI.Name;
                         }
                         catch(Exception ex)

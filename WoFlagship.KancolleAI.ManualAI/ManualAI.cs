@@ -70,7 +70,7 @@ namespace WoFlagship.KancolleAI.ManualAI
 
         private void Panel_OnTaskGenerated(KancolleTask obj)
         {
-            KancolleTaskExecutor.Get().EnqueueTask(obj);
+            KancolleTaskExecutor.Instance.EnqueueTask(obj);
         }
 
         public void Stop()

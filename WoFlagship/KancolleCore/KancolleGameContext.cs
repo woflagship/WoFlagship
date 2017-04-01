@@ -21,7 +21,7 @@ namespace WoFlagship.KancolleCore
         private api_mst_mission_item[] api_mst_mission;
 
         private readonly KancolleGameData gameData = new KancolleGameData();
-        public KancolleGameData GameData { get { return gameData; } }
+        //public KancolleGameData GameData { get { return gameData; } }
 
         public KancolleGameContext()
         {

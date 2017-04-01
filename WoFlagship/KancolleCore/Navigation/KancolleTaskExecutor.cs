@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using static WoFlagship.KancolleCore.Navigation.KancolleTaskResultErrors;
 using System.Diagnostics;
+using WoFlagship.Utils;
+using System.Collections.Specialized;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
@@ -15,6 +17,10 @@ namespace WoFlagship.KancolleCore.Navigation
     {
         internal event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished_Internal;
         public event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished;
+
+        internal event Action<KancolleTaskExecutor, NotifyCollectionChangedEventArgs> OnTasksChanged_Internal;
+        internal event Action<KancolleTaskExecutor> OnTaskStart_Internal;
+
 
         /// <summary>
         /// 等待新Scenes响应的超时，单位为毫秒
@@ -49,12 +55,16 @@ namespace WoFlagship.KancolleCore.Navigation
         private INavigator navigator = new SimpleNavigator();
 
         private Func<KancolleScene> GetCurrentScene;
-        private Func<KancolleGameData> GetGameData;
 
         private Random random = new Random();
 
         private static KancolleTaskExecutor s_instance = null;
-        public static KancolleTaskExecutor Get() { return s_instance; }
+
+        /// <summary>
+        /// 获取单例实例
+        /// </summary>
+        /// <returns></returns>
+        public static KancolleTaskExecutor Instance { get { return s_instance; } }
 
         protected KancolleScene CurrentScene
         {
@@ -65,16 +75,10 @@ namespace WoFlagship.KancolleCore.Navigation
             }
         }
 
-        public KancolleGameData GameData
-        {
-            get { return Application.Current.Dispatcher.Invoke(GetGameData); }
-        }
 
-
-        internal KancolleTaskExecutor(KancolleActionExecutor actionExecutor, Func<KancolleScene> GetCurrentScene, Func<KancolleGameData> GetGameData)
+        internal KancolleTaskExecutor(KancolleActionExecutor actionExecutor, Func<KancolleScene> GetCurrentScene)
         {
             this.GetCurrentScene = GetCurrentScene;
-            this.GetGameData = GetGameData;
             this.actionExecutor = actionExecutor;
             //单例类，只允许一个实例
             Debug.Assert(s_instance == null);
@@ -88,6 +92,7 @@ namespace WoFlagship.KancolleCore.Navigation
         public void EnqueueTask(KancolleTask task)
         {
             taskQueue.Enqueue(task, (int)task.Priority);
+            OnTasksChanged_Internal?.InvokeAll(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, task));
         }
 
         /// <summary>
@@ -96,6 +101,12 @@ namespace WoFlagship.KancolleCore.Navigation
         public void ClearTaskList()
         {
             taskQueue.Clear();
+            OnTasksChanged_Internal?.InvokeAll(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
+        internal IEnumerator<KancolleTask> GetEnumerator()
+        {
+            return taskQueue.GetEnumerator();
         }
 
         /// <summary>
@@ -150,6 +161,8 @@ namespace WoFlagship.KancolleCore.Navigation
                     continue;
                 }
                 var currentTask = taskQueue.Dequeue();
+                OnTasksChanged_Internal?.InvokeAll(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, currentResponse));
+                OnTaskStart_Internal?.InvokeAll(this);
                 KancolleTaskResult result = null;
                 if (currentTask is OrganizeTask)
                 {
@@ -235,7 +248,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
             //先移除除旗舰外所有的位置
             /*
-            if (GameData.OwnedShipPlaceArray[deck, 1] != -1)//至少有2个船
+            if (KancolleGameData.Instance.OwnedShipPlaceArray[deck, 1] != -1)//至少有2个船
             {
                 actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_RemoveAllExceptFirst));
                 result = LockNowAndWaitForResponse();
@@ -245,14 +258,14 @@ namespace WoFlagship.KancolleCore.Navigation
             }*/
 
 
-            var sortedShip = (from s in GameData.OwnedShipDictionary.Values
+            var sortedShip = (from s in KancolleGameData.Instance.OwnedShipDictionary.Values
                              orderby s.No descending
                              select s).ToArray();//按照降序排列，和new的顺序相同
 
             //依次变更
             for (int i = 0; i < ships.Length; i++)
             {
-                int currentShipId = GameData.OwnedShipPlaceArray[deck, i];
+                int currentShipId = KancolleGameData.Instance.OwnedShipPlaceArray[deck, i];
                 if (ships[i] == currentShipId)
                     continue;
 
@@ -260,7 +273,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 {
                     for (int j = i; j < ships.Length; j++)//删除后面的
                     {
-                        if (GameData.OwnedShipPlaceArray[deck, i] == -1)//始终判断第i个
+                        if (KancolleGameData.Instance.OwnedShipPlaceArray[deck, i] == -1)//始终判断第i个
                             break;
                         //点击变更按钮
                         actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));//始终移除第i个位置的，因为删了之后后面会补上来
@@ -453,7 +466,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, tresult.Message, tresult.ErrorCode);
 
             KancolleMapInfoData mapinfo;
-            if (!GameData.MapInfoDictionary.TryGetValue(task.MapId, out mapinfo))
+            if (!KancolleGameData.Instance.MapInfoDictionary.TryGetValue(task.MapId, out mapinfo))
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能找到地图id【{task.MapId}】", UnfoundMapId);
             int areaIndex = mapinfo.MapAreaId - 1;
             int mapIndex = mapinfo.MapAreaId - 1;
@@ -559,7 +572,7 @@ namespace WoFlagship.KancolleCore.Navigation
             bool result;
             KancolleTaskResult tresult;
             //需要改装的舰娘no
-            var shipNo = GameData.OwnedShipPlaceArray[task.TargetDeck, task.TargetPosition];
+            var shipNo = KancolleGameData.Instance.OwnedShipPlaceArray[task.TargetDeck, task.TargetPosition];
             if (shipNo == -1)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前位置【{task.TargetDeck + "-" + task.TargetPosition}】没有舰娘", NoShipAtPosition);
 
@@ -578,18 +591,18 @@ namespace WoFlagship.KancolleCore.Navigation
 
             //先移除自己的所有装备，不过已经在正确位置的装备就不动了
             int correctSlotNum = 0;
-            int slotNum = GameData.GetShip(shipNo).SlotNum;
+            int slotNum = KancolleGameData.Instance.GetShip(shipNo).SlotNum;
             for(; correctSlotNum < slotNum; correctSlotNum++)
             {
                 int itemNo = task.SlotItemNos[correctSlotNum];
                 if (itemNo < 0)
                     break;
-                if (GameData.OwnedShipDictionary[shipNo].Slot[correctSlotNum] != itemNo)
+                if (KancolleGameData.Instance.OwnedShipDictionary[shipNo].Slot[correctSlotNum] != itemNo)
                     break;
             }
             for (int i = correctSlotNum; i < slotNum; i++)
             {
-                if (GameData.OwnedShipDictionary[shipNo].Slot[correctSlotNum] < 0)//当前位置没有装备
+                if (KancolleGameData.Instance.OwnedShipDictionary[shipNo].Slot[correctSlotNum] < 0)//当前位置没有装备
                     break;
                 //移除装备，因为装备移除后，下面的会补上来，所以始终是correntSlotNum的位置
                 actionExecutor.Execute(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]);
@@ -606,28 +619,28 @@ namespace WoFlagship.KancolleCore.Navigation
                 int itemNo = task.SlotItemNos[i];
                 if (itemNo < 0)
                     continue;
-                if (GameData.OwnedShipDictionary[shipNo].Slot[i] == itemNo)
+                if (KancolleGameData.Instance.OwnedShipDictionary[shipNo].Slot[i] == itemNo)
                     continue;
                 IEnumerable<int> items;
                 bool isEquipedSlot = false;
-                if (GameData.EquipedSlotDictionary.ContainsKey(itemNo))//该装备已经被别的舰娘装备
+                if (KancolleGameData.Instance.EquipedSlotDictionary.ContainsKey(itemNo))//该装备已经被别的舰娘装备
                 {
                     //不能在本船
-                    items = from es in GameData.EquipedSlotDictionary
-                            where es.Value!=shipNo && GameData.CanShipEquipItem(GameData.OwnedShipDictionary[shipNo].ShipId, GameData.OwnedSlotDictionary[es.Key].SlotItemId)
+                    items = from es in KancolleGameData.Instance.EquipedSlotDictionary
+                            where es.Value!=shipNo && KancolleGameData.Instance.CanShipEquipItem(KancolleGameData.Instance.OwnedShipDictionary[shipNo].ShipId, KancolleGameData.Instance.OwnedSlotDictionary[es.Key].SlotItemId)
                             select es.Key;
                     isEquipedSlot = true;
                 }
                 else
                 {
-                    items = from s in GameData.UnEquipedSlotArray
-                            where GameData.CanShipEquipItem(GameData.OwnedShipDictionary[shipNo].ShipId, GameData.OwnedSlotDictionary[s].SlotItemId)
+                    items = from s in KancolleGameData.Instance.UnEquipedSlotArray
+                            where KancolleGameData.Instance.CanShipEquipItem(KancolleGameData.Instance.OwnedShipDictionary[shipNo].ShipId, KancolleGameData.Instance.OwnedSlotDictionary[s].SlotItemId)
                             select s;
                 }
                 //以slotItemId为第一关键字，no为第二关键字
                 var sortedItem = (from s in items
-                                 orderby GameData.OwnedSlotDictionary[s].SlotItemId, GameData.OwnedSlotDictionary[s].No
-                                  select GameData.OwnedSlotDictionary[s]).ToArray();
+                                 orderby KancolleGameData.Instance.OwnedSlotDictionary[s].SlotItemId, KancolleGameData.Instance.OwnedSlotDictionary[s].No
+                                  select KancolleGameData.Instance.OwnedSlotDictionary[s]).ToArray();
               
                 //找到装备位置
                 int index = indexOfItems(sortedItem, itemNo);
@@ -708,7 +721,7 @@ namespace WoFlagship.KancolleCore.Navigation
             Thread.Sleep(500);
             actionExecutor.Execute(KancolleWidgetPositions.Repair_Docks[task.Dock]);
 
-            var sortedShip = (from s in GameData.OwnedShipDictionary.Values
+            var sortedShip = (from s in KancolleGameData.Instance.OwnedShipDictionary.Values
                               orderby s.No descending
                               select s).ToArray();//按照降序排列，和new的顺序相同
             Thread.Sleep(1000);

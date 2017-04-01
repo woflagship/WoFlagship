@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
@@ -22,6 +23,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
     public abstract class KancolleTask
     {
+
         /// <summary>
         /// 刷新数据用的任务，和new RefreshDataTask()等价，用这个的话就不用再new了，效率比较高
         /// </summary>
@@ -30,6 +32,11 @@ namespace WoFlagship.KancolleCore.Navigation
         public DateTime TimeStamp { get; private set; } = DateTime.Now;
 
         public TaskPriority Priority { get; set; } = TaskPriority.Normal;
+
+        /// <summary>
+        /// 任务类型名
+        /// </summary>
+        public abstract string TypeName { get; }
     }
 
     public class OrganizeTask : KancolleTask
@@ -43,6 +50,14 @@ namespace WoFlagship.KancolleCore.Navigation
         /// </summary>
         public int[] Ships { get; private set; }
 
+        public override string TypeName
+        {
+            get
+            {
+                return "编成";
+            }
+        }
+
         /// <summary>
         /// 编成，organizeFleet从0开始，ships的id是ownship的id
         /// </summary>
@@ -54,6 +69,17 @@ namespace WoFlagship.KancolleCore.Navigation
             Ships = ships;
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder(6 * 2);
+            for(int i=0; i<Ships.Length; i++)
+            {
+                if (Ships[i] < 0)
+                    break;
+                sb.Append($"【{KancolleGameData.Instance.GetShipName(Ships[i])}】");
+            }
+            return $"第{OrganizedDeck+1}舰队，编成{sb.ToString()}";
+        }
     }
 
     public class SupplyTask : KancolleTask
@@ -68,6 +94,19 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             SupplyDeck = supplyDeck;
         }
+
+        public override string ToString()
+        {
+            return $"补给第{SupplyDeck+1}舰队";
+        }
+
+        public override string TypeName
+        {
+            get
+            {
+                return "补给";
+            }
+        }
     }
 
     public class QuestTask : KancolleTask
@@ -75,6 +114,14 @@ namespace WoFlagship.KancolleCore.Navigation
         public QuestTask(int[] requireTasks)
         {
 
+        }
+
+        public override string TypeName
+        {
+            get
+            {
+                return "任务";
+            }
         }
     }
 
@@ -104,6 +151,14 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             Fleet = deck;
             MapId = mapId;
+        }
+
+        public override string TypeName
+        {
+            get
+            {
+                return "出击";
+            }
         }
     }
 
@@ -144,6 +199,14 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             this.BattleChoice = choice;
         }
+
+        public override string TypeName
+        {
+            get
+            {
+                return "进击选择";
+            }
+        }
     }
 
     public class BattleFormationTask : BattleTask
@@ -162,6 +225,13 @@ namespace WoFlagship.KancolleCore.Navigation
             Formation = formation;
         }
 
+        public override string TypeName
+        {
+            get
+            {
+                return "阵型选择";
+            }
+        }
     }
 
     /// <summary>
@@ -169,7 +239,13 @@ namespace WoFlagship.KancolleCore.Navigation
     /// </summary>
     public class BattleSkipTask : BattleTask
     {
-
+        public override string TypeName
+        {
+            get
+            {
+                return "战斗跳过";
+            }
+        }
     }
 
     //远征
@@ -198,7 +274,13 @@ namespace WoFlagship.KancolleCore.Navigation
             MissionFleet = missionFleet;
         }
 
-
+        public override string TypeName
+        {
+            get
+            {
+                return "远征";
+            }
+        }
     }
 
     public class RemodelTask : KancolleTask
@@ -231,7 +313,13 @@ namespace WoFlagship.KancolleCore.Navigation
             SlotItemNos = slotItemNos;
         }
 
-
+        public override string TypeName
+        {
+            get
+            {
+                return "改装";
+            }
+        }
     }
 
     public class RepairTask : KancolleTask
@@ -263,11 +351,26 @@ namespace WoFlagship.KancolleCore.Navigation
             Dock = dock;
             UseFastRepair = useFastRepair;
         }
+
+        public override string TypeName
+        {
+            get
+            {
+                return "入渠";
+            }
+        }
     }
 
     /// <summary>
     /// 用于手动刷新数据的任务
     /// </summary>
     public class RefreshDataTask : KancolleTask{
+        public override string TypeName
+        {
+            get
+            {
+                return "刷新";
+            }
+        }
     }
 }

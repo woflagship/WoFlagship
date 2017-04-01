@@ -22,9 +22,30 @@
             <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="5,0,0,0">
                 <TextBlock Name="Txt_MainLogger"/>
             </ScrollViewer>
-            <ScrollViewer Width="400" Height="480" VerticalScrollBarVisibility="Auto" Margin="5,0,0,0">
-                <TextBox Name="Txt_Battle" IsReadOnly="True"/>
-            </ScrollViewer>
+            <TabControl Name="Tc_MainInfo" Width="400" Height="480" Margin="5,0,0,0">
+                <TabItem Header="任务列表">
+                    <ListBox Name="Lb_Task" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label  Content="{Binding Type}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding Priority}"/>
+                                    <Label Grid.Column="1" Content="{Binding Detail}" Height="30" VerticalContentAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="战斗信息">
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto" >
+                        <TextBox Name="Txt_Battle" IsReadOnly="True"/>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+           
         </StackPanel>
         <StackPanel Orientation="Horizontal"  Grid.Row="1" Margin="5">
             <Button Name="Btn_ShowDevTool" Click="Btn_ShowDevTool_Click" Content="开发者工具"/>

@@ -35,7 +35,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
                 if (gameData != null)
                 {
                     //没有别的任务才可以自动维修
-                    if (panel.AutoRepair && KancolleTaskExecutor.Get().TaskRemaining == 0)
+                    if (panel.AutoRepair && KancolleTaskExecutor.Instance.TaskRemaining == 0)
                     {
                         var repairNos = findAShipToRepair();
                         if (repairNos != null)
@@ -47,12 +47,12 @@ namespace WoFlagship.KancolleAI.SimpleAI
                                 //当前为空闲
                                 if (dock.State == 0)
                                 {
-                                    KancolleTaskExecutor.Get().EnqueueTask(new RepairTask(repairNos[repairIndex++], i, false));
+                                    KancolleTaskExecutor.Instance.EnqueueTask(new RepairTask(repairNos[repairIndex++], i, false));
                                 }
                                 else if (dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
                                 {
                                     //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
-                                    KancolleTaskExecutor.Get().EnqueueTask(KancolleTask.RefreshDataTask);
+                                    KancolleTaskExecutor.Instance.EnqueueTask(KancolleTask.RefreshDataTask);
                                     break;
                                 }
                             }

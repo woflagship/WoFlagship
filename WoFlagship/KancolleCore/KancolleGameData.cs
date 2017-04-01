@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleQuestData;
@@ -15,7 +16,14 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleGameData
     {
-      
+
+        private static KancolleGameData s_instance = null;
+
+        /// <summary>
+        /// 游戏数据单例实例
+        /// </summary>
+        /// <returns></returns>
+        public static KancolleGameData Instance { get { return s_instance; } }
 
         /// <summary>
         /// 舰娘类型字典
@@ -133,6 +141,12 @@ namespace WoFlagship.KancolleCore
         /// 当前场景
         /// </summary>
         public KancolleScene CurrentScene { get; internal set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
+
+        public KancolleGameData()
+        {
+            Debug.Assert(s_instance == null);
+            s_instance = this;
+        }
 
         #region public methods
         /// <summary>

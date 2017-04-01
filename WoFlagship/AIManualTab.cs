@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WoFlagship.KancolleCore;
 using WoFlagship.KancolleCore.Navigation;
 
 
@@ -24,7 +25,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Organize_Ship6.Text),
             };
             OrganizeTask task = new OrganizeTask(deck-1, ships);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
 
         }
 
@@ -47,7 +48,7 @@ namespace WoFlagship
             int no;
             if(int.TryParse(tb.Text, out no))
             {
-                string name = gameContext.GameData.GetShipName(no);
+                string name = KancolleGameData.Instance.GetShipName(no);
                 if (name == null)
                     return "未知";
                 return name;
@@ -59,7 +60,7 @@ namespace WoFlagship
         {
             int supplyDeck = int.Parse(Txt_AIManual_Supply_Deck.Text);
             SupplyTask task = new SupplyTask(supplyDeck-1);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         private void Btn_AIManual_Map_Click(object sender, RoutedEventArgs e)
@@ -68,49 +69,49 @@ namespace WoFlagship
             int map = int.Parse(Txt_AIManual_Map_Map.Text);
             int deck = int.Parse(Txt_AIManual_Map_Deck.Text);
             MapTask task = new MapTask(deck-1, area * 10 + map);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //阵型选择
         private void Btn_AIManual_Battle_Formation_Click(object sender, RoutedEventArgs e)
         {
             BattleFormationTask task = new BattleFormationTask(Cbx_AIManual_Battle_Formation.SelectedIndex+1);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //进击
         private void Btn_AIManual_Battle_Next_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Next);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //回港
         private void Btn_AIManual_Battle_Return_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Return);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //撤退
         private void Btn_AIManual_Battle_Back_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Back);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //夜战
         private void Btn_AIManual_Battle_Night_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Night);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //跳过过场
         private void Btn_AIManual_Battle_Skip_Click(object sender, RoutedEventArgs e)
         {
             BattleSkipTask task = new BattleSkipTask();
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         //改装
@@ -126,7 +127,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Remodel_Item4.Text),
             };
             RemodelTask task = new RemodelTask(deck - 1, position - 1, itemNos);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
         private void Txt_AIManual_Remodel_Item_TextChanged(object sender, TextChangedEventArgs e)
@@ -146,7 +147,7 @@ namespace WoFlagship
             int shipNo = int.Parse(Txt_AIManual_Repair_ShipNo.Text);
             int dock = int.Parse(Txt_AIManual_Repair_Dock.Text);
             RepairTask task = new RepairTask(shipNo, dock-1, (bool)Chk_AIManual_Repair_UseFastRepair.IsChecked);
-            KancolleTaskExecutor.Get().EnqueueTask(task);
+            KancolleTaskExecutor.Instance.EnqueueTask(task);
         }
 
 
@@ -164,7 +165,7 @@ namespace WoFlagship
             int no;
             if (int.TryParse(tb.Text, out no))
             {
-                string name = gameContext.GameData.GetSlotItemName(no);
+                string name = KancolleGameData.Instance.GetSlotItemName(no);
                 if (name == null)
                     return "未知";
                 return name;

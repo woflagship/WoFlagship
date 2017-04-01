@@ -7,7 +7,7 @@ using WoFlagship.KancolleRequirement;
 
 namespace WoFlagship.ViewModels
 {
-    public class MapEditorViewModel : ViewModelBase
+    class MapEditorViewModel : ViewModelBase
     {
         private ObservableCollection<MapInfoItemViewModel> _mapInfos = new ObservableCollection<MapInfoItemViewModel>();
         public ObservableCollection<MapInfoItemViewModel> MapInfos { get { return _mapInfos; } set { _mapInfos = value; OnPropertyChanged(); } }
@@ -28,7 +28,7 @@ namespace WoFlagship.ViewModels
 
     }
 
-    public class MapInfoItemViewModel : ViewModelBase
+    class MapInfoItemViewModel : ViewModelBase
     {
         private MapInfoItem infoItem;
 
@@ -54,7 +54,7 @@ namespace WoFlagship.ViewModels
         }
     }
 
-    public class MapRouteViewModel : ViewModelBase
+    class MapRouteViewModel : ViewModelBase
     {
         private MapRoute mapRoute;
 
@@ -94,7 +94,7 @@ namespace WoFlagship.ViewModels
         }
     }
 
-    public class ShipConditionViewModel : ViewModelBase
+    class ShipConditionViewModel : ViewModelBase
     {
         public ShipCondition ShipCondition { get; private set; }
 
@@ -140,7 +140,7 @@ namespace WoFlagship.ViewModels
         
     }
 
-    public class ShipConstraintViewModel : ViewModelBase
+    class ShipConstraintViewModel : ViewModelBase
     {
         public ShipConstraint ShipConstraint { get; private set; }
 

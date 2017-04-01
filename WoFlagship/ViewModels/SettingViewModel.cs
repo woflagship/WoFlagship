@@ -6,14 +6,14 @@
         public WebSettingViewModel WebSetting { get { return _webSetting; } set { _webSetting = value; OnPropertyChanged(); } }
     }
 
-    public enum ProxyTypes
+    enum ProxyTypes
     {
         NoProxy,
         Http
     }
 
 
-    public class WebSettingViewModel : ViewModelBase
+    class WebSettingViewModel : ViewModelBase
     {
         private string _proxyHost;
         public string ProxyHost { get { return _proxyHost; } set { _proxyHost = value; OnPropertyChanged(); } }
