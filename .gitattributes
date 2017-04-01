@@ -62,4 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-WoFlagshipDocument/* linguist-documentation
+WoFlagshipDocument/Help/html/* linguist-documentation
