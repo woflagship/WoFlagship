@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:WoFlagship"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform X="300"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:0.5"
+                                    Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

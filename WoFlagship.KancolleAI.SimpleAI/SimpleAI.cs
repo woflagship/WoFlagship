@@ -24,7 +24,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
 
         public SimpleAI()
         {
-            timer.Interval = TimeSpan.FromSeconds(10);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
         }
 
@@ -35,7 +35,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
                 if (gameData != null)
                 {
                     //没有别的任务才可以自动维修
-                    if (panel.AutoRepair && KancolleTaskExecutor.Instance.TaskRemaining == 0)
+                    if (panel.AutoRepair && KancolleTaskExecutor.Instance.TaskRemaining == 0 && KancolleTaskExecutor.Instance.RunningTask == null)
                     {
                         var repairNos = findAShipToRepair();
                         if (repairNos != null)
@@ -43,6 +43,8 @@ namespace WoFlagship.KancolleAI.SimpleAI
                             int repairIndex = 0;
                             for (int i = 0; i < gameData.DockArray.Count && repairIndex<repairNos.Length; i++)
                             {
+                                if (repairIndex >= repairNos.Length)
+                                    break;
                                 var dock = gameData.DockArray[i];
                                 //当前为空闲
                                 if (dock.State == 0)

@@ -206,17 +206,39 @@ namespace TestConsole
     }
 
     class TestEvent {
-        public event Action TestA;
+        public event Action<int> TestA;
 
-        public void Invoke()
+        public void Invoke(int arg)
         {
-            //TestA?.Invoke();
-            foreach(var i in TestA.GetInvocationList())
-            {
-              
-            }
+            TestA?.Invoke(arg);
+            
         }
     }
+
+    class TestSubscriber : IDisposable{
+        private TestEvent e;
+        public TestSubscriber(TestEvent e)
+        {
+            e.TestA += E_TestA;
+            this.e = e;
+        }
+
+        ~TestSubscriber()
+        {
+
+        }
+
+        public void Dispose()
+        {
+            e.TestA -= E_TestA;
+        }
+
+        private void E_TestA(int arg)
+        {
+            Console.WriteLine("E_TestA " + arg);
+        }
+    }
+
     
 
     class Program
@@ -225,7 +247,13 @@ namespace TestConsole
 
         static void Main(string[] args)
         {
-            Console.WriteLine("This is " + null);
+            TestEvent e = new TestEvent();
+            TestSubscriber ts = new TestSubscriber(e);
+            e.Invoke(0);
+            ts.Dispose();
+            ts = null;
+            e.Invoke(1);
+
             Console.Read();
         }
 

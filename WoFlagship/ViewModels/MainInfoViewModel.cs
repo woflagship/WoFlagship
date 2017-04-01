@@ -10,6 +10,12 @@ namespace WoFlagship.ViewModels
 {
     class MainInfoViewModel : ViewModelBase
     {
+        private TaskViewModel _currentTask;
+        public TaskViewModel CurrentTask {
+            get { return _currentTask; }
+            set { _currentTask = value; OnPropertyChanged(); }
+        }
+
         private ObservableCollection<TaskViewModel> _taskList = new ObservableCollection<TaskViewModel>();
         public ObservableCollection<TaskViewModel> TaskList { get { return _taskList; } set { _taskList = value; OnPropertyChanged(); } }
     }

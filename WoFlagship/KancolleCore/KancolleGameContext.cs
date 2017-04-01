@@ -374,6 +374,10 @@ namespace WoFlagship.KancolleCore
             KancolleDockData[] docks = new KancolleDockData[api_docks.Length];
             for(int i=0; i<api_docks.Length; i++)
             {
+                if(i<gameData.DockArray.Count && gameData.DockArray[i]?.State > 0 && api_docks[i].api_state == 0)
+                {
+                    KancolleGameData.Instance.OwnedShipDictionary[gameData.DockArray[i].ShipId].RepairFinished();
+                }
                 docks[i] = new KancolleDockData(api_docks[i]);
             }
             gameData.DockArray = new ReadOnlyCollection<KancolleDockData>(docks);

@@ -24,20 +24,35 @@
             </ScrollViewer>
             <TabControl Name="Tc_MainInfo" Width="400" Height="480" Margin="5,0,0,0">
                 <TabItem Header="任务列表">
-                    <ListBox Name="Lb_Task" HorizontalContentAlignment="Stretch">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label  Content="{Binding Type}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding Priority}"/>
-                                    <Label Grid.Column="1" Content="{Binding Detail}" Height="30" VerticalContentAlignment="Center" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Name="Grid_CurrentTask" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Name="Txt_Type" Content="{Binding Type}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding Priority}"/>
+                            <Label Name="Txt_Detail" Grid.Column="1" Content="{Binding Detail}" Height="30" VerticalContentAlignment="Center" />
+                        </Grid>
+                        <ListBox Name="Lb_Task" Grid.Row="1" HorizontalContentAlignment="Stretch">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label  Content="{Binding Type}"  Height="30" VerticalContentAlignment="Center" ToolTip="{Binding Priority}"/>
+                                        <Label Grid.Column="1" Content="{Binding Detail}" Height="30" VerticalContentAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                  
                 </TabItem>
                 <TabItem Header="战斗信息">
                     <ScrollViewer  VerticalScrollBarVisibility="Auto" >

@@ -115,8 +115,9 @@ namespace WoFlagship
             Tc_Deck.SetBinding(TabControl.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Decks") });
             Lb_Dock.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = generalViewModel, Path = new PropertyPath("Docks") });
 
+            Grid_CurrentTask.SetBinding(Grid.DataContextProperty, new Binding() { Source = mainInfoViewModel, Path = new PropertyPath("CurrentTask") });
             Lb_Task.SetBinding(ListBox.ItemsSourceProperty, new Binding() { Source = mainInfoViewModel, Path = new PropertyPath("TaskList") });
-
+      
             LogFactory.SystemLogger.Info("开始插件初始化");
             foreach (var plugin in pluginManager.Plugins)
             {
@@ -373,7 +374,7 @@ namespace WoFlagship
 
         private void TaskExecutor_OnTaskStart_Internal(KancolleTaskExecutor obj)
         {
-            
+            mainInfoViewModel.CurrentTask = new TaskViewModel() { Task = obj.RunningTask};
         }
 
         private void TaskExecutor_OnTasksChanged_Internal(KancolleTaskExecutor obj, NotifyCollectionChangedEventArgs args)
@@ -396,6 +397,8 @@ namespace WoFlagship
                     default:
                         break;
                 }
+
+                mainInfoViewModel.CurrentTask = new TaskViewModel() { Task = obj.RunningTask };
             }));     
         }
 
@@ -424,6 +427,8 @@ namespace WoFlagship
                     ScrollViewer sv = Txt_MainLogger.Parent as ScrollViewer;
                     sv.ScrollToEnd();
                 }
+
+                mainInfoViewModel.CurrentTask = new TaskViewModel() { Task = arg1.RunningTask };
             }));
         }
 

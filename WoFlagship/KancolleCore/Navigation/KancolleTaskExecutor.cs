@@ -34,7 +34,12 @@ namespace WoFlagship.KancolleCore.Navigation
         public double BattleSkipTimeout { get; private set; } = 10000;
 
         /// <summary>
-        /// 当前剩余任务数
+        /// 正在运行的任务，没有运行的任务则为null
+        /// </summary>
+        public KancolleTask RunningTask { get; private set; }
+
+        /// <summary>
+        /// 当前剩余任务数，不包含RunningTask
         /// </summary>
         public int TaskRemaining
         {
@@ -161,6 +166,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     continue;
                 }
                 var currentTask = taskQueue.Dequeue();
+                RunningTask = currentTask;
                 OnTasksChanged_Internal?.InvokeAll(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, currentResponse));
                 OnTaskStart_Internal?.InvokeAll(this);
                 KancolleTaskResult result = null;
@@ -205,6 +211,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 {
                     result = new KancolleTaskResult(currentTask, KancolleTaskResultType.Fail, $"未能处理当前类型任务【{currentTask.GetType().Name}】", UnknownTaskType);
                 }
+                RunningTask = null;
 
                 OnTaskFinished_Internal?.Invoke(this, result);
                 OnTaskFinished?.Invoke(this, result);

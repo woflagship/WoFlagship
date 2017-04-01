@@ -458,6 +458,7 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public int MaxHP { get; private set; }
 
+       
         /// <summary>
         /// 当前生命值
         /// </summary>
@@ -500,6 +501,16 @@ namespace WoFlagship.KancolleCore
 
             OnSlot = ship.api_onslot.ToArray();
         }
+
+
+        /// <summary>
+        /// 修理完成，血量恢复
+        /// </summary>
+        internal void RepairFinished()
+        {
+            NowHP = MaxHP;
+        }
+
     }
 
     /// <summary>
