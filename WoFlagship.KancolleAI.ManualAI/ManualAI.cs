@@ -68,9 +68,9 @@ namespace WoFlagship.KancolleAI.ManualAI
             
         }
 
-        private void Panel_OnTaskGenerated(KancolleTask obj)
+        private async void Panel_OnTaskGenerated(KancolleTask obj)
         {
-            KancolleTaskExecutor.Instance.EnqueueTask(obj);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(obj);
         }
 
         public void Stop()

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WoFlagship.KancolleCore;
 using WoFlagship.KancolleCore.Navigation;
@@ -12,7 +13,7 @@ namespace WoFlagship
     public partial class MainWindow : Window
     {
         //编成
-        private void Btn_AIManual_Organize_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Organize_Click(object sender, RoutedEventArgs e)
         {
             int deck = int.Parse(Txt_AIManual_Organize_Deck.Text);
             int[] ships = new int[]
@@ -25,7 +26,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Organize_Ship6.Text),
             };
             OrganizeTask task = new OrganizeTask(deck-1, ships);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
 
         }
 
@@ -56,66 +57,66 @@ namespace WoFlagship
             return "未知";
         }
 
-        private void Btn_AIManual_Supply_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Supply_Click(object sender, RoutedEventArgs e)
         {
             int supplyDeck = int.Parse(Txt_AIManual_Supply_Deck.Text);
             SupplyTask task = new SupplyTask(supplyDeck-1);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
-        private void Btn_AIManual_Map_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Map_Click(object sender, RoutedEventArgs e)
         {
             int area = int.Parse(Txt_AIManual_Map_Area.Text);
             int map = int.Parse(Txt_AIManual_Map_Map.Text);
             int deck = int.Parse(Txt_AIManual_Map_Deck.Text);
             MapTask task = new MapTask(deck-1, area * 10 + map);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //阵型选择
-        private void Btn_AIManual_Battle_Formation_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Formation_Click(object sender, RoutedEventArgs e)
         {
             BattleFormationTask task = new BattleFormationTask(Cbx_AIManual_Battle_Formation.SelectedIndex+1);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //进击
-        private void Btn_AIManual_Battle_Next_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Next_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Next);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //回港
-        private void Btn_AIManual_Battle_Return_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Return_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Return);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //撤退
-        private void Btn_AIManual_Battle_Back_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Back_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Back);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //夜战
-        private void Btn_AIManual_Battle_Night_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Night_Click(object sender, RoutedEventArgs e)
         {
             BattleChoiceTask task = new BattleChoiceTask(BattleChoiceTask.BattleChoices.Night);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //跳过过场
-        private void Btn_AIManual_Battle_Skip_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Battle_Skip_Click(object sender, RoutedEventArgs e)
         {
             BattleSkipTask task = new BattleSkipTask();
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         //改装
-        private void Btn_AIManual_Remodel_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Remodel_Click(object sender, RoutedEventArgs e)
         {
             int deck = int.Parse(Txt_AIManual_Remodel_Deck.Text);
             int position = int.Parse(Txt_AIManual_Remodel_Position.Text);
@@ -127,7 +128,7 @@ namespace WoFlagship
                 int.Parse(Txt_AIManual_Remodel_Item4.Text),
             };
             RemodelTask task = new RemodelTask(deck - 1, position - 1, itemNos);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
         private void Txt_AIManual_Remodel_Item_TextChanged(object sender, TextChangedEventArgs e)
@@ -142,12 +143,12 @@ namespace WoFlagship
         }
 
         //入渠
-        private void Btn_AIManual_Repair_Click(object sender, RoutedEventArgs e)
+        private async void Btn_AIManual_Repair_Click(object sender, RoutedEventArgs e)
         {
             int shipNo = int.Parse(Txt_AIManual_Repair_ShipNo.Text);
             int dock = int.Parse(Txt_AIManual_Repair_Dock.Text);
             RepairTask task = new RepairTask(shipNo, dock-1, (bool)Chk_AIManual_Repair_UseFastRepair.IsChecked);
-            KancolleTaskExecutor.Instance.EnqueueTask(task);
+            await KancolleTaskExecutor.Instance.DoTaskAsync(task);
         }
 
 

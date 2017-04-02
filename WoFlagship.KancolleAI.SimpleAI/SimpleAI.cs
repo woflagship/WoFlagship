@@ -28,15 +28,14 @@ namespace WoFlagship.KancolleAI.SimpleAI
             timer.Tick += Timer_Tick;
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            await Application.Current.Dispatcher.InvokeAsync(new Action(async () =>
             {
                 if (gameData != null)
                 {
                     //没有别的任务才可以自动维修
-                    if (panel.AutoRepair && KancolleTaskExecutor.Instance.TaskRemaining == 0 && KancolleTaskExecutor.Instance.RunningTask == null)
-                    {
+
                         var repairNos = findAShipToRepair();
                         if (repairNos != null)
                         {
@@ -49,17 +48,17 @@ namespace WoFlagship.KancolleAI.SimpleAI
                                 //当前为空闲
                                 if (dock.State == 0)
                                 {
-                                    KancolleTaskExecutor.Instance.EnqueueTask(new RepairTask(repairNos[repairIndex++], i, false));
+                                    await KancolleTaskExecutor.Instance.DoTaskAsync(new RepairTask(repairNos[repairIndex++], i, false));
                                 }
                                 else if (dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
                                 {
                                     //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
-                                    KancolleTaskExecutor.Instance.EnqueueTask(KancolleTask.RefreshDataTask);
+                                    await KancolleTaskExecutor.Instance.DoTaskAsync(KancolleTask.RefreshDataTask);
                                     break;
                                 }
                             }
                         }
-                    }
+                    
                 }
             }));
 
@@ -134,12 +133,19 @@ namespace WoFlagship.KancolleAI.SimpleAI
         public void Start()
         {
             timer.Start();
+            KancolleTaskExecutor.Instance.OnTaskFinished += TaskExecutor_OnTaskFinished;
+        }
+
+        private void TaskExecutor_OnTaskFinished(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
+        {
+            //throw new NotImplementedException();
         }
 
         public void Stop()
         {
             timer.Stop();
             ShipsWaitForRepaired.Clear();
+            KancolleTaskExecutor.Instance.OnTaskFinished -= TaskExecutor_OnTaskFinished;
         }
 
         public void OnSceneUpdatedHandler(KancolleScene scene)

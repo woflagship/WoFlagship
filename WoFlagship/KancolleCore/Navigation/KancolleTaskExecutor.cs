@@ -10,9 +10,13 @@ using static WoFlagship.KancolleCore.Navigation.KancolleTaskResultErrors;
 using System.Diagnostics;
 using WoFlagship.Utils;
 using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
+    /// <summary>
+    /// 任务执行器，执行各类KancolleTask
+    /// </summary>
     public class KancolleTaskExecutor : IKancolleAPIReceiver
     {
         internal event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished_Internal;
@@ -40,8 +44,9 @@ namespace WoFlagship.KancolleCore.Navigation
 
         /// <summary>
         /// 当前剩余任务数，不包含RunningTask
+        /// 不再对外可获取
         /// </summary>
-        public int TaskRemaining
+        private int TaskRemaining
         {
             get { return taskQueue.Count; }
         }
@@ -62,6 +67,8 @@ namespace WoFlagship.KancolleCore.Navigation
         private Func<KancolleScene> GetCurrentScene;
 
         private Random random = new Random();
+
+        private KancolleTaskResult lastResult = null;
 
         private static KancolleTaskExecutor s_instance = null;
 
@@ -91,10 +98,11 @@ namespace WoFlagship.KancolleCore.Navigation
         }
 
         /// <summary>
-        /// 在优先级队列中插入一个新的任务
+        /// 在优先级队列中插入一个新的任务，该任务会在合适的时机被执行
+        /// 该函数将不再对外可用
         /// </summary>
         /// <param name="task"></param>
-        public void EnqueueTask(KancolleTask task)
+        private void EnqueueTask(KancolleTask task)
         {
             taskQueue.Enqueue(task, (int)task.Priority);
             OnTasksChanged_Internal?.InvokeAll(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, task));
@@ -115,17 +123,37 @@ namespace WoFlagship.KancolleCore.Navigation
         }
 
         /// <summary>
-        /// 执行新的task
-        /// 与EnqueueTask不同，DoTask将清空之前所有的任务，然后加入该任务
+        /// 执行task,改函数进程阻塞，等到改任务被执行并返回结果。
         /// </summary>
         /// <param name="task"></param>
-        public void DoTask(KancolleTask task)
+        /// <returns>执行结果</returns>
+        public KancolleTaskResult DoTask(KancolleTask task)
         {
-            ClearTaskList();
+            while(TaskRemaining > 0 || RunningTask != null)
+            {
+                Thread.Sleep(500);
+            }
+            lastResult = null;
             EnqueueTask(task);
+            while (lastResult == null)
+                Thread.Sleep(500);
+            return lastResult;
         }
 
-       
+        /// <summary>
+        /// 执行task,并返回结果。
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns>执行结果</returns>
+        public async Task<KancolleTaskResult> DoTaskAsync(KancolleTask task)
+        {
+            return await Task.Run<KancolleTaskResult>(()=>
+                {
+                    return DoTask(task);
+                });
+        }
+
+
 
         public void Start()
         {
@@ -212,7 +240,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     result = new KancolleTaskResult(currentTask, KancolleTaskResultType.Fail, $"未能处理当前类型任务【{currentTask.GetType().Name}】", UnknownTaskType);
                 }
                 RunningTask = null;
-
+                lastResult = result;
                 OnTaskFinished_Internal?.Invoke(this, result);
                 OnTaskFinished?.Invoke(this, result);
                 Thread.Sleep(1000);

@@ -421,7 +421,6 @@ namespace WoFlagship
                 else
                     line.Foreground = Brushes.Red;
                 Txt_MainLogger.Inlines.Add(line);
-                Txt_MainLogger.Inlines.Add("剩余任务数：" + arg1.TaskRemaining + "\n");
                 if(Txt_MainLogger.Parent is ScrollViewer)
                 {
                     ScrollViewer sv = Txt_MainLogger.Parent as ScrollViewer;
