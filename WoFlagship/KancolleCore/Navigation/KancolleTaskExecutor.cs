@@ -129,9 +129,9 @@ namespace WoFlagship.KancolleCore.Navigation
         /// <returns>执行结果</returns>
         public KancolleTaskResult DoTask(KancolleTask task)
         {
-            while(TaskRemaining > 0 || RunningTask != null)
+            if(TaskRemaining > 0 || RunningTask != null)
             {
-                Thread.Sleep(500);
+                return new KancolleTaskResult(task, KancolleTaskResultType.Fail, "当前正在执行其他任务！", ExistRunningTask);
             }
             lastResult = null;
             EnqueueTask(task);

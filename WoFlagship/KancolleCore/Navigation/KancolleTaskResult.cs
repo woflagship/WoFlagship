@@ -53,6 +53,7 @@ namespace WoFlagship.KancolleCore.Navigation
     {
         public const int Success = 0;
         public const int UnknownTaskType = 1;
+        public const int ExistRunningTask = 2;
 
         
 
