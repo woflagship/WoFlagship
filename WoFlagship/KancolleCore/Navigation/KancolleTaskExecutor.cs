@@ -20,8 +20,6 @@ namespace WoFlagship.KancolleCore.Navigation
     public class KancolleTaskExecutor : IKancolleAPIReceiver
     {
         internal event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished_Internal;
-        public event Action<KancolleTaskExecutor, KancolleTaskResult> OnTaskFinished;
-
         internal event Action<KancolleTaskExecutor, NotifyCollectionChangedEventArgs> OnTasksChanged_Internal;
         internal event Action<KancolleTaskExecutor> OnTaskStart_Internal;
 
@@ -123,7 +121,7 @@ namespace WoFlagship.KancolleCore.Navigation
         }
 
         /// <summary>
-        /// 执行task,改函数进程阻塞，等到改任务被执行并返回结果。
+        /// 执行task,改函数进程阻塞，等到该任务被执行并返回结果。
         /// </summary>
         /// <param name="task"></param>
         /// <returns>执行结果</returns>
@@ -131,7 +129,8 @@ namespace WoFlagship.KancolleCore.Navigation
         {
             if(TaskRemaining > 0 || RunningTask != null)
             {
-                return new KancolleTaskResult(task, KancolleTaskResultType.Fail, "当前正在执行其他任务！", ExistRunningTask);
+                var result = new KancolleTaskResult(task, KancolleTaskResultType.Fail, "当前正在执行其他任务！", ExistRunningTask);
+                OnTaskFinished_Internal(this, result);
             }
             lastResult = null;
             EnqueueTask(task);
@@ -242,7 +241,6 @@ namespace WoFlagship.KancolleCore.Navigation
                 RunningTask = null;
                 lastResult = result;
                 OnTaskFinished_Internal?.Invoke(this, result);
-                OnTaskFinished?.Invoke(this, result);
                 Thread.Sleep(1000);
 
             }

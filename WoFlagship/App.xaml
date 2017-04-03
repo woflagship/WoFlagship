@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:WoFlagship"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="{x:Type ListBoxItem}">
+        <!--<Style TargetType="{x:Type ListBoxItem}">
             <Setter Property="RenderTransform">
                 <Setter.Value>
                     <TranslateTransform X="300"/>
@@ -23,6 +23,6 @@
                     </EventTrigger.Actions>
                 </EventTrigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
     </Application.Resources>
 </Application>

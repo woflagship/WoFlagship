@@ -133,19 +133,12 @@ namespace WoFlagship.KancolleAI.SimpleAI
         public void Start()
         {
             timer.Start();
-            KancolleTaskExecutor.Instance.OnTaskFinished += TaskExecutor_OnTaskFinished;
-        }
-
-        private void TaskExecutor_OnTaskFinished(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
-        {
-            //throw new NotImplementedException();
         }
 
         public void Stop()
         {
             timer.Stop();
             ShipsWaitForRepaired.Clear();
-            KancolleTaskExecutor.Instance.OnTaskFinished -= TaskExecutor_OnTaskFinished;
         }
 
         public void OnSceneUpdatedHandler(KancolleScene scene)
