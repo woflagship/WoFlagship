@@ -64,7 +64,7 @@ namespace WoFlagship.Utils.BehaviorTree
             return children.Remove(item);
         }
 
-        public abstract BehaviorTreeStatus Behave(DateTime duration);
+        public abstract Task<BehaviorTreeStatus> BehaveAsync();
 
         IEnumerator IEnumerable.GetEnumerator()
         {

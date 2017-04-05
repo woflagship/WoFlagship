@@ -23,7 +23,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
     {
         public bool AutoRepair
         {
-            get { return (bool)Chk_AutoRepair.IsChecked; }
+            get { return Dispatcher.Invoke<bool>(()=>(bool)Chk_AutoRepair.IsChecked); }
         }
 
         public void UpdateGameData(KancolleGameData gameData)

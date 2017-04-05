@@ -29,12 +29,11 @@ namespace WoFlagship.Utils.BehaviorTree
         /// </summary>
         /// <param name="duration"></param>
         /// <returns>未到达次数，返回Running,否则返回Success</returns>
-        public override BehaviorTreeStatus Behave(DateTime duration)
+        public override async Task<BehaviorTreeStatus> BehaveAsync()
         {
-            Behave(duration);
+            await BehaveAsync();
             if (CurrentCount < TargetCount-1)
-            {
-                
+            { 
                 return BehaviorTreeStatus.Running;
             }
             else

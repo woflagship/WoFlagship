@@ -130,7 +130,8 @@ namespace WoFlagship.KancolleCore.Navigation
             if(TaskRemaining > 0 || RunningTask != null)
             {
                 var result = new KancolleTaskResult(task, KancolleTaskResultType.Fail, "当前正在执行其他任务！", ExistRunningTask);
-                OnTaskFinished_Internal(this, result);
+                //OnTaskFinished_Internal(this, result);
+                return result;
             }
             lastResult = null;
             EnqueueTask(task);

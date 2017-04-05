@@ -8,6 +8,7 @@ namespace WoFlagship.Utils.BehaviorTree
 {
     public class BehaviorTreeBuilder
     {
+
         private IBehaviorNode curNode = null;
 
         private Stack<CompositeNode> compositeNodeStack = new Stack<CompositeNode>();
@@ -18,7 +19,7 @@ namespace WoFlagship.Utils.BehaviorTree
         /// <param name="name">节点名</param>
         /// <param name="actionFunc">行为</param>
         /// <returns>创建的行为树</returns>
-        public BehaviorTreeBuilder Do(string name, Func<DateTime, BehaviorTreeStatus> actionFunc)
+        public BehaviorTreeBuilder Do(string name, Func<Task<BehaviorTreeStatus>> actionFunc)
         {
             if(compositeNodeStack.Count <=0)
             {
@@ -76,7 +77,7 @@ namespace WoFlagship.Utils.BehaviorTree
             return this;
         }
 
-        public BehaviorTreeBuilder Condition(string name, Func<DateTime, bool> condition)
+        public BehaviorTreeBuilder Condition(string name, Func<Task<bool>> condition)
         {
             if (compositeNodeStack.Count <= 0)
             {
@@ -108,6 +109,13 @@ namespace WoFlagship.Utils.BehaviorTree
         {
             curNode = compositeNodeStack.Pop();
             return this;
+        }
+
+        public async Task<BehaviorTreeStatus> BehaveAsync()
+        {
+            if (curNode == null)
+                throw new ApplicationException("行为树根节点为空，请检查行为树是否正确定义！");
+            return await curNode.BehaveAsync();
         }
     }
 }

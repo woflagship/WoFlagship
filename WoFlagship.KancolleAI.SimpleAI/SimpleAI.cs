@@ -22,18 +22,79 @@ namespace WoFlagship.KancolleAI.SimpleAI
         private List<int> ShipsWaitForRepaired = new List<int>();
         private KancolleScene currentScene = null;
 
+        private BehaviorTreeBuilder behaviorTree = null;
+
+        private void InitBehaviorTree()
+        {
+            behaviorTree = new BehaviorTreeBuilder()
+                .Selector("SceneSelector")
+                    .Condition("UnknowScene", async () => await Task.Run(() => currentScene?.SceneType == KancolleSceneTypes.Unknown))
+                    .Sequence("BattleScene")
+                        .Condition("IsBattleScene", async () => await Task.Run(() => currentScene != null && currentScene.IsBattleScene()))
+                    .EndComposite()
+                    .Selector("PortScene")
+                        .Sequence("Repair")
+                            .Condition("AutoRepair", async () => await Task.Run(() => panel.AutoRepair))
+                            .Do("Repair", async () => await RepairAsync())
+                        .EndComposite()
+                    .EndComposite();
+        }
+
         public SimpleAI()
         {
+            InitBehaviorTree();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
         }
 
+        private async Task<BehaviorTreeStatus> RepairAsync()
+        {
+            var res = await Application.Current.Dispatcher.Invoke((async ()=>
+            {
+                BehaviorTreeStatus result = BehaviorTreeStatus.Failure;
+                if (gameData != null)
+                {
+                    var repairNos = findAShipToRepair();
+                    if (repairNos != null)
+                    {
+                        int repairIndex = 0;
+                        for (int i = 0; i < gameData.DockArray.Count && repairIndex < repairNos.Length; i++)
+                        {
+                            if (repairIndex >= repairNos.Length)
+                                break;
+                            var dock = gameData.DockArray[i];
+                            //当前为空闲
+                            if (dock.State == 0)
+                            {
+                                var taskResult = await KancolleTaskExecutor.Instance.DoTaskAsync(new RepairTask(repairNos[repairIndex++], i, false));
+                                if (taskResult.IsSuccess)
+                                    result = BehaviorTreeStatus.Success;
+                            }
+                            else if (dock.State > 0 && dock.CompleteTime < DateTime.Now - TimeSpan.FromSeconds(10))
+                            {
+                                //本应该为空闲（给了10秒的容错），但是还没有刷新数据导致state仍然不为0，则刷新
+                                await KancolleTaskExecutor.Instance.DoTaskAsync(KancolleTask.RefreshDataTask);
+                                result = BehaviorTreeStatus.Running;
+                                break;
+                            }
+                        }
+                    }
+                }
+                return result;
+            }));
+            return res;
+        }
+            
+
         private async void Timer_Tick(object sender, EventArgs e)
         {
+            await behaviorTree.BehaveAsync();
+            /*
             await Application.Current.Dispatcher.InvokeAsync(new Action(async () =>
             {
                 if (gameData != null)
                 {
+                    
                     //没有别的任务才可以自动维修
 
                         var repairNos = findAShipToRepair();
@@ -60,7 +121,7 @@ namespace WoFlagship.KancolleAI.SimpleAI
                         }
                     
                 }
-            }));
+            }));*/
 
             
         }

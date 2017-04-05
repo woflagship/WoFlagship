@@ -9,17 +9,17 @@ namespace WoFlagship.Utils.BehaviorTree
     {
         public string Name { get; protected set; }
 
-        private Func<DateTime, bool> condition;
+        private Func<Task<bool>> condition;
 
-        public ConditionNode(string name, Func<DateTime, bool> condition)
+        public ConditionNode(string name, Func<Task<bool>> condition)
         {
             Name = name;
             this.condition = condition;
         }
 
-        public BehaviorTreeStatus Behave(DateTime duration)
+        public async Task<BehaviorTreeStatus> BehaveAsync()
         {
-            if (condition(duration))
+            if (await condition())
                 return BehaviorTreeStatus.Success;
             else
                 return BehaviorTreeStatus.Failure;

@@ -10,6 +10,6 @@ namespace WoFlagship.Utils.BehaviorTree
     {
         string Name { get; }
 
-        BehaviorTreeStatus Behave(DateTime duration);
+        Task<BehaviorTreeStatus> BehaveAsync();
     }
 }

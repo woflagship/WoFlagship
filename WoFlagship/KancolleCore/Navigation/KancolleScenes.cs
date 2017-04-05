@@ -66,6 +66,11 @@
         {
             return SceneType.ToString()+" " + SceneState.ToString();
         }
+
+        public bool IsBattleScene()
+        {
+            return ((int)SceneType & 0xf0) == (int)KancolleSceneTypes.Battle;
+        }
     }
 
     /// <summary>
@@ -103,13 +108,14 @@
         Mission_Decide = 0x91,//远征决定
         Mission_Start= 0x92,//远征开始
         Practice = 0xA0,//演习
+
         Quest = 0xB0,//任务
 
-
-        Battle_NextChoice = 0xC0,//进击的画面（进击/回港）
-        Battle_NightChoice = 0xC1,//撤退/夜战突入
-        Battle_Compass = 0xC2,//罗盘娘
-        Battle_Formation = 0xC3,//阵型选择
+        Battle = 0xC0,
+        Battle_NextChoice = 0xC1,//进击的画面（进击/回港）
+        Battle_NightChoice = 0xC2,//撤退/夜战突入
+        Battle_Compass = 0xC3,//罗盘娘
+        Battle_Formation = 0xC4,//阵型选择
     }
 
     public enum KancolleSceneStates

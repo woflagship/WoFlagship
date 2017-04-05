@@ -19,11 +19,11 @@ namespace WoFlagship.Utils.BehaviorTree
         /// </summary>
         /// <param name="duration"></param>
         /// <returns></returns>
-        public override BehaviorTreeStatus Behave(DateTime duration)
+        public override async Task<BehaviorTreeStatus> BehaveAsync()
         {
             foreach(var child in children)
             {
-                var childStaus = child.Behave(duration);
+                var childStaus = await child.BehaveAsync();
                 if (childStaus != BehaviorTreeStatus.Success)
                     return childStaus;
             }

@@ -15,9 +15,9 @@ namespace WoFlagship.Utils.BehaviorTree
     {
         public Invertor(string name, IBehaviorNode child) : base(name, child) { }
 
-        public override BehaviorTreeStatus Behave(DateTime duration)
+        public override async Task<BehaviorTreeStatus> BehaveAsync()
         {
-            var childStatus = Child.Behave(duration);
+            var childStatus = await Child.BehaveAsync();
             if (childStatus == BehaviorTreeStatus.Failure)
                 return BehaviorTreeStatus.Success;
             else if (childStatus == BehaviorTreeStatus.Success)
