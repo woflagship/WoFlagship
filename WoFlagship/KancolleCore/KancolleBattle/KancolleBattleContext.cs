@@ -61,6 +61,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
                         SupportFleet = isBoss ? BossSF : NormalSF;
                     }
                     CurrentBattle = new Battle(MainFleet, EscortFleet, FleetType, SupportFleet);
+                    Battle.CurrentBattle = CurrentBattle;
                     break;
 
                 //演习
@@ -103,6 +104,7 @@ namespace WoFlagship.KancolleCore.KancolleBattle
             MainFleet = null;
             EscortFleet = null;
             CurrentBattle = null;
+            Battle.CurrentBattle = null;
             SupportFleet = null;
             FleetType = fleetType;
         }

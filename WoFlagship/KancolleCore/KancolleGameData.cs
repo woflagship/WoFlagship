@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using WoFlagship.KancolleCore.KancolleBattle;
 using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Utils;
@@ -137,15 +138,18 @@ namespace WoFlagship.KancolleCore
         /// </summary>
         public ReadOnlyCollection<KancolleDockData> DockArray { get; internal set; } = new ReadOnlyCollection<KancolleDockData>(new KancolleDockData[0]);
 
+        private Func<KancolleScene> GetCurrentScene;
         /// <summary>
         /// 当前场景
         /// </summary>
-        public KancolleScene CurrentScene { get; internal set; } = new KancolleScene(KancolleSceneTypes.Unknown, KancolleSceneStates.Unknown);
+        public KancolleScene CurrentScene { get { return GetCurrentScene(); } }
 
-        public KancolleGameData()
+        public KancolleGameData(Func<KancolleScene> GetCurrentScene)
         {
             Debug.Assert(s_instance == null);
+            Debug.Assert(GetCurrentScene != null);
             s_instance = this;
+            this.GetCurrentScene = GetCurrentScene;
         }
 
         #region public methods
@@ -325,6 +329,44 @@ namespace WoFlagship.KancolleCore
         {
             return IsShipRepairing(ship.No);
         }
+
+
+        /// <summary>
+        /// 是否有大破船只
+        /// </summary>
+        /// <param name="deckNo">舰队号，从0开始,0-3</param>
+        /// <returns></returns>
+        public bool HasBigBrokenShip(int deckNo)
+        {
+            for (int j = 0; j < OwnedShipPlaceArray.ColumnCount; j++)
+            {
+                var shipNo = OwnedShipPlaceArray[deckNo, j];
+                if (shipNo > 0 && OwnedShipDictionary[shipNo].BigBroken)
+                {
+                    return true;
+                }
+            }
+
+            //如果存在战斗，则预测战斗
+            if (Battle.CurrentBattle != null)
+            {
+                foreach(var ship in Battle.CurrentBattle.MainFleet)
+                {
+                    if (ship !=null && KancolleShip.IsBigBroken(ship.ToHP, ship.MaxHP))
+                        return true;
+                }
+                if (Battle.CurrentBattle.EscortFleet != null)
+                {
+                    foreach (var ship in Battle.CurrentBattle.EscortFleet)
+                    {
+                        if (ship != null && KancolleShip.IsBigBroken(ship.ToHP, ship.MaxHP))
+                            return true;
+                    }
+                }
+            }
+
+            return false;
+        }
         #endregion
 
     }
@@ -337,37 +379,37 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 提督等级
         /// </summary>
-        public int Level { get; private set; }
+        public int Level { get; internal set; }
 
         /// <summary>
         /// 头衔id
         /// </summary>
-        public int RankId { get; private set; }
+        public int RankId { get; internal set; }
 
         /// <summary>
         /// 头衔
         /// </summary>
-        public string Rank { get; private set; }
+        public string Rank { get; internal set; }
 
         /// <summary>
         /// 昵称
         /// </summary>
-        public string NickName { get; private set; }
+        public string NickName { get; internal set; }
 
         /// <summary>
         /// 拥有的舰娘个数
         /// </summary>
-        public int OwnedShipCount { get; private set; }
+        public int OwnedShipCount { get; internal set; }
 
         /// <summary>
         /// 最大可保有舰娘个数
         /// </summary>
-        public int MaxShipCount { get; private set; }
+        public int MaxShipCount { get; internal set; }
 
         /// <summary>
         /// 最大可保有装备个数
         /// </summary>
-        public int MaxSlotItemCount { get; private set; }
+        public int MaxSlotItemCount { get; internal set; }
 
         internal KancolleBasicInfo() { }
 
@@ -391,52 +433,52 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// OwnedNo，按照船的获得顺序生成
         /// </summary>
-        public int No { get; private set; }
+        public int No { get; internal set; }
 
         /// <summary>
         /// 数据库中的船的id
         /// </summary>
-        public int ShipId { get; private set; }
+        public int ShipId { get; internal set; }
 
         /// <summary>
         /// 等级
         /// </summary>
-        public int Level { get; private set; }
+        public int Level { get; internal set; }
 
         /// <summary>
         /// 疲劳值
         /// </summary>
-        public int Condition { get; private set; }
+        public int Condition { get; internal set; }
 
         /// <summary>
         /// 火力（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Karyoku { get; private set; }
+        public Tuple<int, int> Karyoku { get; internal set; }
 
         /// <summary>
         /// 对空（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Taiku { get; private set; }
+        public Tuple<int, int> Taiku { get; internal set; }
 
         /// <summary>
         /// 雷装（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Raisou { get; private set; }
+        public Tuple<int, int> Raisou { get; internal set; }
 
         /// <summary>
         /// 装甲（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Soukou { get; private set; }
+        public Tuple<int, int> Soukou { get; internal set; }
 
         /// <summary>
         /// 回避（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Kaihi { get; private set; }
+        public Tuple<int, int> Kaihi { get; internal set; }
 
         /// <summary>
         /// 对潜（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Taisen { get; private set; }
+        public Tuple<int, int> Taisen { get; internal set; }
 
         /// <summary>
         /// 索敌
@@ -446,38 +488,38 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 运（当前值，最大值）
         /// </summary>
-        public Tuple<int, int> Lucky { get; private set; }
+        public Tuple<int, int> Lucky { get; internal set; }
 
         /// <summary>
         /// 是否已锁
         /// </summary>
-        public bool Locked { get; private set; }
+        public bool Locked { get; internal set; }
 
         /// <summary>
         /// 最大生命值
         /// </summary>
-        public int MaxHP { get; private set; }
+        public int MaxHP { get; internal set; }
 
        
         /// <summary>
         /// 当前生命值
         /// </summary>
-        public int NowHP { get; private set; }
+        public int NowHP { get; internal set; }
 
         /// <summary>
         /// 入渠所需时间
         /// </summary>
-        public TimeSpan DockTime { get; private set; }
+        public TimeSpan DockTime { get; internal set; }
 
         /// <summary>
         /// 当前装备,No集合
         /// </summary>
-        public int[] Slot { get; private set; }
+        public int[] Slot { get; internal set; }
 
         /// <summary>
         /// 未知
         /// </summary>
-        public int[] OnSlot { get; private set; }
+        public int[] OnSlot { get; internal set; }
 
         internal KancolleShip(api_ship_item ship)
         {
@@ -504,6 +546,24 @@ namespace WoFlagship.KancolleCore
 
 
         /// <summary>
+        /// 是否为大破状态
+        /// </summary>
+        /// <param name="NowHP">当前血量</param>
+        /// <param name="MaxHP">最大血量</param>
+        /// <returns></returns>
+        public static bool IsBigBroken(int NowHP, int MaxHP)
+        {
+            return NowHP * 4 - 1 < MaxHP;
+        }
+
+        /// <summary>
+        /// 是否为大破状态
+        /// </summary>
+        public bool BigBroken {
+            get { return IsBigBroken(NowHP, MaxHP); }
+        }
+
+        /// <summary>
         /// 修理完成，血量恢复
         /// </summary>
         internal void RepairFinished()
@@ -521,22 +581,22 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 数据库中的船的id
         /// </summary>
-        public int ShipId { get; private set; }
+        public int ShipId { get; internal set; }
 
         /// <summary>
         /// 舰娘名
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// 船的类型
         /// </summary>
-        public int Type { get; private set; }
+        public int Type { get; internal set; }
 
         /// <summary>
         /// 可装备的装备数
         /// </summary>
-        public int SlotNum { get; private set; }
+        public int SlotNum { get; internal set; }
 
         internal KancolleShipData(api_mst_ship_item mst_ship_item)
         {
@@ -555,17 +615,17 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 装备类型id
         /// </summary>
-        public int TypeId { get; private set; }
+        public int TypeId { get; internal set; }
 
         /// <summary>
         /// 装备名
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// 不清楚
         /// </summary>
-        public int ShowFlag { get; private set; }
+        public int ShowFlag { get; internal set; }
 
         internal KancolleItemEquipType(api_mst_slotitem_equiptype_item equiptype_item)
         {
@@ -583,29 +643,29 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 舰种id
         /// </summary>
-        public int TypeId { get; private set; }
+        public int TypeId { get; internal set; }
 
-        public int SortNo { get; private set; }
+        public int SortNo { get; internal set; }
 
         /// <summary>
         /// 舰种名
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// 入渠时间的倍率
         /// </summary>
-        public int Scnt { get; private set; }
+        public int Scnt { get; internal set; }
 
         /// <summary>
         /// 建造时的剪影
         /// </summary>
-        public int Kcnt { get; private set; }
+        public int Kcnt { get; internal set; }
 
         /// <summary>
         /// 可装备的装备类型，key：ItemEquipType的id，value：0为不可用， 1为可用
         /// </summary>
-        public ReadOnlyDictionary<int, int> EquipItemType { get; private set; }
+        public ReadOnlyDictionary<int, int> EquipItemType { get; internal set; }
 
         internal KancolleShipType(api_mst_stype_item stype_item)
         {
@@ -629,12 +689,12 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 远征数据库对应的id
         /// </summary>
-        public int MissionId { get; private set; }
+        public int MissionId { get; internal set; }
 
         /// <summary>
         /// 远征状态
         /// </summary>
-        public int State { get; private set; }
+        public int State { get; internal set; }
 
         internal KancolleMissson(api_mission_item mission_item)
         {
@@ -674,42 +734,42 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 燃
         /// </summary>
-        public int Ran { get; private set; }
+        public int Ran { get; internal set; }
 
         /// <summary>
         /// 弹
         /// </summary>
-        public int Dan { get; private set; }
+        public int Dan { get; internal set; }
 
         /// <summary>
         /// 钢
         /// </summary>
-        public int Gang { get; private set; }
+        public int Gang { get; internal set; }
 
         /// <summary>
         /// 铝
         /// </summary>
-        public int Lv { get; private set; }
+        public int Lv { get; internal set; }
 
         /// <summary>
         /// 建造资材
         /// </summary>
-        public int Jianzao { get; private set; }
+        public int Jianzao { get; internal set; }
 
         /// <summary>
         /// 修复桶
         /// </summary>
-        public int Xiufu { get; private set; }
+        public int Xiufu { get; internal set; }
 
         /// <summary>
         /// 开发资材
         /// </summary>
-        public int Kaifa { get; private set; }
+        public int Kaifa { get; internal set; }
 
         /// <summary>
         /// 改修紫菜
         /// </summary>
-        public int Gaixiu { get; private set; }
+        public int Gaixiu { get; internal set; }
 
         internal KancolleMaterial() { }
 
@@ -780,22 +840,22 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 任务Id
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; internal set; }
 
         /// <summary>
         /// 任务种类
         /// </summary>
-        public int Category { get; private set; }
+        public int Category { get; internal set; }
 
         /// <summary>
         /// 任务类型
         /// </summary>
-        public int Type { get; private set; }
+        public int Type { get; internal set; }
 
         /// <summary>
         /// state=3表示完成，state=2表示任务接受 state=1表示未接收
         /// </summary>
-        public int State { get; private set; }
+        public int State { get; internal set; }
 
         /// <summary>
         /// 任务标题
@@ -805,17 +865,17 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 任务细节
         /// </summary>
-        public string Detail { get; private set; }
+        public string Detail { get; internal set; }
 
         /// <summary>
         /// 资源报酬
         /// </summary>
-        public Tuple<int, int, int, int> Material { get; private set; }
+        public Tuple<int, int, int, int> Material { get; internal set; }
 
         /// <summary>
         /// 0-0% 1-50% 2-80%
         /// </summary>
-        public int ProgressFlag { get; private set; }
+        public int ProgressFlag { get; internal set; }
 
         internal KancolleQuest(api_questlist_item api_questlist)
         {
@@ -838,23 +898,23 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 地图Id
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; internal set; }
 
         /// <summary>
         /// 海域id
         /// </summary>
-        public int MapAreaId { get; private set; }
+        public int MapAreaId { get; internal set; }
 
         /// <summary>
         /// 海域的第几个地图
         /// </summary>
-        public int MapNo { get; private set; }
+        public int MapNo { get; internal set; }
 
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
-        public int Level { get; private set; }
+        public int Level { get; internal set; }
 
-        public string InfoText { get; private set; }
+        public string InfoText { get; internal set; }
 
         internal KancolleMapInfoData(api_mst_mapinfo_item mapinfo_item)
         { 
@@ -875,16 +935,16 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 装备顺序编号
         /// </summary>
-        public int No { get; private set; }
+        public int No { get; internal set; }
 
         /// <summary>
         /// 对应到装备数据库的id
         /// </summary>
-        public int SlotItemId { get; private set; }
+        public int SlotItemId { get; internal set; }
 
-        public bool Locked { get; private set; }
+        public bool Locked { get; internal set; }
 
-        public int Level { get; private set; }
+        public int Level { get; internal set; }
 
         internal KancolleSlotItem(api_slot_item_item slot_item_item)
         {
@@ -900,17 +960,17 @@ namespace WoFlagship.KancolleCore
     /// </summary>
     public class KancolleSlotItemData
     {
-        public int Id { get; private set; }
+        public int Id { get; internal set; }
 
         /// <summary>
         /// 当前分类下顺序
         /// </summary>
-        public int SortNo { get; private set; }
+        public int SortNo { get; internal set; }
 
         /// <summary>
         /// 装备名
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
 
         /// <summary>
         /// 装备类型
@@ -919,17 +979,17 @@ namespace WoFlagship.KancolleCore
         /// [2]:装備可能艦種判定(即api_mst_slotitem_equiptype)
         /// [3]:不明
         /// </summary>
-        public Tuple<int,int,int,int> Type { get; private set; }
+        public Tuple<int,int,int,int> Type { get; internal set; }
 
         /// <summary>
         /// 最大HP
         /// </summary>
-        public int Taik { get; private set; }
+        public int Taik { get; internal set; }
 
         /// <summary>
         /// 装甲
         /// </summary>
-        public int Souk { get; private set; }
+        public int Souk { get; internal set; }
 
         /// <summary>
         /// 火力
@@ -939,77 +999,77 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 雷装
         /// </summary>
-        public int Raig { get; private set; }
+        public int Raig { get; internal set; }
 
         /// <summary>
         /// 速度
         /// </summary>
-        public int Soku { get; private set; }
+        public int Soku { get; internal set; }
 
         /// <summary>
         /// Dive bomber??
         /// </summary>
-        public int Baku { get; private set; }
+        public int Baku { get; internal set; }
 
         /// <summary>
         /// 对空
         /// </summary>
-        public int Tyku { get; private set; }
+        public int Tyku { get; internal set; }
 
         /// <summary>
         /// 对潜
         /// </summary>
-        public int Tais { get; private set; }
+        public int Tais { get; internal set; }
 
         /// <summary>
         /// Unused
         /// </summary>
-        public int Atap { get; private set; }
+        public int Atap { get; internal set; }
 
         /// <summary>
         /// 命中
         /// </summary>
-        public int Houm { get; private set; }
+        public int Houm { get; internal set; }
 
         /// <summary>
         /// Unkown
         /// </summary>
-        public int Raim { get; private set; }
+        public int Raim { get; internal set; }
 
         /// <summary>
         /// 回避
         /// </summary>
-        public int Houk { get; private set; }
+        public int Houk { get; internal set; }
 
         /// <summary>
         /// Unused
         /// </summary>
-        public int Raik { get; private set; }
+        public int Raik { get; internal set; }
 
         /// <summary>
         /// Unused
         /// </summary>
-        public int Bakk { get; private set; }
+        public int Bakk { get; internal set; }
 
         /// <summary>
         /// Line of Sight??
         /// </summary>
-        public int Saku { get; private set; }
+        public int Saku { get; internal set; }
 
         /// <summary>
         /// Unused
         /// </summary>
-        public int Sakb { get; private set; }
+        public int Sakb { get; internal set; }
 
         /// <summary>
         /// 运
         /// </summary>
-        public int Luck { get; private set; }
+        public int Luck { get; internal set; }
 
         /// <summary>
         /// 射程
         /// </summary>
-        public int Leng { get; private set; }
+        public int Leng { get; internal set; }
 
         /// <summary>
         /// 稀有度
@@ -1019,17 +1079,17 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 废弃后所能获得的材料(燃弹钢铝)
         /// </summary>
-        public Tuple<int,int,int,int> Broken { get; private set; }
+        public Tuple<int,int,int,int> Broken { get; internal set; }
 
         /// <summary>
         /// 装备信息
         /// </summary>
-        public string Info { get; private set; }
+        public string Info { get; internal set; }
 
         /// <summary>
         /// unused
         /// </summary>
-        public string UseBull { get; private set; }
+        public string UseBull { get; internal set; }
 
         internal KancolleSlotItemData(api_mst_slotitem_item mst_slotitem_item)
         {
@@ -1069,17 +1129,17 @@ namespace WoFlagship.KancolleCore
         /// <summary>
         /// 入渠的舰娘ownedNo
         /// </summary>
-        public int ShipId { get; private set; }
+        public int ShipId { get; internal set; }
 
         /// <summary>
         /// 完成时间
         /// </summary>
-        public DateTime CompleteTime { get; private set; }
+        public DateTime CompleteTime { get; internal set; }
 
         /// <summary>
         /// -1:未拥有；0：已拥有，且空着；1：已拥有，但是被占用
         /// </summary>
-        public int State { get; private set; }
+        public int State { get; internal set; }
 
         internal KancolleDockData(api_ndock_item dock)
         {

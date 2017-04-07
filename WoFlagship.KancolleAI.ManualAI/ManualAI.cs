@@ -78,9 +78,5 @@ namespace WoFlagship.KancolleAI.ManualAI
             
         }
 
-        public void OnSceneUpdatedHandler(KancolleScene scene)
-        {
-            
-        }
     }
 }

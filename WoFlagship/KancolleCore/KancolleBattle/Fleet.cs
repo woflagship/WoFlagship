@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace WoFlagship.KancolleCore.KancolleBattle
 {
+    /// <summary>
+    /// 战斗舰队，必然包含6个Ship，如果某个位置没有舰娘，则该位置设为null
+    /// </summary>
     public class Fleet : IReadOnlyCollection<Ship>
     {
 

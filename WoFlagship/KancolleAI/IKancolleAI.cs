@@ -5,7 +5,7 @@ using System;
 
 namespace WoFlagship.KancolleAI
 {
-    public interface IKancolleAI : IKancolleGameDataReceiver, IKancolleSceneRevceiver
+    public interface IKancolleAI : IKancolleGameDataReceiver
     {
         /// <summary>
         /// ai名字

@@ -17,6 +17,9 @@ namespace WoFlagship.KancolleCore.KancolleBattle
         public int Position { get; private set; }
         public int MaxHP { get; private set; }
         public int NowHP { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int FromHP { get; private set; }
         public int ToHP { get; private set; }
         public ReadOnlyCollection<int> Items { get; private set; }

@@ -23,6 +23,7 @@ using SmartFormat;
 using WoFlagship.KancolleQuestData;
 using SmartFormat.Core.Extensions;
 using WoFlagship.Utils;
+using System.Windows.Threading;
 
 namespace TestConsole
 {
@@ -239,22 +240,39 @@ namespace TestConsole
         }
     }
 
+   
     
 
     class Program
     {
         static readonly int[,] dd = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
 
+        static int i = 0;
+        static bool running = false;
+        static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
+
         static void Main(string[] args)
         {
-            TestEvent e = new TestEvent();
-            TestSubscriber ts = new TestSubscriber(e);
-            e.Invoke(0);
-            ts.Dispose();
-            ts = null;
-            e.Invoke(1);
-
+            System.Timers.Timer timer = new System.Timers.Timer(500);
+            timer.Elapsed += Timer_Tick;
+            timer.AutoReset = true;
+            timer.Enabled = true;
+            timer.Start();
             Console.Read();
+        }
+
+        private static async void Timer_Tick(object sender, EventArgs e)
+        {
+            if (semaphoreSlim.CurrentCount == 0)
+                return;
+            await semaphoreSlim.WaitAsync();
+            await TestAsync();
+            semaphoreSlim.Release();
+        }
+        static async Task TestAsync()
+        {
+            await Task.Delay(2000);
+            Console.WriteLine("Outut Test " + i++);
         }
 
         static void t()

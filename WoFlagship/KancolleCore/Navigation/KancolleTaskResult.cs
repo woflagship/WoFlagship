@@ -28,12 +28,26 @@ namespace WoFlagship.KancolleCore.Navigation
         /// </summary>
         public int ErrorCode { get; private set; }
 
+        /// <summary>
+        /// 额外的返回参数
+        /// </summary>
+        public object ResultObject { get; private set; } = null;
+
         public KancolleTaskResult(KancolleTask finishedTask, KancolleTaskResultType type, string message, int errorcode)
         {
             FinishedTask = finishedTask;
             ResultType = type;
             Message = message;
             ErrorCode = errorcode;
+        }
+
+        public KancolleTaskResult(KancolleTask finishedTask, KancolleTaskResultType type, string message, int errorcode, object resultObject)
+        {
+            FinishedTask = finishedTask;
+            ResultType = type;
+            Message = message;
+            ErrorCode = errorcode;
+            ResultObject = resultObject;
         }
 
         public override string ToString()
@@ -87,6 +101,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
         #region Battle
         public const int IllegalFormation = 0x4001;
+        public const int NoBattleInfo = 0x4002;
         #endregion
     }
 }

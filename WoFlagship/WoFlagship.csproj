@@ -215,6 +215,7 @@
     <Compile Include="KancolleCore\KancolleBattle\StageTypes.cs" />
     <Compile Include="KancolleCore\KancolleGameContext.cs" />
     <Compile Include="KancolleCore\KancolleGameData.cs" />
+    <Compile Include="KancolleCore\Navigation\KancolleBehaviorFactory.cs" />
     <Compile Include="KancolleCore\Navigation\KancolleTaskResult.cs" />
     <Compile Include="KancolleCore\Navigation\KancolleTaskResultType.cs" />
     <Compile Include="KancolleMap\KancolleMapInfo.cs" />
@@ -243,8 +244,6 @@
     <Compile Include="KancolleCore\Navigation\KancolleTaskExecutor.cs" />
     <Compile Include="KancolleCore\Navigation\KancolleTask.cs" />
     <Compile Include="KancolleCore\Navigation\ResponseHelper.cs" />
-    <Content Include="KancolleCore\KancolleBattle\KancolleBattle.txt" />
-    <Content Include="KancolleCore\KancolleBattle\KancolleBattleContext.txt" />
     <Compile Include="KancolleCore\Navigation\KancolleAction.cs" />
     <Compile Include="KancolleCore\Navigation\KancolleActionEdge.cs" />
     <Compile Include="KancolleCore\Navigation\KancolleActionExecutor.cs" />

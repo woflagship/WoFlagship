@@ -11,6 +11,7 @@ using System.Diagnostics;
 using WoFlagship.Utils;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
+using WoFlagship.KancolleCore.KancolleBattle;
 
 namespace WoFlagship.KancolleCore.Navigation
 {
@@ -66,7 +67,15 @@ namespace WoFlagship.KancolleCore.Navigation
 
         private Random random = new Random();
 
-        private KancolleTaskResult lastResult = null;
+        /// <summary>
+        /// 最后一次任务的结果
+        /// </summary>
+        public KancolleTaskResult LastResult
+        {
+            get; private set;
+        } = null;
+
+        private Battle currentBattle = null;
 
         private static KancolleTaskExecutor s_instance = null;
 
@@ -133,11 +142,11 @@ namespace WoFlagship.KancolleCore.Navigation
                 //OnTaskFinished_Internal(this, result);
                 return result;
             }
-            lastResult = null;
+            LastResult = null;
             EnqueueTask(task);
-            while (lastResult == null)
+            while (LastResult == null)
                 Thread.Sleep(500);
-            return lastResult;
+            return LastResult;
         }
 
         /// <summary>
@@ -240,7 +249,7 @@ namespace WoFlagship.KancolleCore.Navigation
                     result = new KancolleTaskResult(currentTask, KancolleTaskResultType.Fail, $"未能处理当前类型任务【{currentTask.GetType().Name}】", UnknownTaskType);
                 }
                 RunningTask = null;
-                lastResult = result;
+                LastResult = result;
                 OnTaskFinished_Internal?.Invoke(this, result);
                 Thread.Sleep(1000);
 
@@ -281,15 +290,14 @@ namespace WoFlagship.KancolleCore.Navigation
             Thread.Sleep(1000);
 
             //先移除除旗舰外所有的位置
-            /*
+            //这么做会降低效率，但是能解决很多编成时的问题           
             if (KancolleGameData.Instance.OwnedShipPlaceArray[deck, 1] != -1)//至少有2个船
             {
-                actionExector.Execute(new KancolleAction(KancolleWidgetPositions.Organize_RemoveAllExceptFirst));
-                result = LockNowAndWaitForResponse();
+                result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Organize_RemoveAllExceptFirst));
                 if (!result)//超时
-                    return false;
+                    return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
                 Thread.Sleep(1000);
-            }*/
+            }
 
 
             var sortedShip = (from s in KancolleGameData.Instance.OwnedShipDictionary.Values
@@ -312,8 +320,7 @@ namespace WoFlagship.KancolleCore.Navigation
                         //点击变更按钮
                         actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_ChangeButtons[i]));//始终移除第i个位置的，因为删了之后后面会补上来
                         Thread.Sleep(1000);
-                        actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Remove));//移除
-                        LockNowAndWaitForResponse();
+                        LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Organize_Changes_Remove));//移除
                         Thread.Sleep(1000);
                     }
                     break;
@@ -359,8 +366,7 @@ namespace WoFlagship.KancolleCore.Navigation
 
                 actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Changes_ShipList[item]));
                 Thread.Sleep(500);
-                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
-                result = LockNowAndWaitForResponse();
+                result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Organize_Change_Decide));
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
                 Thread.Sleep(1000);
@@ -429,10 +435,9 @@ namespace WoFlagship.KancolleCore.Navigation
             //悬停补给全部的按钮
             actionExecutor.Execute(new KancolleAction(ActionTypes.Move, KancolleWidgetPositions.Supply_SupplyDeck));
             Thread.Sleep(1000);
-            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
 
             //点击补给全部的按钮
-            result = LockNowAndWaitForResponse();
+            result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Supply_SupplyDeck));
             
             if (!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
@@ -503,7 +508,7 @@ namespace WoFlagship.KancolleCore.Navigation
             if (!KancolleGameData.Instance.MapInfoDictionary.TryGetValue(task.MapId, out mapinfo))
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能找到地图id【{task.MapId}】", UnfoundMapId);
             int areaIndex = mapinfo.MapAreaId - 1;
-            int mapIndex = mapinfo.MapAreaId - 1;
+            int mapIndex = mapinfo.MapNo - 1;
 
             //先转到海域
             actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Areas[areaIndex]));
@@ -522,8 +527,7 @@ namespace WoFlagship.KancolleCore.Navigation
             Thread.Sleep(1000);
 
             //点击出击
-            actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Map_Start));
-            result = LockNowAndWaitForResponse();
+            result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Map_Start));
             if (!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
             return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"舰队【{task.Fleet}】出击【{task.MapId}】", Success);
@@ -533,6 +537,7 @@ namespace WoFlagship.KancolleCore.Navigation
         {
            
             bool result;
+            Battle battle = null;
             string taskContent = "作战行动";
             if(task is BattleChoiceTask)
             {
@@ -548,7 +553,11 @@ namespace WoFlagship.KancolleCore.Navigation
                     if (t.BattleChoice == BattleChoiceTask.BattleChoices.Back)
                         actionExecutor.Execute(KancolleWidgetPositions.Battle_LeftChoice);
                     else
-                        actionExecutor.Execute(KancolleWidgetPositions.Battle_RightChoice);
+                    {//夜战会返回battle结果
+                        battle = WaitForBattle(new KancolleAction(KancolleWidgetPositions.Battle_RightChoice));
+                        if(battle == null)
+                            return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得Battle数据", NoBattleInfo);
+                    }
                 }
                 else if(t.BattleChoice == BattleChoiceTask.BattleChoices.Next || t.BattleChoice == BattleChoiceTask.BattleChoices.Return)
                 {
@@ -571,7 +580,10 @@ namespace WoFlagship.KancolleCore.Navigation
                 result = WaitForScene(KancolleSceneTypes.Battle_Formation, ActionTimeout);
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Battle_Formation}】不符", UnexceptedScene);
-                actionExecutor.Execute(KancolleWidgetPositions.Battle_Formation[t.Formation-1]);
+                //阵型会返回battle结果
+                battle = WaitForBattle(new KancolleAction(KancolleWidgetPositions.Battle_Formation[t.Formation - 1]));
+                if (battle == null)
+                    return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得Battle数据", NoBattleInfo);
             }
             else if(task is BattleSkipTask)
             {
@@ -589,7 +601,7 @@ namespace WoFlagship.KancolleCore.Navigation
   
             }
 
-            return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"{taskContent}完成", Success);
+            return new KancolleTaskResult(task, KancolleTaskResultType.Success, $"{taskContent}完成", Success, battle);
         }
 
         private Point GetBattleRandomSafePoint()
@@ -639,8 +651,7 @@ namespace WoFlagship.KancolleCore.Navigation
                 if (KancolleGameData.Instance.OwnedShipDictionary[shipNo].Slot[correctSlotNum] < 0)//当前位置没有装备
                     break;
                 //移除装备，因为装备移除后，下面的会补上来，所以始终是correntSlotNum的位置
-                actionExecutor.Execute(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]);
-                result = LockNowAndWaitForResponse();
+                result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Remodel_RemoveItem[correctSlotNum]));
                 if (!result)
                     return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
                 Thread.Sleep(2000);
@@ -725,18 +736,24 @@ namespace WoFlagship.KancolleCore.Navigation
 
                 actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Changes_ItemList[item]));
                 Thread.Sleep(500);
-                actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
                 if (isEquipedSlot)
                 {
+                    result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
+                    if (!result)
+                        return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
                     Thread.Sleep(1000);
                     //如果是已装备的，则还有一个确认列表
                     if (CurrentScene.SceneType !=  KancolleSceneTypes.Remodel_ItemList_Other_Decide)
                         return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"当前场景【{CurrentScene.SceneType}】与预期场景【{KancolleSceneTypes.Remodel_ItemList_Other_Decide}】不符", UnexceptedScene);
                     actionExecutor.Execute(KancolleWidgetPositions.Remodel_Change_Other_Decide);
                 }
-                result = LockNowAndWaitForResponse();
-                if (!result)
-                    return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
+                else
+                {
+                    result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Remodel_Change_Decide));
+                    if (!result)
+                        return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
+                }
+               
                 Thread.Sleep(2000);
             }
 
@@ -804,8 +821,7 @@ namespace WoFlagship.KancolleCore.Navigation
             Thread.Sleep(500);
             actionExecutor.Execute(new KancolleAction(KancolleWidgetPositions.Repair_Start));
             Thread.Sleep(1000);
-            actionExecutor.Execute(KancolleWidgetPositions.Repair_Start_Decide);
-            bool result = LockNowAndWaitForResponse();
+            bool result = LockNowAndWaitForResponse(new KancolleAction(KancolleWidgetPositions.Repair_Start_Decide));
             if(!result)
                 return new KancolleTaskResult(task, KancolleTaskResultType.Fail, $"未能获得服务端响应", NoResponse);
             Thread.Sleep(500);
@@ -918,12 +934,14 @@ namespace WoFlagship.KancolleCore.Navigation
         /// 线程阻塞，一直等到有response响应
         /// </summary>
         /// <returns></returns>
-        private bool LockNowAndWaitForResponse()
+        private bool LockNowAndWaitForResponse(KancolleAction action)
         {
             lock (actionTimeStampLock)
             {
+                currentResponse = null;
                 actionTimeStamp = DateTime.Now;
             }
+            actionExecutor.Execute(action);
             DateTime start = DateTime.Now;
             while ((currentResponse == null || currentResponse.Time <= actionTimeStamp) && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
             {
@@ -935,6 +953,18 @@ namespace WoFlagship.KancolleCore.Navigation
             return false;
         }
 
+        private Battle WaitForBattle(KancolleAction action)
+        {
+            currentBattle = null;
+            actionExecutor.Execute(action);
+            DateTime start = DateTime.Now;
+            while (currentBattle == null  && (DateTime.Now - start).TotalMilliseconds <= ActionTimeout)
+            {
+                Thread.Sleep(500);
+            }
+            return currentBattle;
+        }
+
         public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
         {
             lock (actionTimeStampLock)
@@ -944,6 +974,10 @@ namespace WoFlagship.KancolleCore.Navigation
             }
         }
 
+        public void OnBattleHappenedHandler(Battle obj)
+        {
+            currentBattle = obj;
+        }
        
     }
 }

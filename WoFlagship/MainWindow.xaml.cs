@@ -59,7 +59,7 @@ namespace WoFlagship
 
         private StreamWriter sw = new StreamWriter("outputAPI.txt");
 
-        private readonly KancolleGameContext gameContext = new KancolleGameContext();
+        private readonly KancolleGameContext gameContext;
         private readonly KancolleBattleContext battleContext;
 
         private INavigator navigator = new SimpleNavigator();
@@ -69,6 +69,7 @@ namespace WoFlagship
 
         public MainWindow()
         {
+            gameContext = new KancolleGameContext(GetCurrentScene);
             //初始化事件
             InitContextEvent();
 
@@ -92,6 +93,7 @@ namespace WoFlagship
             LogFactory.ConsoleLogger = new ConsoleLogger(Txt_MainLogger);
 
             battleContext.OnBattleHappened += BattleContext_OnBattleHappened;
+           
 
             Cbx_ProxyType.SetBinding(ComboBox.SelectedItemProperty, new Binding() { Source = settingViewModel.WebSetting, Path = new PropertyPath("ProxyType") });
             Txt_ProxyHost.SetBinding(TextBox.TextProperty, new Binding() { Source = settingViewModel.WebSetting, Path = new PropertyPath("ProxyHost") });
@@ -363,6 +365,8 @@ namespace WoFlagship
                 KancolleTaskExecutor.Instance.OnTaskFinished_Internal += TaskExecutor_OnTaskFinished_Internal;
                 KancolleTaskExecutor.Instance.OnTasksChanged_Internal += TaskExecutor_OnTasksChanged_Internal;
                 KancolleTaskExecutor.Instance.Start();
+
+                battleContext.OnBattleHappened += KancolleTaskExecutor.Instance.OnBattleHappenedHandler;
             }
             catch(Exception ex)
             {
@@ -405,10 +409,7 @@ namespace WoFlagship
 
         private void ActionExecutor_OnActionExecuted(KancolleAction obj)
         {
-            if(currentAI != null)
-            {
-                currentAI.OnSceneUpdatedHandler(GetCurrentScene());
-            }
+            //KancolleGameData.Instance.CurrentScene = GetCurrentScene();
         }
 
         private void TaskExecutor_OnTaskFinished_Internal(KancolleTaskExecutor arg1, KancolleTaskResult arg2)
@@ -561,8 +562,11 @@ namespace WoFlagship
 
         private KancolleScene GetCurrentScene()
         {
-            var screen = GetWebViewBitmap();
-            return sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
+            return Dispatcher.Invoke(() =>
+            {
+                var screen = GetWebViewBitmap();
+                return sceneRecognizer.GetSceneTypeFromBitmap(ToBitmap(screen));
+            });
             
         }
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WoFlagship.KancolleCore;
+using WoFlagship.KancolleCore.Navigation;
 
 namespace WoFlagship.KancolleAI.SimpleAI
 {
@@ -25,6 +26,37 @@ namespace WoFlagship.KancolleAI.SimpleAI
         {
             get { return Dispatcher.Invoke<bool>(()=>(bool)Chk_AutoRepair.IsChecked); }
         }
+
+        public bool AutoBattle
+        {
+            get { return Dispatcher.Invoke(() => (bool)Chk_AutoBattle.IsChecked); }
+        }
+
+        public int BattleMap
+        {
+            get
+            {
+                return Dispatcher.Invoke(() =>
+                {
+                    int i1, i2;
+                    if (int.TryParse(Txt_BattleMap1.Text, out i1) && int.TryParse(Txt_BattleMap2.Text, out i2))
+                    {
+                        return i1 * 10 + i2;
+                    }
+                    else
+                        return -1;
+                });
+            }
+        }
+
+        public void SetCurrentScene(KancolleScene currentScene)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                Txt_CurrentScene.Text = currentScene.SceneType + " " + currentScene.SceneState;
+            });
+        }
+
 
         public void UpdateGameData(KancolleGameData gameData)
         {

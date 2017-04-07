@@ -8,10 +8,20 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
+            <Label Content="当前场景：" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBlock Name="Txt_CurrentScene" Margin="5" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
             <CheckBox Name="Chk_AutoRepair" Content="自动入渠" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="当前入渠：" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
             <TextBlock Name="Txt_CurrentRepair" Margin="5" VerticalAlignment="Center"/>
         </StackPanel>
-       
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Name="Chk_AutoBattle" Content="自动出击" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Content="出击海域：" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBox Name="Txt_BattleMap1" Margin="5" VerticalAlignment="Center" Width="20" Text="1"/>
+            <Label Content="-" VerticalAlignment="Center"/>
+            <TextBox Name="Txt_BattleMap2" Margin="5" VerticalAlignment="Center" Width="20" Text="4"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

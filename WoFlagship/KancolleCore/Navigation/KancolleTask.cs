@@ -25,9 +25,14 @@ namespace WoFlagship.KancolleCore.Navigation
     {
 
         /// <summary>
-        /// 刷新数据用的任务，和new RefreshDataTask()等价，用这个的话就不用再new了，效率比较高
+        /// 刷新数据用的任务，和new RefreshDataTask()等价，用这个的话就不用再new了
         /// </summary>
         public static RefreshDataTask RefreshDataTask { get; private set; } = new RefreshDataTask();
+
+        /// <summary>
+        /// 战斗过程空点跳过，和new BattleSkipTask()等价，用这个的话就不用再new了
+        /// </summary>
+        public static BattleSkipTask BattleSkipTask { get; private set; } = new BattleSkipTask();
 
         public DateTime TimeStamp { get; private set; } = DateTime.Now;
 
@@ -140,13 +145,21 @@ namespace WoFlagship.KancolleCore.Navigation
         /// </summary>
         public int MapId { get; private set; }
 
-
+        /// <summary>
+        /// 出击选择地图（默认第1舰队）
+        /// </summary>
+        /// <param name="mapId">地图id，格式样例：如果地图为1-4，那么id为14</param>
         public MapTask(int mapId)
         {
             MapId = mapId;
             Fleet = 0;
         }
 
+        /// <summary>
+        /// 出击选择地图
+        /// </summary>
+        /// <param name="deck">出击的舰队，从0开始</param>
+        /// <param name="mapId">地图id，格式样例：如果地图为1-4，那么id为14</param>
         public MapTask(int deck, int mapId)
         {
             Fleet = deck;
@@ -178,12 +191,12 @@ namespace WoFlagship.KancolleCore.Navigation
             Next,
 
             /// <summary>
-            /// 进击
+            /// 回港
             /// </summary>
             Return,
 
             /// <summary>
-            /// 撤退
+            /// 撤退,不夜战
             /// </summary>
             Back,
 

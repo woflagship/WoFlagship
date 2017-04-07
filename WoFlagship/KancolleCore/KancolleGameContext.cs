@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using WoFlagship.KancolleCore.Navigation;
 using WoFlagship.KancolleQuestData;
 using WoFlagship.Logger;
 using WoFlagship.Utils;
@@ -20,12 +21,12 @@ namespace WoFlagship.KancolleCore
         private api_ship_item[] api_ship;
         private api_mst_mission_item[] api_mst_mission;
 
-        private readonly KancolleGameData gameData = new KancolleGameData();
+        private readonly KancolleGameData gameData;
         //public KancolleGameData GameData { get { return gameData; } }
 
-        public KancolleGameContext()
+        public KancolleGameContext(Func<KancolleScene> GetCurrentScene)
         {
-            
+            gameData = new KancolleGameData(GetCurrentScene);
         }
 
         public void OnAPIResponseReceivedHandler(RequestInfo requestInfo, string response, string api)
@@ -91,7 +92,12 @@ namespace WoFlagship.KancolleCore
                     var ndock = api_object.ToObject<api_ndock_item[]>();
                     UpdateDock(ndock);
                     break;
-               
+                case "api_get_member/ship_deck"://战斗后的舰娘信息
+                    var ship_deck = api_object.ToObject<api_shipdeck_data>();
+                    UpdateShips(ship_deck.api_ship_data);
+                    break;
+                case "api_req_sortie/battle":
+                    break;
                 default:
                     gameDataUpdated = false;
                     break;
@@ -476,6 +482,21 @@ namespace WoFlagship.KancolleCore
             var dic = gameData.OwnedShipDictionary.ToDictionary(k => k.Key, k => k.Value);
             dic[deprive.api_ship_data.api_set_ship.api_id] = new KancolleShip(deprive.api_ship_data.api_set_ship);
             dic[deprive.api_ship_data.api_unset_ship.api_id] = new KancolleShip(deprive.api_ship_data.api_unset_ship);
+            gameData.OwnedShipDictionary = new ReadOnlyDictionary<int, KancolleShip>(dic);
+        }
+
+
+        /// <summary>
+        /// 仅更新传入参数部分的舰娘信息
+        /// </summary>
+        /// <param name="ship_items"></param>
+        private void UpdateShips(api_ship_item[] ship_items)
+        {
+            var dic = gameData.OwnedShipDictionary.ToDictionary(k => k.Key, k => k.Value);
+            for(int i=0; i<ship_items.Length; i++)
+            {
+                dic[ship_items[i].api_id] = new KancolleShip(ship_items[i]);
+            }
             gameData.OwnedShipDictionary = new ReadOnlyDictionary<int, KancolleShip>(dic);
         }
         #endregion
